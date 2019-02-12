@@ -1,16 +1,13 @@
 import React from 'react';
+import ForumHeader from './ForumHeader';
 import {connect} from 'react-redux';
 
 export class Forum extends React.Component{
-  
-  whichForum(){
-    return this.props.display === "neighbor-forum" ? <p>NEIGHBORS FORUM</p> : <p>CITY FORUM</p>
-  }
 
   render(){
     return(
       <section className="forum">
-        {this.whichForum()}
+        <ForumHeader type={this.props.display} />
       </section>
     );
   }
