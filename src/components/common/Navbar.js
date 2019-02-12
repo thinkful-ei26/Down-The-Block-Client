@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 // import {toggleNavbar} from '../actions/index';
 // import {clearAuth} from '../actions/auth';
 // import {clearAuthToken} from '../local-storage';
@@ -18,8 +18,10 @@ export default class Navbar extends React.Component{
 
   navbarLinks(){
     let className = this.props.toggleNavbar ? "show link" : "dontshow link";
+    let loggedIn = true; //placeholder
 
-    if(this.props.loggedIn){
+    if(loggedIn){
+      console.log('LOGGED IN')
       return (
         <div className = "right">
           <Link className={className} to ="/about">About</Link>
@@ -51,10 +53,9 @@ export default class Navbar extends React.Component{
   }
 }
 
-const mapStateToProps = (state) => ({
-  // toggleNavbar: state.pawfile.toggleNavbar,
-  // loggedIn: state.auth.currentUser !== null
-  loggedIn: true,
-});
+// const mapStateToProps = (state) => ({
+//   toggleNavbar: state.pawfile.toggleNavbar,
+//   loggedIn: state.auth.currentUser !== null
+// });
 
 // export default connect(mapStateToProps)(Navbar);
