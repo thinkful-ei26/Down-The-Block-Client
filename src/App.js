@@ -55,5 +55,4 @@ export default class App extends React.Component {
 //   loggedIn: state.auth.currentUser !== null
 // });
 
-// Deal with update blocking - https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
 // export default connect(mapStateToProps)(App);

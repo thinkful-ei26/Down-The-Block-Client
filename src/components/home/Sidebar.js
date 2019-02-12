@@ -1,16 +1,16 @@
 import React from 'react';
-import Navbar from '../common/Navbar';
+import {connect} from 'react-redux';
+import {display} from '../../actions/NavigationActions'
 import './sidebar.css'
-// import requiresLogin from '../requires-login';
 
-export default class Sidebar extends React.Component{
+class Sidebar extends React.Component{
   render(){
     return(
       <aside className="sidebar">
         <nav>
           <h4>Forums</h4>
-          <button>Neighors</button>
-          <button>City</button>
+          <button onClick={()=>this.props.dispatch(display('neighbor-forum'))}>Neighors</button>
+          <button onClick={()=>this.props.dispatch(display('city-forum'))} >City</button>
           <h4>Chats</h4>
         </nav>
       </aside>
@@ -18,4 +18,4 @@ export default class Sidebar extends React.Component{
   }
 }
 
-// export default requiresLogin()(connect(mapStateToProps)(HomePage));
+export default connect()(Sidebar)

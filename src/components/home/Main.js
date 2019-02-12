@@ -1,15 +1,26 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import Forum from './Forum';
+import Chat from './Chat'
 import './main.css'
-// import requiresLogin from '../requires-login';
 
-export default class Main extends React.Component{
+export class Main extends React.Component{
+
+  display(){
+    return this.props.display==="neighbor-forum" || this.props.display==="city-forum" ? <Forum/> : <Chat/>
+  }
+
   render(){
     return(
-      <main className="forum">
-        {/* depending on the state, render either the neighbor forum, city forum, or specific chat */}
+      <main className="main">
+        {this.display()}
       </main>
     );
   }
 }
 
-// export default requiresLogin()(connect(mapStateToProps)(HomePage));
+const mapStateToProps = state => ({
+  display: state.nav.display 
+});
+
+export default connect(mapStateToProps)(Main)
