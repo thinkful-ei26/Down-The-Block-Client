@@ -6,6 +6,7 @@ import HomePage from './components/home/HomePage';
 import RegistrationPage from './components/onboarding/SignupPage';
 import {refreshAuthToken} from './actions/auth';
 import Navbar from './components/common/Navbar';
+import AboutPage from './components/common/AboutPage'
 
 export class App extends React.Component {
     componentDidUpdate(prevProps) {
@@ -44,6 +45,7 @@ export class App extends React.Component {
                 <Route path="/" component={Navbar} />    
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/home" component={HomePage}></Route>
+                <Route exact path="/about" component={AboutPage}></Route>
                 <Route exact path="/register" component={RegistrationPage} />
             </div>
         );
