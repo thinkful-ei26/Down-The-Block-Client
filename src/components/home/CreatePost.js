@@ -3,11 +3,12 @@ import {connect} from 'react-redux';
 import {reduxForm, Field, focus} from 'redux-form';
 import Input from '../common/input';
 import {submitPost} from '../../actions/posts';
-import {required, nonEmpty} from '../common/validators';
+import {required, nonEmpty, unSelected} from '../common/validators';
 import {todaysDate} from '../common/helper-functions';
 
 export class CreatePost extends React.Component{
   onSubmit(values){
+    values.date = todaysDate();
     return this.props.dispatch(submitPost(values, this.props.currentPetId, this.props.currentPostId));
   }
 
@@ -36,26 +37,22 @@ export class CreatePost extends React.Component{
             id="content"
           /> 
 
-          <Field
-            component={Input}
-            label="Category:"
-            className="required"
-            type="text" 
-            name="category" 
-            id="category"
-            validate={[required, nonEmpty]}
-          /> 
+            <Field
+              component={Input} 
+              className="required"
+              label = "Category:"
+              name="category" 
+              id="category"
+              type = "text"
+              element="select"
+              validate={[unSelected]}
+              >
+              <option value="" className="bold"> Select a Category</option>
+              <option value="Dog">Crime</option>
+              <option value="Cat">Events</option>
+              <option value="Bird">Personal</option>
+            </Field>
 
-          <Field
-            component={Input} 
-            className="required"
-            label = "Date:"
-            name="date" 
-            id="date"
-            type = "date"
-            max= {todaysDate()}
-            validate={[required, nonEmpty]}
-          />
 
           <Field
             component={Input}
