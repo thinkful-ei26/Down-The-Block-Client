@@ -18,9 +18,8 @@ export class Navbar extends React.Component{
 
   navbarLinks(){
     let className = this.props.toggleNavbar ? "show link" : "dontshow link";
-    let loggedIn = true; //placeholder
 
-    if(loggedIn){
+    if(this.props.loggedIn){
       console.log('LOGGED IN')
       return (
         <div className = "right">
@@ -53,9 +52,9 @@ export class Navbar extends React.Component{
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   toggleNavbar: state.pawfile.toggleNavbar,
-//   loggedIn: state.auth.currentUser !== null
-// });
+const mapStateToProps = (state) => ({
+  // toggleNavbar: state.pawfile.toggleNavbar,
+  loggedIn: state.auth.currentUser !== null
+});
 
-export default connect()(Navbar);
+export default connect(mapStateToProps)(Navbar);

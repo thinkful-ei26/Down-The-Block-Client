@@ -12,7 +12,7 @@ export function RegistrationPage(props) {
 
     return (
         <div className="registration-page">
-            <Navbar/>
+            {/* <Navbar/> */}
             <h2 className="registration-page-h2">Sign up Below</h2>
             <SignupForm/><br/>
             <label className="registration-page-label">Already Registered?</label>

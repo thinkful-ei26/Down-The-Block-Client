@@ -5,6 +5,7 @@ import LandingPage from './components/onboarding/LandingPage';
 import HomePage from './components/home/HomePage';
 import RegistrationPage from './components/onboarding/SignupPage';
 import {refreshAuthToken} from './actions/auth';
+import Navbar from './components/common/Navbar';
 
 export class App extends React.Component {
     componentDidUpdate(prevProps) {
@@ -39,7 +40,9 @@ export class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <Route exact path="/" component={LandingPage} />     
+                {/* Always show the navbar! */}
+                <Route path="/" component={Navbar} />    
+                <Route exact path="/" component={LandingPage} />
                 <Route exact path="/home" component={HomePage}></Route>
                 <Route exact path="/register" component={RegistrationPage} />
             </div>

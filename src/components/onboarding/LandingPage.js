@@ -12,7 +12,7 @@ export function LandingPage(props) {
 
     return (
         <div className="landing-page">
-            <Navbar/>
+            {/* <Navbar/> */}
             <h2 className="landing-h2">Sign in Below</h2>
             <LoginForm />
             <label className="landing-register">Don't have an account yet?</label>
