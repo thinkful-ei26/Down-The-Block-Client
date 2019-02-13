@@ -1,1 +1,11 @@
 export const DISPLAY = 'DISPLAY';
+export const TOGGLE_NAVBAR = "TOGGLE_NAVBAR";
+
+export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
+export const CLEAR_AUTH = 'CLEAR_AUTH';
+export const AUTH_REQUEST = 'AUTH_REQUEST';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_ERROR = 'AUTH_ERROR';
+
+export const FETCH_LOCATION_SUCCESS = 'FETCH_LOCATION_SUCCESS';
+export const FETCH_LOCATION_ERROR = 'FETCH_LOCATION_ERROR';

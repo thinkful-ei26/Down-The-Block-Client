@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {display} from '../../actions/NavigationActions'
+import {display} from '../../actions/navigation'
 import './sidebar.css'
 
 class Sidebar extends React.Component{
