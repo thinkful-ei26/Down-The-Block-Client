@@ -35,13 +35,14 @@ export const fetchPosts = (coords) => (dispatch, getState) => {
     // console.log(testObj);
     console.log(geoObjToObj);
     let stringifiedObj = JSON.stringify(geoObjToObj);
-    fetch(`${API_BASE_URL}/posts`, {
+    console.log(stringifiedObj);
+    fetch(`${API_BASE_URL}/posts/${stringifiedObj}`, {
         method: 'GET',
         headers: {
             // Provide our auth token as credentials
             Authorization: `Bearer ${authToken}`
         },
-        // body: stringifiedObj,
+        // params: stringifiedObj,
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
