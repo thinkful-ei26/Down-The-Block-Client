@@ -11,12 +11,11 @@ export function RegistrationPage(props) {
     }
 
     return (
-        <div className="registration-page">
-            {/* <Navbar/> */}
-            <h2 className="registration-page-h2">Sign up Below</h2>
+        <div className="landing-page">
+            <h2>Sign up Below</h2>
             <SignupForm/><br/>
-            <label className="registration-page-label">Already Registered?</label>
-            <Link to="/" style={{color: 'blue'}}>login</Link>
+            <h4>Already Registered?</h4>
+            <Link to="/">Login</Link>
         </div>
     );
 }
