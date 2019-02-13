@@ -23,6 +23,7 @@ export class Navbar extends React.Component{
       console.log('LOGGED IN')
       return (
         <div className = "right">
+          <Link className={className} to ="/home">Home</Link>
           <Link className={className} to ="/about">About</Link>
           <button id="logout" className={className} onClick={() => this.logOut()}>Logout</button>
         </div>
