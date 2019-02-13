@@ -1,5 +1,6 @@
-import {FETCH_LOCATION_SUCCESS, FETCH_LOCATION_ERROR } from '../actions/geolocation';
-
+import {
+  FETCH_LOCATION_SUCCESS, 
+  FETCH_LOCATION_ERROR } from '../actions/types';
 
 const initialState = {
   location: null,
@@ -16,4 +17,5 @@ export default function reducer(state=initialState, action){
       err: action.err
     })
   }
+  return state;
 }

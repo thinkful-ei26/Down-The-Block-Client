@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
-import NavigationReducer from './NavigationReducer';
+import nav from './navigation';
+import auth from './auth';
+import geolocation from './geolocation';
+import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
-  nav: NavigationReducer,
+  nav,
+  auth,
+  geolocation,
+  form: formReducer,
 });

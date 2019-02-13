@@ -1,20 +1,20 @@
 import React from 'react';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 // import {toggleNavbar} from '../actions/index';
-// import {clearAuth} from '../actions/auth';
-// import {clearAuthToken} from '../local-storage';
+import { clearAuth } from '../../actions/auth';
+import { clearAuthToken } from './local-storage';
 import { HashLink as Link } from 'react-router-hash-link';
 import './navbar.css'
 
-export default class Navbar extends React.Component{
+export class Navbar extends React.Component{
   // componentWillUnmount(){
   //   this.props.dispatch(toggleNavbar(false));
   // }
 
-  // logOut() {
-  //   this.props.dispatch(clearAuth());
-  //   clearAuthToken();
-  // }
+  logOut() {
+    this.props.dispatch(clearAuth());
+    clearAuthToken();
+  }
 
   navbarLinks(){
     let className = this.props.toggleNavbar ? "show link" : "dontshow link";
@@ -58,4 +58,4 @@ export default class Navbar extends React.Component{
 //   loggedIn: state.auth.currentUser !== null
 // });
 
-// export default connect(mapStateToProps)(Navbar);
+export default connect()(Navbar);
