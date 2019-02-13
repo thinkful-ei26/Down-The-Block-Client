@@ -1,5 +1,6 @@
 import React from 'react';
 import ForumHeader from './ForumHeader';
+import PostsList from './PostsList';
 import {connect} from 'react-redux';
 import { fetchPosts } from '../../actions/posts';
 
@@ -10,11 +11,10 @@ export class Forum extends React.Component{
   }
 
   render(){
-    console.log(this.props.posts)
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
-        {this.props.posts}
+        <PostsList/>
       </section>
     );
   }
@@ -22,7 +22,6 @@ export class Forum extends React.Component{
 
 const mapStateToProps = state => ({
   display: state.nav.display,
-  posts: state.posts.posts,
 });
 
 export default connect(mapStateToProps)(Forum)
