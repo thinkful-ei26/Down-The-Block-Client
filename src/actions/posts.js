@@ -48,9 +48,8 @@ export const createPostRequest = () => ({
     type: CREATE_POST_REQUEST,
 })
 
-export const createPostSuccess = (post) => ({
+export const createPostSuccess = () => ({
   type: CREATE_POST_SUCCESS,
-  post
 })
 
 export const createPostError= (error) => ({
@@ -73,16 +72,15 @@ export const submitPost = (values) => (dispatch, getState) =>{
     })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
-    .then(post => {
-        dispatch(createPostSuccess(post));
-    })
-    .then(()=>{
+    .then(() => {
+        dispatch(createPostSuccess());
         dispatch(fetchPosts());
     })
     .catch(error => {
         dispatch(createPostError(error));
         const {message, location, status} = error;
         if (status === 400) {
+            console.log(message, location)
             // Convert errors into SubmissionErrors for Redux Form
             return Promise.reject(
                 new SubmissionError({
