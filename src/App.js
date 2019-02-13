@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
 import LandingPage from './components/login-registration/login-page';
-// import Dashboard from './dashboard';
+import HomePage from './components/home/HomePage';
 import RegistrationPage from './components/login-registration/registration-page';
 import {refreshAuthToken} from './actions/auth';
 
@@ -39,8 +39,8 @@ export class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <Route exact path="/" component={LandingPage} />
-                {/* <Route exact path="/dashboard" component={Dashboard} /> */}
+                <Route exact path="/" component={LandingPage} />     
+                <Route exact path="/home" component={HomePage}></Route>
                 <Route exact path="/register" component={RegistrationPage} />
             </div>
         );
@@ -53,4 +53,3 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(connect(mapStateToProps)(App));
-

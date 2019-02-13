@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import App from './App';
+import './index.css';
+// import Demo from './GeolocationScratch';
 import store from './store';
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
@@ -12,8 +15,6 @@ ReactDOM.render(
             <App />
         </Router>
     </Provider>, 
-
 document.getElementById('root'));
-
 
 serviceWorker.unregister();
