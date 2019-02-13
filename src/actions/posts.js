@@ -71,7 +71,7 @@ export const createPostError= (error) => ({
   error
 })
 
-export const submitPost = (values) => (dispatch, getState) =>{
+export const submitPost = (values, coords) => (dispatch, getState) =>{
     dispatch(createPostRequest());
     const authToken = getState().auth.authToken;
 
@@ -88,7 +88,7 @@ export const submitPost = (values) => (dispatch, getState) =>{
     .then(res => res.json())
     .then(() => {
         dispatch(createPostSuccess());
-        dispatch(fetchPosts());
+        dispatch(fetchPosts(coords));
     })
     .catch(error => {
         dispatch(createPostError(error));

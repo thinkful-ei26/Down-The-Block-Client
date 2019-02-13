@@ -9,6 +9,7 @@ export default function Post(props){
       <p>{props.userId.firstName}</p>
       <p>{formatLongDate(props.date)}</p>
       <p>{props.content}</p>
+      <p>{props.category}</p>
       <PostComments comments={props.comments}/>
     </article>
   );

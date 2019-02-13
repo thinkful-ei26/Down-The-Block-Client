@@ -8,20 +8,30 @@ import {todaysDate} from '../common/helper-functions';
 
 export class CreatePost extends React.Component{
 
+  constructor(props){
+    super(props);
+
+    this.state = {
+      borderAround: '',
+    }
+  }
+
   onSubmit(e){
     e.preventDefault();
     const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "other", date: todaysDate(), coordinates: 'placeholder'};
-    this.props.dispatch(submitPost(values));
+    this.props.dispatch(submitPost(values, this.props.coords));
     this.content.value = "";
     this.form.category.value="other";
   }
 
   render(){
+  
     return(
       <form 
         className="post-form" 
         onSubmit={(e)=> this.onSubmit(e)}
         ref={form => this.form = form}
+        style={this.state.style}
       >
           
         <textarea 
@@ -34,16 +44,39 @@ export class CreatePost extends React.Component{
         />
 
         <input type="radio" id="crime" name="category" value="crime" />
-        <label className="crime" htmlFor="crime">Crime</label>
+        <label 
+          onClick={()=>this.setState({borderAround: 'crime'})} 
+          className={`crime ${this.state.borderAround==='crime' &&'border'}`}
+          htmlFor="crime"
+        >
+          Crime
+        </label>
 
         <input type="radio" id="event" name="category" value="event"/>
-        <label className="event"  htmlFor="event">Event</label>
+        <label 
+          onClick={()=>this.setState({borderAround: 'event'})} 
+          className={`event ${this.state.borderAround==='event' &&'border'}`}
+          htmlFor="event">
+          Event
+        </label>
 
         <input type="radio" id="personal" name="category" value="personal"/>
-        <label className="personal"  htmlFor="personal">Personal</label>
+        <label 
+          htmlFor="personal"
+          onClick={()=>this.setState({borderAround: 'personal'})} 
+          className={`personal ${this.state.borderAround==='personal' &&'border'}`}
+          >Personal
+        </label>
 
         <input defaultChecked type="radio" id="other" name="category" value="other"/>
-        <label className="other"  htmlFor="other">Other</label>
+        <label
+          htmlFor="other"
+          onClick={()=>this.setState({borderAround: 'other'})} 
+          className={`other ${this.state.borderAround==='other' &&'border'}`}
+          >
+          
+        Other
+        </label>
      
         <button 
           type="submit" >Post
@@ -53,4 +86,15 @@ export class CreatePost extends React.Component{
   }
 }
 
-export default connect()(CreatePost);
+// let style = ({
+//   [this.state.borderAround]: {
+//     border: '1px solid black',
+//   },
+// })
+
+const mapStateToProps = state => ({
+  coords: state.geolocation.coords
+});
+
+
+export default connect(mapStateToProps)(CreatePost);
