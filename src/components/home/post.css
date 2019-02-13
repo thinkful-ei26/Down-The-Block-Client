@@ -32,6 +32,16 @@ input[type="radio"] {
   cursor: pointer;
 }
 
+.submit-post{
+  background: rgb(56, 98, 146);
+  float: right;
+  padding: 10px;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
 .border{
   border: 2px solid black;
 }
