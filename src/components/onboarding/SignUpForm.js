@@ -5,14 +5,11 @@ import {login} from '../../actions/auth';
 import Input from '../common/input';
 import {required, nonEmpty, matches, length, isTrimmed} from '../common/validators';
 
-
-
 const passwordLength = length({min: 8, max: 72});
 const matchesPassword = matches('password');
 
-export class RegistrationForm extends React.Component {
+export class SignupForm extends React.Component {
     onSubmit(values) {
-
         const {username, password, firstName, lastName} = values;
         const user = {username, password, firstName, lastName};
         return this.props
@@ -68,4 +65,4 @@ export default reduxForm({
     form: 'registration',
     onSubmitFail: (errors, dispatch) =>
         dispatch(focus('registration', Object.keys(errors)[0]))
-})(RegistrationForm);
+})(SignupForm);
