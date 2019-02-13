@@ -1,10 +1,14 @@
 import { 
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_SUCCESS,
-  FETCH_POSTS_ERROR
+  FETCH_POSTS_ERROR,
+  CREATE_POST_REQUEST,
+  CREATE_POST_SUCCESS,
+  CREATE_POST_ERROR,
 } from './types';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
+import {SubmissionError} from 'redux-form';
 
 export const fetchPostsRequest = () => ({
     type: FETCH_POSTS_REQUEST,
@@ -39,3 +43,55 @@ export const fetchPosts = () => (dispatch, getState) => {
             dispatch(fetchPostsError(error));
         });
 };
+
+export const createPostRequest = () => ({
+    type: CREATE_POST_REQUEST,
+})
+
+export const createPostSuccess = (post) => ({
+  type: CREATE_POST_SUCCESS,
+  post
+})
+
+export const createPostError= (error) => ({
+  type: CREATE_POST_ERROR,
+  error
+})
+
+export const submitPost = (values) => (dispatch, getState) =>{
+    dispatch(createPostRequest());
+    const authToken = getState().auth.authToken;
+
+    return fetch(`${API_BASE_URL}/posts`, { 
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify(values)
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(post => {
+        dispatch(createPostSuccess(post));
+    }).catch(error => {
+        dispatch(createPostError(error));
+        const {message, location, status} = error;
+        if (status === 400) {
+            // Convert errors into SubmissionErrors for Redux Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: message
+                })
+            );
+        }
+        else{
+            return Promise.reject(
+                new SubmissionError({
+                    _error: 'Unable to create post, please try again',
+                })
+            );
+        }
+    });
+}
