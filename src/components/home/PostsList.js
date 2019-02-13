@@ -5,7 +5,7 @@ import { fetchPosts } from '../../actions/posts';
 
 export class PostsList extends React.Component{
   componentWillMount(){
-    this.props.dispatch(fetchPosts());
+    this.props.dispatch(fetchPosts(this.props.coords));
   }
 
   generatePosts(){
@@ -13,7 +13,7 @@ export class PostsList extends React.Component{
   }
 
   render(){
-    console.log(this.props.posts);
+    console.log(this.props);
     return(
       <section className="posts-list">
         {this.generatePosts()}
@@ -24,6 +24,7 @@ export class PostsList extends React.Component{
 
 const mapStateToProps = state => ({
   posts: state.posts.posts,
+  coords: state.geolocation.coords
 });
 
 export default connect(mapStateToProps)(PostsList)

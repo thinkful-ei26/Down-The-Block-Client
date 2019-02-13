@@ -3,7 +3,7 @@ import {
   FETCH_LOCATION_ERROR } from '../actions/types';
 
 const initialState = {
-  location: null,
+  coords: null,
   error: null
 }
 
