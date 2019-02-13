@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import LoginForm from './LoginForm';
+import LoginForm from './LogInForm';
 import Navbar from '../common/Navbar';
 import './onboarding.css';
 

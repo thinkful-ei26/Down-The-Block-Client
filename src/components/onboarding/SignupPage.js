@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Redirect} from 'react-router-dom';
-import SignupForm from './SignupForm';
+import SignupForm from './SignUpForm';
 import './onboarding.css'
 
 export function RegistrationPage(props) {
