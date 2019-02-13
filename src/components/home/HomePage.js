@@ -9,6 +9,7 @@ import requiresLogin from '../common/requires-login';
 
 export class HomePage extends React.Component{
   render(){
+    // console.log(this.state);
     return(
       <div className="home">
         <Sidebar/>

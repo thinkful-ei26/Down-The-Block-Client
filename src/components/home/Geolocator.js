@@ -1,11 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {geolocated} from 'react-geolocated';
+import { fetchLocationSuccess } from '../../actions/geolocation';
 
 export class Geolocator extends React.Component {
 
-  handleLocationReceipt(){
-    
+  componentDidUpdate(){
+    console.log(this.props);
+    console.log(this.props.coords);
+    this.props.dispatch(fetchLocationSuccess(this.props.coords))
   }
 
   render() {
