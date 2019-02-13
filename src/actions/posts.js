@@ -75,7 +75,11 @@ export const submitPost = (values) => (dispatch, getState) =>{
     .then(res => res.json())
     .then(post => {
         dispatch(createPostSuccess(post));
-    }).catch(error => {
+    })
+    .then(()=>{
+        dispatch(fetchPosts());
+    })
+    .catch(error => {
         dispatch(createPostError(error));
         const {message, location, status} = error;
         if (status === 400) {
