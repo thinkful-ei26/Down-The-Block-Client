@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Redirect} from 'react-router-dom';
-import SignupForm from './SignUpForm';
+import SignUpForm from './SignUpForm';
 import './onboarding.css';
 
 export function RegistrationPage(props) {
@@ -12,7 +12,7 @@ export function RegistrationPage(props) {
 
     return (
         <main className="landing-page">
-            <SignupForm/><br/>
+            <SignUpForm/><br/>
         </main>
     );
 }

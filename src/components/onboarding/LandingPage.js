@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import LoginForm from './LogInForm';
+import LogInForm from './LogInForm';
 import Navbar from '../common/Navbar';
 import './onboarding.css';
 
@@ -13,7 +13,7 @@ export function LandingPage(props) {
 
     return (
         <main className="landing-page">
-            <LoginForm />
+            <LogInForm />
         </main>
     );
 }

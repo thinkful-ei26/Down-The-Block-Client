@@ -5,7 +5,7 @@ import {login} from '../../actions/auth';
 import {required, nonEmpty} from '../common/validators';
 import {Link} from 'react-router-dom';
 
-export class LoginForm extends React.Component {
+export class LogInForm extends React.Component {
     onSubmit(values) {
         return this.props.dispatch(login(values.username, values.password));
     }
@@ -57,4 +57,4 @@ export class LoginForm extends React.Component {
 export default reduxForm({
     form: 'login',
     onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
-})(LoginForm);
+})(LogInForm);

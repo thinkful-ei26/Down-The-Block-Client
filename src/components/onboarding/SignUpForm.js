@@ -9,7 +9,7 @@ import {required, nonEmpty, matches, length, isTrimmed} from '../common/validato
 const passwordLength = length({min: 8, max: 72});
 const matchesPassword = matches('password');
 
-export class SignupForm extends React.Component {
+export class SignUpForm extends React.Component {
     onSubmit(values) {
         const {username, password, firstName, lastName} = values;
         const user = {username, password, firstName, lastName};
@@ -67,4 +67,4 @@ export default reduxForm({
     form: 'registration',
     onSubmitFail: (errors, dispatch) =>
         dispatch(focus('registration', Object.keys(errors)[0]))
-})(SignupForm);
+})(SignUpForm);
