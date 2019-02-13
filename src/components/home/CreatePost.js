@@ -29,6 +29,16 @@ export class CreatePost extends React.Component{
 
           <Field
             component={Input}
+            label="Content:" 
+            element="textarea" 
+            maxLength = '180'
+            name="content" 
+            id="content"
+          /> 
+
+          <Field
+            component={Input}
+            label="Category:"
             className="required"
             type="text" 
             name="category" 
@@ -46,15 +56,6 @@ export class CreatePost extends React.Component{
             max= {todaysDate()}
             validate={[required, nonEmpty]}
           />
-
-          <Field
-            component={Input}
-            label="Content:" 
-            element="textarea" 
-            maxLength = '180'
-            name="content" 
-            id="content"
-          /> 
 
           <Field
             component={Input}
