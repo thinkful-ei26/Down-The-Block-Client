@@ -6,15 +6,15 @@ import { fetchPosts } from '../../actions/posts';
 
 export class Forum extends React.Component{
 
-  componentWillMount(){
-    this.props.dispatch(fetchPosts());
-  }
+  // componentWillMount(){
+  //   this.props.dispatch(fetchPosts());
+  // }
 
   render(){
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
-        <PostsList/>
+        {this.props.coords && <PostsList/>} 
       </section>
     );
   }
@@ -22,6 +22,7 @@ export class Forum extends React.Component{
 
 const mapStateToProps = state => ({
   display: state.nav.display,
+  coords: state.geolocation.coords
 });
 
 export default connect(mapStateToProps)(Forum)

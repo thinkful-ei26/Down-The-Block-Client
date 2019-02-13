@@ -6,13 +6,13 @@ import { fetchLocationSuccess } from '../../actions/geolocation';
 export class Geolocator extends React.Component {
 
   componentDidUpdate(){
-    console.log(this.props);
+    // console.log(this.props);
     console.log(this.props.coords);
     this.props.dispatch(fetchLocationSuccess(this.props.coords))
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return( 
       !this.props.isGeolocationAvailable 
       ? <div>Your browser does not support geolocation</div>
