@@ -8,6 +8,12 @@ export default class Input extends React.Component {
     }
 
     render() {
+        const Element = this.props.element || 'input';
+
+        const max = {max: this.props.max};
+        const accept = {accept: 'image/png, image/jpeg, image/jpg'}
+        const maxLength = {maxLength: this.props.maxLength};
+
         let error;
         if (this.props.meta.touched && this.props.meta.error) {
             error = <div className="form-error">{this.props.meta.error}</div>;
@@ -20,6 +26,18 @@ export default class Input extends React.Component {
             );
         }
 
+        let element = (<Element
+            {...this.props.input}
+            {...max}
+            {...maxLength}
+            id={this.props.input.name}
+            type={this.props.type}
+            ref={input => (this.input = input)}
+            autoFocus = {this.props.autoFocus}
+            >
+            {this.props.children}
+        </Element>)
+
         return (
             <div className="form-input">
                 <label htmlFor={this.props.input.name}>
@@ -27,12 +45,7 @@ export default class Input extends React.Component {
                     {error}
                     {warning}
                 </label>
-                <input
-                    {...this.props.input}
-                    id={this.props.input.name}
-                    type={this.props.type}
-                    ref={input => (this.input = input)}
-                />
+                {element}
             </div>
         );
     }

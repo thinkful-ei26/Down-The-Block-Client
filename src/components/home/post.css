@@ -1,5 +1,51 @@
 .post{
   border: 2px solid black;
-  margin: 20px auto;
+  margin: 20px auto 0px auto;
   width: 80%;
+}
+
+textarea{
+  width:100%;
+  margin: auto;
+  display: block;
+  border: none;
+  outline: 0;
+  resize: none;
+}
+
+.post-form{
+  background: white;
+  width: 80%;
+  margin: auto;
+}
+
+input[type="radio"] { 
+  position: fixed;
+  opacity: 0;
+}
+
+.hack{
+  padding: 5px; 
+  margin: 5px;
+  cursor: pointer;
+}
+
+.hack:focus{
+  border: 2px solid black;
+}
+
+.crime{
+  background: red;
+}
+
+.personal{
+  background: green;
+}
+
+.event{
+  background: purple;
+}
+
+.other{
+  background: yellow
 }
