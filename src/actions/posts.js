@@ -24,15 +24,29 @@ export const fetchPostsError= (error) => ({
   error
 })
 
-export const fetchPosts = () => (dispatch, getState) => {
+export const fetchPosts = (coords) => (dispatch, getState) => {
     dispatch(fetchPostsRequest());
     const authToken = getState().auth.authToken;
-    fetch(`${API_BASE_URL}/posts`, {
+    console.log(coords);
+    let geoObjToObj = {
+      latitude: coords.latitude,
+      longitude: coords.longitude
+    }
+    // let testObj = {
+    //   latitude: 2,
+    //   longitude: 4
+    // };
+    // console.log(testObj);
+    console.log(geoObjToObj);
+    let stringifiedObj = JSON.stringify(geoObjToObj);
+    console.log(stringifiedObj);
+    fetch(`${API_BASE_URL}/posts/${stringifiedObj}`, {
         method: 'GET',
         headers: {
             // Provide our auth token as credentials
             Authorization: `Bearer ${authToken}`
-        }
+        },
+        // params: stringifiedObj,
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())

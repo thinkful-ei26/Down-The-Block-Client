@@ -1,11 +1,12 @@
 import {
     FETCH_LOCATION_SUCCESS,
     FETCH_LOCATION_ERROR,
+    FETCH_LOCATION_REQUEST
 } from './types'
 
-export const fetchLocationSuccess = location => ({
+export const fetchLocationSuccess = coords => ({
     type: FETCH_LOCATION_SUCCESS,
-    location
+    coords
 });
 
 export const fetchLocationError = err => ({
@@ -13,3 +14,14 @@ export const fetchLocationError = err => ({
     err
 });
 
+export const fetchLocationRequest = () =>({
+    type: FETCH_LOCATION_REQUEST
+})
+
+// export const fetchLocation = (dispatch, coords) => {
+//     dispatch(fetchLocationRequest())
+//         .then(dispatch(fetchLocationSuccess(coords)))
+//         .catch(error => {
+//             dispatch(fetchLocationError(error))
+//         })
+// }

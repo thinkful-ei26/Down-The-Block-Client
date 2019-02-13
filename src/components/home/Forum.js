@@ -11,8 +11,8 @@ export class Forum extends React.Component{
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
+        {this.props.coords && <PostsList/>} 
         <CreatePost/>
-        <PostsList/>
       </section>
     );
   }
@@ -20,6 +20,7 @@ export class Forum extends React.Component{
 
 const mapStateToProps = state => ({
   display: state.nav.display,
+  coords: state.geolocation.coords
 });
 
 export default connect(mapStateToProps)(Forum)

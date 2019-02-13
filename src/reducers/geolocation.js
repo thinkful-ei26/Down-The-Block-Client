@@ -3,19 +3,21 @@ import {
   FETCH_LOCATION_ERROR } from '../actions/types';
 
 const initialState = {
-  location: null,
+  coords: null,
   error: null
 }
 
-export default function reducer(state=initialState, action){
-  if (action.type === FETCH_LOCATION_SUCCESS){
-    return Object.assign({}, state, {
-      location: action.location
-    })
-  } else if(action.type === FETCH_LOCATION_ERROR) {
-    return Object.assign({}, state, {
-      err: action.err
-    })
+export default (state=initialState, action) =>{
+  switch (action.type){
+    case FETCH_LOCATION_SUCCESS:
+      return Object.assign({}, state, {
+        coords: action.coords
+      })
+    case FETCH_LOCATION_ERROR: 
+      return Object.assign({}, state, {
+        err: action.err
+      })
+    default:
+      return state;
   }
-  return state;
 }
