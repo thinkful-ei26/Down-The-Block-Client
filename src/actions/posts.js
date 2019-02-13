@@ -75,7 +75,7 @@ export const submitPost = (values, coords) => (dispatch, getState) =>{
     dispatch(createPostRequest());
     const authToken = getState().auth.authToken;
 
-    return fetch(`${API_BASE_URL}/posts`, { 
+    return fetch(`${API_BASE_URL}/posts/${coords}`, { 
         method: 'POST',
         headers: {
             'Accept': 'application/json',

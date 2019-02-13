@@ -1,9 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-// import {reduxForm, Field, focus} from 'redux-form';
-// import Input from '../common/input';
 import {submitPost} from '../../actions/posts';
-// import {required, nonEmpty, unSelected} from '../common/validators';
 import {todaysDate} from '../common/helper-functions';
 
 export class CreatePost extends React.Component{
@@ -18,14 +15,14 @@ export class CreatePost extends React.Component{
 
   onSubmit(e){
     e.preventDefault();
-    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "other", date: todaysDate(), coordinates: 'placeholder'};
+    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: todaysDate(), coordinates: this.props.coords};
     this.props.dispatch(submitPost(values, this.props.coords));
     this.content.value = "";
-    this.form.category.value="other";
+    this.form.category.value="Other";
   }
 
   render(){
-  
+    console.log(this.state.borderAround);
     return(
       <form 
         className="post-form" 
@@ -44,7 +41,10 @@ export class CreatePost extends React.Component{
           placeholder="Write a Post For Your Neighborhood To See!" 
         />
 
-        <input type="radio" id="crime" name="category" value="crime" />
+      <div className="bottom-options">
+      <section className="radio-buttons">
+
+      <input type="radio" id="crime" name="category" value="Crime" />
         <label 
           onClick={()=>this.setState({borderAround: 'crime'})} 
           className={`crime ${this.state.borderAround==='crime' &&'border'}`}
@@ -53,7 +53,7 @@ export class CreatePost extends React.Component{
           Crime
         </label>
 
-        <input type="radio" id="event" name="category" value="event"/>
+        <input type="radio" id="event" name="category" value="Event"/>
         <label 
           onClick={()=>this.setState({borderAround: 'event'})} 
           className={`event ${this.state.borderAround==='event' &&'border'}`}
@@ -61,7 +61,7 @@ export class CreatePost extends React.Component{
           Event
         </label>
 
-        <input type="radio" id="personal" name="category" value="personal"/>
+        <input type="radio" id="personal" name="category" value="Personal"/>
         <label 
           htmlFor="personal"
           onClick={()=>this.setState({borderAround: 'personal'})} 
@@ -69,20 +69,22 @@ export class CreatePost extends React.Component{
           >Personal
         </label>
 
-        <input defaultChecked type="radio" id="other" name="category" value="other"/>
+        <input defaultChecked type="radio" id="other" name="category" value="Other"/>
         <label
           htmlFor="other"
           onClick={()=>this.setState({borderAround: 'other'})} 
-          className={`other ${this.state.borderAround==='other' &&'border'}`}
+          className={`other ${this.state.borderAround==='other' && 'border'}`}
           >
-          
         Other
         </label>
+
+      </section>
      
         <button 
           className="submit-post"
           type="submit" >Post
         </button>
+      </div>
     </form>
     );
   }

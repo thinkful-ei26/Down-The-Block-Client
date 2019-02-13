@@ -1,7 +1,11 @@
-.post{
-  border: 2px solid black;
-  margin: 20px auto 0px auto;
+.entire-thread{
+  background: rgb(226, 227, 217);
   width: 80%;
+  margin: 20px auto 0px auto;
+}
+
+.post{
+  border-bottom: 1px solid black;
 }
 
 .post-form textarea{
@@ -18,6 +22,7 @@
   background: white;
   width: 80%;
   margin: auto;
+  border: 1px solid black;
 }
 
 input[type="radio"] { 
@@ -30,11 +35,12 @@ input[type="radio"] {
   padding: 5px;
   margin: 5px;
   cursor: pointer;
+  opacity:.7;
+  border: 2px solid transparent;
 }
 
 .submit-post{
   background: rgb(56, 98, 146);
-  float: right;
   padding: 10px;
   border: none;
   color: white;
@@ -42,8 +48,10 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-.border{
-  border: 2px solid black;
+.bottom-options{
+  background: rgb(226, 227, 217);
+  display: flex;
+  justify-content: space-between;
 }
 
 .crime{
@@ -59,5 +67,9 @@ input[type="radio"] {
 }
 
 .other{
-  background: yellow
+  background: yellow;
+}
+
+.post-form label.border{
+  opacity:1;
 }
