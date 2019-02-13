@@ -7,23 +7,22 @@ import {submitPost} from '../../actions/posts';
 import {todaysDate} from '../common/helper-functions';
 
 export class CreatePost extends React.Component{
-  // onSubmit(values){
-    // values.date = todaysDate();
-    // values.coordinates = "placeholder";
-    // return this.props.dispatch(submitPost(values, this.props.currentPetId, this.props.currentPostId));
-  // }
 
   onSubmit(e){
     e.preventDefault();
-    const values={content: this.content.value, category: this.category.value, date: todaysDate(), coordinates: 'placeholder'};
+    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "other", date: todaysDate(), coordinates: 'placeholder'};
     this.props.dispatch(submitPost(values));
     this.content.value = "";
-    this.category.value="";
+    this.form.category.value="other";
   }
 
   render(){
     return(
-      <form onSubmit={(e)=> this.onSubmit(e)}>
+      <form 
+        className="post-form" 
+        onSubmit={(e)=> this.onSubmit(e)}
+        ref={form => this.form = form}
+      >
           
         <textarea 
           required 
@@ -34,16 +33,17 @@ export class CreatePost extends React.Component{
           placeholder="Write a Post For Your Neighborhood To See!" 
         />
 
-        <select 
-          ref={(input) => this.category = input}
-          id="category" 
-          required 
-        >
-          <option defaultValue value = "">Choose a Category</option>
-          <option value = "crime">Crime</option>
-          <option value = "event">Event</option>
-          <option value = "personal">Personal</option>
-        </select>
+        <input type="radio" id="crime" name="category" value="crime" />
+        <label className="crime" htmlFor="crime">Crime</label>
+
+        <input type="radio" id="event" name="category" value="event"/>
+        <label className="event"  htmlFor="event">Event</label>
+
+        <input type="radio" id="personal" name="category" value="personal"/>
+        <label className="personal"  htmlFor="personal">Personal</label>
+
+        <input defaultChecked type="radio" id="other" name="category" value="other"/>
+        <label className="other"  htmlFor="other">Other</label>
      
         <button 
           type="submit" >Post

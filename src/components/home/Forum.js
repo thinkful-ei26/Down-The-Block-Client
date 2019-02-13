@@ -7,10 +7,6 @@ import { fetchPosts } from '../../actions/posts';
 
 export class Forum extends React.Component{
 
-  componentWillMount(){
-    this.props.dispatch(fetchPosts());
-  }
-
   render(){
     return(
       <section className="forum">
