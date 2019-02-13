@@ -39,7 +39,7 @@ export class CreatePost extends React.Component{
           id="category" 
           required 
         >
-          <option selected disabled value = "">Choose a Category</option>
+          <option defaultValue value = "">Choose a Category</option>
           <option value = "crime">Crime</option>
           <option value = "event">Event</option>
           <option value = "personal">Personal</option>
