@@ -9,7 +9,7 @@ export default class Post extends React.Component{
       <section className="entire-thread">
         <article className='post'>
           <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
-          <h4>{this.props.userId.firstName}</h4>
+          <h3>{this.props.userId.firstName}</h3>
           <h6>{formatLongDate(this.props.date)}</h6>
           <p>{this.props.content}</p>
         </article>

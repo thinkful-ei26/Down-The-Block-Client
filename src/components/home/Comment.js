@@ -4,8 +4,8 @@ import {formatLongDate} from '../common/helper-functions';
 export default function Comment(props){
   return(
     <div className="comment">
-      <p>{props.userId.firstName}</p>
-      <p>{formatLongDate(props.date)}</p>
+      <h5>{props.userId.firstName}</h5>
+      {/* <p>{formatLongDate(props.date)}</p> */}
       <p>{props.content}</p>
     </div>
   );
