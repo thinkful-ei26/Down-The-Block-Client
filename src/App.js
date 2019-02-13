@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
-import LandingPage from './components/login-registration/login-page';
+import LandingPage from './components/onboarding/LandingPage';
 import HomePage from './components/home/HomePage';
-import RegistrationPage from './components/login-registration/registration-page';
+import RegistrationPage from './components/onboarding/SignupPage';
 import {refreshAuthToken} from './actions/auth';
 
 export class App extends React.Component {

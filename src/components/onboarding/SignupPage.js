@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
-
-import RegistrationForm from './registration-form';
+import SignupForm from './SignupForm';
+import Navbar from '../common/Navbar'
 
 export function RegistrationPage(props) {
     
@@ -12,8 +12,9 @@ export function RegistrationPage(props) {
 
     return (
         <div className="registration-page">
+            <Navbar/>
             <h2 className="registration-page-h2">Sign up Below</h2>
-            <RegistrationForm /><br/>
+            <SignupForm/><br/>
             <label className="registration-page-label">Already Registered?</label>
             <Link to="/" style={{color: 'blue'}}>login</Link>
         </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
-import LoginForm from './login-form';
+import LoginForm from './LoginForm';
+import Navbar from '../common/Navbar'
 
 export function LandingPage(props) {
     // If we are logged in redirect straight to the user's home
@@ -11,6 +12,7 @@ export function LandingPage(props) {
 
     return (
         <div className="landing-page">
+            <Navbar/>
             <h2 className="landing-h2">Sign in Below</h2>
             <LoginForm />
             <label className="landing-register">Don't have an account yet?</label>
