@@ -11,8 +11,8 @@ export class Forum extends React.Component{
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
-        {this.props.coords && <PostsList/>} 
         <CreatePost/>
+        {this.props.coords && <PostsList/>} 
       </section>
     );
   }

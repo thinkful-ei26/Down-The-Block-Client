@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import Navbar from '../common/Navbar';
 import Sidebar from './Sidebar';
 import Main from './Main';
 import Geolocator from './Geolocator';
