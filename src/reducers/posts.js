@@ -5,12 +5,14 @@ import {
   CREATE_POST_REQUEST,
   CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
+  CHANGE_SEARCH_TERM
 } from '../actions/types';
 
 const INITIAL_STATE = {
   posts: [],
   loading: false,
   error: null,
+  searchTerm: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -44,6 +46,10 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         error: action.error,
       });
+    case CHANGE_SEARCH_TERM:
+      return Object.assign({}, state, {
+        searchTerm: action.searchTerm,
+      })
     default:
       return state;
   }

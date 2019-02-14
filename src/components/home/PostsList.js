@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Post from './Post';
 import { fetchPosts } from '../../actions/posts';
+import { filterPostsBySearch } from '../common/helper-functions'
 
 export class PostsList extends React.Component{
   componentDidMount(){
@@ -12,7 +13,11 @@ export class PostsList extends React.Component{
   }
 
   generatePosts(){
-    return this.props.posts.map((post, index)=> <Post key={index} {...post} />)
+    let posts = this.props.posts.map((post, index)=> <Post key={index} postId={post.id} {...post} />);
+    if(this.props.searchTerm){
+      posts = filterPostsBySearch(this.props.searchTerm, posts);
+    }
+    return posts;
   }
 
   render(){
@@ -29,7 +34,8 @@ export class PostsList extends React.Component{
 
 const mapStateToProps = state => ({
   posts: state.posts.posts,
-  coords: state.geolocation.coords
+  coords: state.geolocation.coords,
+  searchTerm: state.posts.searchTerm,
 });
 
 export default connect(mapStateToProps)(PostsList)

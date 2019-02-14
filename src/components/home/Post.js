@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PostComments from './PostComments';
 import {formatLongDate} from '../common/helper-functions';
 import './post.css';

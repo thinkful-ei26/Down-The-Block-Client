@@ -1,4 +1,7 @@
 .forum-header{
   text-align: center;
+  width: 80%;
   padding: 20px;
+  display: flex;
+  justify-content: center;
 }
