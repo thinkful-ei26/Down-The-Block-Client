@@ -74,3 +74,74 @@ export function formatLongDate(dateString){
 
   return `${nameDay}, ${month} ${day}, ${year}`
 }
+
+//global variable: 
+let globalArrayOfSearchTerms=[];
+
+//this fn is responsible for updating the global array which keeps track of the search terms and whether or not they were found in each post
+//it accepts the id for the post, the part of the post being checked, and the array of search terms 
+function contains(id, str, arr){
+  for(let i =0; i<arr.length; i++){
+    //if this word was already found for this post, or it now includes it, change this word's value to true for this post 
+    if(globalArrayOfSearchTerms.find(item=>item.postId===id)[arr[i]]===true || str.toLowerCase().includes((arr[i]).toLowerCase())){
+      //this means this search term was found somewhere in the post 
+      globalArrayOfSearchTerms.find(item=>item.postId===id)[arr[i]] = true;
+    }
+    //if its not found in this part of the post, then return false for this post
+    else{
+      globalArrayOfSearchTerms.find(item=>item.postId===id)[arr[i]] = false;
+    }
+  }
+  //dont care what it returns, the point of it is to update the global arr
+  return null;
+}
+
+//This search fn will return any post that has ALL of the search terms (each space determines a new term) present somewhere in the post 
+export function filterPostsBySearch(terms, posts){
+  let searchTerms = terms.toLowerCase().split(" ");
+
+  //reset the global
+  globalArrayOfSearchTerms =[];
+
+  //set up the global to be an array of objects, each object having a postId
+  for(let i = 0; i<posts.length; i++){
+    globalArrayOfSearchTerms.push({"postId": posts[i].props.postId});
+  }
+
+  console.log('the global array is', globalArrayOfSearchTerms);
+
+  //for each post, run the contains function that will update the global array accordingly
+  return posts.filter(post=>
+    {
+      let bool = true; 
+      let date = formatLongDate(post.props.date).toLowerCase();
+
+      contains(post.props.postId, post.props.category, searchTerms);
+
+      contains(post.props.postId, date, searchTerms);
+
+      contains(post.props.postId, post.props.userId.firstName, searchTerms);
+
+      contains(post.props.postId, post.props.content, searchTerms);
+
+
+      //grab the object in the array that corresponds to this specific post 
+      let obj = globalArrayOfSearchTerms.find(item=>item.postId===post.props.postId)
+
+      //if any of the words in the global array for this post were false, then it doesn't include that search term in the post. and we'll return false for this post
+      for (var key in obj) {
+        if(obj[key]===false){
+          bool=false;
+        }
+      }
+      return(  
+        bool    
+      );
+    }
+  )
+}
+
+export function filterByCategory(filter, posts){
+  console.log(posts);
+  return posts.filter(post=>post.props.category===filter);
+}

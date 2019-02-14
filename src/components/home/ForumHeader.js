@@ -1,7 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import { changeSearchTerm, changeCategoryFilter } from '../../actions/posts'
 import './forum-header.css';
 
-export default class Forum extends React.Component{
+export class ForumHeader extends React.Component{
   
   whichForum(){
     return (
@@ -13,14 +15,21 @@ export default class Forum extends React.Component{
 
   render(){
     return(
-      <header className="forum-header"> 
+      <header className="forum-header">
+        <input onChange={e=>this.props.dispatch(changeSearchTerm(e.target.value))} className="search-posts" placeholder='Search Posts'/> 
+
         {this.whichForum()}
+
+        <select className="filter-posts" onChange={e=>this.props.dispatch(changeCategoryFilter(e.target.value))}>
+          <option value="">Filter Category:</option>
+          <option value="Crime">Crime</option>
+          <option value="Personal">Personal</option>
+          <option value="Event">Event</option>
+          <option value="Other">Other</option>
+        </select>
       </header>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  display: state.nav.display 
-});
-
+export default connect()(ForumHeader)
