@@ -6,10 +6,7 @@ import { filterPostsBySearch, filterByCategory } from '../common/helper-function
 
 export class PostsList extends React.Component{
   componentDidMount(){
-    // if (this.props.coords){
-      console.log('in here', this.props.coords);
-      this.props.dispatch(fetchPosts(this.props.coords));
-    // }
+    this.props.dispatch(fetchPosts(this.props.coords));
   }
 
   generatePosts(){
@@ -26,8 +23,6 @@ export class PostsList extends React.Component{
   }
 
   render(){
-    // console.log(this.props);
-    // this.locationFetched();
     return(
       <section className="posts-list">
         {this.generatePosts()}

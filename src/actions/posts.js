@@ -6,7 +6,8 @@ import {
   CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
   CHANGE_SEARCH_TERM,
-  CHANGE_CATEGORY_FILTER
+  CHANGE_CATEGORY_FILTER,
+  POST_BEING_EDITED,
 } from './types';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
@@ -27,6 +28,7 @@ export const fetchPostsError= (error) => ({
 })
 
 export const fetchPosts = (coords) => (dispatch, getState) => {
+    console.log('here')
     dispatch(fetchPostsRequest());
     const authToken = getState().auth.authToken;
     // console.log(coords);
@@ -67,12 +69,23 @@ export const createPostError= (error) => ({
   error
 })
 
-export const submitPost = (values, coords) => (dispatch, getState) =>{
+export const submitPost = (postId, values, coords) => (dispatch, getState) =>{
     dispatch(createPostRequest());
     const authToken = getState().auth.authToken;
+    const method = postId ? "PUT" : "POST";
 
-    return fetch(`${API_BASE_URL}/posts/${coords}`, { 
-        method: 'POST',
+    let geoObjToObj = {
+        latitude: coords.latitude,
+        longitude: coords.longitude
+      }
+      // console.log(geoObjToObj);
+    let stringifiedObj = JSON.stringify(geoObjToObj);
+
+    const path = postId ? `${API_BASE_URL}/posts/${postId}` : `${API_BASE_URL}/posts/${stringifiedObj}`; 
+
+
+    return fetch(path, { 
+        method,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -107,6 +120,11 @@ export const submitPost = (values, coords) => (dispatch, getState) =>{
         }
     });
 }
+
+export const postBeingEdited= (post) => ({
+    type: POST_BEING_EDITED,
+    post,
+  })
 
 export const changeSearchTerm = (searchTerm) =>({
     type: CHANGE_SEARCH_TERM,
