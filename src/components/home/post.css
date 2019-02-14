@@ -1,5 +1,5 @@
 .entire-thread{
-  background: rgb(226, 227, 217);
+  background: rgb(240, 241, 205);
   width: 80%;
   margin: 20px auto 0px auto;
 }
@@ -39,13 +39,14 @@ input[type="radio"] {
   border: 2px solid transparent;
 }
 
-.submit-post{
+.post-form button{
   background: rgb(56, 98, 146);
   padding: 10px;
   border: none;
   color: white;
   font-size: 1rem;
   cursor: pointer;
+  margin: 0px 5px;
 }
 
 .bottom-options{

@@ -5,12 +5,18 @@ import {
   CREATE_POST_REQUEST,
   CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
+  CHANGE_SEARCH_TERM,
+  CHANGE_CATEGORY_FILTER,
+  POST_BEING_EDITED
 } from '../actions/types';
 
 const INITIAL_STATE = {
   posts: [],
   loading: false,
   error: null,
+  searchTerm: '',
+  categoryFilter: '',
+  postBeingEdited: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -38,12 +44,25 @@ export default (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, {
         loading: false,
         error: null,
+        postBeingEdited: null,
       });
     case CREATE_POST_ERROR:
       return Object.assign({}, state, {
         loading: false,
         error: action.error,
       });
+    case CHANGE_SEARCH_TERM:
+      return Object.assign({}, state, {
+        searchTerm: action.searchTerm,
+      })
+    case CHANGE_CATEGORY_FILTER:
+      return Object.assign({}, state, {
+        categoryFilter: action.categoryFilter,
+      })
+    case POST_BEING_EDITED:
+      return Object.assign({}, state, {
+        postBeingEdited: action.post 
+      })
     default:
       return state;
   }
