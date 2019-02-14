@@ -27,18 +27,13 @@ export const fetchPostsError= (error) => ({
 export const fetchPosts = (coords) => (dispatch, getState) => {
     dispatch(fetchPostsRequest());
     const authToken = getState().auth.authToken;
-    // console.log(coords);
-    let geoObjToObj = {
+    let convertedStringifiedGeolocationObject = JSON.stringify({
       latitude: coords.latitude,
       longitude: coords.longitude
-    }
-    // console.log(geoObjToObj);
-    let stringifiedObj = JSON.stringify(geoObjToObj);
-    console.log(stringifiedObj);
-    fetch(`${API_BASE_URL}/posts/${stringifiedObj}`, {
+    })
+    fetch(`${API_BASE_URL}/posts/${convertedStringifiedGeolocationObject}`, {
         method: 'GET',
         headers: {
-            // Provide our auth token as credentials
             Authorization: `Bearer ${authToken}`
         },
     })
@@ -68,8 +63,12 @@ export const createPostError= (error) => ({
 export const submitPost = (values, coords) => (dispatch, getState) =>{
     dispatch(createPostRequest());
     const authToken = getState().auth.authToken;
+    let convertedStringifiedGeolocationObject = JSON.stringify({
+        latitude: coords.latitude,
+        longitude: coords.longitude
+      })
 
-    return fetch(`${API_BASE_URL}/posts/${coords}`, { 
+    return fetch(`${API_BASE_URL}/posts/${convertedStringifiedGeolocationObject}`, { 
         method: 'POST',
         headers: {
             'Accept': 'application/json',

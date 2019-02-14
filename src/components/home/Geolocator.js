@@ -6,7 +6,7 @@ import { fetchLocationSuccess } from '../../actions/geolocation';
 export class Geolocator extends React.Component {
 
   componentDidUpdate(){
-    // console.log(this.props);
+    console.log(this.props);
     console.log(this.props.coords);
     this.props.dispatch(fetchLocationSuccess(this.props.coords))
   }
