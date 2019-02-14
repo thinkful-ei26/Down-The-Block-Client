@@ -29,7 +29,7 @@ export class CreatePost extends React.Component{
         onSubmit={(e)=> this.onSubmit(e)}
         ref={form => this.form = form}
         style={this.state.style}
-        onMouseLeave={()=>this.setState({borderAround: ''})}
+        // onMouseLeave={()=>this.setState({borderAround: ''})}
       >
           
         <textarea 

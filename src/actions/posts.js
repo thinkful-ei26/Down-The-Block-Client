@@ -5,7 +5,8 @@ import {
   CREATE_POST_REQUEST,
   CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
-  CHANGE_SEARCH_TERM
+  CHANGE_SEARCH_TERM,
+  CHANGE_CATEGORY_FILTER
 } from './types';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
@@ -110,4 +111,9 @@ export const submitPost = (values, coords) => (dispatch, getState) =>{
 export const changeSearchTerm = (searchTerm) =>({
     type: CHANGE_SEARCH_TERM,
     searchTerm
+})
+
+export const changeCategoryFilter = (categoryFilter) =>({
+    type: CHANGE_CATEGORY_FILTER,
+    categoryFilter
 })

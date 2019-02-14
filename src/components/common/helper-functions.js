@@ -140,3 +140,8 @@ export function filterPostsBySearch(terms, posts){
     }
   )
 }
+
+export function filterByCategory(filter, posts){
+  console.log(posts);
+  return posts.filter(post=>post.props.category===filter);
+}
