@@ -31,18 +31,15 @@ export const fetchPosts = (coords) => (dispatch, getState) => {
     console.log('here')
     dispatch(fetchPostsRequest());
     const authToken = getState().auth.authToken;
-    // console.log(coords);
-    let geoObjToObj = {
+    let simplifiedGeoObject = {
       latitude: coords.latitude,
       longitude: coords.longitude
     }
-    // console.log(geoObjToObj);
-    let stringifiedObj = JSON.stringify(geoObjToObj);
+    let stringifiedObj = JSON.stringify(simplifiedGeoObject);
     console.log(stringifiedObj);
     fetch(`${API_BASE_URL}/posts/${stringifiedObj}`, {
         method: 'GET',
         headers: {
-            // Provide our auth token as credentials
             Authorization: `Bearer ${authToken}`
         },
     })
@@ -74,12 +71,11 @@ export const submitPost = (postId, values, coords) => (dispatch, getState) =>{
     const authToken = getState().auth.authToken;
     const method = postId ? "PUT" : "POST";
 
-    let geoObjToObj = {
+    let simplifiedGeoObject = {
         latitude: coords.latitude,
         longitude: coords.longitude
-      }
-      // console.log(geoObjToObj);
-    let stringifiedObj = JSON.stringify(geoObjToObj);
+      };
+    let stringifiedObj = JSON.stringify(simplifiedGeoObject);
 
     const path = postId ? `${API_BASE_URL}/posts/${postId}` : `${API_BASE_URL}/posts/${stringifiedObj}`; 
 
