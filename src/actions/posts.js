@@ -8,6 +8,9 @@ import {
   CHANGE_SEARCH_TERM,
   CHANGE_CATEGORY_FILTER,
   POST_BEING_EDITED,
+  DELETE_POST_REQUEST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR
 } from './types';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
@@ -120,6 +123,59 @@ export const submitPost = (postId, values, coords) => (dispatch, getState) =>{
         }
     });
 }
+
+export const deletePostRequest = () => ({
+    type: DELETE_POST_REQUEST,
+})
+
+export const deletePostSuccess = (postId) => ({
+  type: DELETE_POST_SUCCESS,
+  postId
+})
+
+export const deletePostError= (error) => ({
+  type: DELETE_POST_ERROR,
+  error
+})
+
+export const deletePost = (postId) => (dispatch, getState) =>{
+    dispatch(deletePostRequest());
+    const authToken = getState().auth.authToken;
+
+    fetch(`${API_BASE_URL}/posts/${postId}`, {
+        method: 'DELETE',
+        headers: {
+            // Provide our auth token as credentials
+            Authorization: `Bearer ${authToken}`
+        },
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => {
+        console.log('here')
+        dispatch(deletePostSuccess(postId));
+    })
+    .catch(error => {
+        dispatch(deletePostError(error));
+        const {message, location, status} = error;
+        if (status === 400) {
+            console.log(message, location)
+            // Convert errors into SubmissionErrors for Redux Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: message
+                })
+            );
+        }
+        else{
+            return Promise.reject(
+                new SubmissionError({
+                    _error: 'Unable to delete post, please try again',
+                })
+            );
+        }
+    });
+}
+
 
 export const postBeingEdited= (post) => ({
     type: POST_BEING_EDITED,
