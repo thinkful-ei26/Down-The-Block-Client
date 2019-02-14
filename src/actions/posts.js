@@ -5,6 +5,8 @@ import {
   CREATE_POST_REQUEST,
   CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
+  CHANGE_SEARCH_TERM,
+  CHANGE_CATEGORY_FILTER
 } from './types';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
@@ -27,17 +29,12 @@ export const fetchPostsError= (error) => ({
 export const fetchPosts = (coords) => (dispatch, getState) => {
     dispatch(fetchPostsRequest());
     const authToken = getState().auth.authToken;
-    console.log(coords);
+    // console.log(coords);
     let geoObjToObj = {
       latitude: coords.latitude,
       longitude: coords.longitude
     }
-    // let testObj = {
-    //   latitude: 2,
-    //   longitude: 4
-    // };
-    // console.log(testObj);
-    console.log(geoObjToObj);
+    // console.log(geoObjToObj);
     let stringifiedObj = JSON.stringify(geoObjToObj);
     console.log(stringifiedObj);
     fetch(`${API_BASE_URL}/posts/${stringifiedObj}`, {
@@ -46,7 +43,6 @@ export const fetchPosts = (coords) => (dispatch, getState) => {
             // Provide our auth token as credentials
             Authorization: `Bearer ${authToken}`
         },
-        // params: stringifiedObj,
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
@@ -71,11 +67,11 @@ export const createPostError= (error) => ({
   error
 })
 
-export const submitPost = (values) => (dispatch, getState) =>{
+export const submitPost = (values, coords) => (dispatch, getState) =>{
     dispatch(createPostRequest());
     const authToken = getState().auth.authToken;
 
-    return fetch(`${API_BASE_URL}/posts`, { 
+    return fetch(`${API_BASE_URL}/posts/${coords}`, { 
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -88,7 +84,7 @@ export const submitPost = (values) => (dispatch, getState) =>{
     .then(res => res.json())
     .then(() => {
         dispatch(createPostSuccess());
-        dispatch(fetchPosts());
+        dispatch(fetchPosts(coords));
     })
     .catch(error => {
         dispatch(createPostError(error));
@@ -111,3 +107,13 @@ export const submitPost = (values) => (dispatch, getState) =>{
         }
     });
 }
+
+export const changeSearchTerm = (searchTerm) =>({
+    type: CHANGE_SEARCH_TERM,
+    searchTerm
+})
+
+export const changeCategoryFilter = (categoryFilter) =>({
+    type: CHANGE_CATEGORY_FILTER,
+    categoryFilter
+})

@@ -1,15 +1,20 @@
-import React from 'react';
+import React from 'react'
 import PostComments from './PostComments';
 import {formatLongDate} from '../common/helper-functions';
 import './post.css';
 
-export default function Post(props){
-  return(
-    <article className="post">
-      <p>{props.userId.firstName}</p>
-      <p>{formatLongDate(props.date)}</p>
-      <p>{props.content}</p>
-      <PostComments comments={props.comments}/>
-    </article>
-  );
+export default class Post extends React.Component{
+  render(){
+    return(
+      <section className="entire-thread">
+        <article className='post'>
+          <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
+          <h3>{this.props.userId.firstName}</h3>
+          <h6>{formatLongDate(this.props.date)}</h6>
+          <p>{this.props.content}</p>
+        </article>
+        <PostComments comments={this.props.comments}/>
+      </section>
+    );
+  }
 }
