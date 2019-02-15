@@ -1,5 +1,6 @@
 export const DISPLAY = 'DISPLAY';
 export const TOGGLE_NAVBAR = "TOGGLE_NAVBAR";
+export const SHOW_ANIMATION = "SHOW_ANIMATION"
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const CLEAR_AUTH = 'CLEAR_AUTH';

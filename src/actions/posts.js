@@ -10,11 +10,12 @@ import {
   POST_BEING_EDITED,
   DELETE_POST_REQUEST,
   DELETE_POST_SUCCESS,
-  DELETE_POST_ERROR
+  DELETE_POST_ERROR,
 } from './types';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {SubmissionError} from 'redux-form';
+import { showAnimation } from './navigation'
 
 export const fetchPostsRequest = () => ({
     type: FETCH_POSTS_REQUEST,
@@ -73,6 +74,8 @@ export const submitPost = (postId, values, coords) => (dispatch, getState) =>{
     dispatch(createPostRequest());
     const authToken = getState().auth.authToken;
     const method = postId ? "PUT" : "POST";
+
+    console.log(coords);
 
     let simplifiedGeoObject = {
         latitude: coords.latitude,

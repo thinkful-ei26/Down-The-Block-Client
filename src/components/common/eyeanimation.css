@@ -1,0 +1,14 @@
+.eyes {
+  -webkit-animation: flip 5s smooth; /* Safari 4.0 - 8.0 */
+  animation: flip 5s smooth;
+}
+
+@-webkit-keyframes flip {
+  from {transform: scaleX(-1);}
+  to { transform: scaleX(1);}
+}
+
+@keyframes flip {
+  from {transform: scaleX(-1);}
+  to { transform: scaleX(1);}
+}
