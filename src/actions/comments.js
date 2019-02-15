@@ -7,7 +7,7 @@ import
         POST_COMMENT_ERROR 
     } 
 from './types'; 
-    
+import { fetchPosts } from './posts';    
 
 export const postCommentRequest = () => ({
     type: POST_COMMENT_REQUEST
@@ -44,6 +44,9 @@ export const addComment = (content, userId, postId) => (dispatch, getState) => {
         })
         .then((response) =>{ 
             dispatch(postCommentSuccess(response));
+        })
+        .then( () => {
+            dispatch(fetchPosts(this.props.coords));
         })
         .catch(err => {
             dispatch(postCommentError(err));
