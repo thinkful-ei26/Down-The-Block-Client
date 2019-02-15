@@ -4,8 +4,11 @@ import PostComments from './PostComments';
 import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
+import { PostAddComment } from './PostAddComment';
+import { fetchPosts } from '../../actions/posts';
 
-export class Post extends React.Component{
+export class Post extends React.Component {
+
   edit(postId, content, category){
     if(this.props.userId.id===this.props.loggedInUserId){
       return <button onClick={()=>this.props.dispatch(postBeingEdited({postId, content, category}))} >Edit</button>
@@ -31,14 +34,20 @@ export class Post extends React.Component{
           <p>{this.props.content}</p>
         </article>
         <PostComments comments={this.props.comments}/>
+        <PostAddComment form={this.props.postId}/>
       </section>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  loggedInUserId: state.auth.currentUser.id
-});
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    loggedInUserId: state.auth.currentUser.id, 
+    coords: state.geolocation.coords,
+    postsArray: state.postsArray
+  }
+};
 
 export default connect(mapStateToProps)(Post)
 
