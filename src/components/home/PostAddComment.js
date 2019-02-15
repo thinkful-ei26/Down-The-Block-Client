@@ -3,17 +3,13 @@ import {Field, reduxForm, focus} from 'redux-form';
 import { connect } from 'react-redux';
 import {required, nonEmpty} from '../common/validators';
 import { addComment } from '../../actions/comments';
-
 export class PostAddComment extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     onSubmit(values, props) {
         props = this.props;
-        return this.props.dispatch(addComment(values.content, props.loggedInUserId, props.form));
-    }    
-    
+        return this.props.dispatch(addComment(values.content, props.loggedInUserId, props.form));       
+    }  
+
     render() {   
         let error;
         if (this.props.error) {
@@ -54,6 +50,7 @@ PostAddComment = reduxForm({
 
 PostAddComment = connect(state => {
     return{
+        coords: state.geolocation.coords,
         loggedInUserId: state.auth.currentUser.id,
         postsArray: state.posts.posts  
     }
