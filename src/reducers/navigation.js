@@ -1,11 +1,13 @@
 import {
   DISPLAY,
   TOGGLE_NAVBAR,
+  SHOW_ANIMATION
 } from '../actions/types';
 
 const INITIAL_STATE = {
   display: 'neighbor-forum',
   toggleNavbar: false,
+  showAnimation: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -17,15 +19,17 @@ export default (state = INITIAL_STATE, action) => {
     case TOGGLE_NAVBAR:
       console.log(action.bool);
       if(action.bool===true || action.bool===false){
-        console.log('CHANGING TOGGLE1', action.bool)
         return Object.assign({}, state, {
           toggleNavbar: action.bool,
         })
       }
-      console.log('CHANGING TOGGLE2', action.bool)
       return Object.assign({}, state, {
         toggleNavbar: !state.toggleNavbar,
       })
+      case SHOW_ANIMATION:
+      return Object.assign({}, state, {
+        showAnimation: action.bool,
+      });    
     default:
       return state;
   }

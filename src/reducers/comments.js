@@ -1,10 +1,8 @@
-import  
-    { 
+import  { 
         POST_COMMENT_REQUEST, 
         POST_COMMENT_SUCCESS, 
         POST_COMMENT_ERROR 
-    } 
-from '../actions/types'; 
+    } from '../actions/types';
 
 const initialState = {
     response:null, 
