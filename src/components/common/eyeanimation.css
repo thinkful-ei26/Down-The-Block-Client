@@ -1,14 +1,22 @@
-.eyes {
-  -webkit-animation: flip 5s smooth; /* Safari 4.0 - 8.0 */
-  animation: flip 5s smooth;
+.eyes-left, .eyes-right{
+  margin:auto;
+  display: block;
+  width: 300px;
+  height: 200px;
 }
 
-@-webkit-keyframes flip {
-  from {transform: scaleX(-1);}
-  to { transform: scaleX(1);}
+.eyes-left {
+  transform: scaleX(-1);
+}
+
+.eyes-right {
+  transform: scaleX(1);
+}
+
+/* @-webkit-keyframes flip {
+  100% {transform: scaleX(1);}
 }
 
 @keyframes flip {
-  from {transform: scaleX(-1);}
-  to { transform: scaleX(1);}
-}
+  100% {transform: scaleX(1);}
+} */
