@@ -1,83 +1,40 @@
 import { 
-  FETCH_POSTS_REQUEST,
-  FETCH_POSTS_SUCCESS,
-  FETCH_POSTS_ERROR,
-  CREATE_POST_REQUEST,
-  CREATE_POST_SUCCESS,
-  CREATE_POST_ERROR,
-  CHANGE_SEARCH_TERM,
-  CHANGE_CATEGORY_FILTER,
-  POST_BEING_EDITED,
-  DELETE_POST_REQUEST,
-  DELETE_POST_SUCCESS,
-  DELETE_POST_ERROR,
-} from './types';
-import {API_BASE_URL} from '../config';
-import {normalizeResponseErrors} from './utils';
-import {SubmissionError} from 'redux-form';
-import { showAnimation } from './navigation'
-
-export const fetchPostsRequest = () => ({
-    type: FETCH_POSTS_REQUEST,
-})
-
-export const fetchPostsSuccess = (posts) => ({
-  type: FETCH_POSTS_SUCCESS,
-  posts
-})
-
-export const fetchPostsError= (error) => ({
-  type: FETCH_POSTS_ERROR,
-  error
-})
-
-export const fetchPosts = (coords) => (dispatch, getState) => {
-    console.log('here')
-    dispatch(fetchPostsRequest());
-    const authToken = getState().auth.authToken;
-    let simplifiedGeoObject = {
-      latitude: coords.latitude,
-      longitude: coords.longitude
-    }
-    let stringifiedObj = JSON.stringify(simplifiedGeoObject);
-    console.log(stringifiedObj);
-    fetch(`${API_BASE_URL}/posts/${stringifiedObj}`, {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${authToken}`
-        },
-    })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => res.json())
-        .then(posts => {
-            dispatch(fetchPostsSuccess(posts));
-        })
-        .catch(error => {
-            dispatch(fetchPostsError(error));
-        });
-};
-
-export const createPostRequest = () => ({
-    type: CREATE_POST_REQUEST,
-})
-
-export const createPostSuccess = () => ({
-  type: CREATE_POST_SUCCESS,
-})
-
-export const createPostError= (error) => ({
-  type: CREATE_POST_ERROR,
-  error
-})
-
-export const submitPost = (postId, values, coords) => (dispatch, getState) =>{
-    dispatch(createPostRequest());
-    const authToken = getState().auth.authToken;
-    const method = postId ? "PUT" : "POST";
-
-    console.log(coords);
-
-    let simplifiedGeoObject = {
+    FETCH_POSTS_REQUEST,
+    FETCH_POSTS_SUCCESS,
+    FETCH_POSTS_ERROR,
+    CREATE_POST_REQUEST,
+    CREATE_POST_SUCCESS,
+    CREATE_POST_ERROR,
+    CHANGE_SEARCH_TERM,
+    CHANGE_CATEGORY_FILTER,
+    POST_BEING_EDITED,
+    DELETE_POST_REQUEST,
+    DELETE_POST_SUCCESS,
+    DELETE_POST_ERROR
+  } from './types';
+  import {API_BASE_URL} from '../config';
+  import {normalizeResponseErrors} from './utils';
+  import {SubmissionError} from 'redux-form';
+  
+  export const fetchPostsRequest = () => ({
+      type: FETCH_POSTS_REQUEST,
+  })
+  
+  export const fetchPostsSuccess = (posts) => ({
+    type: FETCH_POSTS_SUCCESS,
+    posts
+  })
+  
+  export const fetchPostsError= (error) => ({
+    type: FETCH_POSTS_ERROR,
+    error
+  })
+  
+  export const fetchPosts = (coords) => (dispatch, getState) => {
+      console.log('here')
+      dispatch(fetchPostsRequest());
+      const authToken = getState().auth.authToken;
+      let simplifiedGeoObject = {
         latitude: coords.latitude,
         longitude: coords.longitude
       }
@@ -92,8 +49,7 @@ export const submitPost = (postId, values, coords) => (dispatch, getState) =>{
           .then(res => normalizeResponseErrors(res))
           .then(res => res.json())
           .then(posts => {
-              console.log(fetchPostsSuccess(posts))
-              return dispatch(fetchPostsSuccess(posts));
+              dispatch(fetchPostsSuccess(posts));
           })
           .catch(error => {
               dispatch(fetchPostsError(error));
@@ -230,4 +186,4 @@ export const submitPost = (postId, values, coords) => (dispatch, getState) =>{
   export const changeCategoryFilter = (categoryFilter) =>({
       type: CHANGE_CATEGORY_FILTER,
       categoryFilter
-  });
+  })
