@@ -3,6 +3,7 @@ import ForumHeader from './ForumHeader';
 import PostsList from './PostsList';
 import CreatePost from './CreatePost';
 import {connect} from 'react-redux';
+import './main.css'
 
 export class Forum extends React.Component{
 
@@ -11,7 +12,11 @@ export class Forum extends React.Component{
       <section className="forum">
         <ForumHeader type={this.props.display} />
         {!this.props.postBeingEdited && <CreatePost/>}
-        {this.props.postBeingEdited && <CreatePost editPost={this.props.postBeingEdited}/>} 
+        {this.props.postBeingEdited && 
+          <div className="modal">
+            <CreatePost editPost={this.props.postBeingEdited}/>
+          </div>
+        } 
         {this.props.coords && <PostsList/>}
       </section>
     );
