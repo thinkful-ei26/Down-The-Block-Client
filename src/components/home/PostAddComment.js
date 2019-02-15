@@ -17,27 +17,7 @@ export class PostAddComment extends Component {
         }       
         
         return (
-            <form 
-            className="userCommentForm"
-            onSubmit= {this.props.handleSubmit(values=> 
-                {
-                this.onSubmit(values);
-                this.props.reset('commentInput');
-                }
-            )}>
-                {error}
-                <label htmlFor="comment">ADD COMMENT</label>
-                <Field
-                    component="input"
-                    type="text"
-                    name="userComment"
-                    id="userComment"
-                    validate={[required, nonEmpty]}
-                />
-                <button disabled={this.props.pristine || this.props.submitting}>
-                    SUBMIT
-                </button>
-                </form>
+            <div></div>
         )
     }
 }
