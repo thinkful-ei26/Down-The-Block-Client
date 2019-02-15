@@ -15,7 +15,7 @@ export default (state=initialState, action) =>{
       })
     case FETCH_LOCATION_ERROR: 
       return Object.assign({}, state, {
-        err: action.err
+        error: 'Location access not granted'
       })
     default:
       return state;

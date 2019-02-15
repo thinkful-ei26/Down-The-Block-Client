@@ -11,12 +11,16 @@ export class HomePage extends React.Component{
     // console.log(this.state);
     return(
       <div className="home">
-        <Sidebar/>
         <Geolocator/>
-        <Main/>
+        {this.props.coords && <Sidebar/>}
+        {this.props.coords && <Main/>}
       </div>
     );
   }
 }
 
-export default requiresLogin()(connect()(HomePage));
+const mapStateToProps = state => ({
+  coords: state.geolocation.coords,
+});
+
+export default requiresLogin()(connect(mapStateToProps)(HomePage));

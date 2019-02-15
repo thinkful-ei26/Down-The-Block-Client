@@ -17,7 +17,7 @@ export class Forum extends React.Component{
             <CreatePost editPost={this.props.postBeingEdited}/>
           </div>
         } 
-        {this.props.coords && <PostsList/>}
+        <PostsList/>
       </section>
     );
   }
@@ -25,7 +25,6 @@ export class Forum extends React.Component{
 
 const mapStateToProps = state => ({
   display: state.nav.display,
-  coords: state.geolocation.coords,
   postBeingEdited: state.posts.postBeingEdited,
 });
 

@@ -8,7 +8,6 @@ export const fetchLocationSuccess = coords => ({
     coords
 });
 
-export const fetchLocationError = err => ({
-    type: FETCH_LOCATION_ERROR,
-    err
+export const fetchLocationError = () => ({
+    type: FETCH_LOCATION_ERROR
 });
