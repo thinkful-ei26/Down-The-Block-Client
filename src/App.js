@@ -44,7 +44,6 @@ export class App extends React.Component {
             <div className="app">
                 {/* Always show the navbar! */}
                 <Route path="/" component={Navbar} />
-                <Route path="/chat" component={Chat} />
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/home" component={HomePage}></Route>
                 <Route exact path="/about" component={AboutPage}></Route>

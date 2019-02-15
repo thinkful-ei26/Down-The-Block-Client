@@ -15,13 +15,13 @@ export class Chat extends React.Component{
   render(){
     return(
       <section className="chat">
-        <h1>hello world</h1>
+        <h1>Chat Messages</h1>
         <form onSubmit={e => {
           e.preventDefault()
           this.socket.emit("chat-message", e.currentTarget.message.value )
           console.log("submitted")
         }} >
-          <input type="text" placeholder="Type Message" name="message"
+          <input type="text" placeholder="Type your message" name="message"
           />
           <button type="submit">Submit</button>
         </form>
