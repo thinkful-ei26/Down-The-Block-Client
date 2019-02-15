@@ -5,17 +5,13 @@ import {required, nonEmpty} from '../common/validators';
 import { addComment } from '../../actions/comments';
 
 export class PostAddComment extends Component {
-    constructor(props){
-        console.log(props);
+    constructor(props) {
         super(props);
     }
 
-    onSubmit(values, props, e) {
-        e = this.refs;
-        console.log(e);
+    onSubmit(values, props) {
         props = this.props;
-        console.log(props);
-        return this.props.dispatch(addComment(values.userComment, props.loggedInUserId, props.postId));
+        return this.props.dispatch(addComment(values.content, props.loggedInUserId, props.form));
     }    
     
     render() {   
@@ -27,24 +23,39 @@ export class PostAddComment extends Component {
                 </div>
             );
         }   
-            
-        console.log(this.props);
         return (
-            <div></div>
+                <form 
+                className= "commentInput"
+                onSubmit= {this.props.handleSubmit(values=> 
+                    {
+                    this.onSubmit(values, this.props.loggedInUserId, this.props.form);
+                    this.props.reset('commentInput');
+                    }
+                )}>
+                    {error}
+                    <label htmlFor="comment">ADD COMMENT</label>
+                    <Field
+                        component="input"
+                        type="text"
+                        name="content"
+                        id=  {this.props.postId}
+                        validate={[required, nonEmpty]}
+                    />
+                    <button  disabled={ this.props.pristine || this.props.submitting}>
+                        SUBMIT
+                    </button>
+                </form> 
         )
     }
 }
 
 PostAddComment = reduxForm({
-    form: 'commentInput',
-    onSubmitFail: (errors, dispatch) => dispatch(focus('userComment'))
 })(PostAddComment);
 
 PostAddComment = connect(state => {
-    console.log(state);
     return{
         loggedInUserId: state.auth.currentUser.id,
-        
+        postsArray: state.posts.posts  
     }
 })(PostAddComment)
 

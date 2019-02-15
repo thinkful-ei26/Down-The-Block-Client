@@ -26,7 +26,6 @@ export const postCommentError = (error) => ({
 export const addComment = (content, userId, postId) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     dispatch(postCommentRequest());
- 
     return (
         fetch(`${API_BASE_URL}/comments`, {
             method: 'POST',

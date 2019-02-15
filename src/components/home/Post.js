@@ -32,7 +32,7 @@ export class Post extends React.Component{
           <p>{this.props.content}</p>
         </article>
         <PostComments comments={this.props.comments}/>
-        <PostAddComment />
+        <PostAddComment form={this.props.postId}/>
       </section>
     );
   }
