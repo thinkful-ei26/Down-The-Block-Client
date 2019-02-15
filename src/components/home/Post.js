@@ -4,6 +4,7 @@ import PostComments from './PostComments';
 import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
+import { PostAddComment } from './PostAddComment';
 
 export class Post extends React.Component{
   edit(postId, content, category){
@@ -31,6 +32,7 @@ export class Post extends React.Component{
           <p>{this.props.content}</p>
         </article>
         <PostComments comments={this.props.comments}/>
+        <PostAddComment />
       </section>
     );
   }

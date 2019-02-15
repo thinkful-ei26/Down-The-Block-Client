@@ -1,9 +1,21 @@
 import React, { Component } from 'react'; 
 import {Field, reduxForm, focus} from 'redux-form';
+import { connect } from 'react-redux';
+import {required, nonEmpty} from '../common/validators';
+import { addComment } from '../../actions/comments';
 
 export class PostAddComment extends Component {
-    onSubmit(values) {
-        return this.props.dispatch(addComment(values.userComment));
+    constructor(props){
+        console.log(props);
+        super(props);
+    }
+
+    onSubmit(values, props, e) {
+        e = this.refs;
+        console.log(e);
+        props = this.props;
+        console.log(props);
+        return this.props.dispatch(addComment(values.userComment, props.loggedInUserId, props.postId));
     }    
     
     render() {   
@@ -14,35 +26,26 @@ export class PostAddComment extends Component {
                     {this.props.error}
                 </div>
             );
-        }       
-        
+        }   
+            
+        console.log(this.props);
         return (
-            <form 
-            className="userCommentForm"
-            onSubmit= {this.props.handleSubmit(values=> 
-                {
-                this.onSubmit(values);
-                this.props.reset('commentInput');
-                }
-            )}>
-                {error}
-                <label htmlFor="comment">ADD COMMENT</label>
-                <Field
-                    component="input"
-                    type="text"
-                    name="userComment"
-                    id="userComment"
-                    validate={[required, nonEmpty]}
-                />
-                <button disabled={this.props.pristine || this.props.submitting}>
-                    SUBMIT
-                </button>
-                </form>
+            <div></div>
         )
     }
 }
 
-export default reduxForm({
+PostAddComment = reduxForm({
     form: 'commentInput',
     onSubmitFail: (errors, dispatch) => dispatch(focus('userComment'))
-})(AnswerInput);
+})(PostAddComment);
+
+PostAddComment = connect(state => {
+    console.log(state);
+    return{
+        loggedInUserId: state.auth.currentUser.id,
+        
+    }
+})(PostAddComment)
+
+export default PostAddComment;
