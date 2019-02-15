@@ -31,7 +31,7 @@ export const fetchPostsError= (error) => ({
 })
 
 export const fetchPosts = (coords) => (dispatch, getState) => {
-    console.log('here')
+    // console.log('here')
     dispatch(fetchPostsRequest());
     const authToken = getState().auth.authToken;
     let simplifiedGeoObject = {
@@ -39,7 +39,7 @@ export const fetchPosts = (coords) => (dispatch, getState) => {
       longitude: coords.longitude
     }
     let stringifiedObj = JSON.stringify(simplifiedGeoObject);
-    console.log(stringifiedObj);
+    // console.log(stringifiedObj);
     fetch(`${API_BASE_URL}/posts/${stringifiedObj}`, {
         method: 'GET',
         headers: {
