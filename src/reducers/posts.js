@@ -6,7 +6,11 @@ import {
   CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
   CHANGE_SEARCH_TERM,
-  CHANGE_CATEGORY_FILTER
+  CHANGE_CATEGORY_FILTER,
+  POST_BEING_EDITED,
+  DELETE_POST_REQUEST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -15,6 +19,7 @@ const INITIAL_STATE = {
   error: null,
   searchTerm: '',
   categoryFilter: '',
+  postBeingEdited: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -42,6 +47,7 @@ export default (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, {
         loading: false,
         error: null,
+        postBeingEdited: null,
       });
     case CREATE_POST_ERROR:
       return Object.assign({}, state, {
@@ -56,6 +62,26 @@ export default (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, {
         categoryFilter: action.categoryFilter,
       })
+    case POST_BEING_EDITED:
+      return Object.assign({}, state, {
+        postBeingEdited: action.post 
+      })
+    case DELETE_POST_REQUEST:
+      return Object.assign({}, state, {
+        loading: true 
+      })      
+    case DELETE_POST_SUCCESS:
+      console.log(state.posts, action.postId)
+      return Object.assign({}, state, {
+        loading: false,
+        error: null,
+        posts: state.posts.filter(post=>post.id!==action.postId) 
+      }) 
+    case DELETE_POST_ERROR:
+      return Object.assign({}, state, {
+        loading: false,
+        error: action.error,
+    })      
     default:
       return state;
   }

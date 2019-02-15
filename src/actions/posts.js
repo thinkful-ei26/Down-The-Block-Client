@@ -6,7 +6,11 @@ import {
   CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
   CHANGE_SEARCH_TERM,
-  CHANGE_CATEGORY_FILTER
+  CHANGE_CATEGORY_FILTER,
+  POST_BEING_EDITED,
+  DELETE_POST_REQUEST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR
 } from './types';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
@@ -27,20 +31,18 @@ export const fetchPostsError= (error) => ({
 })
 
 export const fetchPosts = (coords) => (dispatch, getState) => {
+    console.log('here')
     dispatch(fetchPostsRequest());
     const authToken = getState().auth.authToken;
-    // console.log(coords);
-    let geoObjToObj = {
+    let simplifiedGeoObject = {
       latitude: coords.latitude,
       longitude: coords.longitude
     }
-    // console.log(geoObjToObj);
-    let stringifiedObj = JSON.stringify(geoObjToObj);
+    let stringifiedObj = JSON.stringify(simplifiedGeoObject);
     console.log(stringifiedObj);
     fetch(`${API_BASE_URL}/posts/${stringifiedObj}`, {
         method: 'GET',
         headers: {
-            // Provide our auth token as credentials
             Authorization: `Bearer ${authToken}`
         },
     })
@@ -67,12 +69,22 @@ export const createPostError= (error) => ({
   error
 })
 
-export const submitPost = (values, coords) => (dispatch, getState) =>{
+export const submitPost = (postId, values, coords) => (dispatch, getState) =>{
     dispatch(createPostRequest());
     const authToken = getState().auth.authToken;
+    const method = postId ? "PUT" : "POST";
 
-    return fetch(`${API_BASE_URL}/posts/${coords}`, { 
-        method: 'POST',
+    let simplifiedGeoObject = {
+        latitude: coords.latitude,
+        longitude: coords.longitude
+      };
+    let stringifiedObj = JSON.stringify(simplifiedGeoObject);
+
+    const path = postId ? `${API_BASE_URL}/posts/${postId}` : `${API_BASE_URL}/posts/${stringifiedObj}`; 
+
+
+    return fetch(path, { 
+        method,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -107,6 +119,64 @@ export const submitPost = (values, coords) => (dispatch, getState) =>{
         }
     });
 }
+
+export const deletePostRequest = () => ({
+    type: DELETE_POST_REQUEST,
+})
+
+export const deletePostSuccess = (postId) => ({
+  type: DELETE_POST_SUCCESS,
+  postId
+})
+
+export const deletePostError= (error) => ({
+  type: DELETE_POST_ERROR,
+  error
+})
+
+export const deletePost = (postId) => (dispatch, getState) =>{
+    dispatch(deletePostRequest());
+    const authToken = getState().auth.authToken;
+
+    fetch(`${API_BASE_URL}/posts/${postId}`, {
+        method: 'DELETE',
+        headers: {
+            // Provide our auth token as credentials
+            Authorization: `Bearer ${authToken}`
+        },
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => {
+        console.log('here')
+        dispatch(deletePostSuccess(postId));
+    })
+    .catch(error => {
+        dispatch(deletePostError(error));
+        const {message, location, status} = error;
+        if (status === 400) {
+            console.log(message, location)
+            // Convert errors into SubmissionErrors for Redux Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: message
+                })
+            );
+        }
+        else{
+            return Promise.reject(
+                new SubmissionError({
+                    _error: 'Unable to delete post, please try again',
+                })
+            );
+        }
+    });
+}
+
+
+export const postBeingEdited= (post) => ({
+    type: POST_BEING_EDITED,
+    post,
+  })
 
 export const changeSearchTerm = (searchTerm) =>({
     type: CHANGE_SEARCH_TERM,

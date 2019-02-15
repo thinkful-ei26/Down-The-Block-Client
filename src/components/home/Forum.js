@@ -3,7 +3,7 @@ import ForumHeader from './ForumHeader';
 import PostsList from './PostsList';
 import CreatePost from './CreatePost';
 import {connect} from 'react-redux';
-import { fetchPosts } from '../../actions/posts';
+import './main.css'
 
 export class Forum extends React.Component{
 
@@ -11,8 +11,13 @@ export class Forum extends React.Component{
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
-        <CreatePost/>
-        {this.props.coords && <PostsList/>} 
+        {!this.props.postBeingEdited && <CreatePost/>}
+        {this.props.postBeingEdited && 
+          <div className="modal">
+            <CreatePost editPost={this.props.postBeingEdited}/>
+          </div>
+        } 
+        {this.props.coords && <PostsList/>}
       </section>
     );
   }
@@ -20,7 +25,8 @@ export class Forum extends React.Component{
 
 const mapStateToProps = state => ({
   display: state.nav.display,
-  coords: state.geolocation.coords
+  coords: state.geolocation.coords,
+  postBeingEdited: state.posts.postBeingEdited,
 });
 
 export default connect(mapStateToProps)(Forum)

@@ -1,7 +1,7 @@
 import React from 'react';
 import {formatLongDate} from '../common/helper-functions';
 
-export default function Comment(props){
+export default function Comment(props) {
   return(
     <div className="comment">
       <h5>{props.userId.firstName}</h5>
