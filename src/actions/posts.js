@@ -10,7 +10,8 @@ import {
     POST_BEING_EDITED,
     DELETE_POST_REQUEST,
     DELETE_POST_SUCCESS,
-    DELETE_POST_ERROR
+    DELETE_POST_ERROR,
+    UPDATED_POST
   } from './types';
   import {API_BASE_URL} from '../config';
   import {normalizeResponseErrors} from './utils';
@@ -31,7 +32,6 @@ import {
   })
   
   export const fetchPosts = (coords) => (dispatch, getState) => {
-      console.log('here')
       dispatch(fetchPostsRequest());
       const authToken = getState().auth.authToken;
       let simplifiedGeoObject = {
@@ -49,6 +49,7 @@ import {
           .then(res => normalizeResponseErrors(res))
           .then(res => res.json())
           .then(posts => {
+              console.log('THE POSTS GOTTEN BACK ARE', posts)
               dispatch(fetchPostsSuccess(posts));
           })
           .catch(error => {
@@ -186,4 +187,9 @@ import {
   export const changeCategoryFilter = (categoryFilter) =>({
       type: CHANGE_CATEGORY_FILTER,
       categoryFilter
+  })
+
+  export const updatePost = (post) => ({
+      type: UPDATED_POST,
+      post
   })

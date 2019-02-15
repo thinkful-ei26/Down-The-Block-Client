@@ -1,5 +1,6 @@
 import {API_BASE_URL} from '../config';
-
+import {normalizeResponseErrors} from './utils';
+import {updatePost} from './posts';
 import  
     { 
         POST_COMMENT_REQUEST, 
@@ -39,14 +40,13 @@ export const addComment = (content, userId, postId) => (dispatch, getState) => {
                 postId
             })
         })
-        .then(res =>{ 
-            return res.json()
-        })
-        .then((response) =>{ 
-            dispatch(postCommentSuccess(response));
-        })
-        .then( () => {
-            dispatch(fetchPosts(this.props.coords));
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((post) =>{ 
+            console.log('the response in comments is', post);
+            dispatch(postCommentSuccess(post));
+            // it gets back the post that was changed, so update that in the posts array? 
+            dispatch(updatePost(post))
         })
         .catch(err => {
             dispatch(postCommentError(err));

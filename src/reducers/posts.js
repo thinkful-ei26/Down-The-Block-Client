@@ -10,7 +10,8 @@ import {
   POST_BEING_EDITED,
   DELETE_POST_REQUEST,
   DELETE_POST_SUCCESS,
-  DELETE_POST_ERROR
+  DELETE_POST_ERROR,
+  UPDATED_POST
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -81,6 +82,11 @@ export default (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, {
         loading: false,
         error: action.error,
+    }) 
+    case UPDATED_POST:
+      let posts = state.posts.map(post=> post.id===action.post.id ? post=action.post : post)
+    return Object.assign({}, state, {
+      posts
     })      
     default:
       return state;

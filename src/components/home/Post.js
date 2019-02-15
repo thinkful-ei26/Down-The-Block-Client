@@ -22,7 +22,6 @@ export class Post extends React.Component {
   }
   
   render(){
-    console.log(this.props);
     return(
       <section className="entire-thread">
         <article className='post'>
@@ -41,7 +40,6 @@ export class Post extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     loggedInUserId: state.auth.currentUser.id, 
     coords: state.geolocation.coords,
