@@ -74,3 +74,16 @@ input[type="radio"] {
 .post-form label.border{
   opacity:1;
 }
+
+.profile-photo{
+  width:50px;
+  border-radius: 50%;
+}
+
+.post-user-name{
+  display: inline;
+}
+
+.post span{
+  display: block;
+}
