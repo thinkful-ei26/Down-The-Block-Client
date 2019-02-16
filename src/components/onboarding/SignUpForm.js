@@ -72,7 +72,7 @@ export class SignUpForm extends React.Component {
                     name="img" 
                     id="img"
                     type= "file"
-                    // validate={[sizeLimit, imageNotEmpty]}
+                    validate={[sizeLimit]}
                 />
                 <button
                     type="submit"
