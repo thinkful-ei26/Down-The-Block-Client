@@ -5,7 +5,6 @@ import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
 import { PostAddComment } from './PostAddComment';
-import { fetchPosts } from '../../actions/posts';
 
 export class Post extends React.Component {
 
@@ -27,7 +26,7 @@ export class Post extends React.Component {
       <section className="entire-thread">
         <article className='post'>
           <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
-          <img className="profile-photo" src={this.props.userId.photo.url} alt="profile"/>
+          {/* <img className="profile-photo" src={this.props.userId.photo.url} alt="profile"/> */}
           <h3 className="post-user-name">{this.props.userId.firstName}</h3>
           {this.delete(this.props.postId)}
           {this.edit(this.props.postId, this.props.content, this.props.category)}
