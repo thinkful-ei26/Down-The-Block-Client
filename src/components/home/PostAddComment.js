@@ -36,6 +36,7 @@ export class PostAddComment extends React.Component {
             <form 
                 onSubmit={(e)=> this.onSubmit(e)}
                 ref={form => this.form = form}
+                className="comment-form"
             >
                 <img className="comment-profile-photo" src={this.props.currentUser.photo.url} alt="profile"/>
 
