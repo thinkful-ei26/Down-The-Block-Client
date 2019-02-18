@@ -34,30 +34,19 @@ export const fetchAddressError = err => ({
 
 export const fetchAddress = (address) => (dispatch) => {
     dispatch(fetchAddressRequest());
-    // console.log(address);
-    // console.log(Object.values(address));
     let stringifiedAddress = Object.values(address).map(word => word.replace(/\s/g, '+')).join('+');
-    // console.log(addressArray);
-    
-    // .join('+');
     console.log(stringifiedAddress);
     let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${stringifiedAddress}&key=${GOOGLE_MAPS_API_KEY}`;
     console.log(url);
     fetch(url)
-    // fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,
-    // +Mountain+View,+CA&key=${GOOGLE_MAPS_API_KEY}`)
-        // .then(res => normalizeResponseErrors(res))
+        .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        // .then(res => console.log(res))
         .then(response => {
-            console.log('the results are', response.results)
             let googleCoords = response.results[0].geometry.location;
-            // console.log(googleCoords);
             let coords = {
                 latitude: googleCoords.lat,
                 longitude: googleCoords.lng
             };
-            // console.log(coordsObject);
             dispatch(fetchAddressSuccess(coords));
         })
         .catch(error => {
