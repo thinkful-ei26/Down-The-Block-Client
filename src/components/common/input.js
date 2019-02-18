@@ -38,6 +38,21 @@ export default class Input extends React.Component {
             {this.props.children}
         </Element>)
 
+        //if its a file/image, need to handle it differently: 
+        if(this.props.input.name==="img"){
+            console.log('here')
+            delete this.props.input.value;
+            element = (<Element
+                {...this.props.input}
+                {...accept}
+                id={this.props.input.name}
+                type={this.props.type}
+                ref={input => (this.input = input)}
+                autoFocus = {this.props.autoFocus}
+            >
+            </Element>)
+        }
+
         return (
             <div className="form-input">
                 <label htmlFor={this.props.input.name}>
