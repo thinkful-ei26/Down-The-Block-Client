@@ -22,13 +22,15 @@ export class Post extends React.Component {
   }
   
   render(){
+    console.log(this.props.userId)
     return(
       <section className="entire-thread">
         <article className='post'>
           <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
-          {this.edit(this.props.postId, this.props.content, this.props.category)}
+          <img className="profile-photo" src={this.props.userId.photo.url} alt="profile"/>
+          <h3 className="post-user-name">{this.props.userId.firstName}</h3>
           {this.delete(this.props.postId)}
-          <h3>{this.props.userId.firstName}</h3>
+          {this.edit(this.props.postId, this.props.content, this.props.category)}
           <h6>{formatLongDate(this.props.date)}</h6>
           <p>{this.props.content}</p>
         </article>
