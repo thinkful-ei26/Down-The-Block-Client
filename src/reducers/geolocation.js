@@ -28,13 +28,11 @@ export default (state=initialState, action) =>{
     case FETCH_ADDRESS_SUCCESS:
       console.log('in reducer', action.coords);
       return Object.assign({}, state, {
-        // traverse google maps response here
         coords: action.coords
       })
     case FETCH_ADDRESS_ERROR:
       return Object.assign({}, state, {
-        // traverse google maps response here
-        // error: action.error
+        error: action.error
       })
     default:
       return state;
