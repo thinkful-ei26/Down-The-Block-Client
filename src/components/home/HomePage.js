@@ -8,14 +8,17 @@ import requiresLogin from '../common/requires-login';
 
 
 export class HomePage extends React.Component{
+  // componentDidUpdate
+
   render(){
-    // console.log(this.state);
+    console.log(this.props.geoError);
     return(
       <div className="home">
         <Geolocator/>
         {this.props.coords && <Sidebar/>}
         {this.props.coords && <Main/>}
-        {/* {this.props.geoError && <AddressForm />} */}
+        {this.props.geoError && <AddressForm />}
+        {/* <AddressForm /> */}
       </div>
     );
   }

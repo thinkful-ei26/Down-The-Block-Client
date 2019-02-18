@@ -13,7 +13,8 @@ export class Geolocator extends React.Component {
       this.props.dispatch(fetchLocationSuccess(this.props.coords))
       this.props.dispatch(showAnimation(false));
     } else {
-      this.props.dispatch(fetchLocationError())
+      this.props.dispatch(fetchLocationError());
+      this.props.dispatch(showAnimation(false));
     }
   } 
 
