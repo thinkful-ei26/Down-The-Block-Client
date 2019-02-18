@@ -4,7 +4,7 @@ import PostComments from './PostComments';
 import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
-import { PostAddComment } from './PostAddComment';
+import PostAddComment from './PostAddComment';
 import { fetchPosts } from '../../actions/posts';
 
 export class Post extends React.Component {

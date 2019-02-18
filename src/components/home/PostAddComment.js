@@ -1,59 +1,66 @@
-import React, { Component } from 'react'; 
-import {Field, reduxForm, focus} from 'redux-form';
+import React from 'react'; 
 import { connect } from 'react-redux';
-import {required, nonEmpty} from '../common/validators';
 import { addComment } from '../../actions/comments';
-export class PostAddComment extends Component {
 
-    onSubmit(values, props) {
-        props = this.props;
-        return this.props.dispatch(addComment(values.content, props.loggedInUserId, props.form));       
+export class PostAddComment extends React.Component {
+    constructor(props){
+        super(props);
+
+        this.test='';
+    }
+    onSubmit(e) {
+        console.log(this.test)
+        e.preventDefault();
+        this.props.dispatch(addComment(this.test, this.props.currentUser.id, this.props.form));   
+        this.content.value="";    
     }  
 
+    handleKeyDown(e){
+        if (e.keyCode === 13 && !e.shiftKey)
+        {
+            //form should submit
+            console.log('this.content.value=', this.content.value);
+            this.test=this.content.value
+            console.log('this.test=', this.test);
+            this.onSubmit(e);
+        }
+        else if(e.keyCode===13 && e.shiftKey){
+            console.log('this.content.value=', this.content.value);
+          this.test = this.content.value + ' <br/> ';
+          console.log('this.test=', this.test);
+        }
+    }
+
     render() {   
-        let error;
-        if (this.props.error) {
-            error = (
-                <div className="form-error" aria-live="polite">
-                    {this.props.error}
-                </div>
-            );
-        }   
         return (
-                <form 
-                className= "commentInput"
-                onSubmit= {this.props.handleSubmit(values=> 
-                    {
-                    this.onSubmit(values, this.props.loggedInUserId, this.props.form);
-                    this.props.reset('commentInput');
-                    }
-                )}>
-                    {error}
-                    <label htmlFor="comment">ADD COMMENT</label>
-                    <Field
-                        component="input"
-                        type="text"
-                        name="content"
-                        id=  {this.props.postId}
-                        validate={[required, nonEmpty]}
-                    />
-                    <button  disabled={ this.props.pristine || this.props.submitting}>
-                        SUBMIT
-                    </button>
-                </form> 
+            <form 
+                onSubmit={(e)=> this.onSubmit(e)}
+                ref={form => this.form = form}
+            >
+                <img className="comment-profile-photo" src={this.props.currentUser.photo.url} alt="profile"/>
+
+                <textarea 
+                    className="comment-textarea" 
+                    ref={input => this.content = input} 
+                    type="textarea" 
+                    id="content" 
+                    name="content" 
+                    placeholder="Write a Comment"
+                    onKeyDown={(e)=>this.handleKeyDown(e)} 
+                    // defaultValue={editMode ? this.props.editPost.content : ""}
+                />
+            </form>
         )
     }
 }
 
-PostAddComment = reduxForm({
-})(PostAddComment);
-
-PostAddComment = connect(state => {
-    return{
+const mapStateToProps = state => {
+    return {
+        currentUser: state.auth.currentUser,
         coords: state.geolocation.coords,
-        loggedInUserId: state.auth.currentUser.id,
         postsArray: state.posts.posts  
     }
-})(PostAddComment)
+  };
+  
+export default connect(mapStateToProps)(PostAddComment)
 
-export default PostAddComment;
