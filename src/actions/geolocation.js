@@ -6,8 +6,10 @@ import {
     FETCH_ADDRESS_ERROR
 } from './types';
 
-import {GOOGLE_MAPS_API_KEY} from '../config';
 import { normalizeResponseErrors } from './utils';
+
+const key = process.env.REACT_APP_GOOGLE_API_KEY;
+console.log("KEY IS", key)
 
 export const fetchLocationSuccess = coords => ({
     type: FETCH_LOCATION_SUCCESS,
@@ -36,7 +38,7 @@ export const fetchAddress = (address) => (dispatch) => {
     dispatch(fetchAddressRequest());
     let stringifiedAddress = Object.values(address).map(word => word.replace(/\s/g, '+')).join('+');
     console.log(stringifiedAddress);
-    let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${stringifiedAddress}&key=${GOOGLE_MAPS_API_KEY}`;
+    let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${stringifiedAddress}&key=${key}`;
     console.log(url);
     fetch(url)
         .then(res => normalizeResponseErrors(res))

@@ -4,7 +4,8 @@ import {registerUser} from '../../actions/users';
 import {login} from '../../actions/auth';
 import Input from '../common/input';
 import {Link} from 'react-router-dom';
-import {required, nonEmpty, matches, length, isTrimmed, sizeLimit, imageNotEmpty} from '../common/validators';
+import {required, nonEmpty, matches, length, isTrimmed, sizeLimit} from '../common/validators';
+import Avatar from 'react-avatar';
 
 const passwordLength = length({min: 8, max: 72});
 const matchesPassword = matches('password');

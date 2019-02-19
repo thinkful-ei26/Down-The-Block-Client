@@ -2,20 +2,16 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
+
 export const registerUser = user => dispatch => {
     let formData = new FormData();
     
     Object.keys(user).forEach(item=> {
-        // console.log('got here', item)
-        // if(item==="img"){
-        //     console.log('if')
-        //     formData.append('public_id', user[item].public_id)
-        //     formData.append('url', user[item].url)
-        // }
-        // else{
-            console.log('else')
-            formData.append(item, (user[item]))
-        // }
+        if(item==='img' && !user[item]){
+            console.log('user didnt supply immage');
+        }
+        // console.log(item, user[item]);
+        formData.append(item, (user[item]))
     });
 
 

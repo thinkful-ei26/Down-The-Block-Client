@@ -36,6 +36,7 @@ export class Post extends React.Component {
             
           <div className="post-info">
             <img className="profile-photo" src={this.props.userId.photo.url} alt="profile"/>
+            
             <div className="name-and-date">
               <h3 className="post-user-name">{this.props.userId.firstName}</h3>
               <h6>{formatLongDate(this.props.date)}</h6>
