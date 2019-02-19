@@ -40,6 +40,7 @@ export class App extends React.Component {
     }
 
     render() {
+        // console.log(process.env.REACT_APP_GOOGLE_API_KEY);
         return (
             <div className="app">
                 {/* Always show the navbar! */}

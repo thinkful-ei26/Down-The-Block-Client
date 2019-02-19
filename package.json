@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "socket.io": "^2.2.0",
+=======
+    "dotenv": "^6.2.0",
+>>>>>>> 87e4b725a82dbc9c9e3e42f2d6fc027f28f79362
     "jwt-decode": "^2.2.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
