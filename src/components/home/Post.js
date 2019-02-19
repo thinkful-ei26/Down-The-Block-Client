@@ -4,12 +4,8 @@ import PostComments from './PostComments';
 import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
-<<<<<<< HEAD
-import { PostAddComment } from './PostAddComment';
-=======
 import PostAddComment from './PostAddComment';
 import { fetchPosts } from '../../actions/posts';
->>>>>>> 87e4b725a82dbc9c9e3e42f2d6fc027f28f79362
 
 export class Post extends React.Component {
 
@@ -30,15 +26,6 @@ export class Post extends React.Component {
     return(
       <section className="entire-thread">
         <article className='post'>
-<<<<<<< HEAD
-          <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
-          {/* <img className="profile-photo" src={this.props.userId.photo.url} alt="profile"/> */}
-          <h3 className="post-user-name">{this.props.userId.firstName}</h3>
-          {this.delete(this.props.postId)}
-          {this.edit(this.props.postId, this.props.content, this.props.category)}
-          <h6>{formatLongDate(this.props.date)}</h6>
-          <p>{this.props.content}</p>
-=======
           <div className="top-post">
             <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
             <div className="options">
@@ -57,7 +44,6 @@ export class Post extends React.Component {
 
           <p className="post-content">{this.props.content}</p>       
 
->>>>>>> 87e4b725a82dbc9c9e3e42f2d6fc027f28f79362
         </article>
         <PostComments comments={this.props.comments}/>
         <PostAddComment form={this.props.postId}/>
