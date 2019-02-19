@@ -58,6 +58,7 @@ export class CreatePost extends React.Component{
   }
 
   render(){
+    console.log(this.props)
     let editMode = this.props.editPost ? true : false;
 
     return(
@@ -75,6 +76,7 @@ export class CreatePost extends React.Component{
           type="textarea" 
           id="content" 
           name="content" 
+          className="create-post-textarea"
           placeholder="Write a Post For Your Neighborhood To See!" 
           defaultValue={editMode ? this.props.editPost.content : ""}
         />
@@ -82,39 +84,59 @@ export class CreatePost extends React.Component{
       <div className="bottom-options">
         <section className="radio-buttons">
 
-        <input type="radio" id="crime" name="category" value="Crime" />
-          <label 
-            onClick={()=>this.setState({borderAround: 'crime'})} 
-            className={`crime ${this.state.borderAround==='crime' &&'border'}`}
-            htmlFor="crime"
+        <input 
+          defaultChecked={editMode && (this.props.editPost.category==='Crime' && true)}
+          type="radio" 
+          id="crime" 
+          name="category" 
+          value="Crime" />
+        <label 
+          onClick={()=>this.setState({borderAround: 'crime'})} 
+          className={`crime ${this.state.borderAround==='crime' &&'border'}`}
+          htmlFor="crime"
+        >
+          Crime
+        </label>
+
+        <input 
+          defaultChecked={editMode && (this.props.editPost.category==='Event' && true)}
+          type="radio" 
+          id="event" 
+          name="category" 
+          value="Event"/>
+        <label 
+          onClick={()=>this.setState({borderAround: 'event'})} 
+          className={`event ${this.state.borderAround==='event' &&'border'}`}
+          htmlFor="event">
+          Event
+        </label>
+
+        <input 
+          defaultChecked={editMode && (this.props.editPost.category==='Personal' && true)}
+          type="radio" 
+          id="personal" 
+          name="category" 
+          value="Personal"/>
+        <label 
+          htmlFor="personal"
+          onClick={()=>this.setState({borderAround: 'personal'})} 
+          className={`personal ${this.state.borderAround==='personal' &&'border'}`}
+          >Personal
+        </label>
+
+        <input 
+          defaultChecked={editMode && (this.props.editPost.category==='Other' && true)}
+          type="radio" 
+          id="other" 
+          name="category" 
+          value="Other"/>
+        <label
+          htmlFor="other"
+          onClick={()=>this.setState({borderAround: 'other'})} 
+          className={`other ${this.state.borderAround==='other' && 'border'}`}
           >
-            Crime
-          </label>
-
-          <input type="radio" id="event" name="category" value="Event"/>
-          <label 
-            onClick={()=>this.setState({borderAround: 'event'})} 
-            className={`event ${this.state.borderAround==='event' &&'border'}`}
-            htmlFor="event">
-            Event
-          </label>
-
-          <input type="radio" id="personal" name="category" value="Personal"/>
-          <label 
-            htmlFor="personal"
-            onClick={()=>this.setState({borderAround: 'personal'})} 
-            className={`personal ${this.state.borderAround==='personal' &&'border'}`}
-            >Personal
-          </label>
-
-          <input defaultChecked type="radio" id="other" name="category" value="Other"/>
-          <label
-            htmlFor="other"
-            onClick={()=>this.setState({borderAround: 'other'})} 
-            className={`other ${this.state.borderAround==='other' && 'border'}`}
-            >
-          Other
-          </label>
+        Other
+        </label>
 
         </section>
         {this.generateButtons()}

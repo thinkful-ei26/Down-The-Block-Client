@@ -7,7 +7,11 @@ import {
   CREATE_POST_ERROR,
   CHANGE_SEARCH_TERM,
   CHANGE_CATEGORY_FILTER,
-  POST_BEING_EDITED
+  POST_BEING_EDITED,
+  DELETE_POST_REQUEST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR,
+  UPDATED_POST
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -63,6 +67,27 @@ export default (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, {
         postBeingEdited: action.post 
       })
+    case DELETE_POST_REQUEST:
+      return Object.assign({}, state, {
+        loading: true 
+      })      
+    case DELETE_POST_SUCCESS:
+      console.log(state.posts, action.postId)
+      return Object.assign({}, state, {
+        loading: false,
+        error: null,
+        posts: state.posts.filter(post=>post.id!==action.postId) 
+      }) 
+    case DELETE_POST_ERROR:
+      return Object.assign({}, state, {
+        loading: false,
+        error: action.error,
+    }) 
+    case UPDATED_POST:
+      let posts = state.posts.map(post=> post.id===action.post.id ? post=action.post : post)
+    return Object.assign({}, state, {
+      posts
+    })      
     default:
       return state;
   }
