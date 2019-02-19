@@ -58,6 +58,7 @@ export class CreatePost extends React.Component{
   }
 
   render(){
+    console.log(this.props)
     let editMode = this.props.editPost ? true : false;
 
     return(
@@ -75,6 +76,7 @@ export class CreatePost extends React.Component{
           type="textarea" 
           id="content" 
           name="content" 
+          className="create-post-textarea"
           placeholder="Write a Post For Your Neighborhood To See!" 
           defaultValue={editMode ? this.props.editPost.content : ""}
         />

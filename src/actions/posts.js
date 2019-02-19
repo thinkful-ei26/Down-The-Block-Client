@@ -48,6 +48,7 @@ import {
       })
           .then(res => normalizeResponseErrors(res))
           .then(res => res.json())
+        //   .then(res => console.log(res))
           .then(posts => {
               console.log('THE POSTS GOTTEN BACK ARE', posts)
               dispatch(fetchPostsSuccess(posts));
