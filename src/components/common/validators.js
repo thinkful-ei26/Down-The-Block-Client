@@ -24,3 +24,13 @@ export const unSelected = value => {
   if (value === undefined) value = '';
   return value.trim() !== '' ? undefined : 'Please select';
 }
+
+export const sizeLimit = value => {
+    console.log('in validate', value);
+    return !value || value.length===0 ? undefined : value[0].size > 5000000 ? 'Image exceeds 5MB limit. Please try again.' : undefined;
+}
+
+export const imageNotEmpty = value =>{
+    console.log('in validate', value);
+    return !value || value.length===0 ? 'Please upload an image or click cancel' : undefined; 
+}

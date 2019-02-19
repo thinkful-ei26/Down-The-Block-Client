@@ -4,7 +4,7 @@ import PostComments from './PostComments';
 import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
-import { PostAddComment } from './PostAddComment';
+import PostAddComment from './PostAddComment';
 import { fetchPosts } from '../../actions/posts';
 
 export class Post extends React.Component {
@@ -22,15 +22,28 @@ export class Post extends React.Component {
   }
   
   render(){
+    console.log(this.props.userId)
     return(
       <section className="entire-thread">
         <article className='post'>
-          <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
-          {this.edit(this.props.postId, this.props.content, this.props.category)}
-          {this.delete(this.props.postId)}
-          <h3>{this.props.userId.firstName}</h3>
-          <h6>{formatLongDate(this.props.date)}</h6>
-          <p>{this.props.content}</p>
+          <div className="top-post">
+            <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
+            <div className="options">
+              {this.delete(this.props.postId)}
+              {this.edit(this.props.postId, this.props.content, this.props.category)}
+            </div>
+          </div>
+            
+          <div className="post-info">
+            <img className="profile-photo" src={this.props.userId.photo.url} alt="profile"/>
+            <div className="name-and-date">
+              <h3 className="post-user-name">{this.props.userId.firstName}</h3>
+              <h6>{formatLongDate(this.props.date)}</h6>
+            </div> 
+          </div>
+
+          <p className="post-content">{this.props.content}</p>       
+
         </article>
         <PostComments comments={this.props.comments}/>
         <PostAddComment form={this.props.postId}/>

@@ -4,15 +4,16 @@ import {registerUser} from '../../actions/users';
 import {login} from '../../actions/auth';
 import Input from '../common/input';
 import {Link} from 'react-router-dom';
-import {required, nonEmpty, matches, length, isTrimmed} from '../common/validators';
+import {required, nonEmpty, matches, length, isTrimmed, sizeLimit, imageNotEmpty} from '../common/validators';
 
 const passwordLength = length({min: 8, max: 72});
 const matchesPassword = matches('password');
 
 export class SignUpForm extends React.Component {
     onSubmit(values) {
-        const {username, password, firstName, lastName} = values;
-        const user = {username, password, firstName, lastName};
+        values.img = values.img[0];
+        const {username, password, firstName, lastName, img} = values;
+        const user = {username, password, firstName, lastName, img};
         return this.props
             .dispatch(registerUser(user))
             .then(() => this.props.dispatch(login(username, password)));
@@ -63,6 +64,15 @@ export class SignUpForm extends React.Component {
                     type="password"
                     name="passwordConfirm"
                     validate={[required, nonEmpty, matchesPassword]}
+                />
+                <Field
+                    component={Input}
+                    className="required"
+                    label="Profile Photo:" 
+                    name="img" 
+                    id="img"
+                    type= "file"
+                    validate={[sizeLimit]}
                 />
                 <button
                     type="submit"
