@@ -8,7 +8,7 @@ import './main.css'
 
 export class Forum extends React.Component{
   whatToDisplay(){
-    console.log('coords in fn', this.props.coords)
+    // console.log('coords in fn', this.props.coords)
     if(this.props.showAnimation){
       return <EyeAnimation/>;
     }
@@ -22,7 +22,7 @@ export class Forum extends React.Component{
       }
       else{
         if(this.props.coords){
-          console.log('IN HERE')
+          // console.log('IN HERE')
           return (
             <React.Fragment>
               <CreatePost/>
