@@ -4,6 +4,7 @@ import {normalizeResponseErrors} from './utils';
 
 export const registerUser = user => dispatch => {
     let formData = new FormData();
+    console.log('form data created');
     
     Object.keys(user).forEach(item=> {
         // console.log('got here', item)
