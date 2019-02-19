@@ -26,6 +26,7 @@ export class Geolocator extends React.Component {
 
   render() {
     return( 
+      <div></div>
       // !this.props.isGeolocationAvailable 
       // ? <div>Your browser does not support geolocation</div>
       // : !this.props.isGeolocationEnabled
@@ -33,7 +34,7 @@ export class Geolocator extends React.Component {
       //   : this.props.coords
       //     ? null
       //     : <div>Getting the location data&hellip; </div>
-      null
+      // null
     )
   }
 }
