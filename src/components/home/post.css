@@ -25,6 +25,11 @@
   border: 1px solid #a7a5a5;
 }
 
+.modal .post-form{
+  margin-left: 200px;
+  margin-top: 60px;
+}
+
 input[type="radio"] { 
   position: fixed;
   opacity: 0;
