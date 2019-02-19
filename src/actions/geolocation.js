@@ -6,7 +6,7 @@ import {
     FETCH_ADDRESS_ERROR
 } from './types';
 
-// import {REACT_APP_GOOGLE_API_KEY} from '../credentials';
+import {GOOGLE_MAPS_API_KEY} from '../config';
 import { normalizeResponseErrors } from './utils';
 
 export const fetchLocationSuccess = coords => ({
@@ -32,24 +32,24 @@ export const fetchAddressError = err => ({
     err
 })
 
-// export const fetchAddress = (address) => (dispatch) => {
-//     dispatch(fetchAddressRequest());
-//     let stringifiedAddress = Object.values(address).map(word => word.replace(/\s/g, '+')).join('+');
-//     console.log(stringifiedAddress);
-//     let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${stringifiedAddress}&key=${REACT_APP_GOOGLE_API_KEY}`;
-//     console.log(url);
-//     fetch(url)
-//         .then(res => normalizeResponseErrors(res))
-//         .then(res => res.json())
-//         .then(response => {
-//             let googleCoords = response.results[0].geometry.location;
-//             let coords = {
-//                 latitude: googleCoords.lat,
-//                 longitude: googleCoords.lng
-//             };
-//             dispatch(fetchAddressSuccess(coords));
-//         })
-//         .catch(error => {
-//             dispatch(fetchAddressError(error))
-//         });
-// };
+export const fetchAddress = (address) => (dispatch) => {
+    dispatch(fetchAddressRequest());
+    let stringifiedAddress = Object.values(address).map(word => word.replace(/\s/g, '+')).join('+');
+    console.log(stringifiedAddress);
+    let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${stringifiedAddress}&key=${GOOGLE_MAPS_API_KEY}`;
+    console.log(url);
+    fetch(url)
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(response => {
+            let googleCoords = response.results[0].geometry.location;
+            let coords = {
+                latitude: googleCoords.lat,
+                longitude: googleCoords.lng
+            };
+            dispatch(fetchAddressSuccess(coords));
+        })
+        .catch(error => {
+            dispatch(fetchAddressError(error))
+        });
+};
