@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import socketClient from "socket.io-client"
+import './Chat.css'
 
 export class Chat extends React.Component{
   constructor(props){
