@@ -11,7 +11,10 @@ const matchesPassword = matches('password');
 
 export class SignUpForm extends React.Component {
     onSubmit(values) {
-        values.img = values.img[0];
+        if (values.img){
+            values.img = values.img[0];
+        }
+        console.log('before 15');
         const {username, password, firstName, lastName, img} = values;
         const user = {username, password, firstName, lastName, img};
         return this.props
