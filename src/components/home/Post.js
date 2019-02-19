@@ -1,10 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
+
 import PostComments from './PostComments';
 import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
 import { PostAddComment } from './PostAddComment';
+
+
 
 export class Post extends React.Component {
 
@@ -21,7 +24,7 @@ export class Post extends React.Component {
   }
   
   render(){
-    console.log(this.props.userId)
+    console.log(this.props)
     return(
       <section className="entire-thread">
         <article className='post'>
