@@ -5,7 +5,7 @@ import socketIOClient from "socket.io-client";
 import Post from './Post';
 import { fetchPosts } from '../../actions/posts';
 import { filterPostsBySearch, filterByCategory } from '../common/helper-functions'
-
+import {updatePost} from '../../actions/posts';
 export class PostsList extends React.Component{
 
   constructor(){
@@ -20,28 +20,50 @@ export class PostsList extends React.Component{
   getPosts = posts =>{
     console.log('posts being recieved', posts);
     this.setState({ posts_data: posts });
+    console.log(this.state.posts_data);
   }
 
-  changePosts = () => {
-    this.socket.emit("initial_data");
-  }
+  updatePostsInState = res => {
+    console.log(res);
+    const new_array = this.state.posts_data.map(post => {
+        console.log('post:', post);
+
+        if (post.id === res.postId) {
+            post.comments.push(res.id);
+            post.userId = res.userId;
+            return post;
+        }
+        return post;
+    })
+    this.setState({ posts_data:new_array });
+    console.log(this.state);
+    this.dispatch(updatePost(new_array));
+  };
   
   componentDidMount(){
     this.props.dispatch(fetchPosts(this.props.coords));
     this.socket.emit("initial_data");
     this.socket.on("get_posts", this.getPosts);
-    this.socket.on("changed_posts", this.changePosts);
+    this.socket.on("commentAdded", this.updatePostsInState);
   }
 
   componentWillUnmount(){
     this.socket.off("get_posts");
-    this.socket.off("changed_posts");
+    this.socket.off("commentAdded", this.updatePostsInState);
   }
 
   generatePosts(){
-    let posts = this.state.posts_data.map((post, index)=> <Post key={index} postId={post.id} {...post} />);
+    let posts = [];
 
-    if(this.props.searchTerm){
+    if(this.state.posts_data.postsArray === undefined) {
+        if(this.state.posts_data.length > 0) {
+          console.log(this.state.posts_data);
+          posts = this.state.posts_data.map((post, index)=> <Post key={index} postId={post.id} {...post} />);
+          console.log('posts after map:', posts);
+        }
+    }
+
+    if(this.props.searchTerm) {
       posts = filterPostsBySearch(this.props.searchTerm, posts);
     }
 
@@ -56,13 +78,12 @@ export class PostsList extends React.Component{
       <section className="posts-list">
         {this.generatePosts()}
       </section>
-
     );
   }
 }
 
 const mapStateToProps = state => ({
-  posts: PostsList.posts_data,
+  posts: state.posts.posts,
   coords: state.geolocation.coords,
   searchTerm: state.posts.searchTerm,
   categoryFilter: state.posts.categoryFilter,

@@ -6,13 +6,16 @@ import { fetchPosts } from '../../actions/posts';
 
 export class PostComments extends React.Component{
 
-  // componentDidMount() {
-  //   this.props.dispatch(fetchPosts(this.props.coords));
-  // }
+  componentDidMount() {
+    this.props.dispatch(fetchPosts(this.props.coords));
+  }
 
   
   generateComments(){
-    return this.props.comments.map((comment, index)=> <Comment key={index} {...comment} />)
+    console.log(this.props);
+    if(this.props.postsArray.length > 0){
+      return this.props.postsArray.map((comment, index)=> <Comment key={index} {...comment} />)
+    };
   }
 
   render(){

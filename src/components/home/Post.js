@@ -44,10 +44,11 @@ export class Post extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     loggedInUserId: state.auth.currentUser.id, 
     coords: state.geolocation.coords,
-    postsArray: state.postsArray
+    postsArray: state.posts.posts
   }
 };
 
