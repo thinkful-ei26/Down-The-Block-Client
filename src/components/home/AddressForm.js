@@ -9,6 +9,7 @@ import { showAnimation } from '../../actions/navigation';
 export class AddressForm extends React.Component {
 
   componentDidMount(){
+    console.log('In Address Form Mount')
     this.props.dispatch(showAnimation(false));
   }
 

@@ -26,6 +26,7 @@ export default (state = INITIAL_STATE, action) => {
         toggleNavbar: !state.toggleNavbar,
       })
       case SHOW_ANIMATION:
+        console.log('IN SHOW ANIMATION REDUCER, IT IS', action.bool)
       return Object.assign({}, state, {
         showAnimation: action.bool,
       });    

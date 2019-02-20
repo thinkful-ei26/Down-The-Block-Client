@@ -12,14 +12,16 @@ export class Geolocator extends React.Component {
       this.props.dispatch(fetchLocationSuccess(this.props.coords))
       this.props.dispatch(showAnimation(false));
     } else {
+      console.log("IN COMP DID UPDATE GEOLOCATOR")
       this.props.dispatch(fetchLocationError());
-      this.props.dispatch(showAnimation(true));
+      // this.props.dispatch(showAnimation(true));
     }
   } 
 
   componentDidMount(){
     if(!this.props.coords){
-      this.props.dispatch(showAnimation(true));
+      console.log("IN COMP DID MOUNT GEOLOCATOR")
+      // this.props.dispatch(showAnimation(true));
     }
   }
 
