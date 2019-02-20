@@ -8,6 +8,7 @@ import {
 
 // import {GOOGLE_MAPS_API_KEY} from '../config';
 import { normalizeResponseErrors } from './utils';
+import { showAnimation } from './navigation';
 
 export const fetchLocationSuccess = coords => ({
     type: FETCH_LOCATION_SUCCESS,
@@ -49,6 +50,7 @@ export const fetchAddress = (address) => (dispatch) => {
                 latitude: googleCoords.lat,
                 longitude: googleCoords.lng
             };
+            dispatch(showAnimation(false));
             dispatch(fetchAddressSuccess(coords));
         })
         .catch(error => {
