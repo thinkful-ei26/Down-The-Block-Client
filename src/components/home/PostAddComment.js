@@ -38,7 +38,17 @@ export class PostAddComment extends React.Component {
                 ref={form => this.form = form}
                 className="comment-form"
             >
-                <img className="comment-profile-photo" src={this.props.currentUser.photo.url} alt="profile"/>
+
+                <div className="comment-profile-photo-avatar">
+                    {!this.props.currentUser.photo ? 
+                        <p className="initials">
+                            {this.props.currentUser.firstName[0]}
+                            {this.props.currentUser.lastName[0]}
+                        </p>
+                        :
+                        <img className="comment-profile-photo" src={this.props.currentUser.photo.url} alt="profile"/> 
+                    }
+                </div>
 
                 <textarea 
                     className="comment-textarea" 

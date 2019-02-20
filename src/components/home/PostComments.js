@@ -12,7 +12,16 @@ export class PostComments extends React.Component{
       console.log('the comment is', comment)
      return (
       <div className="comment-info" key={index}>
-        <img className="comment-profile-photo" src={comment.userId.photo.url} alt="profile"/>
+        <div className="comment-profile-photo-avatar">
+          {!comment.userId.photo ? 
+              <p className="initials">
+                  {comment.userId.firstName[0]}
+                  {comment.userId.lastName[0]}
+              </p>
+              :
+              <img className="comment-profile-photo" src={comment.userId.photo.url} alt="profile"/> 
+          }
+        </div>
         {/* <h6>{formatLongDate(this.props.date)}</h6> */}
         <Comment {...comment} />
       </div>
