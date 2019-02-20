@@ -3,14 +3,17 @@ import {
     CLEAR_AUTH,
     AUTH_REQUEST,
     AUTH_SUCCESS,
-    AUTH_ERROR
+    AUTH_ERROR,
+    UPDATED_USER_SUCCESS,
+    CHANGE_SUCCESS_MESSAGE
 } from '../actions/types';
 
 const initialState = {
     authToken: null, // authToken !== null does not mean it has been validated
     currentUser: null,
     loading: false,
-    error: null
+    error: null,
+    successMessage: null
 };
 
 export default function reducer(state = initialState, action) {
@@ -40,5 +43,18 @@ export default function reducer(state = initialState, action) {
             error: action.error
         });
     }
+    else if (action.type=== UPDATED_USER_SUCCESS){
+        return Object.assign({}, state, {
+            currentUser: action.updatedUser,
+            successMessage: action.message,
+            error: null
+        });
+      }
+      else if(action.type===CHANGE_SUCCESS_MESSAGE){
+        return Object.assign({}, state, {
+            successMessage: action.message,
+            error: null
+        });
+      }
     return state;
 }
