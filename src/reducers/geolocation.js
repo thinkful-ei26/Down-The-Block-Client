@@ -13,7 +13,6 @@ const initialState = {
 export default (state=initialState, action) =>{
   switch (action.type){
     case FETCH_LOCATION_SUCCESS:
-      console.log('in reducer',action.coords);
       return Object.assign({}, state, {
         coords: action.coords
       })
@@ -26,7 +25,6 @@ export default (state=initialState, action) =>{
         error: null
       })
     case FETCH_ADDRESS_SUCCESS:
-      console.log('in reducer', action.coords);
       return Object.assign({}, state, {
         coords: action.coords
       })

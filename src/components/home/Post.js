@@ -5,7 +5,6 @@ import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
 import PostAddComment from './PostAddComment';
-import { fetchPosts } from '../../actions/posts';
 
 export class Post extends React.Component {
 
@@ -22,7 +21,6 @@ export class Post extends React.Component {
   }
   
   render(){
-    console.log('LOOK HERE', this.props.userId.photo);
     return(
       <section className="entire-thread">
         <article className='post'>

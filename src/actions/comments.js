@@ -8,7 +8,6 @@ import
         POST_COMMENT_ERROR 
     } 
 from './types'; 
-import { fetchPosts } from './posts';    
 
 export const postCommentRequest = () => ({
     type: POST_COMMENT_REQUEST
