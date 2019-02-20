@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import UpdateAccountForm from './UpdateAccountForm';
+import UpdatePasswordForm from './UpdatePasswordForm';
 import requiresLogin from '../common/requires-login';
 import {changeSuccessMessage} from '../../actions/users';
 
@@ -35,6 +36,7 @@ export class SettingsPage extends React.Component{
           </div>
           }
           <UpdateAccountForm/>
+          <UpdatePasswordForm/>
         </main>
       </div>
     );

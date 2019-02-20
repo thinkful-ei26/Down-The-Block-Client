@@ -84,3 +84,38 @@ export const updatedUser = user => (dispatch, getState) => {
             }
         });
 };
+
+export const updatePassword = user => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/auth/users/password`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify(user)
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(updatedUser => {
+            dispatch(updatedUserSuccess(updatedUser, 'Your password has been successfully updated'));
+        })
+        .catch(err => {
+            const {reason, message, location, status} = err;
+            if (reason === 'ValidationError' || status === 401) {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+            else{
+                return Promise.reject(
+                    new SubmissionError({
+                        _error: 'Unable to update password, please try again',
+                    })
+                );
+            }
+        });
+};

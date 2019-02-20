@@ -10,6 +10,10 @@ import EyeAnimation from '../common/EyeAnimation'
 
 export class HomePage extends React.Component{
 
+  componentDidMount(){
+    document.title = 'Home';
+  }
+
   componentWillMount(){
     if(!this.props.coords){
       console.log("IN COMP WILL MOUNT HOME PAGE")
