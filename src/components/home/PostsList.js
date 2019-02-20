@@ -6,7 +6,7 @@ import { filterPostsBySearch, filterByCategory } from '../common/helper-function
 
 export class PostsList extends React.Component{
   componentDidMount(){
-    this.props.dispatch(fetchPosts(this.props.coords));
+    this.props.dispatch(fetchPosts(this.props.coords, this.props.display));
   }
 
   generatePosts(){
@@ -37,6 +37,7 @@ const mapStateToProps = state => ({
   coords: state.geolocation.coords,
   searchTerm: state.posts.searchTerm,
   categoryFilter: state.posts.categoryFilter,
+  display: state.nav.display 
 });
 
 export default connect(mapStateToProps)(PostsList)

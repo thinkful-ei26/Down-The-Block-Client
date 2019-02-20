@@ -7,7 +7,7 @@ import './main.css'
 export class Main extends React.Component{
 
   display(){
-    return this.props.display==="neighbor-forum" || this.props.display==="city-forum" ? <Forum/> : <Chat/>
+    return this.props.display==="neighbors" || this.props.display==="city" ? <Forum/> : <Chat/>
   }
 
   render(){

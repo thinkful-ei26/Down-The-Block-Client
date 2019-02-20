@@ -42,7 +42,6 @@ export default class Input extends React.Component {
 
         //if its a file/image, need to handle it differently: 
         if(this.props.input.name==="img"){
-            console.log('here')
             delete this.props.input.value;
             element = (<Element
                 {...this.props.input}

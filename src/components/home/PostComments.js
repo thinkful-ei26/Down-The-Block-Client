@@ -9,7 +9,6 @@ export class PostComments extends React.Component{
   generateComments(){
     return this.props.comments.map((comment, index)=>{
       comment.content = comment.content.replace(/\n/g, '<br/>');
-      console.log('the comment is', comment)
      return (
       <div className="comment-info" key={index}>
         <div className="comment-profile-photo-avatar">
