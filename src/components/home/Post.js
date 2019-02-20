@@ -5,7 +5,6 @@ import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
 import PostAddComment from './PostAddComment';
-import { fetchPosts } from '../../actions/posts';
 
 export class Post extends React.Component {
 
@@ -22,7 +21,6 @@ export class Post extends React.Component {
   }
   
   render(){
-    console.log(this.props.userId)
     return(
       <section className="entire-thread">
         <article className='post'>
@@ -35,7 +33,17 @@ export class Post extends React.Component {
           </div>
             
           <div className="post-info">
-            <img className="profile-photo" src={this.props.userId.photo.url} alt="profile"/>
+            <div className="profile-photo-avatar">
+            {!this.props.userId.photo ? 
+              <p className="initials">
+                {this.props.userId.firstName[0]}
+                {this.props.userId.lastName[0]}
+              </p>
+              :
+              <img className="profile-photo" src={this.props.userId.photo.url} alt="profile"/> 
+            }
+            </div>
+
             <div className="name-and-date">
               <h3 className="post-user-name">{this.props.userId.firstName}</h3>
               <h6>{formatLongDate(this.props.date)}</h6>

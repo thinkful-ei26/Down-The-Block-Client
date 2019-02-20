@@ -7,7 +7,7 @@ export class ForumHeader extends React.Component{
   
   whichForum(){
     return (
-      this.props.type === "neighbor-forum" ? 
+      this.props.type === "neighbors" ? 
       <h1>What's Happening In Your Neighborhood</h1> : 
       <h1>What's Happening In Your City</h1>
     );
