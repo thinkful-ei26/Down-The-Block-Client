@@ -2,7 +2,6 @@ import React from 'react';
 import ForumHeader from './ForumHeader';
 import PostsList from './PostsList';
 import CreatePost from './CreatePost';
-import EyeAnimation from '../common/EyeAnimation'
 import {connect} from 'react-redux';
 import './main.css'
 
