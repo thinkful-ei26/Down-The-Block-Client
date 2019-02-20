@@ -2,7 +2,8 @@
   margin:auto;
   display: block;
   width: 300px;
-  height: 200px;
+  height: 450px;
+  padding-top: 200px;
 }
 
 .eyes-left {
@@ -12,11 +13,3 @@
 .eyes-right {
   transform: scaleX(1);
 }
-
-/* @-webkit-keyframes flip {
-  100% {transform: scaleX(1);}
-}
-
-@keyframes flip {
-  100% {transform: scaleX(1);}
-} */

@@ -33,12 +33,11 @@ export const fetchAddressError = err => ({
 });
 
 export const fetchAddress = (address) => (dispatch) => {
+    console.log('KEY',process.env.REACT_APP_GOOGLE_API_KEY)
     dispatch(fetchAddressRequest());
     let stringifiedAddress = Object.values(address).map(word => word.replace(/\s/g, '+')).join('+');
     console.log(stringifiedAddress);
-    // console.log(process.env.REACT_APP_GOOGLE_API_KEY);
-    // const googleAPIKey = `${process.env.REACT_APP_GOOGLE_API_KEY}`;
-    // console.log(googleAPIKey);
+
     let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${stringifiedAddress}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
     console.log(url);
     fetch(url)
