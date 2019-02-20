@@ -19,7 +19,6 @@ export class Navbar extends React.Component{
 
 
     if(this.props.loggedIn){
-      console.log('LOGGED IN')
       return (
         <div className = "right">
           <Link 

@@ -7,16 +7,12 @@ export const registerUser = user => dispatch => {
     console.log('formData', formData);
 
     Object.keys(user).forEach(item=> {
-            console.log('item', item);
-            formData.append(item, (user[item]))
+        formData.append(item, (user[item]))
     });
-
 
     for (let pair of formData.entries()) {
         console.log('DATA', pair[0]+ ', ' + pair[1]); 
     }
-
-    console.log('formData', formData);
 
     return fetch(`${API_BASE_URL}/auth/users`, {
         method: 'POST',

@@ -2,17 +2,11 @@ import React from 'react';
 import ForumHeader from './ForumHeader';
 import PostsList from './PostsList';
 import CreatePost from './CreatePost';
-import EyeAnimation from '../common/EyeAnimation'
 import {connect} from 'react-redux';
 import './main.css'
 
 export class Forum extends React.Component{
   whatToDisplay(){
-    console.log('coords in fn', this.props.coords)
-    if(this.props.showAnimation){
-      return <EyeAnimation/>;
-    }
-    else{
       if(this.props.postBeingEdited){
         return (
           <div className="modal">
@@ -22,7 +16,6 @@ export class Forum extends React.Component{
       }
       else{
         if(this.props.coords){
-          console.log('IN HERE')
           return (
             <React.Fragment>
               <CreatePost/>
@@ -31,11 +24,10 @@ export class Forum extends React.Component{
           )
         }
       }
-    }
   }
 
   render(){
-    console.log('showanimaton is', this.props.showAnimation)
+    console.log('SHOWANIMATION IS', this.props.showAnimation)
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />

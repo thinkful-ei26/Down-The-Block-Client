@@ -1,22 +1,25 @@
 import React from 'react';
-import {connect} from 'react-redux';
-// import {};
+import { connect } from 'react-redux'
 import './address-form.css'
 import {Field, reduxForm} from 'redux-form';
 import {required, nonEmpty} from '../common/validators';
 import { fetchAddress } from '../../actions/geolocation';
+import { showAnimation } from '../../actions/navigation';
 
 export class AddressForm extends React.Component {
 
+  componentDidMount(){
+    console.log('In Address Form Mount')
+    this.props.dispatch(showAnimation(false));
+  }
+
   onSubmit(values) {
-      // props = this.props;
       console.log(values);
-      // return this.props.dispatch(addComment(values.content, props.loggedInUserId, props.form));
-      return this.props.dispatch(fetchAddress(values));       
+      this.props.dispatch(showAnimation(true));
+      return this.props.dispatch(fetchAddress(values));    
   }  
 
   render() {   
-      // console.log('render address form');
       let error;
       if (this.props.error) {
         error = (
@@ -75,6 +78,6 @@ export class AddressForm extends React.Component {
   }
 }
 
-export default reduxForm({
+export default connect()(reduxForm({
   form: 'addressForm'
-})(AddressForm);
+})(AddressForm))

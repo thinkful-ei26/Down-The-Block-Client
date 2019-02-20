@@ -11,11 +11,9 @@ const matchesPassword = matches('password');
 
 export class SignUpForm extends React.Component {
     onSubmit(values) {
-        console.log('values', values);
-        if(values.img) {
+        if(values.img){
             values.img = values.img[0];
-        } 
-        
+        }
         const {username, password, firstName, lastName, img} = values;
         const user = {username, password, firstName, lastName, img};
         console.log('user', user);
@@ -72,7 +70,6 @@ export class SignUpForm extends React.Component {
                 />
                 <Field
                     component={Input}
-                    className="required"
                     label="Profile Photo:" 
                     name="img" 
                     id="img"

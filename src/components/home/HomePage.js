@@ -5,19 +5,32 @@ import Main from './Main';
 import Geolocator from './Geolocator';
 import AddressForm from './AddressForm';
 import requiresLogin from '../common/requires-login';
-
+import { showAnimation } from '../../actions/navigation';
+import EyeAnimation from '../common/EyeAnimation'
 
 export class HomePage extends React.Component{
-  // componentDidUpdate
+
+  componentWillMount(){
+    if(!this.props.coords){
+      console.log("IN COMP WILL MOUNT HOME PAGE")
+      this.props.dispatch(showAnimation(true));
+    }
+  }
+
+  componentWillUnmount(){
+    this.props.dispatch(showAnimation(false));
+  }
 
   render(){
     console.log(this.props.geoError);
+    console.log('SHOWANIMATION IS', this.props.showAnimation)
     return(
       <div className="home">
         <Geolocator/>
         {this.props.coords && <Sidebar/>}
         {this.props.coords && <Main/>}
-        {this.props.geoError && <AddressForm />} 
+        {this.props.showAnimation && <EyeAnimation/>}
+        {this.props.geoError && !this.props.coords && <AddressForm />}
       </div>
     );
   }
@@ -25,7 +38,8 @@ export class HomePage extends React.Component{
 
 const mapStateToProps = state => ({
   coords: state.geolocation.coords,
-  geoError: state.geolocation.error
+  geoError: state.geolocation.error,
+  showAnimation: state.nav.showAnimation,
 });
 
 export default requiresLogin()(connect(mapStateToProps)(HomePage));
