@@ -41,7 +41,7 @@ export class PostsList extends React.Component{
   };
   
   componentDidMount(){
-    this.props.dispatch(fetchPosts(this.props.coords));
+    this.props.dispatch(fetchPosts(this.props.coords, this.props.display));
     this.socket.emit("initial_data");
     this.socket.on("get_posts", this.getPosts);
     this.socket.on("commentAdded", this.updatePostsInState);
@@ -87,6 +87,7 @@ const mapStateToProps = state => ({
   coords: state.geolocation.coords,
   searchTerm: state.posts.searchTerm,
   categoryFilter: state.posts.categoryFilter,
+  display: state.nav.display 
 });
 
 export default connect(mapStateToProps)(PostsList)

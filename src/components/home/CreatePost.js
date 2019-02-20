@@ -17,8 +17,8 @@ export class CreatePost extends React.Component{
     e.preventDefault();
     let postId = this.props.editPost ? this.props.editPost.postId : null;
     // let method = this.props.editPost ? 'PUT' : 'POST';
-    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: todaysDate(), coordinates: this.props.coords};
-    this.props.dispatch(submitPost(postId, values, this.props.coords));
+    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: todaysDate(), coordinates: this.props.coords, audience: this.props.display};
+    this.props.dispatch(submitPost(postId, values, this.props.coords, this.props.display));
     this.content.value = "";
     this.form.category.value="Other";
   }
@@ -66,7 +66,6 @@ export class CreatePost extends React.Component{
         onSubmit={(e)=> this.onSubmit(e)}
         ref={form => this.form = form}
         style={this.state.style}
-        // onMouseLeave={()=>this.setState({borderAround: ''})}
       >
           
         <textarea 
@@ -75,6 +74,7 @@ export class CreatePost extends React.Component{
           type="textarea" 
           id="content" 
           name="content" 
+          className="create-post-textarea"
           placeholder="Write a Post For Your Neighborhood To See!" 
           defaultValue={editMode ? this.props.editPost.content : ""}
         />
@@ -145,7 +145,8 @@ export class CreatePost extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  coords: state.geolocation.coords
+  coords: state.geolocation.coords,
+  display: state.nav.display
 });
 
 

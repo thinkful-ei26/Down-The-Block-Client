@@ -1,5 +1,4 @@
-import React, { Component } from 'react'; 
-import {Field, reduxForm, focus} from 'redux-form';
+import React from 'react'; 
 import { connect } from 'react-redux';
 import socketIOClient from "socket.io-client";
 import {API_BASE_URL} from '../../config';
@@ -7,10 +6,13 @@ import {required, nonEmpty} from '../common/validators';
 import { addComment } from '../../actions/comments';
 
 
-export class PostAddComment extends Component {
+
     
-    constructor() {
-        super();
+    
+export class PostAddComment extends React.Component {
+    constructor(props) {
+        super(props);
+        this.test='';
         this.state = {
           post_data: [], 
           endpoint: `${API_BASE_URL}`
@@ -64,96 +66,73 @@ export class PostAddComment extends Component {
         this.socket.emit('addComment', newComment);
     };    
 
-    
-        // console.log(id);
-        // let post_details = {};
-        // console.log('post data in state', this.state.post_data);
-        // this.state.post_data.map(post => {
-        //   if (post.id === id) {
-        //     post_details = post;
-        //   }
-        //   return post;
-        // });
-        // console.log('post details:', post_details);
-        // this.socket.emit("putComment", post_details);
-        
-        // const new_array = this.state.post_data.map(post => {
-        //     console.log('post:', post);
-            
-        //     if (post.id === id) {
-        //         // post.comments.push(post_details._id)
-        //         return post;
-        //       }
-        // });
-        // console.log('new Array:', new_array);
-        // this.setState({ post_data: new_array });
-        // console.log('state after comment has been submitted', this.state);
-    // };
 
-    // Changing the quantity in the state which is emitted to the backend at the time of placing a comment.
-    // changePost = (event, postid, comment) => {
-    //     if (!event.target.value) {
-    //       event.target.value = '';
-    //     }
-    //     const new_array = this.state.post_data.map(post => {
-    //       if (post.id === postid) {
-    //         post.comments.push(comment.id); 
-    //       }
-    //       return post;
-    //     });
-    //     this.setState({ post_data: new_array });
-    // };
+    // onSubmit(values, props ) {
+    //     props = this.props;
+    //     this.sendComment(values.content, props.loggedInUserId, props.form);
+    //     return this.props.dispatch(addComment(values.content, props.loggedInUserId, props.form));       
 
-    onSubmit(values, props ) {
-        props = this.props;
-        this.sendComment(values.content, props.loggedInUserId, props.form);
-        return this.props.dispatch(addComment(values.content, props.loggedInUserId, props.form));       
+    // }
+
+    onSubmit(e) {
+        e.preventDefault();
+        this.props.dispatch(addComment(this.test, this.props.currentUser.id, this.props.form));   
+        this.content.value="";    
     }  
 
+    handleKeyDown(e){
+        if (e.keyCode === 13 && !e.shiftKey)
+        {
+            //form should submit
+            this.test=this.content.value
+            this.onSubmit(e);
+        }
+        else if(e.keyCode===13 && e.shiftKey){
+          this.test = this.content.value + ' <br/> ';
+        }
+    }
+
     render() {   
-        let error;
-        if (this.props.error) {
-            error = (
-                <div className="form-error" aria-live="polite">
-                    {this.props.error}
-                </div>
-            );
-        }   
         return (
-                <form 
-                className= "commentInput"
-                onSubmit= {this.props.handleSubmit(values=> 
-                    {
-                    this.onSubmit(values, this.props.loggedInUserId, this.props.form);
-                    this.props.reset('commentInput');
+            <form 
+                onSubmit={(e)=> this.onSubmit(e)}
+                ref={form => this.form = form}
+                className="comment-form"
+            >
+
+                <div className="comment-profile-photo-avatar">
+                    {!this.props.currentUser.photo ? 
+                        <p className="initials">
+                            {this.props.currentUser.firstName[0]}
+                            {this.props.currentUser.lastName[0]}
+                        </p>
+                        :
+                        <img className="comment-profile-photo" src={this.props.currentUser.photo.url} alt="profile"/> 
                     }
-                )}>
-                    {error}
-                    <label htmlFor="comment">ADD COMMENT</label>
-                    <Field
-                        component="input"
-                        type="text"
-                        name="content"
-                        id=  {this.props.postId}
-                        validate={[required, nonEmpty]}
-                    />
-                    <button  disabled={ this.props.pristine || this.props.submitting}>
-                        SUBMIT
-                    </button>
-                </form> 
+                </div>
+
+                <textarea 
+                    className="comment-textarea" 
+                    ref={input => this.content = input} 
+                    type="textarea" 
+                    id="content" 
+                    name="content" 
+                    placeholder="Write a Comment"
+                    onKeyDown={(e)=>this.handleKeyDown(e)} 
+                    // defaultValue={editMode ? this.props.editPost.content : ""}
+                />
+            </form>
         )
     }
 }
 
-PostAddComment = reduxForm({
-})(PostAddComment);
-
-PostAddComment = connect(state => {
-    return{
+const mapStateToProps = state => {
+    return {
+        currentUser: state.auth.currentUser,
         coords: state.geolocation.coords,
-        loggedInUserId: state.auth.currentUser.id,
         postsArray: state.posts.posts  
     }
-})(PostAddComment)
+  };
+  
+export default connect(mapStateToProps)(PostAddComment)
 
-export default PostAddComment;

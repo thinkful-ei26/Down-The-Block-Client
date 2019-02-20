@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  display: 'neighbor-forum',
+  display: 'neighbors',
   toggleNavbar: false,
   showAnimation: false,
 };
@@ -17,7 +17,6 @@ export default (state = INITIAL_STATE, action) => {
         display: action.component,
       });
     case TOGGLE_NAVBAR:
-      console.log(action.bool);
       if(action.bool===true || action.bool===false){
         return Object.assign({}, state, {
           toggleNavbar: action.bool,
@@ -27,6 +26,7 @@ export default (state = INITIAL_STATE, action) => {
         toggleNavbar: !state.toggleNavbar,
       })
       case SHOW_ANIMATION:
+        console.log('IN SHOW ANIMATION REDUCER, IT IS', action.bool)
       return Object.assign({}, state, {
         showAnimation: action.bool,
       });    

@@ -2,20 +2,30 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Comment from './Comment';
 import './comments.css';
-import { fetchPosts } from '../../actions/posts';
+import { cpus } from 'os';
 
 export class PostComments extends React.Component{
-
-  componentDidMount() {
-    this.props.dispatch(fetchPosts(this.props.coords));
-  }
-
   
   generateComments(){
-    console.log(this.props);
-    if(this.props.postsArray.length > 0){
-      return this.props.postsArray.map((comment, index)=> <Comment key={index} {...comment} />)
-    };
+    return this.props.comments.map((comment, index)=>{
+      comment.content = comment.content.replace(/\n/g, '<br/>');
+     return (
+      <div className="comment-info" key={index}>
+        <div className="comment-profile-photo-avatar">
+          {!comment.userId.photo ? 
+              <p className="initials">
+                  {comment.userId.firstName[0]}
+                  {comment.userId.lastName[0]}
+              </p>
+              :
+              <img className="comment-profile-photo" src={comment.userId.photo.url} alt="profile"/> 
+          }
+        </div>
+        {/* <h6>{formatLongDate(this.props.date)}</h6> */}
+        <Comment {...comment} />
+      </div>
+     );
+    });
   }
 
   render(){
