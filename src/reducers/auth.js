@@ -44,6 +44,7 @@ export default function reducer(state = initialState, action) {
         });
     }
     else if (action.type=== UPDATED_USER_SUCCESS){
+        console.log('IN REDUCER', action.updatedUser);
         return Object.assign({}, state, {
             currentUser: action.updatedUser,
             successMessage: action.message,

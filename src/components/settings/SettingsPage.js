@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import UpdateAccountForm from './UpdateAccountForm';
 import UpdatePasswordForm from './UpdatePasswordForm';
 import requiresLogin from '../common/requires-login';
-import {changeSuccessMessage} from '../../actions/users';
+import {changeSuccessMessage, updateProfilePhoto} from '../../actions/users';
 
 export class SettingsPage extends React.Component{
   componentDidMount(){
@@ -25,8 +25,19 @@ export class SettingsPage extends React.Component{
     }
   }
 
-  render(){
+  onSubmit(e){
+    e.preventDefault();
+    if(this.img.files){
+      let updatedPhoto= this.img.files[0];
+      return this.props.dispatch(updateProfilePhoto(updatedPhoto));
+    // }
+    }
+    console.log('SUBMIT PHOTO', this.img.files);
 
+  }
+
+  render(){
+    console.log('USERS PHOTO', this.props.currentUser.photo.url)
     return(
       <div className="settings">
         <main className="settings-main">
@@ -35,6 +46,25 @@ export class SettingsPage extends React.Component{
             {this.props.successMessage}
           </div>
           }
+          <div className="profile-photo-avatar">
+            {!this.props.currentUser.photo ? 
+              <p className="initials">
+                {this.props.currentUser.firstName[0]}
+                {this.props.currentUser.lastName[0]}
+              </p>
+              :
+              <img className="profile-photo" src={this.props.currentUser.photo.url} alt="profile"/> 
+            }
+          </div>
+
+          
+          <input 
+            onChange={(e)=>this.onSubmit(e)} 
+            accept="image/*"
+            ref={input => this.img = input}
+            type="file"
+          />
+
           <UpdateAccountForm/>
           <UpdatePasswordForm/>
         </main>
@@ -45,6 +75,7 @@ export class SettingsPage extends React.Component{
 
 const mapStateToProps = state => ({
   successMessage: state.auth.successMessage,
+  currentUser: state.auth.currentUser,
 });
 
 export default requiresLogin()(connect(mapStateToProps)(SettingsPage));

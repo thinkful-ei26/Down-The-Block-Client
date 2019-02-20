@@ -6,6 +6,8 @@ import {UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE} from './types';
 
 export const registerUser = user => dispatch => {
     let formData = new FormData();
+
+    console.log('the photo is', user.img);
     
     Object.keys(user).forEach(item=> {
         formData.append(item, (user[item]))
@@ -117,5 +119,39 @@ export const updatePassword = user => (dispatch, getState) => {
                     })
                 );
             }
+        });
+};
+
+export const updateProfilePhoto = photo => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    let formData = new FormData();
+
+    console.log('photo is', photo)
+    
+    formData.append('photo', photo)
+
+    for (let pair of formData.entries()) {
+        console.log('DATA', pair[0]+ ', ' + pair[1]); 
+    }
+
+
+    return fetch(`${API_BASE_URL}/auth/users/photo`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
+        body: formData
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(updatedUser => {
+            dispatch(updatedUserSuccess(updatedUser, 'Your account has been successfully updated'));
+        })
+        .then(()=>{
+            dispatch(refreshProfileAuthToken())
+        })
+        
+        .catch(err => {
+            console.log(err);
         });
 };
