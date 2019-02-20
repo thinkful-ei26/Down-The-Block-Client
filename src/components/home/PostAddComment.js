@@ -42,29 +42,29 @@ export class PostAddComment extends React.Component {
     
 
     componentDidMount() {
-        this.socket.emit("initial_data");
+        // this.socket.emit("initial_data", );
         // const state_current = this;
-        this.socket.on("get_posts", this.getPosts);
+        // this.socket.on("get_posts", this.getPosts);
         // this.socket.on('commentAdded', this.updatePostsInState);
     }
 
     componentWillUnmount() {
-        this.socket.off("get_posts", this.getPosts);
+        // this.socket.off("get_posts", this.getPosts);
         // this.socket.off('commentAdded', this.updatePostsInState);
     }
 
     //Function to place the comment.
 
-    sendComment = (content, userId, postId ) => {
+    // sendComment = (content, userId, postId ) => {
         
-        const newComment = {
-            content, 
-            userId, 
-            postId
-        }; 
-        console.log(newComment);
-        this.socket.emit('addComment', newComment);
-    };    
+    //     const newComment = {
+    //         content, 
+    //         userId, 
+    //         postId
+    //     }; 
+    //     console.log(newComment);
+    //     this.socket.emit('addComment', newComment);
+    // };    
 
 
     // onSubmit(values, props ) {

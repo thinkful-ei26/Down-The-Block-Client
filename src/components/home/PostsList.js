@@ -39,12 +39,26 @@ export class PostsList extends React.Component{
     console.log(this.state);
     this.dispatch(updatePost(new_array));
   };
-  
+
   componentDidMount(){
     this.props.dispatch(fetchPosts(this.props.coords, this.props.display));
-    this.socket.emit("initial_data");
-    this.socket.on("get_posts", this.getPosts);
-    this.socket.on("commentAdded", this.updatePostsInState);
+    if(this.props.coords) {
+      let simplifiedGeoObject = {
+        latitude: this.props.coords.latitude,
+        longitude: this.props.coords.longitude
+      }
+      // let stringifiedObj = JSON.stringify(simplifiedGeoObject);
+      console.log('COORDS', simplifiedGeoObject);
+      console.log('DISPLAY', this.props.display);
+      this.socket.emit("initial_data", this.props.display, simplifiedGeoObject);
+      this.socket.on("get_posts", (post) => {
+        console.log('POST:', post);
+        this.getPosts(post);
+      });
+      // this.socket.on("commentAdded", this.updatePostsInState);
+    }
+
+
   }
 
   componentWillUnmount(){
@@ -55,13 +69,13 @@ export class PostsList extends React.Component{
   generatePosts(){
     let posts = [];
 
-    if(this.state.posts_data.postsArray === undefined) {
-        if(this.state.posts_data.length > 0) {
-          console.log(this.state.posts_data);
-          posts = this.state.posts_data.map((post, index)=> <Post key={index} postId={post.id} {...post} />);
+    // if(this.state.posts_data.postsArray === undefined) {
+    //     if(this.state.posts_data.length > 0) {
+    //       console.log(this.state.posts_data);
+          posts = this.props.posts.map((post, index)=> <Post key={index} postId={post.id} {...post} />);
           console.log('posts after map:', posts);
-        }
-    }
+        // }
+    // }
 
     if(this.props.searchTerm) {
       posts = filterPostsBySearch(this.props.searchTerm, posts);
