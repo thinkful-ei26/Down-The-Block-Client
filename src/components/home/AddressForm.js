@@ -88,7 +88,6 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-
 import './address-form.css'
 
 import { showAnimation } from '../../actions/navigation';
