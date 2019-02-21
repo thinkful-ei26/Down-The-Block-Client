@@ -1,6 +1,7 @@
 import React from 'react';
+import requiresLogin from '../common/requires-login';
 
-export default class About extends React.Component{
+export class About extends React.Component{
 
   componentDidMount(){
     document.title = 'About';
@@ -14,3 +15,5 @@ export default class About extends React.Component{
     );
   }
 }
+
+export default requiresLogin()(About);

@@ -83,8 +83,7 @@ export class SignUpForm extends React.Component {
                     disabled={this.props.pristine || this.props.submitting}>
                     Register
                 </button>
-                <label>Already Registered?</label>
-                <Link to="/">Login</Link>
+                
             </form>
         );
     }
