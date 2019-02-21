@@ -33,6 +33,12 @@ export class Navbar extends React.Component{
             to ="/about">
             About
           </Link>
+          <Link 
+            onClick={()=>this.props.dispatch(toggleNavbar(false))} 
+            className={className} 
+            to ="/settings">
+            Settings
+          </Link>
           <button id="logout" 
             className={className} 
             onClick={() => this.logOut()}>
