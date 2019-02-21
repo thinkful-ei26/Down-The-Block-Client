@@ -5,10 +5,10 @@ import
     { 
         POST_COMMENT_REQUEST, 
         POST_COMMENT_SUCCESS, 
-        POST_COMMENT_ERROR 
+        POST_COMMENT_ERROR, 
+        ADD_NEW_COMMENT 
     } 
 from './types'; 
-import { fetchPosts } from './posts';    
 
 export const postCommentRequest = () => ({
     type: POST_COMMENT_REQUEST
@@ -24,7 +24,7 @@ export const postCommentError = (error) => ({
     error
 });
 
-export const addComment = (content, userId, postId) => (dispatch, getState) => {
+export const addComment = (content, date, userId, postId) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     dispatch(postCommentRequest());
     return (
@@ -36,6 +36,7 @@ export const addComment = (content, userId, postId) => (dispatch, getState) => {
             },
             body: JSON.stringify({
                 content, 
+                date,
                 userId, 
                 postId
             })
@@ -46,7 +47,7 @@ export const addComment = (content, userId, postId) => (dispatch, getState) => {
             console.log('the response in comments is', post);
             dispatch(postCommentSuccess(post));
             // it gets back the post that was changed, so update that in the posts array? 
-            dispatch(updatePost(post))
+            // dispatch(updatePost(post))
         })
         .catch(err => {
             dispatch(postCommentError(err));

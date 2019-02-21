@@ -8,7 +8,8 @@ export class Chat extends React.Component{
     this.state={
       messages: []
     }
-    this.socket = socketClient("http://localhost:8080")
+    this.socket = socketClient("http://localhost:8080"); 
+    console.log(this.socket); 
     this.socket.on("chat-message", (msg)=>{
       this.setState({messages: [...this.state.messages, msg]})})
   }

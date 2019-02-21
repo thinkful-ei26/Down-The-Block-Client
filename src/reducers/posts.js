@@ -11,7 +11,8 @@ import {
   DELETE_POST_REQUEST,
   DELETE_POST_SUCCESS,
   DELETE_POST_ERROR,
-  UPDATED_POST
+  UPDATED_POST, 
+  ADD_NEW_POST
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -72,7 +73,6 @@ export default (state = INITIAL_STATE, action) => {
         loading: true 
       })      
     case DELETE_POST_SUCCESS:
-      console.log(state.posts, action.postId)
       return Object.assign({}, state, {
         loading: false,
         error: null,
@@ -87,7 +87,12 @@ export default (state = INITIAL_STATE, action) => {
       let posts = state.posts.map(post=> post.id===action.post.id ? post=action.post : post)
     return Object.assign({}, state, {
       posts
-    })      
+    })
+    case ADD_NEW_POST: 
+      // let posts = [...state.posts, action.post ] 
+      return Object.assign({}, state, {
+        posts: [...state.posts, action.post ] 
+      })
     default:
       return state;
   }

@@ -1,11 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PostComments from './PostComments';
-import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
 import PostAddComment from './PostAddComment';
-import { fetchPosts } from '../../actions/posts';
 
 export class Post extends React.Component {
 
@@ -22,7 +20,7 @@ export class Post extends React.Component {
   }
   
   render(){
-    console.log('LOOK HERE', this.props.userId.photo);
+    console.log('POST COMPONENT:', this.props)
     return(
       <section className="entire-thread">
         <article className='post'>
@@ -48,7 +46,7 @@ export class Post extends React.Component {
 
             <div className="name-and-date">
               <h3 className="post-user-name">{this.props.userId.firstName}</h3>
-              <h6>{formatLongDate(this.props.date)}</h6>
+              <h6>{this.props.date}</h6>
             </div> 
           </div>
 
@@ -66,7 +64,7 @@ const mapStateToProps = state => {
   return {
     loggedInUserId: state.auth.currentUser.id, 
     coords: state.geolocation.coords,
-    postsArray: state.postsArray
+    postsArray: state.postsArray, 
   }
 };
 

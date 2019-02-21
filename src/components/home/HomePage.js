@@ -10,10 +10,19 @@ import EyeAnimation from '../common/EyeAnimation'
 
 export class HomePage extends React.Component{
 
+  componentDidMount(){
+    document.title = 'Home';
+  }
+
   componentWillMount(){
     if(!this.props.coords){
+      console.log("IN COMP WILL MOUNT HOME PAGE")
       this.props.dispatch(showAnimation(true));
     }
+  }
+
+  componentWillUnmount(){
+    this.props.dispatch(showAnimation(false));
   }
 
   render(){
@@ -25,7 +34,7 @@ export class HomePage extends React.Component{
         {this.props.coords && <Sidebar/>}
         {this.props.coords && <Main/>}
         {this.props.showAnimation && <EyeAnimation/>}
-        {this.props.geoError && <AddressForm />}
+        {this.props.geoError && !this.props.coords && <AddressForm />}
       </div>
     );
   }

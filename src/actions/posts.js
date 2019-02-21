@@ -11,12 +11,16 @@ import {
     DELETE_POST_REQUEST,
     DELETE_POST_SUCCESS,
     DELETE_POST_ERROR,
-    UPDATED_POST
+    UPDATED_POST, 
+    ADD_NEW_POST
   } from './types';
   import {API_BASE_URL} from '../config';
   import {normalizeResponseErrors} from './utils';
   import {SubmissionError} from 'redux-form';
-  
+  import {display} from './navigation';
+  import { connect } from 'react-redux';
+  import { socket } from '../reducers/socket'; 
+
   export const fetchPostsRequest = () => ({
       type: FETCH_POSTS_REQUEST,
   })
@@ -31,7 +35,8 @@ import {
     error
   })
   
-  export const fetchPosts = (coords) => (dispatch, getState) => {
+  export const fetchPosts = (coords, forum) => (dispatch, getState) => {
+      dispatch(display(forum))
       dispatch(fetchPostsRequest());
       const authToken = getState().auth.authToken;
       let simplifiedGeoObject = {
@@ -40,7 +45,7 @@ import {
       }
       let stringifiedObj = JSON.stringify(simplifiedGeoObject);
       console.log(stringifiedObj);
-      fetch(`${API_BASE_URL}/posts/${stringifiedObj}`, {
+      fetch(`${API_BASE_URL}/posts/${stringifiedObj}/${forum}`, {
           method: 'GET',
           headers: {
               Authorization: `Bearer ${authToken}`
@@ -48,9 +53,9 @@ import {
       })
           .then(res => normalizeResponseErrors(res))
           .then(res => res.json())
-        //   .then(res => console.log(res))
           .then(posts => {
               console.log('THE POSTS GOTTEN BACK ARE', posts)
+
               dispatch(fetchPostsSuccess(posts));
           })
           .catch(error => {
@@ -70,8 +75,13 @@ import {
     type: CREATE_POST_ERROR,
     error
   })
+
+  export const addNewPost = (post) => ({
+      type:ADD_NEW_POST, 
+      post
+  });
   
-  export const submitPost = (postId, values, coords) => (dispatch, getState) =>{
+  export const submitPost = (postId, values, coords, forum) => (dispatch, getState) =>{
       dispatch(createPostRequest());
       const authToken = getState().auth.authToken;
       const method = postId ? "PUT" : "POST";
@@ -95,10 +105,12 @@ import {
           body: JSON.stringify(values)
       })
       .then(res => normalizeResponseErrors(res))
-      .then(res => res.json())
+      .then(res => { 
+         return res.json()
+        })
       .then(() => {
           dispatch(createPostSuccess());
-          dispatch(fetchPosts(coords));
+        //   dispatch(fetchPosts(coords, forum));
       })
       .catch(error => {
           dispatch(createPostError(error));
@@ -149,7 +161,6 @@ import {
       })
       .then(res => normalizeResponseErrors(res))
       .then(() => {
-          console.log('here')
           dispatch(deletePostSuccess(postId));
       })
       .catch(error => {
@@ -194,3 +205,11 @@ import {
       type: UPDATED_POST,
       post
   })
+
+  const mapStateToProps = state => {
+      console.log('STATE', state);
+      return {
+          socket:state.socket
+      }
+  }
+  export default connect(mapStateToProps)(fetchPosts);

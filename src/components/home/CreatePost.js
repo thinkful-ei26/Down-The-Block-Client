@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { submitPost, postBeingEdited } from '../../actions/posts';
+
+import { submitPost, postBeingEdited, addNewPost } from '../../actions/posts';
 import {todaysDate} from '../common/helper-functions';
+import moment from 'moment';
 
 export class CreatePost extends React.Component{
 
@@ -17,8 +19,9 @@ export class CreatePost extends React.Component{
     e.preventDefault();
     let postId = this.props.editPost ? this.props.editPost.postId : null;
     // let method = this.props.editPost ? 'PUT' : 'POST';
-    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: todaysDate(), coordinates: this.props.coords};
-    this.props.dispatch(submitPost(postId, values, this.props.coords));
+    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display};
+
+    this.props.dispatch(submitPost(postId, values, this.props.coords, this.props.display));
     this.content.value = "";
     this.form.category.value="Other";
   }
@@ -30,6 +33,12 @@ export class CreatePost extends React.Component{
         borderAround: this.props.editPost.category.toLowerCase()
       })
     } 
+    console.log('socket in CREATE:', this.props.socket)
+    //listens for the server when the new post has been created
+    this.props.socket.on('new_post', post => {
+      console.log(post); 
+      this.props.dispatch(addNewPost(post));
+    })
   }
 
   generateButtons(){
@@ -58,7 +67,6 @@ export class CreatePost extends React.Component{
   }
 
   render(){
-    console.log(this.props)
     let editMode = this.props.editPost ? true : false;
 
     return(
@@ -67,7 +75,6 @@ export class CreatePost extends React.Component{
         onSubmit={(e)=> this.onSubmit(e)}
         ref={form => this.form = form}
         style={this.state.style}
-        // onMouseLeave={()=>this.setState({borderAround: ''})}
       >
           
         <textarea 
@@ -147,7 +154,9 @@ export class CreatePost extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  coords: state.geolocation.coords
+  coords: state.geolocation.coords,
+  display: state.nav.display, 
+  socket:state.socket.socket
 });
 
 

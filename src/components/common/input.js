@@ -1,7 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import { focusOn} from '../../actions/navigation';
 
-export default class Input extends React.Component {
+
+export class Input extends React.Component {
     componentDidUpdate(prevProps) {
+        //focus on form when clicked
+        console.log('id', this.input.id, 'focus', this.props.focusOn)
+        if(this.input.id===this.props.focusOn){
+            console.log('here')
+            this.input.focus();
+            this.props.dispatch(focusOn(""));
+        }
         if (!prevProps.meta.active && this.props.meta.active) {
             this.input.focus();
         }
@@ -42,7 +52,6 @@ export default class Input extends React.Component {
 
         //if its a file/image, need to handle it differently: 
         if(this.props.input.name==="img"){
-            console.log('here')
             delete this.props.input.value;
             element = (<Element
                 {...this.props.input}
@@ -67,3 +76,10 @@ export default class Input extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    focusOn: state.nav.focusOn,
+    focusForm: state.nav.focusForm,
+  });
+  
+  export default connect(mapStateToProps)(Input);
