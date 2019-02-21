@@ -18,7 +18,6 @@ class Sidebar extends React.Component{
     const response = await fetch(`http://localhost:8080/auth/users/`)
     const json = await response.json()
     this.setState({ users: json });
-
   }
 
   getListOfUsers= ()=>{
@@ -43,8 +42,7 @@ class Sidebar extends React.Component{
           <button  onClick={()=>this.props.dispatch(display('chat'))}>Users</button>
           <button onClick={()=>{this.getListOfUsers()}}>Get users</button>
           <ul>
-            <li>Nikki</li>
-            <li>Steve</li>
+
           </ul>
         </nav>
       </aside>
