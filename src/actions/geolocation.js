@@ -34,8 +34,6 @@ export const fetchAddressError = err => ({
     err
 });
 
-
-
 // export const fetchAddress = (address) => (dispatch) => {
 //     console.log('KEY',process.env.REACT_APP_GOOGLE_API_KEY)
 //     dispatch(fetchAddressRequest());

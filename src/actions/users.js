@@ -11,8 +11,6 @@ import {UPDATED_USER_SUCCESS,
 export const registerUser = user => dispatch => {
     let formData = new FormData();
 
-    console.log('the photo is', user.img);
-    
     Object.keys(user).forEach(item=> {
         formData.append(item, (user[item]))
     });
