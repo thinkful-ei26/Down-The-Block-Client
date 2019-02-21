@@ -1,5 +1,6 @@
 export const DISPLAY = 'DISPLAY';
 export const TOGGLE_NAVBAR = "TOGGLE_NAVBAR";
+export const FOCUS_ON = "FOCUS_ON";
 export const SHOW_ANIMATION = "SHOW_ANIMATION"
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';

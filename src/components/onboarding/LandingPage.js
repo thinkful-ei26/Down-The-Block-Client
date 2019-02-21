@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import LogInForm from './LogInForm';
+import About from '../common/About';
+import SignUpForm from './SignUpForm';
 import './onboarding.css';
 
 export function LandingPage(props) {
@@ -12,7 +14,12 @@ export function LandingPage(props) {
 
     return (
         <main className="landing-page">
-            <LogInForm />
+            <h1>Welcome To Neighborhood Watch</h1>
+            <About/>
+            <section className="form-section">
+                <LogInForm />
+                <SignUpForm/>
+            </section>
         </main>
     );
 }
