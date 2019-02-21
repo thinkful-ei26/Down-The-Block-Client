@@ -5,7 +5,10 @@ import {
     AUTH_SUCCESS,
     AUTH_ERROR,
     UPDATED_USER_SUCCESS,
-    CHANGE_SUCCESS_MESSAGE
+    CHANGE_SUCCESS_MESSAGE,
+    FETCH_USERS_REQUEST, 
+    FETCH_USERS_SUCCESS, 
+    FETCH_USERS_ERROR
 } from '../actions/types';
 
 const initialState = {
@@ -13,7 +16,9 @@ const initialState = {
     currentUser: null,
     loading: false,
     error: null,
-    successMessage: null
+    successMessage: null,
+    users: [],
+    loadingUsers: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -55,6 +60,23 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             successMessage: action.message,
             error: null
+        });
+    }
+    else if(action.type===FETCH_USERS_REQUEST){
+      return Object.assign({}, state, {
+        loadingUsers: true,
+      });
+    }
+    else if(action.type===FETCH_USERS_SUCCESS){
+        return Object.assign({}, state, {
+          users: action.users,
+          loadingUsers: false,
+        });
+      }
+    else if(action.type===FETCH_USERS_ERROR){
+        return Object.assign({}, state, {
+            loadingUsers: false,
+            error: action.error,
         });
       }
     return state;

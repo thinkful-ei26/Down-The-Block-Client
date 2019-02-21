@@ -41,7 +41,7 @@ import {
         longitude: coords.longitude
       }
       let stringifiedObj = JSON.stringify(simplifiedGeoObject);
-      console.log(stringifiedObj);
+      console.log('COORDS', stringifiedObj);
       fetch(`${API_BASE_URL}/posts/${stringifiedObj}/${forum}`, {
           method: 'GET',
           headers: {

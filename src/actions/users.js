@@ -2,7 +2,7 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {refreshProfileAuthToken} from './auth';
-import {UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE} from './types';
+import {UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR} from './types';
 
 export const registerUser = user => dispatch => {
     let formData = new FormData();
@@ -153,5 +153,44 @@ export const updateProfilePhoto = photo => (dispatch, getState) => {
         
         .catch(err => {
             console.log(err);
+        });
+};
+
+export const fetchUsersRequest = () => ({
+    type: FETCH_USERS_REQUEST,
+})
+
+export const fetchUsersSuccess = (users) => ({
+  type: FETCH_USERS_SUCCESS,
+  users
+})
+
+export const fetchUsersError= (error) => ({
+  type: FETCH_USERS_ERROR,
+  error
+})
+
+export const fetchUsers = (coords) => (dispatch, getState) => {
+    dispatch(fetchUsersRequest());
+    const authToken = getState().auth.authToken;
+    let simplifiedGeoObject = {
+        latitude: coords.latitude,
+        longitude: coords.longitude
+      }
+      let stringifiedObj = JSON.stringify(simplifiedGeoObject);
+    fetch(`${API_BASE_URL}/auth/users/${stringifiedObj}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(users => {
+            dispatch(fetchUsersSuccess(users));
+            console.log('THE USERS GOTTEN BACK ARE', users)
+        })
+        .catch(error => {
+            console.log(error);
         });
 };

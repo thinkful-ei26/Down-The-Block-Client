@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import socketClient from "socket.io-client"
 import {API_BASE_URL} from '../../config'
-import './Chat.css'
+// import './Chat.css'
 
 export class Chat extends React.Component {
   constructor(props) {

@@ -3,35 +3,29 @@ import {connect} from 'react-redux';
 import {display} from '../../actions/navigation'
 import './sidebar.css'
 import { fetchPosts } from '../../actions/posts';
-import REACT_APP_API_BASE_URL from '../../config'
+import { fetchUsers } from '../../actions/users'
 
 class Sidebar extends React.Component{
-  constructor(props){
-    super(props)
-    this.state={
-      users: {},
 
+  componentDidMount (){
+    this.props.dispatch(fetchUsers(this.props.coords));
+  }
+
+  showAllUsers(){
+    if(this.props.users){
+      return this.props.users.map((user,index)=> {
+        return (
+          <button 
+            onClick={()=>this.props.dispatch(display('chat'))}
+            key={index}>{user.firstName}
+          </button>
+        )
+      })
     }
   }
 
-  componentDidMount = async () => {
-    const response = await fetch(`http://localhost:8080/auth/users/`)
-    const json = await response.json()
-    this.setState({ users: json });
-  }
-
-  getListOfUsers= ()=>{
-    let arrayofuserobjects = []
-      for(let name in this.state.users){
-        arrayofuserobjects.push(this.state.users[name])
-        console.log(this.state.users[name].id, this.capitalizeFirstLetter(this.state.users[name].username))
-      }
-      return arrayofuserobjects
-  }
- capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
  render(){
+   console.log('users are', this.props.users)
     return(
       <aside className="sidebar">
         <nav>
@@ -39,11 +33,7 @@ class Sidebar extends React.Component{
           <button onClick={()=>this.props.dispatch(fetchPosts(this.props.coords, 'neighbors'))}>Neighors</button>
           <button onClick={()=>this.props.dispatch(fetchPosts(this.props.coords, 'city'))} >City</button>
           <h4>Chats</h4>
-          <button  onClick={()=>this.props.dispatch(display('chat'))}>Users</button>
-          <button onClick={()=>{this.getListOfUsers()}}>Get users</button>
-          <ul>
-
-          </ul>
+          {this.showAllUsers()}
         </nav>
       </aside>
     );
@@ -51,7 +41,8 @@ class Sidebar extends React.Component{
 }
 const mapStateToProps = state => ({
   coords: state.geolocation.coords,
-  display: state.nav.display
+  display: state.nav.display,
+  users: state.auth.users
 });
 
 export default connect(mapStateToProps)(Sidebar)
