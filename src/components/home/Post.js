@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PostComments from './PostComments';
-import {formatLongDate} from '../common/helper-functions';
 import { postBeingEdited, deletePost } from '../../actions/posts';
 import './post.css';
 import PostAddComment from './PostAddComment';
@@ -46,7 +45,7 @@ export class Post extends React.Component {
 
             <div className="name-and-date">
               <h3 className="post-user-name">{this.props.userId.firstName}</h3>
-              <h6>{formatLongDate(this.props.date)}</h6>
+              <h6>{this.props.date}</h6>
             </div> 
           </div>
 
