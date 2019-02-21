@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../common/input';
 import {login} from '../../actions/auth';
@@ -7,7 +8,7 @@ import {Link} from 'react-router-dom';
 
 export class LogInForm extends React.Component {
     onSubmit(values) {
-        return this.props.dispatch(login(values.username, values.password));
+        return this.props.dispatch(login(values['login-username'], values.password));
     }
 
     render() {
@@ -22,18 +23,20 @@ export class LogInForm extends React.Component {
 
         return (
             <form
+                id = "login"
                 className="login-form"
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
                 <h2>Sign in Below</h2>
                 {error}
-                <label htmlFor="username">Username</label>
+                <label htmlFor="login-username">Username</label>
                 <Field
                     component={Input}
+                    ref={input => (this.input = input)}
                     type="text"
-                    name="username"
-                    id="username"
+                    name="login-username"
+                    id="login-username"
                     validate={[required, nonEmpty]}
                 />
                 <label htmlFor="password">Password</label>
@@ -41,11 +44,9 @@ export class LogInForm extends React.Component {
                     component={Input}
                     type="password"
                     name="password"
-                    id="password"
                     validate={[required, nonEmpty]}
                 />
-                <label>Don't have an account yet?</label>
-                <Link to="/register">Sign Up!</Link>
+               
                 <button disabled={this.props.pristine || this.props.submitting}>
                     Log in
                 </button>
@@ -54,7 +55,13 @@ export class LogInForm extends React.Component {
     }
 }
 
-export default reduxForm({
-    form: 'login',
-    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
-})(LogInForm);
+const mapStateToProps = state => ({
+    focusOn: state.nav.focusOn,
+});
+
+export default connect(mapStateToProps)(reduxForm({
+    form:'login',
+    onSubmitFail: (error, dispatch) => {
+      dispatch(focus('login', Object.keys(error)[0]));
+    },
+  })(LogInForm));
