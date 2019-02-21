@@ -92,6 +92,7 @@ import './address-form.css'
 
 import { showAnimation } from '../../actions/navigation';
 import { fetchAddressSuccess } from '../../actions/geolocation';
+import { setUserCoords } from '../../actions/users';
 
  
 class AddressForm extends React.Component {
@@ -116,10 +117,12 @@ class AddressForm extends React.Component {
       .then(googleCoords => {
           let coords = {
             latitude: googleCoords.lat,
-            longitude: googleCoords.lng
+            longitude: googleCoords.lng,
+            automatic: false
         };
         this.props.dispatch(showAnimation(false));
-        this.props.dispatch(fetchAddressSuccess(coords))
+        this.props.dispatch(fetchAddressSuccess(coords));
+        this.props.dispatch(setUserCoords(coords));
       })
       // .then(googleCoords => console.log('Success', googleCoords))
       .catch(error => console.error('Error', error));

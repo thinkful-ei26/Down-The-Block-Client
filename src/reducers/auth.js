@@ -5,7 +5,10 @@ import {
     AUTH_SUCCESS,
     AUTH_ERROR,
     UPDATED_USER_SUCCESS,
-    CHANGE_SUCCESS_MESSAGE
+    CHANGE_SUCCESS_MESSAGE,
+    USER_COORDS_SUCCESS,
+    USER_COORDS_REQUEST,
+    USER_COORDS_ERROR
 } from '../actions/types';
 
 const initialState = {
@@ -42,20 +45,34 @@ export default function reducer(state = initialState, action) {
             loading: false,
             error: action.error
         });
-    }
-    else if (action.type=== UPDATED_USER_SUCCESS){
+    } else if (action.type=== UPDATED_USER_SUCCESS){
         console.log('IN REDUCER', action.updatedUser);
         return Object.assign({}, state, {
             currentUser: action.updatedUser,
             successMessage: action.message,
             error: null
         });
-      }
-      else if(action.type===CHANGE_SUCCESS_MESSAGE){
+      } else if(action.type===CHANGE_SUCCESS_MESSAGE){
         return Object.assign({}, state, {
             successMessage: action.message,
             error: null
         });
+      } else if(action.type === USER_COORDS_REQUEST){
+          return Object.assign({}, state, {
+            loading: true
+          })
+      } else if(action.type === USER_COORDS_ERROR){
+          return Object.assign({}, state, {
+            loading: false,
+            error: action.error
+          })
+      } else if(action.type === USER_COORDS_SUCCESS){
+        console.log('IN REDUCER', action.user);
+          return Object.assign({}, state, {
+              currentUser: action.user,
+              error: null,
+              loading: false
+          })
       }
     return state;
 }

@@ -2,7 +2,11 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {refreshProfileAuthToken} from './auth';
-import {UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE} from './types';
+import {UPDATED_USER_SUCCESS, 
+        CHANGE_SUCCESS_MESSAGE, 
+        USER_COORDS_REQUEST,
+        USER_COORDS_SUCCESS,
+        USER_COORDS_ERROR} from './types';
 
 export const registerUser = user => dispatch => {
     let formData = new FormData();
@@ -155,3 +159,57 @@ export const updateProfilePhoto = photo => (dispatch, getState) => {
             console.log(err);
         });
 };
+
+export const userCoordsRequest = () => ({
+    type: USER_COORDS_REQUEST
+});
+
+export const userCoordsSuccess = user => ({
+    type: USER_COORDS_SUCCESS,
+    user
+});
+
+export const userCoordsError = error => ({
+    type: USER_COORDS_ERROR,
+    error
+})
+
+export const setUserCoords = (coords) => (dispatch, getState) => {
+    dispatch(userCoordsRequest());
+    const authToken = getState().auth.authToken;
+
+    let simplifiedGeoObject = {
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+    };
+        
+    if (coords.automatic === false){
+        simplifiedGeoObject.automatic = false;
+    } else { 
+        simplifiedGeoObject.automatic = true
+    }
+    
+    let stringifiedObj = JSON.stringify(simplifiedGeoObject);
+
+    console.log(stringifiedObj);
+
+    const path = `${API_BASE_URL}/auth/users/location/${stringifiedObj}`; 
+
+    return fetch(path, { 
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(user => {
+        dispatch(userCoordsSuccess(user));
+        // dispatch(fetchPosts(coords, forum));
+    })
+    .catch(error => {
+        dispatch(userCoordsError(error))
+    })
+}
