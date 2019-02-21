@@ -13,7 +13,7 @@ export class LogInForm extends React.Component {
 
     componentDidUpdate(){
         if(this.props.focusOn==="login"){
-            this.input.focus();
+            console.log(this.props)
         }
     }
 
@@ -42,7 +42,6 @@ export class LogInForm extends React.Component {
                     ref={input => (this.input = input)}
                     type="text"
                     name="username"
-                    id="username"
                     validate={[required, nonEmpty]}
                 />
                 <label htmlFor="password">Password</label>
@@ -50,7 +49,6 @@ export class LogInForm extends React.Component {
                     component={Input}
                     type="password"
                     name="password"
-                    id="password"
                     validate={[required, nonEmpty]}
                 />
                 <label>Don't have an account yet?</label>

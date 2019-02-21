@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   toggleNavbar: false,
   showAnimation: false,
   focusOn: ""
+  formFocus: "",
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -35,6 +36,7 @@ export default (state = INITIAL_STATE, action) => {
     case FOCUS_ON:
       return Object.assign({}, state, {
         focusOn: action.focus,
+        formFocus: action.form
       });     
     default:
       return state;

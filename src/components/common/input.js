@@ -1,7 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import { focusOn} from '../../actions/navigation';
 
-export default class Input extends React.Component {
+
+export class Input extends React.Component {
     componentDidUpdate(prevProps) {
+        //focus on form when clicked
+        console.log(this.input.id, this.props.focusOn)
+        if(this.input.id===this.props.focusOn){
+            console.log('here')
+            this.input.focus();
+            this.props.dispatch(focusOn(""));
+        }
         if (!prevProps.meta.active && this.props.meta.active) {
             this.input.focus();
         }
@@ -66,3 +76,9 @@ export default class Input extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    focusOn: state.nav.focusOn,
+  });
+  
+  export default connect(mapStateToProps)(Input);
