@@ -4,7 +4,7 @@ import {registerUser} from '../../actions/users';
 import {login} from '../../actions/auth';
 import Input from '../common/input';
 import {Link} from 'react-router-dom';
-import {required, nonEmpty, matches, length, isTrimmed, sizeLimit, imageNotEmpty} from '../common/validators';
+import {required, nonEmpty, matches, length, isTrimmed, sizeLimit } from '../common/validators';
 
 const passwordLength = length({min: 8, max: 72});
 const matchesPassword = matches('password');
@@ -14,22 +14,31 @@ export class SignUpForm extends React.Component {
         if(values.img){
             values.img = values.img[0];
         }
-        const {username, password, firstName, lastName, img} = values;
-        const user = {username, password, firstName, lastName, img};
-        console.log('user', user);
+        const {password, firstName, lastName, img} = values;
+        const user = { password, firstName, lastName, img};
+        user.username = values['register-username'];
         return this.props
             .dispatch(registerUser(user))
-            .then(() => this.props.dispatch(login(username, password)));
+            .then(() => this.props.dispatch(login(user.username, password)));
     }
 
     render() {
         return (
             <form
+                id="register"
                 className="registration-form"
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
                 <h2>Register</h2>
+
+                <label htmlFor="username">Username:</label>
+                <Field
+                    component={Input}
+                    type="text"
+                    name="register-username"
+                    validate={[required, nonEmpty, isTrimmed]}
+                />
 
                 <label htmlFor="firstName">First name:</label>
                 <Field 
@@ -45,13 +54,6 @@ export class SignUpForm extends React.Component {
                     component={Input} 
                     type="text" 
                     name="lastName" 
-                    validate={[required, nonEmpty, isTrimmed]}
-                />
-                <label htmlFor="username">Username:</label>
-                <Field
-                    component={Input}
-                    type="text"
-                    name="username"
                     validate={[required, nonEmpty, isTrimmed]}
                 />
                 <label htmlFor="password">Password:</label>
@@ -81,8 +83,7 @@ export class SignUpForm extends React.Component {
                     disabled={this.props.pristine || this.props.submitting}>
                     Register
                 </button>
-                <label>Already Registered?</label>
-                <Link to="/">Login</Link>
+                
             </form>
         );
     }

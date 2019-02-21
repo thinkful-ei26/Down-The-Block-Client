@@ -1,7 +1,10 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
+
 import { addComment, addNewComment } from '../../actions/comments';
 import { updatePost } from '../../actions/posts'; 
+
+import moment from 'moment';
 
 export class PostAddComment extends React.Component {
     constructor(props){
@@ -11,7 +14,9 @@ export class PostAddComment extends React.Component {
     }
     onSubmit(e) {
         e.preventDefault();
-        this.props.dispatch(addComment(this.test, this.props.currentUser.id, this.props.form));   
+        
+        let date = moment().format('LLLL');
+        this.props.dispatch(addComment(this.test, date, this.props.currentUser.id, this.props.form));   
         this.content.value="";    
     }  
 

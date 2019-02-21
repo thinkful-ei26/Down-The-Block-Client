@@ -24,15 +24,7 @@ export const postCommentError = (error) => ({
     error
 });
 
-export const addNewComment = (comments) => {
-    console.log(comments); 
-    return {
-        type:ADD_NEW_COMMENT, 
-        comments
-    }
-};
-
-export const addComment = (content, userId, postId) => (dispatch, getState) => {
+export const addComment = (content, date, userId, postId) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     dispatch(postCommentRequest());
     return (
@@ -44,6 +36,7 @@ export const addComment = (content, userId, postId) => (dispatch, getState) => {
             },
             body: JSON.stringify({
                 content, 
+                date,
                 userId, 
                 postId
             })

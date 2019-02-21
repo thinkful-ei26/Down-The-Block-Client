@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+
 import { submitPost, postBeingEdited, addNewPost } from '../../actions/posts';
 import {todaysDate} from '../common/helper-functions';
+import moment from 'moment';
 
 export class CreatePost extends React.Component{
 
@@ -17,11 +19,8 @@ export class CreatePost extends React.Component{
     e.preventDefault();
     let postId = this.props.editPost ? this.props.editPost.postId : null;
     // let method = this.props.editPost ? 'PUT' : 'POST';
-    const location = {
-      latitude:this.props.coords.latitude, 
-      longitude:this.props.coords.longitude
-    }
-    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: todaysDate(), coordinates: location, audience: this.props.display};
+    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display};
+
     this.props.dispatch(submitPost(postId, values, this.props.coords, this.props.display));
     this.content.value = "";
     this.form.category.value="Other";
