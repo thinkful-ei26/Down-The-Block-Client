@@ -1,5 +1,5 @@
 import React from 'react';
-import {formatLongDate} from '../common/helper-functions';
+import moment from 'moment';
 
 export default class Comment extends React.Component {
   generateComment(comment){
@@ -14,8 +14,8 @@ export default class Comment extends React.Component {
   render(){
     return(
       <div className="comment-content">
-        {/* <p>{formatLongDate(props.date)}</p> */}
         {this.generateComment(this.props)}
+        <strong><h6> {moment(this.props.date, 'LLLL').fromNow()} </h6></strong>
       </div>
     );
   }
