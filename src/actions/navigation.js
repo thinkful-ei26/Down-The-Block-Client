@@ -20,8 +20,7 @@ export const showAnimation = (bool) => ({
     bool
 })
 
-export const focusOn = (form, focus) => ({
+export const focusOn = (focus) => ({
     type: FOCUS_ON,
-    form,
     focus
 })

@@ -14,11 +14,12 @@ export class SignUpForm extends React.Component {
         if(values.img){
             values.img = values.img[0];
         }
-        const {username, password, firstName, lastName, img} = values;
-        const user = {username, password, firstName, lastName, img};
+        const {password, firstName, lastName, img} = values;
+        const user = { password, firstName, lastName, img};
+        user.username = values['register-username'];
         return this.props
             .dispatch(registerUser(user))
-            .then(() => this.props.dispatch(login(username, password)));
+            .then(() => this.props.dispatch(login(user.username, password)));
     }
 
     render() {
@@ -30,6 +31,14 @@ export class SignUpForm extends React.Component {
                     this.onSubmit(values)
                 )}>
                 <h2>Register</h2>
+
+                <label htmlFor="username">Username:</label>
+                <Field
+                    component={Input}
+                    type="text"
+                    name="register-username"
+                    validate={[required, nonEmpty, isTrimmed]}
+                />
 
                 <label htmlFor="firstName">First name:</label>
                 <Field 
@@ -45,13 +54,6 @@ export class SignUpForm extends React.Component {
                     component={Input} 
                     type="text" 
                     name="lastName" 
-                    validate={[required, nonEmpty, isTrimmed]}
-                />
-                <label htmlFor="username">Username:</label>
-                <Field
-                    component={Input}
-                    type="text"
-                    name="username"
                     validate={[required, nonEmpty, isTrimmed]}
                 />
                 <label htmlFor="password">Password:</label>

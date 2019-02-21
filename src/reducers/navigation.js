@@ -9,8 +9,7 @@ const INITIAL_STATE = {
   display: 'neighbors',
   toggleNavbar: false,
   showAnimation: false,
-  focusOn: ""
-  formFocus: "",
+  focusOn: "",
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -34,9 +33,9 @@ export default (state = INITIAL_STATE, action) => {
         showAnimation: action.bool,
       });   
     case FOCUS_ON:
+      console.log(action.focus, action.form)
       return Object.assign({}, state, {
         focusOn: action.focus,
-        formFocus: action.form
       });     
     default:
       return state;

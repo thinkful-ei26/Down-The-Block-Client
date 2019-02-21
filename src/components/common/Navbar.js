@@ -60,13 +60,13 @@ export class Navbar extends React.Component{
             About
           </Link>
           <Link 
-            onClick={()=>this.onClick('login','username')} 
+            onClick={()=>this.onClick('login-username')} 
             className={className} 
             to ="/#login">
             Login
           </Link>
           <Link 
-            onClick={()=>this.onClick('register','username')} 
+            onClick={()=>this.onClick('register-username')} 
             className={className} 
             to ="/#register">
             Register

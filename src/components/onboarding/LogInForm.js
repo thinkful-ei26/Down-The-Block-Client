@@ -8,13 +8,7 @@ import {Link} from 'react-router-dom';
 
 export class LogInForm extends React.Component {
     onSubmit(values) {
-        return this.props.dispatch(login(values.username, values.password));
-    }
-
-    componentDidUpdate(){
-        if(this.props.focusOn==="login"){
-            console.log(this.props)
-        }
+        return this.props.dispatch(login(values['login-username'], values.password));
     }
 
     render() {
@@ -36,12 +30,13 @@ export class LogInForm extends React.Component {
                 )}>
                 <h2>Sign in Below</h2>
                 {error}
-                <label htmlFor="username">Username</label>
+                <label htmlFor="login-username">Username</label>
                 <Field
                     component={Input}
                     ref={input => (this.input = input)}
                     type="text"
-                    name="username"
+                    name="login-username"
+                    id="login-username"
                     validate={[required, nonEmpty]}
                 />
                 <label htmlFor="password">Password</label>
