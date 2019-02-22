@@ -41,7 +41,8 @@ export class Chat extends React.Component {
             <button type="submit">Submit</button>
           </form>
           {this.state.messages.map(message => {
-            return <li className="msg_container">{message}</li>
+            return <li // need to make key
+            className="msg_container">{message}</li>
           })}</div>
       </section>
     );
