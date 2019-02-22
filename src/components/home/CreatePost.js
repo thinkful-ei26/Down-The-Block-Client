@@ -33,14 +33,17 @@ export class CreatePost extends React.Component{
         borderAround: this.props.editPost.category.toLowerCase()
       })
     } 
-    console.log('socket in CREATE:', this.props.socket)
     //listens for the server when the new post has been created
     this.props.socket.on('new_post', post => {
-      console.log('THE POST GOTTEN BACK FROM THE SERVER SOCKET IS', post); 
-      this.props.dispatch(addNewPost(post));
+      console.log('THE POST GOTTEN BACK FROM THE SERVER SOCKET IS', post);
+      if(post){
+        this.props.dispatch(addNewPost(post));
+      } 
     })
     this.props.socket.on('edited_post', post => {
-      this.props.dispatch(updatePost(post));
+      if(post){
+        this.props.dispatch(updatePost(post));
+      }
     })
   }
 
