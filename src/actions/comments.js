@@ -1,12 +1,14 @@
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
-import {updatePost} from './posts';
+import {SubmissionError} from 'redux-form';
 import  
     { 
         POST_COMMENT_REQUEST, 
         POST_COMMENT_SUCCESS, 
-        POST_COMMENT_ERROR, 
-        ADD_NEW_COMMENT 
+        POST_COMMENT_ERROR,  
+        DELETE_COMMENT_REQUEST,
+        DELETE_COMMENT_SUCCESS,
+        DELETE_COMMENT_ERROR
     } 
 from './types'; 
 
@@ -44,13 +46,62 @@ export const addComment = (content, date, userId, postId) => (dispatch, getState
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((post) =>{ 
-            console.log('the response in comments is', post);
+            console.log('the response in comments ACTION is', post);
             dispatch(postCommentSuccess(post));
-            // it gets back the post that was changed, so update that in the posts array? 
-            // dispatch(updatePost(post))
         })
         .catch(err => {
             dispatch(postCommentError(err));
         })
     );
+}
+
+export const deleteCommentRequest = () => ({
+    type: DELETE_COMMENT_REQUEST,
+})
+
+export const deleteCommentSuccess = (commentId) => ({
+  type: DELETE_COMMENT_SUCCESS,
+  commentId
+})
+
+export const deleteCommentError= (error) => ({
+  type: DELETE_COMMENT_ERROR,
+  error
+})
+
+export const deleteComment = (commentId) => (dispatch, getState) =>{
+    dispatch(deleteCommentRequest());
+    const authToken = getState().auth.authToken;
+
+    fetch(`${API_BASE_URL}/comments/${commentId}`, {
+        method: 'DELETE',
+        headers: {
+            // Provide our auth token as credentials
+            Authorization: `Bearer ${authToken}`
+        },
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => {
+        dispatch(deleteCommentSuccess(commentId));
+    })
+    .catch(error => {
+        dispatch(deleteCommentError(error));
+        const {message, location, status} = error;
+        if (status === 400) {
+            console.log(message, location)
+            // Convert errors into SubmissionErrors for Redux Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: message
+                })
+            );
+        }
+        else{
+            return Promise.reject(
+                new SubmissionError({
+                    _error: 'Unable to delete comment, please try again',
+                })
+            );
+        }
+    });
 }
