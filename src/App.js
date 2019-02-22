@@ -10,6 +10,10 @@ import Chat from "./components/home/Chat"
 import About from './components/common/About'
 
 export class App extends React.Component {
+    componentDidMount(){
+        console.log('IN COMP UPDATE FOR APP')
+    }
+
     componentDidUpdate(prevProps) {
         if (!prevProps.loggedIn && this.props.loggedIn) {
             // When we are logged in, refresh the auth token periodically
@@ -41,6 +45,7 @@ export class App extends React.Component {
 
     render() {
         console.log('IN APP PROPS:', this.props);
+        
         return (
             <div className="app">
                 {/* Always show the navbar! */}

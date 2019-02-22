@@ -10,14 +10,17 @@ import EyeAnimation from '../common/EyeAnimation'
 
 export class HomePage extends React.Component{
 
+  // componentDidMount(){
+  //   document.title = 'Home';
+  //   console.log('COMP MOUNT HOME PAGE')
+  // }
+
   componentDidMount(){
     document.title = 'Home';
-  }
-
-  componentWillMount(){
-    if(!this.props.coords){
-      this.props.dispatch(showAnimation(true));
-    }
+    console.log('COMP MOUNT HOME PAGE')
+    // if(!this.props.coords){
+    //   this.props.dispatch(showAnimation(true));
+    // }
   }
 
   componentWillUnmount(){

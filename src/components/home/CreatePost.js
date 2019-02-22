@@ -27,6 +27,7 @@ export class CreatePost extends React.Component{
   }
 
   componentDidMount(){
+    console.log('IN COMPONENT DID MOUNT FOR CREATE POST')
     //if editing, highlight the correct chosen category
     if(this.props.editPost){
       this.setState({
