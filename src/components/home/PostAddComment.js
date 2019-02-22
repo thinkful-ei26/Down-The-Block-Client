@@ -41,7 +41,6 @@ export class PostAddComment extends React.Component {
       }
 
     render() {   
-        console.log(this.props);
         return (
             <form 
                 onSubmit={(e)=> this.onSubmit(e)}

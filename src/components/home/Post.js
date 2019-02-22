@@ -20,7 +20,6 @@ export class Post extends React.Component {
   }
   
   render(){
-    console.log('POST COMPONENT:', this.props)
     return(
       <section className="entire-thread">
         <article className='post'>
