@@ -8,7 +8,6 @@ const initialState={
 
 
 export default (state=initialState, action) => {
-    console.log("IN SOCKET REDUCER, STATE BEING RETURNED IS", state);
     switch (action.type) {	
         default: 
             return state
