@@ -12,15 +12,14 @@ export class Geolocator extends React.Component {
     console.log(prevProps.currentUser);
     if(this.props.coords){
       this.props.dispatch(fetchLocationSuccess(this.props.coords))
-      this.props.dispatch(showAnimation(false));
       if(!prevProps.currentUser.coordinates && (!this.props.currentUser.coordinates || this.props.currentUser.coordinates.automatic === true)){
-        // console.log('PASSED FIRST IF');
-        // if (!this.props.currentUser.coordinates || this.props.currentUser.coordinates.automatic === true){
         console.log('NO LOCATION OR LOCATION SET AUTOMATICALLY');
         this.props.dispatch(setUserCoords(this.props.coords));
+        this.props.dispatch(showAnimation(false));
       } 
     } else if(!this.props.coords && this.props.currentUser.coordinates){
       console.log(this.props);
+      console.log('manual set running');
       this.props.dispatch(fetchLocationSuccess(this.props.currentUser.coordinates));
       this.props.dispatch(showAnimation(false));
     } else {
