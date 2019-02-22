@@ -6,12 +6,6 @@ import { filterPostsBySearch, filterByCategory } from '../common/helper-function
 
 export class PostsList extends React.Component{
   componentDidMount(){
-    // const location = {
-    //   latitude:this.props.coords.latitude, 
-    //   longitude:this.props.coords.longitude
-    // }
-    
-    // console.log(location);
     this.props.dispatch(fetchPosts(this.props.coords, this.props.display));
   }
 

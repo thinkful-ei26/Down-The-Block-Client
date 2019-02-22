@@ -8,7 +8,8 @@ import
         POST_COMMENT_ERROR,  
         DELETE_COMMENT_REQUEST,
         DELETE_COMMENT_SUCCESS,
-        DELETE_COMMENT_ERROR
+        DELETE_COMMENT_ERROR,
+        COMMENT_BEING_EDITED
     } 
 from './types'; 
 
@@ -26,12 +27,16 @@ export const postCommentError = (error) => ({
     error
 });
 
-export const addComment = (content, date, userId, postId) => (dispatch, getState) => {
+export const addComment = (content, date, userId, postId, commentId) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
+    
+    const method = commentId ? "PUT" : "POST";
+    const path = commentId ? `${API_BASE_URL}/comments/${postId}/${commentId}` : `${API_BASE_URL}/comments`; 
+
     dispatch(postCommentRequest());
     return (
-        fetch(`${API_BASE_URL}/comments`, {
-            method: 'POST',
+        fetch(path, {
+            method,
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${authToken}`
@@ -69,11 +74,11 @@ export const deleteCommentError= (error) => ({
   error
 })
 
-export const deleteComment = (commentId) => (dispatch, getState) =>{
+export const deleteComment = (commentId, postId) => (dispatch, getState) =>{
     dispatch(deleteCommentRequest());
     const authToken = getState().auth.authToken;
 
-    fetch(`${API_BASE_URL}/comments/${commentId}`, {
+    fetch(`${API_BASE_URL}/comments/${postId}/${commentId}`, {
         method: 'DELETE',
         headers: {
             // Provide our auth token as credentials
@@ -81,9 +86,6 @@ export const deleteComment = (commentId) => (dispatch, getState) =>{
         },
     })
     .then(res => normalizeResponseErrors(res))
-    .then(() => {
-        dispatch(deleteCommentSuccess(commentId));
-    })
     .catch(error => {
         dispatch(deleteCommentError(error));
         const {message, location, status} = error;
@@ -105,3 +107,8 @@ export const deleteComment = (commentId) => (dispatch, getState) =>{
         }
     });
 }
+
+export const commentBeingEdited= (comment) => ({
+    type: COMMENT_BEING_EDITED,
+    comment,
+})
