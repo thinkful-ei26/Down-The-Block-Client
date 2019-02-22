@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import socketClient from "socket.io-client"
-import {API_BASE_URL} from '../../config'
+import { API_BASE_URL } from '../../config'
 
 import './Chat.css'
 
@@ -19,7 +19,7 @@ export class Chat extends React.Component {
 
     //user_id of the person your chatting with
     //make a subroom
-     this.socket = socketClient(API_BASE_URL);
+    this.socket = socketClient(API_BASE_URL);
 
     //send the message as well as the coordinates to the client.
     //then decide inside the function if the coordinates match up to display the message. if not dont display it
@@ -31,7 +31,7 @@ export class Chat extends React.Component {
     return (
       <section className="chat">
         <div className="chat"> <h1>Chat Messages</h1>
-          <form className="form" onSubmit={e => {
+          <form autocomplete="off" className="form" onSubmit={e => {
             e.preventDefault()
             this.socket.emit("chat-message", e.currentTarget.message.value)
             console.log("submitted")
