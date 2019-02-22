@@ -2,7 +2,9 @@ import {
     DISPLAY,
     TOGGLE_NAVBAR,
     SHOW_ANIMATION,
-    FOCUS_ON
+    FOCUS_ON, 
+    DESTROY_SOCKET,
+    CREATE_SOCKET
 } from './types';
 
 export const display = (component) => ({
@@ -23,4 +25,12 @@ export const showAnimation = (bool) => ({
 export const focusOn = (focus) => ({
     type: FOCUS_ON,
     focus
+})
+
+export const destroySocket = () => ({
+    type: DESTROY_SOCKET, 
+})
+
+export const createSocket = () => ({
+    type: CREATE_SOCKET 
 })
