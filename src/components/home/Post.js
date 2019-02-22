@@ -60,7 +60,8 @@ export class Post extends React.Component {
 
         </article>
         <PostComments comments={this.props.comments}/>
-        <PostAddComment form={this.props.postId}/>
+       {!this.props.commentBeingEdited && <PostAddComment form={this.props.postId}/>
+       }
       </section>
     );
   }
@@ -71,6 +72,7 @@ const mapStateToProps = state => {
     loggedInUserId: state.auth.currentUser.id, 
     coords: state.geolocation.coords,
     postsArray: state.postsArray, 
+    commentBeingEdited: state.comments.commentBeingEdited,
     socket:state.socket.socket
   }
 };

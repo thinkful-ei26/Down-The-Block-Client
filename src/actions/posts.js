@@ -201,10 +201,9 @@ import {
       post
   })
 
-  const mapStateToProps = state => {
-    //   console.log('STATE', state);
-      return {
-          socket:state.socket
-      }
-  }
-  export default connect(mapStateToProps)(fetchPosts);
+//   const mapStateToProps = state => {
+//       return {
+//           socket:state.socket
+//       }
+//   }
+//   export default connect(mapStateToProps)(fetchPosts);
