@@ -31,7 +31,7 @@ export class Chat extends React.Component {
     return (
       <section>
         <div className="chat"> <h1>Chat Messages</h1>
-          <form autocomplete="off" className="chat-form" onSubmit={e => {
+          <form autoComplete="off" className="chat-form" onSubmit={e => {
             e.preventDefault()
             this.socket.emit("chat-message", e.currentTarget.message.value)
             console.log("submitted")
