@@ -93,7 +93,7 @@ export default (state = INITIAL_STATE, action) => {
       console.log("IN ADD NEW POST REDUCER, STATE.POSTS IS", state.posts);
       console.log("IN  ADD NEW POST REDUCER, THIS IS WHATS GETTING CHANGED TO", [...state.posts, action.post ]) 
       return Object.assign({}, state, {
-        posts: [...state.posts, action.post ] 
+        posts: [action.post, ...state.posts ] 
       })
     default:
       return state;
