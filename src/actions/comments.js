@@ -69,11 +69,11 @@ export const deleteCommentError= (error) => ({
   error
 })
 
-export const deleteComment = (commentId) => (dispatch, getState) =>{
+export const deleteComment = (commentId, postId) => (dispatch, getState) =>{
     dispatch(deleteCommentRequest());
     const authToken = getState().auth.authToken;
 
-    fetch(`${API_BASE_URL}/comments/${commentId}`, {
+    fetch(`${API_BASE_URL}/comments/${postId}/${commentId}`, {
         method: 'DELETE',
         headers: {
             // Provide our auth token as credentials
@@ -81,9 +81,6 @@ export const deleteComment = (commentId) => (dispatch, getState) =>{
         },
     })
     .then(res => normalizeResponseErrors(res))
-    .then(() => {
-        dispatch(deleteCommentSuccess(commentId));
-    })
     .catch(error => {
         dispatch(deleteCommentError(error));
         const {message, location, status} = error;

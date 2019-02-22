@@ -19,9 +19,9 @@ class Comment extends React.Component {
     });
   }
 
-  delete(commentId){
+  delete(commentId, postId){
     if(this.props.userId.id===this.props.loggedInUserId){
-      return <button onClick={()=>this.props.dispatch(deleteComment(commentId))} >Delete</button>
+      return <button onClick={()=>this.props.dispatch(deleteComment(commentId, postId))} >Delete</button>
     }
   }
 
@@ -31,7 +31,7 @@ class Comment extends React.Component {
       <div className="comment-content">
         {this.generateComment(this.props)}
         <strong><h6> {moment(this.props.date, 'LLLL').fromNow()} </h6></strong>
-        {this.delete(this.props.id)}
+        {this.delete(this.props.id, this.props.postId)}
       </div>
     );
   }
