@@ -6,6 +6,9 @@ import {connect} from 'react-redux';
 import './main.css'
 
 export class Forum extends React.Component{
+  componentDidMount(){
+    console.log('IN COMP DID MOUNT FOR FORUM')
+  }
   whatToDisplay(){
     console.log('POST BEING EDITED IS', this.props.postBeingEdited)
       if(this.props.postBeingEdited){
