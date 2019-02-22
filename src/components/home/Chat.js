@@ -24,16 +24,24 @@ export class Chat extends React.Component {
     //send the message as well as the coordinates to the client.
     //then decide inside the function if the coordinates match up to display the message. if not dont display it
     this.socket.on("chat-message", (msg) => {
+      if(msg===""){
+        return
+      }
       this.setState({ messages: [...this.state.messages, msg] })
     })
+  }
+
+  componentDidMount(){
+    console.log("mounted")
   }
   render() {
     return (
       <section>
         <div className="chat"> <h1>Chat Messages</h1>
-          <form autoComplete="off" className="chat-form" onSubmit={e => {
+          <form autoComplete="off" id="chat-form" className="chat-form" onSubmit={e => {
             e.preventDefault()
             this.socket.emit("chat-message", e.currentTarget.message.value)
+            document.getElementById("chat-form").reset();
             console.log("submitted")
           }} >
             <input className="type_msg" type="text" placeholder="Type your message" name="message"
