@@ -29,14 +29,14 @@ export class Chat extends React.Component {
   }
   render() {
     return (
-      <section className="chat">
+      <section>
         <div className="chat"> <h1>Chat Messages</h1>
-          <form autocomplete="off" className="form" onSubmit={e => {
+          <form autocomplete="off" className="chat-form" onSubmit={e => {
             e.preventDefault()
             this.socket.emit("chat-message", e.currentTarget.message.value)
             console.log("submitted")
           }} >
-            <input className="text-input" className="type_msg" type="text" placeholder="Type your message" name="message"
+            <input className="type_msg" type="text" placeholder="Type your message" name="message"
             />
             <button type="submit">Submit</button>
           </form>

@@ -1,11 +1,11 @@
 
-.form {
+.chat-form {
   position: absolute;
     bottom: 10px;
     padding-left: 10px;
     display: flex;
     width: 70%;
 }
-.text-input {
-  width: "-webkit-fill-available"
+.type_msg {
+  width: 100%
 }
