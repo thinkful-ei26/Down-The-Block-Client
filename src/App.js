@@ -40,6 +40,7 @@ export class App extends React.Component {
     }
 
     render() {
+        console.log('IN APP PROPS:', this.props);
         return (
             <div className="app">
                 {/* Always show the navbar! */}
