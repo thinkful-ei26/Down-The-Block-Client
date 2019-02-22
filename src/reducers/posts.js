@@ -89,9 +89,8 @@ export default (state = INITIAL_STATE, action) => {
       posts
     })
     case ADD_NEW_POST: 
-      // let posts = [...state.posts, action.post ] 
       return Object.assign({}, state, {
-        posts: [...state.posts, action.post ] 
+        posts: [action.post, ...state.posts ] 
       })
     default:
       return state;

@@ -19,7 +19,6 @@ import {
   import {SubmissionError} from 'redux-form';
   import {display} from './navigation';
   import { connect } from 'react-redux';
-  import { socket } from '../reducers/socket'; 
 
   export const fetchPostsRequest = () => ({
       type: FETCH_POSTS_REQUEST,
@@ -93,7 +92,6 @@ import {
       let stringifiedObj = JSON.stringify(simplifiedGeoObject);
   
       const path = postId ? `${API_BASE_URL}/posts/${postId}` : `${API_BASE_URL}/posts/${stringifiedObj}`; 
-  
   
       return fetch(path, { 
           method,
