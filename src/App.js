@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
 import LandingPage from './components/onboarding/LandingPage';
 import HomePage from './components/home/HomePage';
-import RegistrationPage from './components/onboarding/SignupPage';
+import SettingsPage from './components/settings/SettingsPage';
 import {refreshAuthToken} from './actions/auth';
 import Navbar from './components/common/Navbar';
 import Chat from "./components/home/Chat"
-import AboutPage from './components/common/AboutPage'
+import About from './components/common/About'
 
 export class App extends React.Component {
     componentDidUpdate(prevProps) {
@@ -46,8 +46,8 @@ export class App extends React.Component {
                 <Route path="/" component={Navbar} />
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/home" component={HomePage}></Route>
-                <Route exact path="/about" component={AboutPage}></Route>
-                <Route exact path="/register" component={RegistrationPage} />
+                <Route exact path="/about" component={About}></Route>
+                <Route exact path="/settings" component={SettingsPage}></Route>
             </div>
         );
     }

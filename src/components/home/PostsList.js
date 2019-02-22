@@ -6,7 +6,13 @@ import { filterPostsBySearch, filterByCategory } from '../common/helper-function
 
 export class PostsList extends React.Component{
   componentDidMount(){
-    this.props.dispatch(fetchPosts(this.props.coords));
+    // const location = {
+    //   latitude:this.props.coords.latitude, 
+    //   longitude:this.props.coords.longitude
+    // }
+    
+    // console.log(location);
+    this.props.dispatch(fetchPosts(this.props.coords, this.props.display));
   }
 
   generatePosts(){
@@ -32,12 +38,17 @@ export class PostsList extends React.Component{
   }
 }
 
-const mapStateToProps = state => ({
-  posts: state.posts.posts,
-  coords: state.geolocation.coords,
-  searchTerm: state.posts.searchTerm,
-  categoryFilter: state.posts.categoryFilter,
-});
+const mapStateToProps = state => {
+  console.log("IN POSTS LIST STATE, ARR OF POSTS", state.posts.posts)
+  return { 
+    posts: state.posts.posts,
+    coords: state.geolocation.coords,
+    searchTerm: state.posts.searchTerm,
+    categoryFilter: state.posts.categoryFilter,
+    display: state.nav.display, 
+    socket:state.socket.socket, 
+  }
+};
 
 export default connect(mapStateToProps)(PostsList)
 

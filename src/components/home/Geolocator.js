@@ -1,33 +1,51 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {geolocated} from 'react-geolocated';
-import { fetchLocationSuccess } from '../../actions/geolocation';
+import { fetchLocationSuccess, fetchLocationError } from '../../actions/geolocation';
 import { showAnimation } from '../../actions/navigation';
+import {setUserCoords} from '../../actions/users';
 
 export class Geolocator extends React.Component {
 
-  componentDidUpdate(){
-    this.props.dispatch(fetchLocationSuccess(this.props.coords));
-    this.props.dispatch(showAnimation(false));
-  }
+  componentDidUpdate(prevProps){
+    console.log(this.props.currentUser);
+    console.log(prevProps.currentUser);
+    if(this.props.coords){
+      this.props.dispatch(fetchLocationSuccess(this.props.coords))
+      this.props.dispatch(showAnimation(false));
+      if(!prevProps.currentUser.coordinates && (!this.props.currentUser.coordinates || this.props.currentUser.coordinates.automatic === true)){
+        // console.log('PASSED FIRST IF');
+        // if (!this.props.currentUser.coordinates || this.props.currentUser.coordinates.automatic === true){
+        console.log('NO LOCATION OR LOCATION SET AUTOMATICALLY');
+        this.props.dispatch(setUserCoords(this.props.coords));
+      } 
+    } else if(!this.props.coords && this.props.currentUser.coordinates){
+      console.log(this.props);
+      this.props.dispatch(fetchLocationSuccess(this.props.currentUser.coordinates));
+      this.props.dispatch(showAnimation(false));
+    } else {
+      console.log("IN COMP DID UPDATE GEOLOCATOR")
+      this.props.dispatch(fetchLocationError());
+      // this.props.dispatch(showAnimation(true));
+    }
+  } 
 
   componentDidMount(){
     if(!this.props.coords){
-      this.props.dispatch(showAnimation(true));
+      console.log("IN COMP DID MOUNT GEOLOCATOR")
+      // this.props.dispatch(showAnimation(true));
     }
   }
 
   render() {
     return( 
-      !this.props.isGeolocationAvailable 
-      ? <div>Your browser does not support geolocation</div>
-      : !this.props.isGeolocationEnabled
-        ?<div>Geolocation is not enabled</div>
-        : this.props.coords
-          ? null
-          : <div>Getting the location data&hellip; </div>
+      null
     )
   }
 }
 
-export default geolocated()(connect()(Geolocator));
+const mapStateToProps = state => ({
+  currentUser: state.auth.currentUser
+});
+
+export default geolocated()(connect(mapStateToProps)(Geolocator));

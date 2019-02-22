@@ -1,13 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PostComments from './PostComments';
-import {formatLongDate} from '../common/helper-functions';
-import { postBeingEdited, deletePost } from '../../actions/posts';
+import { postBeingEdited, deletePostSuccess, deletePost } from '../../actions/posts';
 import './post.css';
-import { PostAddComment } from './PostAddComment';
-import { fetchPosts } from '../../actions/posts';
+import PostAddComment from './PostAddComment';
 
 export class Post extends React.Component {
+
+  componentDidMount(){
+    this.props.socket.on('delete_post', post => {
+      console.log('DELETED POST GOTTEN BACK FROM EMIT', post)
+      this.props.dispatch(deletePostSuccess(post.id));
+    })
+  }
 
   edit(postId, content, category){
     if(this.props.userId.id===this.props.loggedInUserId){
@@ -25,12 +30,34 @@ export class Post extends React.Component {
     return(
       <section className="entire-thread">
         <article className='post'>
-          <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
-          {this.edit(this.props.postId, this.props.content, this.props.category)}
-          {this.delete(this.props.postId)}
-          <h3>{this.props.userId.firstName}</h3>
-          <h6>{formatLongDate(this.props.date)}</h6>
-          <p>{this.props.content}</p>
+          <div className="top-post">
+            <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
+            <div className="options">
+              {this.delete(this.props.postId)}
+              {this.edit(this.props.postId, this.props.content, this.props.category)}
+            </div>
+          </div>
+            
+          <div className="post-info">
+            <div className="profile-photo-avatar">
+            {!this.props.userId.photo ? 
+              <p className="initials">
+                {this.props.userId.firstName[0]}
+                {this.props.userId.lastName[0]}
+              </p>
+              :
+              <img className="profile-photo" src={this.props.userId.photo.url} alt="profile"/> 
+            }
+            </div>
+
+            <div className="name-and-date">
+              <h3 className="post-user-name">{this.props.userId.firstName}</h3>
+              <h6>{this.props.date}</h6>
+            </div> 
+          </div>
+
+          <p className="post-content">{this.props.content}</p>       
+
         </article>
         <PostComments comments={this.props.comments}/>
         <PostAddComment form={this.props.postId}/>
@@ -43,7 +70,8 @@ const mapStateToProps = state => {
   return {
     loggedInUserId: state.auth.currentUser.id, 
     coords: state.geolocation.coords,
-    postsArray: state.postsArray
+    postsArray: state.postsArray, 
+    socket:state.socket.socket
   }
 };
 

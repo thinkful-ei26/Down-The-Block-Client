@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {display} from '../../actions/navigation'
 import './sidebar.css'
+import { fetchPosts } from '../../actions/posts';
 
 class Sidebar extends React.Component{
   render(){
@@ -9,8 +10,8 @@ class Sidebar extends React.Component{
       <aside className="sidebar">
         <nav>
           <h4>Forums</h4>
-          <button onClick={()=>this.props.dispatch(display('neighbor-forum'))}>Neighors</button>
-          <button onClick={()=>this.props.dispatch(display('city-forum'))} >City</button>
+          <button onClick={()=>this.props.dispatch(fetchPosts(this.props.coords, 'neighbors'))}>Neighors</button>
+          <button onClick={()=>this.props.dispatch(fetchPosts(this.props.coords, 'city'))} >City</button>
           <h4>Chats</h4>
           <button  onClick={()=>this.props.dispatch(display('chat'))}>Users</button>
         </nav>
@@ -18,5 +19,9 @@ class Sidebar extends React.Component{
     );
   }
 }
+const mapStateToProps = state => ({
+  coords: state.geolocation.coords,
+  display: state.nav.display 
+});
 
-export default connect()(Sidebar)
+export default connect(mapStateToProps)(Sidebar)

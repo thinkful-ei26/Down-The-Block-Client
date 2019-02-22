@@ -142,6 +142,12 @@ export function filterPostsBySearch(terms, posts){
 }
 
 export function filterByCategory(filter, posts){
-  console.log(posts);
   return posts.filter(post=>post.props.category===filter);
+}
+
+export function formatName(str) {
+  //make it all lower case first
+  str = str.toLowerCase();
+  //make the first letter capital: 
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
