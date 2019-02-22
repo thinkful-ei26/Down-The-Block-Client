@@ -111,6 +111,7 @@ class AddressForm extends React.Component {
   };
  
   handleSelect = address => {
+    this.setState({ address });
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       // .then(googleCoords => console.log('Success', googleCoords))
@@ -124,7 +125,6 @@ class AddressForm extends React.Component {
         this.props.dispatch(fetchAddressSuccess(coords));
         this.props.dispatch(setUserCoords(coords));
       })
-      // .then(googleCoords => console.log('Success', googleCoords))
       .catch(error => console.error('Error', error));
   };
  
@@ -149,10 +149,14 @@ class AddressForm extends React.Component {
                 const className = suggestion.active
                   ? 'suggestion-item--active'
                   : 'suggestion-item';
+                  const style = suggestion.active
+                  ? { backgroundColor: '#89cff0', cursor: 'pointer' }
+                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {
                       className,
+                      style
                     })}
                   >
                     <span>{suggestion.description}</span>
