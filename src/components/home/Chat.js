@@ -8,9 +8,15 @@ export class Chat extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      messages: []
+      messages: [] //saving the chat to mongoDB
     }
+    //get users first name
+    //display it before the message
     this.socket = socketClient(API_BASE_URL)
+    //user_id of the person your chatting with
+    //make a subroom
+
+
     this.socket.on("chat-message", (msg) => {
       this.setState({ messages: [...this.state.messages, msg] })
     })

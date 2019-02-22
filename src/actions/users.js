@@ -2,13 +2,19 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {refreshProfileAuthToken} from './auth';
+<<<<<<< HEAD
 import {UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR} from './types';
+=======
+import {UPDATED_USER_SUCCESS, 
+        CHANGE_SUCCESS_MESSAGE, 
+        USER_COORDS_REQUEST,
+        USER_COORDS_SUCCESS,
+        USER_COORDS_ERROR} from './types';
+>>>>>>> 44809a35d4ac4bda8724842664566eba19cad2f4
 
 export const registerUser = user => dispatch => {
     let formData = new FormData();
 
-    console.log('the photo is', user.img);
-    
     Object.keys(user).forEach(item=> {
         formData.append(item, (user[item]))
     });
@@ -156,6 +162,7 @@ export const updateProfilePhoto = photo => (dispatch, getState) => {
         });
 };
 
+<<<<<<< HEAD
 export const fetchUsersRequest = () => ({
     type: FETCH_USERS_REQUEST,
 })
@@ -194,3 +201,58 @@ export const fetchUsers = (coords) => (dispatch, getState) => {
             console.log(error);
         });
 };
+=======
+export const userCoordsRequest = () => ({
+    type: USER_COORDS_REQUEST
+});
+
+export const userCoordsSuccess = user => ({
+    type: USER_COORDS_SUCCESS,
+    user
+});
+
+export const userCoordsError = error => ({
+    type: USER_COORDS_ERROR,
+    error
+})
+
+export const setUserCoords = (coords) => (dispatch, getState) => {
+    dispatch(userCoordsRequest());
+    const authToken = getState().auth.authToken;
+
+    let simplifiedGeoObject = {
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+    };
+        
+    if (coords.automatic === false){
+        simplifiedGeoObject.automatic = false;
+    } else { 
+        simplifiedGeoObject.automatic = true
+    }
+    
+    let stringifiedObj = JSON.stringify(simplifiedGeoObject);
+
+    console.log(stringifiedObj);
+
+    const path = `${API_BASE_URL}/auth/users/location/${stringifiedObj}`; 
+
+    return fetch(path, { 
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(user => {
+        dispatch(userCoordsSuccess(user));
+        // dispatch(fetchPosts(coords, forum));
+    })
+    .catch(error => {
+        dispatch(userCoordsError(error))
+    })
+}
+>>>>>>> 44809a35d4ac4bda8724842664566eba19cad2f4

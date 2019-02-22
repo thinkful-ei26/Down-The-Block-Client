@@ -11,13 +11,16 @@ import {
     DELETE_POST_REQUEST,
     DELETE_POST_SUCCESS,
     DELETE_POST_ERROR,
-    UPDATED_POST
+    UPDATED_POST, 
+    ADD_NEW_POST
   } from './types';
   import {API_BASE_URL} from '../config';
   import {normalizeResponseErrors} from './utils';
   import {SubmissionError} from 'redux-form';
   import {display} from './navigation';
-  
+  import { connect } from 'react-redux';
+  import { socket } from '../reducers/socket'; 
+
   export const fetchPostsRequest = () => ({
       type: FETCH_POSTS_REQUEST,
   })
@@ -52,6 +55,7 @@ import {
           .then(res => res.json())
           .then(posts => {
               console.log('THE POSTS GOTTEN BACK ARE', posts)
+
               dispatch(fetchPostsSuccess(posts));
           })
           .catch(error => {
@@ -71,6 +75,11 @@ import {
     type: CREATE_POST_ERROR,
     error
   })
+
+  export const addNewPost = (post) => ({
+      type:ADD_NEW_POST, 
+      post
+  });
   
   export const submitPost = (postId, values, coords, forum) => (dispatch, getState) =>{
       dispatch(createPostRequest());
@@ -96,10 +105,12 @@ import {
           body: JSON.stringify(values)
       })
       .then(res => normalizeResponseErrors(res))
-      .then(res => res.json())
+      .then(res => { 
+         return res.json()
+        })
       .then(() => {
           dispatch(createPostSuccess());
-          dispatch(fetchPosts(coords, forum));
+        //   dispatch(fetchPosts(coords, forum));
       })
       .catch(error => {
           dispatch(createPostError(error));
@@ -194,3 +205,11 @@ import {
       type: UPDATED_POST,
       post
   })
+
+  const mapStateToProps = state => {
+      console.log('STATE', state);
+      return {
+          socket:state.socket
+      }
+  }
+  export default connect(mapStateToProps)(fetchPosts);

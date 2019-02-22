@@ -1,6 +1,9 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
-import { addComment } from '../../actions/comments';
+
+import { addComment, addNewComment } from '../../actions/comments';
+import { updatePost } from '../../actions/posts'; 
+
 import moment from 'moment';
 
 export class PostAddComment extends React.Component {
@@ -28,8 +31,17 @@ export class PostAddComment extends React.Component {
           this.test = this.content.value + ' <br/> ';
         }
     }
+    componentDidMount(){
+        console.log('socket in COMMENT:', this.props.socket)
+        //listens for the server when the new post has been created
+        this.props.socket.on('new_comment', post => {
+          console.log(post); 
+          this.props.dispatch(updatePost(post));
+        })
+      }
 
     render() {   
+        console.log(this.props);
         return (
             <form 
                 onSubmit={(e)=> this.onSubmit(e)}
@@ -64,10 +76,13 @@ export class PostAddComment extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state); 
     return {
         currentUser: state.auth.currentUser,
         coords: state.geolocation.coords,
-        postsArray: state.posts.posts  
+        postsArray: state.posts.posts, 
+        socket:state.socket.socket, 
+        comments:state.comment
     }
   };
   

@@ -5,7 +5,8 @@ import
     { 
         POST_COMMENT_REQUEST, 
         POST_COMMENT_SUCCESS, 
-        POST_COMMENT_ERROR 
+        POST_COMMENT_ERROR, 
+        ADD_NEW_COMMENT 
     } 
 from './types'; 
 
@@ -46,7 +47,7 @@ export const addComment = (content, date, userId, postId) => (dispatch, getState
             console.log('the response in comments is', post);
             dispatch(postCommentSuccess(post));
             // it gets back the post that was changed, so update that in the posts array? 
-            dispatch(updatePost(post))
+            // dispatch(updatePost(post))
         })
         .catch(err => {
             dispatch(postCommentError(err));

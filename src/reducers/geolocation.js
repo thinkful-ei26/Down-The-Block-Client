@@ -3,7 +3,8 @@ import {
   FETCH_LOCATION_ERROR, 
   FETCH_ADDRESS_REQUEST,
   FETCH_ADDRESS_SUCCESS,
-  FETCH_ADDRESS_ERROR } from '../actions/types';
+  FETCH_ADDRESS_ERROR,
+} from '../actions/types';
 
 const initialState = {
   coords: null,

@@ -20,6 +20,7 @@ export class Post extends React.Component {
   }
   
   render(){
+    console.log('POST COMPONENT:', this.props)
     return(
       <section className="entire-thread">
         <article className='post'>
@@ -63,7 +64,7 @@ const mapStateToProps = state => {
   return {
     loggedInUserId: state.auth.currentUser.id, 
     coords: state.geolocation.coords,
-    postsArray: state.postsArray
+    postsArray: state.postsArray, 
   }
 };
 
