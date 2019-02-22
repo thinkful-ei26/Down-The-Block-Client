@@ -1,11 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PostComments from './PostComments';
-import { postBeingEdited, deletePost } from '../../actions/posts';
+import { postBeingEdited, deletePostSuccess, deletePost } from '../../actions/posts';
 import './post.css';
 import PostAddComment from './PostAddComment';
 
 export class Post extends React.Component {
+
+  componentDidMount(){
+    this.props.socket.on('delete_post', post => {
+      console.log('DELETED POST GOTTEN BACK FROM EMIT', post)
+      this.props.dispatch(deletePostSuccess(post.id));
+    })
+  }
 
   edit(postId, content, category){
     if(this.props.userId.id===this.props.loggedInUserId){
@@ -20,7 +27,6 @@ export class Post extends React.Component {
   }
   
   render(){
-    console.log('POST COMPONENT:', this.props)
     return(
       <section className="entire-thread">
         <article className='post'>
@@ -65,6 +71,7 @@ const mapStateToProps = state => {
     loggedInUserId: state.auth.currentUser.id, 
     coords: state.geolocation.coords,
     postsArray: state.postsArray, 
+    socket:state.socket.socket
   }
 };
 

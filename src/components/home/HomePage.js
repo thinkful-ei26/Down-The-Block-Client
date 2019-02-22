@@ -16,7 +16,6 @@ export class HomePage extends React.Component{
 
   componentWillMount(){
     if(!this.props.coords){
-      console.log("IN COMP WILL MOUNT HOME PAGE")
       this.props.dispatch(showAnimation(true));
     }
   }
@@ -27,7 +26,6 @@ export class HomePage extends React.Component{
 
   render(){
     console.log(this.props.geoError);
-    console.log('SHOWANIMATION IS', this.props.showAnimation)
     return(
       <div className="home">
         <Geolocator/>

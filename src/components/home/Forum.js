@@ -7,6 +7,7 @@ import './main.css'
 
 export class Forum extends React.Component{
   whatToDisplay(){
+    console.log('POST BEING EDITED IS', this.props.postBeingEdited)
       if(this.props.postBeingEdited){
         return (
           <div className="modal">
@@ -27,7 +28,6 @@ export class Forum extends React.Component{
   }
 
   render(){
-    console.log('SHOWANIMATION IS', this.props.showAnimation)
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />

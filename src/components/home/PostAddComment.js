@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 
-import { addComment, addNewComment } from '../../actions/comments';
+import { addComment } from '../../actions/comments';
 import { updatePost } from '../../actions/posts'; 
 
 import moment from 'moment';
@@ -41,7 +41,6 @@ export class PostAddComment extends React.Component {
       }
 
     render() {   
-        console.log(this.props);
         return (
             <form 
                 onSubmit={(e)=> this.onSubmit(e)}

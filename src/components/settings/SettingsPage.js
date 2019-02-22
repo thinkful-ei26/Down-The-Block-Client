@@ -32,12 +32,9 @@ export class SettingsPage extends React.Component{
       return this.props.dispatch(updateProfilePhoto(updatedPhoto));
     // }
     }
-    console.log('SUBMIT PHOTO', this.img.files);
-
   }
 
   render(){
-    console.log('USERS PHOTO', this.props.currentUser.photo.url)
     return(
       <div className="settings">
         <main className="settings-main">

@@ -51,7 +51,6 @@ export default function reducer(state = initialState, action) {
             error: action.error
         });
     } else if (action.type=== UPDATED_USER_SUCCESS){
-        console.log('IN REDUCER', action.updatedUser);
         return Object.assign({}, state, {
             currentUser: action.updatedUser,
             successMessage: action.message,
@@ -89,7 +88,6 @@ export default function reducer(state = initialState, action) {
             error: action.error
           })
       } else if(action.type === USER_COORDS_SUCCESS){
-        console.log('IN REDUCER', action.user);
           return Object.assign({}, state, {
               currentUser: action.user,
               error: null,

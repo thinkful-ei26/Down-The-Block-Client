@@ -13,6 +13,5 @@ export default combineReducers({
   posts,
   geolocation,
   socket,
-  // comments,
   form: formReducer,
 });
