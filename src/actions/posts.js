@@ -155,9 +155,9 @@ import {
           },
       })
       .then(res => normalizeResponseErrors(res))
-      .then(() => {
-          dispatch(deletePostSuccess(postId));
-      })
+    //   .then(() => {
+    //       dispatch(deletePostSuccess(postId));
+    //   })
       .catch(error => {
           dispatch(deletePostError(error));
           const {message, location, status} = error;

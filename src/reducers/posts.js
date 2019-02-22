@@ -74,6 +74,7 @@ export default (state = INITIAL_STATE, action) => {
         loading: true 
       })      
     case DELETE_POST_SUCCESS:
+      console.log('IN DELETE SUCCESS', action.postId)
       return Object.assign({}, state, {
         loading: false,
         error: null,
