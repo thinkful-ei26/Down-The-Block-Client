@@ -7,6 +7,12 @@ import PostAddComment from './PostAddComment';
 
 export class Post extends React.Component {
 
+  componentDidMount(){
+    this.props.socket.on('delete_post', post => {
+      this.props.dispatch(deletePost(post.id));
+    })
+  }
+
   edit(postId, content, category){
     if(this.props.userId.id===this.props.loggedInUserId){
       return <button onClick={()=>this.props.dispatch(postBeingEdited({postId, content, category}))} >Edit</button>
@@ -64,6 +70,7 @@ const mapStateToProps = state => {
     loggedInUserId: state.auth.currentUser.id, 
     coords: state.geolocation.coords,
     postsArray: state.postsArray, 
+    socket:state.socket.socket
   }
 };
 
