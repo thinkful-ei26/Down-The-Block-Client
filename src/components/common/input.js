@@ -6,9 +6,7 @@ import { focusOn} from '../../actions/navigation';
 export class Input extends React.Component {
     componentDidUpdate(prevProps) {
         //focus on form when clicked
-        console.log('id', this.input.id, 'focus', this.props.focusOn)
         if(this.input.id===this.props.focusOn){
-            console.log('here')
             this.input.focus();
             this.props.dispatch(focusOn(""));
         }

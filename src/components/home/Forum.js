@@ -27,7 +27,6 @@ export class Forum extends React.Component{
   }
 
   render(){
-    console.log('SHOWANIMATION IS', this.props.showAnimation)
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />

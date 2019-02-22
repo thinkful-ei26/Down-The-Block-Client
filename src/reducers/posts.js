@@ -25,6 +25,7 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
+  console.log("IN POSTS REDUCER, ACTION TYPE IS", action.type)
   switch (action.type) {
     case FETCH_POSTS_REQUEST:
       return Object.assign({}, state, {
@@ -89,7 +90,6 @@ export default (state = INITIAL_STATE, action) => {
       posts
     })
     case ADD_NEW_POST: 
-      // let posts = [...state.posts, action.post ] 
       return Object.assign({}, state, {
         posts: [...state.posts, action.post ] 
       })

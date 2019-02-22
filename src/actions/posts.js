@@ -44,7 +44,6 @@ import {
         longitude: coords.longitude
       }
       let stringifiedObj = JSON.stringify(simplifiedGeoObject);
-      console.log(stringifiedObj);
       fetch(`${API_BASE_URL}/posts/${stringifiedObj}/${forum}`, {
           method: 'GET',
           headers: {
@@ -54,8 +53,7 @@ import {
           .then(res => normalizeResponseErrors(res))
           .then(res => res.json())
           .then(posts => {
-              console.log('THE POSTS GOTTEN BACK ARE', posts)
-
+              console.log('THE POSTS GOTTEN BACK IN FETCH POSTS ARE', posts)
               dispatch(fetchPostsSuccess(posts));
           })
           .catch(error => {
@@ -207,7 +205,7 @@ import {
   })
 
   const mapStateToProps = state => {
-      console.log('STATE', state);
+    //   console.log('STATE', state);
       return {
           socket:state.socket
       }

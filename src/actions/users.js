@@ -15,10 +15,6 @@ export const registerUser = user => dispatch => {
         formData.append(item, (user[item]))
     });
 
-    for (let pair of formData.entries()) {
-        console.log('DATA', pair[0]+ ', ' + pair[1]); 
-    }
-
     return fetch(`${API_BASE_URL}/auth/users`, {
         method: 'POST',
         body: formData
@@ -127,14 +123,8 @@ export const updatePassword = user => (dispatch, getState) => {
 export const updateProfilePhoto = photo => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     let formData = new FormData();
-
-    console.log('photo is', photo)
     
     formData.append('photo', photo)
-
-    for (let pair of formData.entries()) {
-        console.log('DATA', pair[0]+ ', ' + pair[1]); 
-    }
 
 
     return fetch(`${API_BASE_URL}/auth/users/photo`, {
@@ -188,8 +178,6 @@ export const setUserCoords = (coords) => (dispatch, getState) => {
     }
     
     let stringifiedObj = JSON.stringify(simplifiedGeoObject);
-
-    console.log(stringifiedObj);
 
     const path = `${API_BASE_URL}/auth/users/location/${stringifiedObj}`; 
 

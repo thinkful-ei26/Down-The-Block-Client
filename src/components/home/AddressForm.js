@@ -129,8 +129,6 @@ class AddressForm extends React.Component {
   };
  
   render() {
-    console.log(this.props);
-    console.log(this.state);
     return (
       <PlacesAutocomplete
         value={this.state.address}
