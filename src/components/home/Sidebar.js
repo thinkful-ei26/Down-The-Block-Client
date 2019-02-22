@@ -25,7 +25,7 @@ class Sidebar extends React.Component{
   }
 
  render(){
-   console.log('users are', this.props.users)
+   console.log('IN SIDEBAR users are', this.props.users)
     return(
       <aside className="sidebar">
         <nav>

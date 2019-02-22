@@ -181,7 +181,7 @@ export const fetchUsers = (coords) => (dispatch, getState) => {
         .then(res => res.json())
         .then(users => {
             dispatch(fetchUsersSuccess(users));
-            console.log('THE USERS GOTTEN BACK ARE', users)
+            console.log('THE USERS GOTTEN BACK IN ACTION ARE', users)
         })
         .catch(error => {
             console.log(error);
