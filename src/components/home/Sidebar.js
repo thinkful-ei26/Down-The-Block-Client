@@ -15,7 +15,7 @@ class Sidebar extends React.Component{
     if(this.props.users){
       return this.props.users.map((user,index)=> {
         return (
-          <button 
+          <button
             onClick={()=>this.props.dispatch(display('chat'))}
             key={index}>{user.firstName}
           </button>
@@ -33,6 +33,9 @@ class Sidebar extends React.Component{
           <button onClick={()=>this.props.dispatch(fetchPosts(this.props.coords, 'neighbors'))}>Neighors</button>
           <button onClick={()=>this.props.dispatch(fetchPosts(this.props.coords, 'city'))} >City</button>
           <h4>Chats</h4>
+          <button
+            onClick={()=>this.props.dispatch(display('chat'))}
+            >Chats</button>
           {this.showAllUsers()}
         </nav>
       </aside>

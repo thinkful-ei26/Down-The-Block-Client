@@ -1,16 +1,13 @@
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
-import {normalizeResponseErrors} from './utils';
-import {refreshProfileAuthToken} from './auth';
-<<<<<<< HEAD
-import {UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR} from './types';
-=======
-import {UPDATED_USER_SUCCESS, 
-        CHANGE_SUCCESS_MESSAGE, 
-        USER_COORDS_REQUEST,
-        USER_COORDS_SUCCESS,
-        USER_COORDS_ERROR} from './types';
->>>>>>> 44809a35d4ac4bda8724842664566eba19cad2f4
+import { normalizeResponseErrors } from './utils';
+import { refreshProfileAuthToken } from './auth';
+import { UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR } from './types';
+import {
+  USER_COORDS_REQUEST,
+  USER_COORDS_SUCCESS,
+  USER_COORDS_ERROR
+} from './types';
 
 export const registerUser = user => dispatch => {
     let formData = new FormData();
@@ -24,7 +21,7 @@ export const registerUser = user => dispatch => {
         body: formData
     })
         .then(res => normalizeResponseErrors(res))
-        .then(res =>{ 
+        .then(res =>{
             res.json();
         })
         .catch(err => {
@@ -48,7 +45,7 @@ export const updatedUserSuccess = (updatedUser, message) => ({
 export const changeSuccessMessage = (message) =>({
     type: CHANGE_SUCCESS_MESSAGE,
     message
-}) 
+})
 
 export const updatedUser = user => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
@@ -127,7 +124,7 @@ export const updatePassword = user => (dispatch, getState) => {
 export const updateProfilePhoto = photo => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     let formData = new FormData();
-    
+
     formData.append('photo', photo)
 
 
@@ -146,13 +143,12 @@ export const updateProfilePhoto = photo => (dispatch, getState) => {
         .then(()=>{
             dispatch(refreshProfileAuthToken())
         })
-        
+
         .catch(err => {
             console.log(err);
         });
 };
 
-<<<<<<< HEAD
 export const fetchUsersRequest = () => ({
     type: FETCH_USERS_REQUEST,
 })
@@ -191,7 +187,6 @@ export const fetchUsers = (coords) => (dispatch, getState) => {
             console.log(error);
         });
 };
-=======
 export const userCoordsRequest = () => ({
     type: USER_COORDS_REQUEST
 });
@@ -214,18 +209,18 @@ export const setUserCoords = (coords) => (dispatch, getState) => {
         latitude: coords.latitude,
         longitude: coords.longitude,
     };
-        
+
     if (coords.automatic === false){
         simplifiedGeoObject.automatic = false;
-    } else { 
+    } else {
         simplifiedGeoObject.automatic = true
     }
-    
+
     let stringifiedObj = JSON.stringify(simplifiedGeoObject);
 
-    const path = `${API_BASE_URL}/auth/users/location/${stringifiedObj}`; 
+    const path = `${API_BASE_URL}/auth/users/location/${stringifiedObj}`;
 
-    return fetch(path, { 
+    return fetch(path, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -243,4 +238,3 @@ export const setUserCoords = (coords) => (dispatch, getState) => {
         dispatch(userCoordsError(error))
     })
 }
->>>>>>> 44809a35d4ac4bda8724842664566eba19cad2f4
