@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { updatePost } from '../../actions/posts'; 
-
+import { withinRadius } from '../common/helper-functions';
 import { submitPost, postBeingEdited, addNewPost } from '../../actions/posts';
 import moment from 'moment';
 
@@ -33,10 +33,11 @@ export class CreatePost extends React.Component{
         borderAround: this.props.editPost.category.toLowerCase()
       })
     } 
-    //listens for the server when the new post has been created
+    //listens for the server when the new post has been created. ONLY do something with this post if the user's geofilter is within the radius of this post
     this.props.socket.on('new_post', post => {
       console.log('THE POST GOTTEN BACK FROM THE SERVER SOCKET IS', post);
-      if(post){
+      //only do something with the post received if its within radius
+      if(withinRadius(post.coordinates, this.props.coords, this.props.display)){
         this.props.dispatch(addNewPost(post));
       } 
     })
