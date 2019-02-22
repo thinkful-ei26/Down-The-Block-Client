@@ -3,22 +3,16 @@ import {connect} from 'react-redux';
 import Post from './Post';
 import { fetchPosts } from '../../actions/posts';
 import { filterPostsBySearch, filterByCategory } from '../common/helper-functions'
-import { socket } from '../../reducers/socket';
 
 export class PostsList extends React.Component{
   componentDidMount(){
-    // let socket = this.props.socket;
-    const location = {
-      latitude:this.props.coords.latitude, 
-      longitude:this.props.coords.longitude
-    }
+    // const location = {
+    //   latitude:this.props.coords.latitude, 
+    //   longitude:this.props.coords.longitude
+    // }
     
-    console.log(location);
-    console.log(this.props);
-    // socket.emit('get_posts', () => {
-      // console.log('inside of socket and props are', this.props);
-      this.props.dispatch(fetchPosts(location, this.props.display));
-    // })
+    // console.log(location);
+    this.props.dispatch(fetchPosts(this.props.coords, this.props.display));
   }
 
   generatePosts(){
@@ -45,7 +39,7 @@ export class PostsList extends React.Component{
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  console.log("IN POSTS LIST STATE, ARR OF POSTS", state.posts.posts)
   return { 
     posts: state.posts.posts,
     coords: state.geolocation.coords,
@@ -53,7 +47,6 @@ const mapStateToProps = state => {
     categoryFilter: state.posts.categoryFilter,
     display: state.nav.display, 
     socket:state.socket.socket, 
-  
   }
 };
 

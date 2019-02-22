@@ -108,7 +108,6 @@ import {
         })
       .then(() => {
           dispatch(createPostSuccess());
-        //   dispatch(fetchPosts(coords, forum));
       })
       .catch(error => {
           dispatch(createPostError(error));
