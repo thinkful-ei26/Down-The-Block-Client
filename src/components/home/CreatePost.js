@@ -27,6 +27,7 @@ export class CreatePost extends React.Component{
   }
 
   componentDidMount(){
+    // this.props.socket.connect();
     console.log('IN COMPONENT DID MOUNT FOR CREATE POST')
     //if editing, highlight the correct chosen category
     if(this.props.editPost){
@@ -47,6 +48,13 @@ export class CreatePost extends React.Component{
         this.props.dispatch(updatePost(post));
       }
     })
+  }
+
+  componentWillUnmount(){
+    console.log('UNMOUNTING CREATE POST')
+    this.props.socket.off('new_post');
+    this.props.socket.off('edited_post');
+    // this.props.socket.disconnect();
   }
 
   generateButtons(){

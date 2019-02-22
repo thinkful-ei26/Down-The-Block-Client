@@ -13,6 +13,7 @@ export class App extends React.Component {
     componentDidMount(){
         console.log('IN COMP UPDATE FOR APP')
     }
+    
 
     componentDidUpdate(prevProps) {
         if (!prevProps.loggedIn && this.props.loggedIn) {
