@@ -1,12 +1,13 @@
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
-import {normalizeResponseErrors} from './utils';
-import {refreshProfileAuthToken} from './auth';
-import {UPDATED_USER_SUCCESS, 
-        CHANGE_SUCCESS_MESSAGE, 
-        USER_COORDS_REQUEST,
-        USER_COORDS_SUCCESS,
-        USER_COORDS_ERROR} from './types';
+import { normalizeResponseErrors } from './utils';
+import { refreshProfileAuthToken } from './auth';
+import { UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR } from './types';
+import {
+  USER_COORDS_REQUEST,
+  USER_COORDS_SUCCESS,
+  USER_COORDS_ERROR
+} from './types';
 
 export const registerUser = user => dispatch => {
     let formData = new FormData();
@@ -20,7 +21,7 @@ export const registerUser = user => dispatch => {
         body: formData
     })
         .then(res => normalizeResponseErrors(res))
-        .then(res =>{ 
+        .then(res =>{
             res.json();
         })
         .catch(err => {
@@ -44,7 +45,7 @@ export const updatedUserSuccess = (updatedUser, message) => ({
 export const changeSuccessMessage = (message) =>({
     type: CHANGE_SUCCESS_MESSAGE,
     message
-}) 
+})
 
 export const updatedUser = user => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
@@ -123,7 +124,7 @@ export const updatePassword = user => (dispatch, getState) => {
 export const updateProfilePhoto = photo => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     let formData = new FormData();
-    
+
     formData.append('photo', photo)
 
 
@@ -142,12 +143,50 @@ export const updateProfilePhoto = photo => (dispatch, getState) => {
         .then(()=>{
             dispatch(refreshProfileAuthToken())
         })
-        
+
         .catch(err => {
             console.log(err);
         });
 };
 
+export const fetchUsersRequest = () => ({
+    type: FETCH_USERS_REQUEST,
+})
+
+export const fetchUsersSuccess = (users) => ({
+  type: FETCH_USERS_SUCCESS,
+  users
+})
+
+export const fetchUsersError= (error) => ({
+  type: FETCH_USERS_ERROR,
+  error
+})
+
+export const fetchUsers = (coords) => (dispatch, getState) => {
+    dispatch(fetchUsersRequest());
+    const authToken = getState().auth.authToken;
+    let simplifiedGeoObject = {
+        latitude: coords.latitude,
+        longitude: coords.longitude
+      }
+      let stringifiedObj = JSON.stringify(simplifiedGeoObject);
+    fetch(`${API_BASE_URL}/auth/users/${stringifiedObj}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(users => {
+            dispatch(fetchUsersSuccess(users));
+            console.log('THE USERS GOTTEN BACK IN ACTION ARE', users)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
 export const userCoordsRequest = () => ({
     type: USER_COORDS_REQUEST
 });
@@ -170,18 +209,18 @@ export const setUserCoords = (coords) => (dispatch, getState) => {
         latitude: coords.latitude,
         longitude: coords.longitude,
     };
-        
+
     if (coords.automatic === false){
         simplifiedGeoObject.automatic = false;
-    } else { 
+    } else {
         simplifiedGeoObject.automatic = true
     }
-    
+
     let stringifiedObj = JSON.stringify(simplifiedGeoObject);
 
     const path = `${API_BASE_URL}/users/location/${stringifiedObj}`; 
 
-    return fetch(path, { 
+    return fetch(path, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
