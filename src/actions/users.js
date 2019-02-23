@@ -16,7 +16,7 @@ export const registerUser = user => dispatch => {
         formData.append(item, (user[item]))
     });
 
-    return fetch(`${API_BASE_URL}/auth/users`, {
+    return fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
         body: formData
     })
@@ -49,7 +49,7 @@ export const changeSuccessMessage = (message) =>({
 
 export const updatedUser = user => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/auth/users/account`, {
+    return fetch(`${API_BASE_URL}/users/account`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
@@ -88,7 +88,7 @@ export const updatedUser = user => (dispatch, getState) => {
 
 export const updatePassword = user => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/auth/users/password`, {
+    return fetch(`${API_BASE_URL}/users/password`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
@@ -128,7 +128,7 @@ export const updateProfilePhoto = photo => (dispatch, getState) => {
     formData.append('photo', photo)
 
 
-    return fetch(`${API_BASE_URL}/auth/users/photo`, {
+    return fetch(`${API_BASE_URL}/users/photo`, {
         method: 'PUT',
         headers: {
             Authorization: `Bearer ${authToken}`
@@ -218,7 +218,7 @@ export const setUserCoords = (coords) => (dispatch, getState) => {
 
     let stringifiedObj = JSON.stringify(simplifiedGeoObject);
 
-    const path = `${API_BASE_URL}/auth/users/location/${stringifiedObj}`;
+    const path = `${API_BASE_URL}/users/location/${stringifiedObj}`;
 
     return fetch(path, {
         method: 'PUT',

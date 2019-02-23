@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import socketClient from "socket.io-client"
 import { API_BASE_URL } from '../../config'
+import { fetchUsers } from '../../actions/users'
 
 import './Chat.css'
 
@@ -24,14 +25,16 @@ export class Chat extends React.Component {
     //send the message as well as the coordinates to the client.
     //then decide inside the function if the coordinates match up to display the message. if not dont display it
     this.socket.on("chat-message", (msg) => {
-      if(msg===""){
+      if(msg.content===""){
         return
       }
+      if(msg.user)
       this.setState({ messages: [...this.state.messages, msg] })
     })
   }
 
   componentDidMount(){
+    this.props.dispatch(fetchUsers(this.props.coords));
     console.log("mounted")
   }
   render() {
@@ -40,7 +43,7 @@ export class Chat extends React.Component {
         <div className="chat"> <h1>Chat Messages</h1>
           <form autoComplete="off" id="chat-form" className="chat-form" onSubmit={e => {
             e.preventDefault()
-            this.socket.emit("chat-message", e.currentTarget.message.value)
+            this.socket.broadcast.emit("chat-message", {content: e.currentTarget.message.value})
             document.getElementById("chat-form").reset();
             console.log("submitted")
           }} >

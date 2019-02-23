@@ -90,7 +90,7 @@ import {
         };
       let stringifiedObj = JSON.stringify(simplifiedGeoObject);
 
-      const path = postId ? `${API_BASE_URL}/posts/${postId}` : `${API_BASE_URL}/posts/${stringifiedObj}`;
+      const path = postId ? `${API_BASE_URL}/posts/${postId}` : `${API_BASE_URL}/posts/${stringifiedObj}/${forum}`;
 
       return fetch(path, {
           method,

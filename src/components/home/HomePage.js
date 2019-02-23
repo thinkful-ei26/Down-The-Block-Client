@@ -5,23 +5,25 @@ import Main from './Main';
 import Geolocator from './Geolocator';
 import AddressForm from './AddressForm';
 import requiresLogin from '../common/requires-login';
-import { showAnimation } from '../../actions/navigation';
+import { showAnimation, destroySocket, createSocket } from '../../actions/navigation';
 import EyeAnimation from '../common/EyeAnimation'
 
 export class HomePage extends React.Component{
 
   componentDidMount(){
     document.title = 'Home';
-  }
-
-  componentWillMount(){
-    if(!this.props.coords){
-      this.props.dispatch(showAnimation(true));
-    }
+    console.log('COMP MOUNT HOME PAGE')
+    // if(!this.props.coords){
+    //   this.props.dispatch(showAnimation(true));
+    // }
+    // this.props.dispatch(createSocket());
   }
 
   componentWillUnmount(){
+    console.log('COMP UNMOUNT HOME PAGE')
     this.props.dispatch(showAnimation(false));
+
+    // this.props.dispatch(destroySocket());
   }
 
   render(){
