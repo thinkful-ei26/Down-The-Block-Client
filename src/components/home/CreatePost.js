@@ -44,7 +44,7 @@ export class CreatePost extends React.Component{
       } 
     })
     this.props.socket.on('edited_post', post => {
-      if(post){
+      if(withinRadius(post.coordinates, this.props.coords, this.props.display)){
         this.props.dispatch(updatePost(post));
       }
     })
