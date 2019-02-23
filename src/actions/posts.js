@@ -89,10 +89,10 @@ import {
           longitude: coords.longitude
         };
       let stringifiedObj = JSON.stringify(simplifiedGeoObject);
-
-      const path = postId ? `${API_BASE_URL}/posts/${postId}` : `${API_BASE_URL}/posts/${stringifiedObj}`;
-
-      return fetch(path, {
+  
+      const path = postId ? `${API_BASE_URL}/posts/${postId}` : `${API_BASE_URL}/posts/${stringifiedObj}/${forum}`; 
+  
+      return fetch(path, { 
           method,
           headers: {
               'Accept': 'application/json',

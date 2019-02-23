@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { updatePost } from '../../actions/posts'; 
-
+import { withinRadius } from '../common/helper-functions';
 import { submitPost, postBeingEdited, addNewPost } from '../../actions/posts';
 import moment from 'moment';
 
@@ -27,21 +27,34 @@ export class CreatePost extends React.Component{
   }
 
   componentDidMount(){
+    // this.props.socket.connect();
+    console.log('IN COMPONENT DID MOUNT FOR CREATE POST')
     //if editing, highlight the correct chosen category
     if(this.props.editPost){
       this.setState({
         borderAround: this.props.editPost.category.toLowerCase()
       })
     } 
-    console.log('socket in CREATE:', this.props.socket)
-    //listens for the server when the new post has been created
+    //listens for the server when the new post has been created. ONLY do something with this post if the user's geofilter is within the radius of this post
     this.props.socket.on('new_post', post => {
-      console.log('THE POST GOTTEN BACK FROM THE SERVER SOCKET IS', post); 
-      this.props.dispatch(addNewPost(post));
+      console.log('THE POST GOTTEN BACK FROM THE SERVER SOCKET IS', post);
+      //only do something with the post received if its within radius
+      if(withinRadius(post.coordinates, this.props.coords, this.props.display)){
+        this.props.dispatch(addNewPost(post));
+      } 
     })
     this.props.socket.on('edited_post', post => {
-      this.props.dispatch(updatePost(post));
+      if(post){
+        this.props.dispatch(updatePost(post));
+      }
     })
+  }
+
+  componentWillUnmount(){
+    console.log('UNMOUNTING CREATE POST')
+    this.props.socket.off('new_post');
+    this.props.socket.off('edited_post');
+    // this.props.socket.disconnect();
   }
 
   generateButtons(){

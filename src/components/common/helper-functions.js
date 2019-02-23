@@ -151,3 +151,35 @@ export function formatName(str) {
   //make the first letter capital: 
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export function withinRadius(postCoords, usersCoords, forum){
+  let latitudeMin, latitudeMax, longitudeMin, longitudeMax;
+
+  if(forum==='neighbors'){
+    latitudeMin = usersCoords.latitude - 0.014631;
+    latitudeMax = usersCoords.latitude + 0.014631;
+    const oneDegreeLongitude = Math.cos(usersCoords.latitude * Math.PI/180) * 69.172;
+    const oneMileLongitudeInDegrees = 1/oneDegreeLongitude;
+    longitudeMin = usersCoords.longitude - oneMileLongitudeInDegrees;
+    longitudeMax = usersCoords.longitude + oneMileLongitudeInDegrees;
+  }
+
+  else{
+    latitudeMin = usersCoords.latitude - 0.073155;
+    latitudeMax = usersCoords.latitude + 0.073155;
+    const oneDegreeLongitude = Math.cos(usersCoords.latitude * Math.PI/180) * 69.172;
+    const fiveMilesLongitudeInDegrees = 5/oneDegreeLongitude;
+    longitudeMin = usersCoords.longitude - fiveMilesLongitudeInDegrees;
+    longitudeMax = usersCoords.longitude + fiveMilesLongitudeInDegrees;
+  }
+
+  //within range
+  if(postCoords.latitude >= latitudeMin && postCoords.latitude <= latitudeMax && postCoords.longitude >= longitudeMin && postCoords.longitude <= longitudeMax){
+    return true
+  }
+  //not in range
+  else{
+    return false
+  }
+  
+}
