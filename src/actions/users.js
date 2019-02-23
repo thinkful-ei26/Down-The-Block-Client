@@ -171,7 +171,7 @@ export const fetchUsers = (coords) => (dispatch, getState) => {
         longitude: coords.longitude
       }
       let stringifiedObj = JSON.stringify(simplifiedGeoObject);
-    fetch(`${API_BASE_URL}/auth/users/${stringifiedObj}`, {
+    fetch(`${API_BASE_URL}/users/${stringifiedObj}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${authToken}`
