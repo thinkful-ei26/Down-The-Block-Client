@@ -33,9 +33,6 @@ class Sidebar extends React.Component{
           <button onClick={()=>this.props.dispatch(fetchPosts(this.props.coords, 'neighbors'))}>Neighors</button>
           <button onClick={()=>this.props.dispatch(fetchPosts(this.props.coords, 'city'))} >City</button>
           <h4>Chats</h4>
-          <button
-            onClick={()=>this.props.dispatch(display('chat'))}
-            >Chats</button>
           {this.showAllUsers()}
         </nav>
       </aside>
