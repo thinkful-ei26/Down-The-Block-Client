@@ -26,11 +26,3 @@ export const focusOn = (focus) => ({
     type: FOCUS_ON,
     focus
 })
-
-export const destroySocket = () => ({
-    type: DESTROY_SOCKET, 
-})
-
-export const createSocket = () => ({
-    type: CREATE_SOCKET 
-})

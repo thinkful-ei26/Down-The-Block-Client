@@ -27,8 +27,6 @@ export class CreatePost extends React.Component{
   }
 
   componentDidMount(){
-    // this.props.socket.connect();
-    console.log('IN COMPONENT DID MOUNT FOR CREATE POST')
     //if editing, highlight the correct chosen category
     if(this.props.editPost){
       this.setState({
@@ -44,17 +42,16 @@ export class CreatePost extends React.Component{
       } 
     })
     this.props.socket.on('edited_post', post => {
-      if(post){
+      if(withinRadius(post.coordinates, this.props.coords, this.props.display)){
         this.props.dispatch(updatePost(post));
       }
     })
   }
 
   componentWillUnmount(){
-    console.log('UNMOUNTING CREATE POST')
+    //need to turn sockets off or else they'll listen twice
     this.props.socket.off('new_post');
     this.props.socket.off('edited_post');
-    // this.props.socket.disconnect();
   }
 
   generateButtons(){

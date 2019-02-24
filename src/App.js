@@ -10,10 +10,6 @@ import Chat from "./components/home/Chat"
 import About from './components/common/About'
 
 export class App extends React.Component {
-    componentDidMount(){
-        console.log('IN COMP UPDATE FOR APP')
-    }
-    
 
     componentDidUpdate(prevProps) {
         if (!prevProps.loggedIn && this.props.loggedIn) {
