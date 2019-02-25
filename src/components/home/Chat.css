@@ -8,6 +8,7 @@
 }
 .type_msg {
   width: 100%
+
 }
 html, body, input {
   font-family: Georgia, Tahoma, Arial, sans-serif;
@@ -37,3 +38,4 @@ html, body, input {
   border: 2px solid #eb5424;
   height: 550px;
  }
+
