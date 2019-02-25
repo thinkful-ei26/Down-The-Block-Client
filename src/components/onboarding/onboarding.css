@@ -1,7 +1,6 @@
 .form-section{
   display: flex;
   flex-wrap: wrap;
-  width: 80%;
   margin: auto;
   justify-content: space-evenly;
 }
@@ -10,16 +9,48 @@
   color: red;
 }
 
-.landing-page{
-  background-color: rgb(56, 98, 146);
+.parallax{
+  background-image: url("../../img/neighborhood.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 900px; 
+  position: relative;
+
+  /* Add the blur effect */
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+}
+
+.intro{
+  position: absolute;
+  top: 70px;
+  margin: auto;
+  width: 100%;
+}
+
+.intro h1{
+  color: rgb(249, 249, 237);
+
 }
 
 .landing-page form{
   background: rgb(249, 249, 237);
   padding: 20px;
   font-size: 20px;
-  width: 500px;
+  width: 80%;
   margin: 40px 0;
+}
+
+@media(min-width:950px){
+  .landing-page form{
+    width: 450px;
+  }
+
+  .form-section{
+    flex-wrap: nowrap;
+  }
 }
 
 .landing-page form input{

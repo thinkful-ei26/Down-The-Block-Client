@@ -7,11 +7,6 @@ import { HashLink as Link } from 'react-router-hash-link';
 import './navbar.css'
 
 export class Navbar extends React.Component{
-  logOut() {
-    this.props.dispatch(clearAuth());
-    clearAuthToken();
-  }
-
   onClick(focus=""){
     this.props.dispatch(focusOn(focus));
   }
@@ -22,15 +17,13 @@ export class Navbar extends React.Component{
       return (
         <div className = "right">
           <Link 
-            to ="/#about">
-            About
-          </Link>
-          <Link 
+            className="link"
             onClick={()=>this.onClick('login-username')} 
             to ="/#login">
             Login
           </Link>
           <Link 
+            className="link"
             onClick={()=>this.onClick('registerUsername')} 
             to ="/#register">
             Register
@@ -44,7 +37,7 @@ export class Navbar extends React.Component{
     return( 
       <nav className="main-navbar">
         <Link className="logo" to="/home">
-          Neighborhood Watch
+          DownTheBlock
         </Link>
         {this.navbarLinks()}
       </nav>

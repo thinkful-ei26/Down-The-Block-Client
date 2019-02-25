@@ -1,17 +1,13 @@
 .main-navbar{
-  background-color: black;
+  background-color: #124f36;
   position: fixed;
   width:100%;
   z-index: 1000;
 }
 
-.icon.right{
+.right{
   float:right;
-  background-color: transparent;
-  border: none;
-  font-size: 20px;
-  margin-top: 20px;
-  margin-right: 20px;
+  padding-right: 10px;
 }
 
 .icon.right:hover, .icon.right:focus{
@@ -19,9 +15,9 @@
 }
 
 .link, .logo{
-  color: white;
+  color: rgb(249, 249, 237);
   text-decoration: none;
-  padding: 20px;
+  padding: 20px 10px;
   text-align: center;
   transition: background-color .5s;
   cursor:pointer;
@@ -29,60 +25,16 @@
   border: none;
   font-family: Montserrat;
   font-size: 18px;
+  display: inline-block;
 }
 
 .logo{
   text-align:left;
-  display: inline-block;
   font-weight: 700;
-  padding-left:50px;
-}
-
-.logo:hover:after, .logo:focus:after, .logo:hover:before, .logo:focus:before{
-  opacity:1;
-  transition: .5s;
+  margin-left:50px;
 }
 
 .link:hover, .link:focus {
-  color: #333;
-  background-color: #fff;
+  color: black;
 }
 
-.show.link{
-  display:block;
-}
-
-.dontshow.link{
-  display: none;
-}
-
-.logo span{
-  padding-left: 2px;
-}
-
-.icon{
-  color:white;
-  display:inline;
-}
-
-@media (min-width: 900px){
-  .main-navbar .link{
-    display: inline-block;
-  }
-
-  .show.link, .dontshow.link{
-    display: inline-block;
-  }
-
-  #logout{
-    width:auto;
-  }
-
-  .right{
-    float:right;
-  }
-
-  .icon{
-    display:none;
-  }
-}

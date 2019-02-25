@@ -4,11 +4,12 @@ import Forum from './Forum';
 import Chat from './Chat'
 import './main.css'
 import SettingsPage from '../settings/SettingsPage';
+import About from '../common/About';
 
 export class Main extends React.Component{
 
   display(){
-    return this.props.display==="neighbors" || this.props.display==="city" ? <Forum/> : this.props.display==="settings" ? <SettingsPage/> : <Chat/>
+    return this.props.display==="neighbors" || this.props.display==="city" ? <Forum/> : this.props.display==="settings" ? <SettingsPage/> : this.props.display==="about" ? <About/> : <Chat/>
   }
 
   render(){

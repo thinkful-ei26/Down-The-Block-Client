@@ -71,11 +71,16 @@ class SidebarNav extends React.Component{
       return (
         <React.Fragment>
           <h4>Account</h4>
-          <Link 
-            className="content"
-            to ="/about">
+          <button
+             className="content"
+             onClick={()=>{
+              this.onSetSidebarOpen(false)
+              this.props.dispatch(display('about'))
+             }
+            }
+          >            
             About
-          </Link>
+          </button>
           <button
              className="content"
              onClick={()=>{
@@ -103,6 +108,13 @@ class SidebarNav extends React.Component{
  render(){
    console.log('CURRENT USER', this.props.currentUser)
     return(
+      <React.Fragment>
+        {!this.state.sidebarDocked && 
+        <button 
+          className="open-sidebar" 
+          onClick={() => this.onSetSidebarOpen(!this.state.sidebarOpen)}>
+          <i className="fa fa-bars"></i>
+        </button>}
         <Sidebar
           sidebar=
           {
@@ -134,15 +146,10 @@ class SidebarNav extends React.Component{
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(56, 98, 146)', width: 200, padding: 10} , content: {position:'static', paddingTop: 20, paddingLeft: 20 }}}
+          styles={{ sidebar: { position: 'fixed', top: 60, background: 'black', width: 200, padding: 10} , root: {position: 'relative'}  }}
         >
-          {!this.state.sidebarDocked && <button 
-            className="open-sidebar" 
-            onClick={() => this.onSetSidebarOpen(!this.state.sidebarOpen)}>
-            <i className="fa fa-bars"></i>
-          </button>}
         </Sidebar>
-        
+        </React.Fragment>
     );
   }
 }
