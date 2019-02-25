@@ -23,3 +23,13 @@ h1,h2,h3,h4,h5,h6,p{
 /* input[type="file"]{
   color: transparent;
 } */
+
+/* button {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+} */
+
+/* button:hover {
+  background-color: #4CAF50;
+  color: white;
+} */

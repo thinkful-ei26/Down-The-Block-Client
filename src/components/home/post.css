@@ -37,6 +37,7 @@ input[type="radio"] {
 
 .post-form label{
   display: inline-block;
+  border-radius: 4px;
   padding: 5px;
   margin-right: 10px;
   cursor: pointer;
@@ -44,14 +45,26 @@ input[type="radio"] {
   border: 2px solid transparent;
 }
 
+.post-form label:hover {
+  opacity: 1;
+}
+
+
 .post-form button{
   background: rgb(56, 98, 146);
   border: none;
+  border-radius: 4px;
   color: white;
   font-size: 1rem;
   cursor: pointer;
   padding: 7px;
   margin-left: 10px;
+}
+
+.post-form button:hover {
+  /* background-color: white; */
+  color: black;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 2px 6px 0 rgba(0,0,0,0.19);
 }
 
 .bottom-options{
@@ -77,7 +90,8 @@ input[type="radio"] {
 }
 
 .post-form label.border{
-  opacity:1;
+  font-weight: bold;
+  opacity: 1;
 }
 
 .profile-photo{
