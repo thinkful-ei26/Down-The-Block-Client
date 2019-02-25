@@ -1,14 +1,4 @@
-.sidebar{
-  position: absolute;
-  top: 60px;
-  background-color: rgb(56, 98, 146);
-  height: 100vh;
-  position: fixed;
-  width: 200px;
-  padding: 10px;
-}
-
-.sidebar button{
+.sidebar .content{
   display: block;
   color: black;
   background: none;
@@ -17,9 +7,15 @@
   font-size: 1rem;
   cursor: pointer;
   padding: 20px;
+  text-decoration: none;
 }
 
-.sidebar button:hover, .sidebar button:focus{
+.sidebar .content:hover, .sidebar .content:focus{
   outline: 0;
   color: white
+}
+
+.open-sidebar{
+  position: relative;
+  z-index: 1000;
 }

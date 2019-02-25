@@ -21,36 +21,7 @@ export class Navbar extends React.Component{
   navbarLinks(){
     let className = this.props.toggleNavbar ? "show link" : "dontshow link";
 
-    if(this.props.loggedIn){
-      return (
-        <div className = "right">
-          <Link 
-            onClick={()=>this.props.dispatch(toggleNavbar(false))} 
-            className={className} 
-            to ="/home">
-            Home
-          </Link>
-          <Link 
-            onClick={()=>this.props.dispatch(toggleNavbar(false))} 
-            className={className} 
-            to ="/about">
-            About
-          </Link>
-          <Link 
-            onClick={()=>this.props.dispatch(toggleNavbar(false))} 
-            className={className} 
-            to ="/settings">
-            Settings
-          </Link>
-          <button id="logout" 
-            className={className} 
-            onClick={() => this.logOut()}>
-            Logout
-          </button>
-        </div>
-      )
-    }
-    else{
+    if(!this.props.loggedIn){
       return (
         <div className = "right">
           <Link 
