@@ -28,8 +28,10 @@ export class Chat extends React.Component {
       if(msg.content===""){
         return
       }
-      if(msg.user)
-      this.setState({ messages: [...this.state.messages, msg] })
+      // if(msg.user){
+
+      // }
+      this.setState({ messages: [...this.state.messages, msg.content] })
     })
   }
 
