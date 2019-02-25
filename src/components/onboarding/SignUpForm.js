@@ -14,12 +14,11 @@ export class SignUpForm extends React.Component {
         if(values.img){
             values.img = values.img[0];
         }
-        const {password, firstName, lastName, img} = values;
-        const user = { password, firstName, lastName, img};
-        user.username = values['register-username'];
-        return this.props
-            .dispatch(registerUser(user))
-            .then(() => this.props.dispatch(login(user.username, password)));
+        const {password, firstName, lastName, img, registerUsername} = values;
+        const user = { password, firstName, lastName, img, registerUsername};
+        // user.username = values['register-username'];
+        return this.props.dispatch(registerUser(user))
+            .then(() => this.props.dispatch(login(registerUsername, password)));
     }
 
     render() {
@@ -36,7 +35,7 @@ export class SignUpForm extends React.Component {
                 <Field
                     component={Input}
                     type="text"
-                    name="register-username"
+                    name="registerUsername"
                     validate={[required, nonEmpty, isTrimmed]}
                 />
 
@@ -91,6 +90,8 @@ export class SignUpForm extends React.Component {
 
 export default reduxForm({
     form: 'registration',
-    onSubmitFail: (errors, dispatch) =>
+    onSubmitFail: (errors, dispatch) =>{
+        console.log("ERROR", errors)
         dispatch(focus('registration', Object.keys(errors)[0]))
+    }
 })(SignUpForm);
