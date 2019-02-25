@@ -2,8 +2,7 @@
 
 [Neighborhood-Watch.com](https://neighbors-client.herokuapp.com/ "Google's Homepage")
 
-![alt text][logo]
-[logo]: https://github.com/thinkful-ei26/neighborhood-watch-client/master/public/common/Neighborhood_2.jpg "Logo"
+![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/Neighborhood_2.png "Logo")
 
 
 ## Intoducing Neighborhood Watch, the easiest way to communicate safely with your neighbors
