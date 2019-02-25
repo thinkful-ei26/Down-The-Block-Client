@@ -51,7 +51,7 @@ export class App extends React.Component {
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/home" component={HomePage}></Route>
                 <Route exact path="/about" component={About}></Route>
-                <Route exact path="/settings" component={SettingsPage}></Route>
+                {/* <Route exact path="/settings" component={SettingsPage}></Route> */}
             </div>
         );
     }

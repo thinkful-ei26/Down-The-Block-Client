@@ -72,11 +72,12 @@ class SidebarNav extends React.Component{
             to ="/about">
             About
           </Link>
-          <Link 
-            className="content"
-            to ="/settings">
+          <button
+             className="content"
+             onClick={()=>this.props.dispatch(display('settings'))}
+          >            
             Settings
-          </Link>
+          </button>
           <button id="logout" 
             className="content"
             onClick={() => this.logOut()}>
@@ -88,6 +89,7 @@ class SidebarNav extends React.Component{
   }
 
  render(){
+   console.log('CURRENT USER', this.props.currentUser)
     return(
         <Sidebar
           sidebar=
@@ -126,7 +128,8 @@ const mapStateToProps = state => ({
   coords: state.geolocation.coords,
   display: state.nav.display,
   users: state.auth.users,
-  loggedIn: state.auth.currentUser !== null
+  loggedIn: state.auth.currentUser !== null,
+  currentUser: state.auth.currentUser,
 });
 
 export default connect(mapStateToProps)(SidebarNav)

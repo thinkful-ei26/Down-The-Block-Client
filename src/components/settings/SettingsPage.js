@@ -35,6 +35,7 @@ export class SettingsPage extends React.Component{
   }
 
   render(){
+    console.log('CURRENT USER', this.props.currentUser)
     return(
       <div className="settings">
         <main className="settings-main">
