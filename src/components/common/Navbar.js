@@ -66,7 +66,7 @@ export class Navbar extends React.Component{
             Login
           </Link>
           <Link 
-            onClick={()=>this.onClick('register-username')} 
+            onClick={()=>this.onClick('registerUsername')} 
             className={className} 
             to ="/#register">
             Register

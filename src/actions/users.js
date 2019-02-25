@@ -10,6 +10,7 @@ import {
 } from './types';
 
 export const registerUser = user => dispatch => {
+    console.log('IN REGISTER USER')
     let formData = new FormData();
 
     Object.keys(user).forEach(item=> {
