@@ -17,8 +17,13 @@ export class CreatePost extends React.Component{
 
   onSubmit(e){
     e.preventDefault();
+    let photo = null;
+    if(this.img && this.img.files){
+      photo= this.img.files[0];
+      console.log('THERES A FILE', photo)
+    }
     let postId = this.props.editPost ? this.props.editPost.postId : null;
-    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display};
+    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display, photo};
 
     this.props.dispatch(submitPost(postId, values, this.props.coords, this.props.display));
     this.content.value = "";
@@ -159,6 +164,13 @@ export class CreatePost extends React.Component{
         </label>
 
         </section>
+
+       {!editMode &&  <input 
+          accept="image/*"
+          ref={input => this.img = input}
+          type="file"
+        />
+       }
         {this.generateButtons()}
       </div>
     </form>
