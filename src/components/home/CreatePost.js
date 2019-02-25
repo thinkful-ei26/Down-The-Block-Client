@@ -18,7 +18,7 @@ export class CreatePost extends React.Component{
   onSubmit(e){
     e.preventDefault();
     let photo = null;
-    if(this.img.files){
+    if(this.img && this.img.files){
       photo= this.img.files[0];
       console.log('THERES A FILE', photo)
     }
@@ -165,12 +165,12 @@ export class CreatePost extends React.Component{
 
         </section>
 
-        <input 
+       {!editMode &&  <input 
           accept="image/*"
           ref={input => this.img = input}
           type="file"
         />
-
+       }
         {this.generateButtons()}
       </div>
     </form>
