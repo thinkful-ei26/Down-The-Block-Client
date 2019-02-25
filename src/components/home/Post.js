@@ -56,7 +56,9 @@ export class Post extends React.Component {
             </div> 
           </div>
 
-          <p className="post-content">{this.props.content}</p>       
+          <p className="post-content">{this.props.content}</p>   
+          
+          {this.props.photo && <img src={this.props.photo.url} alt='photo' />}
 
         </article>
         <PostComments comments={this.props.comments}/>
