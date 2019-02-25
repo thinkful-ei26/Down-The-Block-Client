@@ -69,14 +69,17 @@ export class SignUpForm extends React.Component {
                     name="passwordConfirm"
                     validate={[required, nonEmpty, matchesPassword]}
                 />
+                <label className="image-input">
                 <Field
-                    component={Input}
-                    label="Profile Photo:" 
+                    component={Input} 
                     name="img" 
                     id="img"
                     type= "file"
                     validate={[sizeLimit]}
                 />
+                <span>Select a Profile Photo</span>
+                </label>
+                <br></br>
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>

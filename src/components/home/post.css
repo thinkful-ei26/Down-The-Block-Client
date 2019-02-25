@@ -37,6 +37,7 @@ input[type="radio"] {
 
 .post-form label{
   display: inline-block;
+  border-radius: 4px;
   padding: 5px;
   margin-right: 10px;
   cursor: pointer;
@@ -44,15 +45,47 @@ input[type="radio"] {
   border: 2px solid transparent;
 }
 
+.post-form label:hover {
+  opacity: 1;
+}
+
 .post-form button{
   background: rgb(56, 98, 146);
   border: none;
+  border-radius: 4px;
   color: white;
   font-size: 1rem;
   cursor: pointer;
   padding: 7px;
   margin-left: 10px;
 }
+
+.post-form button:hover, .post button:hover, .options button:hover {
+  /* background-color: white; */
+  font-weight: bold;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 2px 6px 0 rgba(0,0,0,0.19);
+}
+
+label.image-input input[type="file"] {
+  position:absolute;
+  top: -1000px;
+}
+
+.image-input {
+  background: #DDD;
+}
+.image-input:hover {
+  background: #CCC;
+}
+/* .image-input:active {
+  background: #CCF;
+}
+.image-input :invalid + span {
+  color: #A44;
+}
+.image-input :valid + span {
+  color: #4A4;
+} */
 
 .bottom-options{
   background: rgb(249, 249, 237);
@@ -77,7 +110,30 @@ input[type="radio"] {
 }
 
 .post-form label.border{
-  opacity:1;
+  font-weight: bold;
+  opacity: 1;
+}
+
+.post button {
+  background: rgb(56, 98, 146);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 7px;
+  margin-left: 2px;
+}
+
+.options button {
+    background: rgb(56, 98, 146);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    padding: 7px;
+    margin-top: 10px;
+    margin-left: 2px
 }
 
 .profile-photo{
