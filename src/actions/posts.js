@@ -80,6 +80,13 @@ import {
   });
 
   export const submitPost = (postId, values, coords, forum) => (dispatch, getState) =>{
+
+    let formData = new FormData();
+
+    Object.keys(values).forEach(item=> {
+        formData.append(item, (values[item]))
+    });
+
       dispatch(createPostRequest());
       const authToken = getState().auth.authToken;
       const method = postId ? "PUT" : "POST";
@@ -95,11 +102,9 @@ import {
       return fetch(path, {
           method,
           headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
               Authorization: `Bearer ${authToken}`
           },
-          body: JSON.stringify(values)
+          body: formData
       })
       .then(res => normalizeResponseErrors(res))
       .then(res => {
