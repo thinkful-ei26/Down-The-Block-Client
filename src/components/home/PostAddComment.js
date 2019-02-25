@@ -31,6 +31,7 @@ export class PostAddComment extends React.Component {
           this.test = this.content.value + ' <br/> ';
         }
     }
+    
     componentDidMount(){
         console.log('socket in COMMENT:', this.props.socket)
         //listens for the server when the new post has been created
