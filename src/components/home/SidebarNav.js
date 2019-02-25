@@ -49,7 +49,11 @@ class SidebarNav extends React.Component{
         return (
           <button
             className="content"
-            onClick={()=>this.props.dispatch(display('chat'))}
+            onClick={()=>{
+              this.onSetSidebarOpen(false)
+              this.props.dispatch(display('chat'))
+              }
+            }
             key={index}>{user.firstName}
           </button>
         )
@@ -74,13 +78,21 @@ class SidebarNav extends React.Component{
           </Link>
           <button
              className="content"
-             onClick={()=>this.props.dispatch(display('settings'))}
+             onClick={()=>{
+              this.onSetSidebarOpen(false)
+              this.props.dispatch(display('settings'))
+             }
+            }
           >            
             Settings
           </button>
           <button id="logout" 
             className="content"
-            onClick={() => this.logOut()}>
+            onClick={() => {
+              this.onSetSidebarOpen(false)
+              this.logOut()
+              }
+            }>
             Logout
           </button>
         </React.Fragment>
@@ -98,11 +110,21 @@ class SidebarNav extends React.Component{
               <h4>Forums</h4>
               <button 
                 className="content" 
-                onClick={()=>this.props.dispatch(fetchPosts(this.props.coords, 'neighbors'))}>Neighors
+                onClick={()=>{
+                  this.onSetSidebarOpen(false)
+                  this.props.dispatch(fetchPosts(this.props.coords, 'neighbors'))
+                }
+                }
+              >Neighors
               </button>
               <button 
                 className="content" 
-                onClick={()=>this.props.dispatch(fetchPosts(this.props.coords, 'city'))} >City
+                onClick={()=>{
+                this.onSetSidebarOpen(false)
+                this.props.dispatch(fetchPosts(this.props.coords, 'city'))
+                } 
+              }
+              >City
               </button>
               <h4>Chats</h4>
               {this.showAllUsers()}
@@ -112,13 +134,13 @@ class SidebarNav extends React.Component{
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(56, 98, 146)', width: 200, padding: 10} }}
+          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(56, 98, 146)', width: 200, padding: 10} , content: {position:'static', paddingTop: 20, paddingLeft: 20 }}}
         >
-          <button 
+          {!this.state.sidebarDocked && <button 
             className="open-sidebar" 
             onClick={() => this.onSetSidebarOpen(!this.state.sidebarOpen)}>
             <i className="fa fa-bars"></i>
-          </button>
+          </button>}
         </Sidebar>
         
     );

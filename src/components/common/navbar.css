@@ -5,14 +5,6 @@
   z-index: 1000;
 }
 
-.main-navbar a, .main-navbar #logout{
-  padding:20px;
-}
-
-#logout{
-  width:100%;
-}
-
 .icon.right{
   float:right;
   background-color: transparent;
@@ -43,6 +35,7 @@
   text-align:left;
   display: inline-block;
   font-weight: 700;
+  padding-left:50px;
 }
 
 .logo:hover:after, .logo:focus:after, .logo:hover:before, .logo:focus:before{
@@ -61,14 +54,6 @@
 
 .dontshow.link{
   display: none;
-}
-
-.paw-logo{
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: 90px;
-  top: 17px;
 }
 
 .logo span{

@@ -31,6 +31,7 @@ export class Forum extends React.Component{
   }
 
   render(){
+    console.log('CURRENT USER', this.props.currentUser)
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
@@ -40,11 +41,15 @@ export class Forum extends React.Component{
   }
 }
 
-const mapStateToProps = state => ({
-  display: state.nav.display,
-  postBeingEdited: state.posts.postBeingEdited,
-  showAnimation: state.nav.showAnimation,
-  coords: state.geolocation.coords
-});
+const mapStateToProps = state => {
+  console.log("IN FORUM, STATE IS", state)
+  return{
+    display: state.nav.display,
+    postBeingEdited: state.posts.postBeingEdited,
+    showAnimation: state.nav.showAnimation,
+    coords: state.geolocation.coords,
+    currentUser: state.auth.currentUser
+  }
+};
 
 export default connect(mapStateToProps)(Forum)

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Forum from './Forum';
 import Chat from './Chat'
 import './main.css'
-import { SettingsPage } from '../settings/SettingsPage';
+import SettingsPage from '../settings/SettingsPage';
 
 export class Main extends React.Component{
 
@@ -12,6 +12,7 @@ export class Main extends React.Component{
   }
 
   render(){
+    console.log('CURRENT USER IN MAIN', this.props.currentUser)
     return(
       <main className="main">
         {this.display()}
@@ -21,7 +22,8 @@ export class Main extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  display: state.nav.display 
+  display: state.nav.display,
+  currentUser: state.auth.currentUser,
 });
 
 export default connect(mapStateToProps)(Main)
