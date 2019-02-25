@@ -4,6 +4,7 @@ import UpdateAccountForm from './UpdateAccountForm';
 import UpdatePasswordForm from './UpdatePasswordForm';
 import requiresLogin from '../common/requires-login';
 import {changeSuccessMessage, updateProfilePhoto} from '../../actions/users';
+import './settings.css'
 
 export class SettingsPage extends React.Component{
   componentDidMount(){
@@ -53,14 +54,15 @@ export class SettingsPage extends React.Component{
               <img className="profile-photo" src={this.props.currentUser.photo.url} alt="profile"/> 
             }
           </div>
-
-          
-          <input 
-            onChange={(e)=>this.onSubmit(e)} 
-            accept="image/*"
-            ref={input => this.img = input}
-            type="file"
-          />
+          <label className="image-input">
+            <span>Update Your Profile Photo</span>
+            <input 
+              onChange={(e)=>this.onSubmit(e)} 
+              accept="image/*"
+              ref={input => this.img = input}
+              type="file"
+            />
+          </label>
 
           <UpdateAccountForm/>
           <UpdatePasswordForm/>

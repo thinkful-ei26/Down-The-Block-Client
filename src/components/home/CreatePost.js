@@ -165,11 +165,15 @@ export class CreatePost extends React.Component{
 
         </section>
 
-       {!editMode &&  <input 
+       {!editMode &&  
+       <label className="image-input">
+         <input 
           accept="image/*"
           ref={input => this.img = input}
           type="file"
-        />
+          />
+          <span>Select a file</span>
+        </label>
        }
         {this.generateButtons()}
       </div>
