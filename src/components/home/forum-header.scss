@@ -1,0 +1,24 @@
+@import "~../common/colors.scss";
+
+.forum-header{
+  text-align: center;
+  width: 80%;
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  color: $darkGreen;
+  align-items: center;
+}
+
+.forum-header h1{
+  color: $darkGreen;
+  font-family: Play;
+}
+
+.search-posts{
+  height: fit-content;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid gray;
+}

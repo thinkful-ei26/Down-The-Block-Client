@@ -1,22 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { changeSearchTerm, changeCategoryFilter } from '../../actions/posts'
-import './forum-header.css';
+import './forum-header.scss';
 
 export class ForumHeader extends React.Component{
   
   whichForum(){
     return (
       this.props.type === "neighbors" ? 
-      <h1>What's Happening In Your Neighborhood</h1> : 
-      <h1>What's Happening In Your City</h1>
+      <h1>Happening In Your Neighborhood</h1> : 
+      <h1>Happening In Your City</h1>
     );
   }
 
   render(){
     return(
       <header className="forum-header">
-        <input onChange={e=>this.props.dispatch(changeSearchTerm(e.target.value))} className="search-posts" placeholder='Search Posts'/> 
+        <input type="text" onChange={e=>this.props.dispatch(changeSearchTerm(e.target.value))} className="search-posts" placeholder="Search Forum"/> 
 
         {this.whichForum()}
 
