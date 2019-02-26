@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import UpdateAccountForm from './UpdateAccountForm';
 import UpdatePasswordForm from './UpdatePasswordForm';
 import {changeSuccessMessage, updateProfilePhoto} from '../../actions/users';
-import './settings.css'
+// import './settings.css'
 
 export class SettingsPage extends React.Component{
   componentDidMount(){

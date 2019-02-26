@@ -46,6 +46,7 @@ label.image-input input[type="file"] {
 }
 .image-input :valid + span {
   color: #4A4;
+}
 form .highlight-red{
   border: 2px solid $darkRed;
   border-radius: 5px;
