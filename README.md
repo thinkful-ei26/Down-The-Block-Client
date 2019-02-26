@@ -1,11 +1,11 @@
-# Neighborhood Watch
+# Down The Block
 
-[Neighborhood-Watch.com](https://neighbors-client.herokuapp.com/ "Google's Homepage")
+[downtheblock.io.com](https://neighbors-client.herokuapp.com/ "Google's Homepage")
 
 ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/Neighborhood_2.png "Sims")
 
 
-## Intoducing Neighborhood Watch, the easiest way to communicate safely with your neighbors
+## Intoducing Down The Block, the easiest way to communicate safely with your neighbors
 
 1. Are you curious about what’s going on in your neighborhood? ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/friends.jpg "friends")
 2. Hear a helicopter hovering around your house and can’t figure out why?
@@ -15,7 +15,7 @@
 
 
 
-### Neighborhood Watch is here to help. With our easy to use web app you can:
+### Down The Block is here to help. With our easy to use web app you can:
 1. Make an account ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/login.png "login")
 2. View your location
 3. Immediately communicate with others in your area. ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/posts.png "posts")
