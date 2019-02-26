@@ -64,5 +64,15 @@
 .filter-posts {
   min-width: 150px;
   min-height: 25px;
-  font: 13.33333px Arial
+  font-family: Play;
+}
+
+.filter-posts span{
+  border-color: black;
+  box-shadow: 0;
+}
+
+.filter-posts div:hover{
+  border-color: black;
+  box-shadow: 0; 
 }

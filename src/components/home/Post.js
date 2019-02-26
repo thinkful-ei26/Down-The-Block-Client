@@ -29,10 +29,10 @@ export class Post extends React.Component {
   render(){
 
     return(
-      <section className="entire-thread">
+      <section className={`entire-thread border-${this.props.category}`}>
         <article className='post'>
           <div className="top-post">
-            <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span>
+            {/* <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span> */}
             <div className="options">
               {this.delete(this.props.postId)}
               {this.edit(this.props.postId, this.props.content, this.props.category)}

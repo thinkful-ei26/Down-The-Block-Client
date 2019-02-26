@@ -17,9 +17,9 @@ export class ForumHeader extends React.Component{
 
   render(){
     const filterOptions = [
-      {value: "", label:"See Category:", color: "#ccc"},
+      {value: "", label:"Select Filter:", color: "#ccc"},
       {value: "Crime", label: "Crime", color: '#e36060'},
-      {value: "Personal", label: "Personal", color: '#45bb85'},
+      {value: "Personal", label: "Personal", color: '#47b5c6'},
       {value: "Event", label: "Event", color: '#c093d7'},
       {value: "Other", label: "Other", color: '#f3c59c'}
     ];
@@ -40,9 +40,8 @@ export class ForumHeader extends React.Component{
     });
 
     const colorStyles = {
-      control: styles => ({ ...styles, backgroundColor: 'white' }),
+      control: styles => ({ ...styles, backgroundColor: 'white',  borderColor: 'black', boxShadow: 'none', }),
       option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-        console.log('here');
         const color = chroma(data.color);
         return {
           ...styles,
@@ -55,10 +54,11 @@ export class ForumHeader extends React.Component{
               ? chroma.contrast(color, 'white') > 2 ? 'white' : 'black'
               : data.color,
           cursor: isDisabled ? 'not-allowed' : 'default',
+          fontFamily: 'Play',
         };
       },
-      input: styles => ({ ...styles, ...dot() }),
-      placeholder: styles => ({ ...styles, ...dot() }),
+      input: styles => ({ ...styles, ...dot(), fontFamily: 'Play' }),
+      placeholder: styles => ({ ...styles, ...dot(), fontFamily: 'Play' }),
       singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
     };
 
@@ -69,7 +69,7 @@ export class ForumHeader extends React.Component{
         <Select
           defaultValue={filterOptions[0]} 
           options={filterOptions} 
-          placeholder="See Category" 
+          placeholder="Select Filter" 
           className="filter-posts" 
           onChange={option => this.props.dispatch(changeCategoryFilter(option.value))}
           styles={colorStyles}

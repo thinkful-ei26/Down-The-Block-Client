@@ -17,11 +17,31 @@
   background: #f3c59c;
 }
 
+.border-Crime{
+  // border: 1px solid #e36060;
+  box-shadow: 0 0 4px #e36060;
+}
+
+.border-Personal{
+  box-shadow: 0 0 4px #47b5c6;
+  // border: 1px solid #47b5c6;
+}
+
+.border-Event{
+  box-shadow: 0 0 4px #c093d7;
+  // border: 1px solid #c093d7;
+}
+
+.border-Other{
+  box-shadow: 0 0 4px #f3c59c;
+  // border: 1px solid #f3c59c;
+}
+
 /*Post*/
 .entire-thread{
   width: 80%;
   margin: 20px auto 0px auto;
-  box-shadow: 0 0 4px grey;
+  // box-shadow: 0 0 4px grey;
   border-radius: 10px;
 }
 
@@ -110,8 +130,9 @@ margin-left: 5px;
 }
 
 .post span{
-display: inline;
-padding: 5px;
+  display: inline;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .top-post{
@@ -120,8 +141,9 @@ justify-content: space-between;
 }
 
 .post-info, .comment-info, .comment-form{
-display:flex;
-padding: 10px;
+  display:flex;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .post-content{
