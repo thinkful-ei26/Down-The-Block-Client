@@ -1,11 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { focusOn} from '../../actions/navigation';
+import { focusOn, display } from '../../actions/navigation';
 import { HashLink as Link } from 'react-router-hash-link';
 import './navbar.scss'
 
 export class Navbar extends React.Component{
   onClick(focus=""){
+    this.props.dispatch(display(focus));
     this.props.dispatch(focusOn(focus));
   }
 
@@ -16,7 +17,7 @@ export class Navbar extends React.Component{
         <div className = "right">
           <Link 
             className="link"
-            onClick={()=>this.onClick('login-username')} 
+            onClick={()=>this.onClick('loginUsername')} 
             to ="/#login">
             Login
           </Link>

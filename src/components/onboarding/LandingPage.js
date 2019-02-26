@@ -5,9 +5,10 @@ import LogInForm from './LogInForm';
 import SignUpForm from './SignUpForm';
 import './onboarding.scss';
 
-export function LandingPage(props) {
+export class LandingPage extends React.Component {
+    render(){
     // If we are logged in redirect straight to the user's home
-    if (props.loggedIn) {
+    if (this.props.loggedIn) {
         return <Redirect to="/home" />;
     }
 
@@ -18,17 +19,18 @@ export function LandingPage(props) {
             <section className="intro">
                 <h1>Find Out What's Going On In Your Neighborhood</h1>
                 <section className="form-section">
-                    <LogInForm />
-                    <SignUpForm/>
+                    {this.props.display==="loginUsername" ? <LogInForm /> : <SignUpForm/> }
                 </section>
             </section>
             
         </main>
     );
+    }
 }
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.currentUser !== null
+    loggedIn: state.auth.currentUser !== null,
+    display: state.nav.display,
 });
 
 export default connect(mapStateToProps)(LandingPage);

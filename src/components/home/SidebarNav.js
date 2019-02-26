@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Sidebar from "react-sidebar";
-import {display} from '../../actions/navigation'
+import { display } from '../../actions/navigation'
 import './sidebar.css'
 import { fetchPosts } from '../../actions/posts';
 import { fetchUsers } from '../../actions/users';
@@ -63,6 +63,7 @@ class SidebarNav extends React.Component{
 
   logOut() {
     this.props.dispatch(clearAuth());
+    this.props.dispatch(display('loginUsername'));
     clearAuthToken();
   }
 

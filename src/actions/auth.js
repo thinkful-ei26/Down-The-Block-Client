@@ -3,6 +3,7 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../components/common/local-storage';
+import {display} from './navigation';
 import {
     SET_AUTH_TOKEN,
     CLEAR_AUTH,
@@ -39,6 +40,7 @@ export const authError = error => ({
 const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
+    dispatch(display('neighbors'))
     dispatch(authSuccess(decodedToken.user));
     saveAuthToken(authToken);
 };
