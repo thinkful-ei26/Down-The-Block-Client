@@ -32,7 +32,15 @@ export class HomePage extends React.Component{
     return(
       <div className="home">
         <Geolocator/>
-        {this.props.coords && <SidebarNav setUser={this.setUser}/>}
+        {this.props.coords && 
+        <SidebarNav 
+          setUser={this.setUser}
+          chats={chats}
+          user={user}
+          activeChat={activeChat}
+          setActiveChat={this.setActiveChat}
+          onSendPrivateMessage={this.sendOpenPrivateMessage}
+        />}
         {this.props.coords && <Main/>}
         {this.props.showAnimation && <EyeAnimation/>}
         {this.props.geoError && !this.props.coords && <AddressForm />}

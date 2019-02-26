@@ -7,7 +7,7 @@ export default class SideBar extends Component{
 		return (
 			<div id="side-bar">
 					<div className="heading">
-						<div className="app-name">Community Chat</div>
+						<div className="app-name">Private Messages</div>
 					</div>
 					<div className="current-user">
 						<span>{user.name}</span>

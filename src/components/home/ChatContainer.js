@@ -17,10 +17,23 @@ export default class ChatContainer extends Component {
 
 	componentDidMount() {
 		const { socket } = this.props
-		socket.emit('COMMUNITY_CHAT', this.resetChat)
+		this.initSocket(socket);
 	}
 
-	/*
+	initSocket(socket){
+		socket.emit('COMMUNITY_CHAT', this.resetChat)
+		socket.on('PRIVATE_MESSAGE', this.addChat)
+		socket.on('connect', ()=>{
+			socket.emit('COMMUNITY_CHAT', this.resetChat)
+		})
+	}
+
+	sendOpenPrivateMessage = (reciever) => {
+		const { socket, user } = this.props
+		socket.emit('PRIVATE_MESSAGE', {reciever, sender:user.name})
+	}
+
+		/*
 	*	Reset the chat back to only the chat passed in.
 	* 	@param chat {Chat}
 	*/
@@ -36,7 +49,7 @@ export default class ChatContainer extends Component {
 	*	@param chat {Chat} the chat to be added.
 	*	@param reset {boolean} if true will set the chat as the only chat.
 	*/
-	addChat = (chat, reset)=>{
+	addChat = (chat, reset = false)=>{
 		const { socket } = this.props
 		const { chats } = this.state
 
@@ -59,7 +72,7 @@ export default class ChatContainer extends Component {
 	addMessageToChat = (chatId)=>{
 		return message => {
 			const { chats } = this.state
-			let newChats = chats.map((chat)=>{
+			let newChats = chats.map((chat)=>{ 
 				if(chat.id === chatId)
 					chat.messages.push(message)
 				return chat
@@ -117,6 +130,7 @@ export default class ChatContainer extends Component {
 	setActiveChat = (activeChat)=>{
 		this.setState({activeChat})
 	}
+
 	render() {
 		const { user } = this.props
 		const { activeChat } = this.state

@@ -32,7 +32,6 @@ class Layout extends Component {
 
 	render() {
     console.log('PROPS IN LAYOUT', this.props)
-		const { title } = this.props;
 		const { socket, user } = this.props;
 		return (
 			<div className="container">

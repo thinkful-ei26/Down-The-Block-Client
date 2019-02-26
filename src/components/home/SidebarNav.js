@@ -53,8 +53,12 @@ class SidebarNav extends React.Component{
           <button
             className="content"
             onClick={()=>{
-              this.onSetSidebarOpen(false)
-              this.props.socket.emit('VERIFY_USER', this.props.currentUser.username, this.setUser)
+              const { reciever } = user;
+		          const { onSendPrivateMessage } = this.props;
+
+              this.onSetSidebarOpen(false);
+              this.props.socket.emit('VERIFY_USER', this.props.currentUser, this.setUser);
+              onSendPrivateMessage(reciever);
               this.props.dispatch(display('ChatContainer')) 
               }
             }
@@ -163,6 +167,7 @@ const mapStateToProps = state => ({
   users: state.auth.users,
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
+  socket:state.socket.socket
 });
 
 export default connect(mapStateToProps)(SidebarNav)
