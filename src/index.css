@@ -13,13 +13,9 @@ body {
 }
 
 main{
-  padding-top: 60px;
+  padding-top: 55px;
 }
 
 h1,h2,h3,h4,h5,h6,p{
   margin:0;
 }
-
-/* input[type="file"]{
-  color: transparent;
-} */

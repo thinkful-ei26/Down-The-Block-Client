@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { focusOn} from '../../actions/navigation';
-import { clearAuth } from '../../actions/auth';
-import { clearAuthToken } from './local-storage';
 import { HashLink as Link } from 'react-router-hash-link';
 import './navbar.css'
 
@@ -34,11 +32,13 @@ export class Navbar extends React.Component{
   }
 
   render(){  
+    let className= !this.props.loggedIn ? "landing-page-logo" : "logo";
     return( 
       <nav className="main-navbar">
-        <Link className="logo" to="/home">
-          DownTheBlock
+        <Link className={`${className}`} to="/home">
+          <i class="fas fa-home"></i> DownTheBlock
         </Link>
+        <p className="tagline">Your Neighborhood At Your Fingertips</p>
         {this.navbarLinks()}
       </nav>
     );

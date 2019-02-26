@@ -1,5 +1,5 @@
 .main-navbar{
-  background-color: #124f36;
+  background-color: #06311f;
   position: fixed;
   width:100%;
   z-index: 1000;
@@ -7,34 +7,74 @@
 
 .right{
   float:right;
-  padding-right: 10px;
+  padding-right: 5px;
 }
 
 .icon.right:hover, .icon.right:focus{
   cursor:pointer;
 }
 
-.link, .logo{
+.logo, .landing-page-logo, .link{
   color: rgb(249, 249, 237);
   text-decoration: none;
   padding: 20px 10px;
-  text-align: center;
-  transition: background-color .5s;
   cursor:pointer;
   background-color: transparent;
   border: none;
-  font-family: Montserrat;
-  font-size: 18px;
+  font-family: Play;
   display: inline-block;
+  transition: color .5s;
 }
 
 .logo{
   text-align:left;
   font-weight: 700;
-  margin-left:50px;
+  margin-left:40px;
+  font-size: 20px;
+}
+
+.logo:focus, .landing-page-logo:focus{
+  outline: 0;
+}
+
+.logo:hover i, .landing-page-logo:hover i{
+  color: rgb(161, 146, 107);
+  transition: .5s;
+}
+
+.landing-page-logo{
+  text-align:left;
+  font-weight: 700;
+  margin-left:5px;
+  font-size: 18px;
 }
 
 .link:hover, .link:focus {
-  color: black;
+  color: rgb(161, 146, 107);
+  outline: 0;
 }
 
+.tagline{
+  color: rgb(249, 249, 237);
+  display: none;
+}
+
+@media(min-width: 750px){
+  .tagline{
+    display: inline;
+  }
+
+  .logo, .landing-page-logo{
+    font-size: 30px;
+  }
+
+  .landing-page-logo{
+    margin-left: 30px;
+  }
+
+  .right{
+    padding-right: 30px;
+    padding-top: 8px;
+    font-size: 18px;
+  }
+}

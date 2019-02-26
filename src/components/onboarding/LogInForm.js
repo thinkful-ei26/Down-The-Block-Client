@@ -28,7 +28,7 @@ export class LogInForm extends React.Component {
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
-                <h2>Sign in Below</h2>
+                <h2>Sign In</h2>
                 {error}
                 <label htmlFor="login-username">Username</label>
                 <Field
