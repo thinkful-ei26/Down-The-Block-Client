@@ -21,12 +21,18 @@ export class HomePage extends React.Component{
     this.props.dispatch(showAnimation(false));
   }
 
+  setUser = ()=>{
+    const { socket, user } = this.props; 
+    console.log('PROPS FROM HOMEPAGE IN SETUSER', this.props);
+		socket.emit('USER_CONNECTED', user);
+  }
+  
   render(){
     console.log(this.props.geoError);
     return(
       <div className="home">
         <Geolocator/>
-        {this.props.coords && <SidebarNav/>}
+        {this.props.coords && <SidebarNav setUser={this.setUser}/>}
         {this.props.coords && <Main/>}
         {this.props.showAnimation && <EyeAnimation/>}
         {this.props.geoError && !this.props.coords && <AddressForm />}
@@ -39,6 +45,8 @@ const mapStateToProps = state => ({
   coords: state.geolocation.coords,
   geoError: state.geolocation.error,
   showAnimation: state.nav.showAnimation,
+  user: state.auth.currentUser,
+  socket:state.socket.socket 
 });
 
 export default requiresLogin()(connect(mapStateToProps)(HomePage));
