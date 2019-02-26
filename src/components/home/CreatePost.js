@@ -12,6 +12,7 @@ export class CreatePost extends React.Component{
 
     this.state = {
       borderAround: '',
+      uploadedFile: false,
     }
   }
 
@@ -26,6 +27,7 @@ export class CreatePost extends React.Component{
     const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display, photo};
 
     this.props.dispatch(submitPost(postId, values, this.props.coords, this.props.display));
+    this.setState({uploadedFile: false});
     this.content.value = "";
     this.form.category.value="Other";
     this.props.dispatch(postBeingEdited(null))
@@ -84,7 +86,17 @@ export class CreatePost extends React.Component{
     }
   }
 
+  checkIfFile(){
+    if(this.img && this.img.files.length!==0){
+      this.setState({uploadedFile: true});
+    }
+    else{
+      this.setState({uploadedFile: false});
+    }
+  }
+
   render(){
+
     let editMode = this.props.editPost ? true : false;
 
     return(
@@ -171,8 +183,11 @@ export class CreatePost extends React.Component{
           accept="image/*"
           ref={input => this.img = input}
           type="file"
+          onChange={()=>this.checkIfFile()}
           />
-          <span>Select a file</span>
+          
+          <span><i class="fas fa-paperclip"></i> Upload Photo {this.state.uploadedFile && <i class="fas fa-file"></i>}</span>
+          
         </label>
        }
         {this.generateButtons()}

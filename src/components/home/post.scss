@@ -1,9 +1,28 @@
 @import "~../common/colors.scss";
+/*General*/
 
+.crime{
+  background: #e36060;
+}
+
+.personal{
+  background: #47b5c6;
+}
+
+.event{
+  background: #c093d7;
+}
+
+.other{
+  background: #f3c59c;
+}
+
+/*Post*/
 .entire-thread{
   width: 80%;
   margin: 20px auto 0px auto;
-  border: 1px solid lightgray;
+  box-shadow: 0 0 4px grey;
+  border-radius: 10px;
 }
 
 .post{
@@ -12,7 +31,7 @@
 }
 
 .comments-list{
-  background: $lightGray;
+  background: $gray;
 }
 
 .create-post-textarea{
@@ -23,13 +42,114 @@
   border: none;
   outline: 0;
   resize: none;
+  border-radius: 10px;
+  padding: 15px;
 }
 
+.options button {
+  background: $darkGreen;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  padding: 7px;
+  margin-top: 10px;
+  margin-left: 2px
+}
+
+.profile-photo{
+width:50px;
+height: 50px;
+border-radius: 50%;
+}
+
+.profile-photo-avatar, .comment-profile-photo-avatar{
+border-radius: 50%;
+color: white;
+background: black;
+display: flex;
+}
+
+.profile-photo-avatar{
+width:50px;
+height: 50px;
+font-size: 20px;
+}
+
+.comment-profile-photo-avatar{
+width:35px;
+height: 35px;
+font-size: 15px;
+}
+
+.initials{
+width: fit-content;
+margin: auto;
+}
+
+.comment-profile-photo{
+width:35px;
+height: 35px;
+border-radius: 50%;
+}
+
+.post-user-name{
+display: inline;
+}
+
+.comment-user-name{
+display:inline;
+vertical-align: top;
+}
+
+.comment-content{
+display: inline-block;
+padding: 10px;
+background: white;
+border-radius: 16px;
+margin-left: 5px;
+}
+
+.post span{
+display: inline;
+padding: 5px;
+}
+
+.top-post{
+display: flex;
+justify-content: space-between;
+}
+
+.post-info, .comment-info, .comment-form{
+display:flex;
+padding: 10px;
+}
+
+.post-content{
+padding: 0px 12px 10px 12px;
+}
+
+.name-and-date{
+padding: 6px 0px 0px 6px;
+}
+
+.comment-textarea{
+resize: none;
+outline: 0;
+border: 1px solid #a7a5a5;
+border-radius: 16px;
+width: 80%;
+padding: 10px;
+margin-left: 5px;
+}
+
+/*Create Post*/
 .post-form{
   background: white;
   width: 80%;
   margin: auto;
-  border: 1px solid #a7a5a5;
+  box-shadow: 0 0 4px grey;
+  border-radius: 10px;
 }
 
 .modal .post-form{
@@ -42,35 +162,39 @@ input[type="radio"] {
   opacity: 0;
 }
 
-.post-form label{
+.post-form label, .post-form button{
   display: inline-block;
-  border-radius: 4px;
-  padding: 5px;
+  border-radius: 5px;
+  padding: 7px;
   margin-right: 10px;
   cursor: pointer;
   opacity:.7;
   border: 2px solid transparent;
-}
-
-.post-form label:hover {
-  opacity: 1;
+  font-family: Play;
+  font-size: 15px;
+  transition: .5s;
 }
 
 .post-form button{
-  background: rgb(56, 98, 146);
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 7px;
-  margin-left: 10px;
+  background: $darkGreen;
+  color: $beige;
+  margin-right: 0px;
 }
 
-.post-form button:hover, .post button:hover, .options button:hover {
-  /* background-color: white; */
+.post-form label:hover, .post-form button:hover, .post-form label:focus, .post-form button:focus {
+  opacity: 1;
+}
+
+.bottom-options{
+  background: $gray;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.post-form label.border{
   font-weight: bold;
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 2px 6px 0 rgba(0,0,0,0.19);
+  opacity: 1;
 }
 
 label.image-input input[type="file"] {
@@ -79,152 +203,12 @@ label.image-input input[type="file"] {
 }
 
 .image-input {
-  background: #DDD;
-}
-.image-input:hover {
-  background: #CCC;
-}
-/* .image-input:active {
-  background: #CCF;
-}
-.image-input :invalid + span {
-  color: #A44;
-}
-.image-input :valid + span {
-  color: #4A4;
-} */
-
-.bottom-options{
-  background: rgb(249, 249, 237);
-  display: flex;
-  justify-content: space-between;
-}
-
-.crime{
-  background: #e36060;
-}
-
-.personal{
-  background: #45bb85;
-}
-
-.event{
-  background: #c093d7;
-}
-
-.other{
-  background: #f3c59c;
-}
-
-.post-form label.border{
-  font-weight: bold;
-  opacity: 1;
-}
-
-.post button {
-  background: rgb(56, 98, 146);
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 7px;
-  margin-left: 2px;
-}
-
-.options button {
-    background: rgb(56, 98, 146);
-    border: none;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-    padding: 7px;
-    margin-top: 10px;
-    margin-left: 2px
-}
-
-.profile-photo{
-  width:50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.profile-photo-avatar, .comment-profile-photo-avatar{
-  border-radius: 50%;
-  color: white;
-  background: black;
-  display: flex;
-}
-
-.profile-photo-avatar{
-  width:50px;
-  height: 50px;
-  font-size: 20px;
-}
-
-.comment-profile-photo-avatar{
-  width:35px;
-  height: 35px;
-  font-size: 15px;
-}
-
-.initials{
-  width: fit-content;
-  margin: auto;
-}
-
-.comment-profile-photo{
-  width:35px;
-  height: 35px;
-  border-radius: 50%;
-}
-
-.post-user-name{
-  display: inline;
-}
-
-.comment-user-name{
-  display:inline;
-  vertical-align: top;
-}
-
-.comment-content{
+  padding: 2px 5px;
   display: inline-block;
-  padding: 10px;
-  background: white;
-  border-radius: 16px;
-  margin-left: 5px;
+  color: $darkGreen;
 }
 
-.post span{
-  display: inline;
-  padding: 5px;
-}
+.image-input span{
+  color: $darkGreen;
 
-.top-post{
-  display: flex;
-  justify-content: space-between;
-}
-
-.post-info, .comment-info, .comment-form{
-  display:flex;
-  padding: 10px;
-}
-
-.post-content{
-  padding: 0px 12px 10px 12px;
-}
-
-.name-and-date{
-  padding: 6px 0px 0px 6px;
-}
-
-.comment-textarea{
-  resize: none;
-  outline: 0;
-  border: 1px solid #a7a5a5;
-  border-radius: 16px;
-  width: 80%;
-  padding: 10px;
-  margin-left: 5px;
 }

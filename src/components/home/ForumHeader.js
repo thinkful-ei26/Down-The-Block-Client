@@ -16,9 +16,16 @@ export class ForumHeader extends React.Component{
   render(){
     return(
       <header className="forum-header">
-        <input type="text" onChange={e=>this.props.dispatch(changeSearchTerm(e.target.value))} className="search-posts" placeholder="Search Forum"/> 
 
         {this.whichForum()}
+
+        <i class="fas fa-search"></i>
+
+        <input 
+          type="text" 
+          onChange={e=>this.props.dispatch(changeSearchTerm(e.target.value))} 
+          className="search-posts" 
+          placeholder="Search Forum"/> 
 
         <select className="filter-posts" onChange={e=>this.props.dispatch(changeCategoryFilter(e.target.value))}>
           <option value="">Filter Category:</option>
@@ -27,6 +34,8 @@ export class ForumHeader extends React.Component{
           <option value="Event">Event</option>
           <option value="Other">Other</option>
         </select>
+
+
       </header>
     );
   }

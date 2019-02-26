@@ -18,31 +18,6 @@ h1,h2,h3,h4,h5,h6,p{
   margin:0;
 }
 
-label.image-input input[type="file"] {
-  position:absolute;
-  top: -1000px;
-}
-
-.image-input {
-  border: 2px solid #AAA;
-  border-radius: 4px;
-  padding: 2px 5px;
-  margin: 2px;
-  background: #DDD;
-  display: inline-block;
-}
-.image-input:hover {
-  background: #CCC;
-}
-.image-input:active {
-  background: #CCF;
-}
-.image-input :invalid + span {
-  color: #A44;
-}
-.image-input :valid + span {
-  color: #4A4;
-}
 form .highlight-red{
   border: 2px solid $darkRed;
   border-radius: 5px;
