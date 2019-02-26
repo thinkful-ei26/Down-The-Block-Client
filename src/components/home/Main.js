@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import Forum from './Forum';
 import Chat from './Chat'
 import Layout from './Layout';
-import './main.css'
+import './main.scss'
 import SettingsPage from '../settings/SettingsPage';
 import About from '../common/About';
-import './main.scss'
+import './main.scss';
 
 export class Main extends React.Component{
 
