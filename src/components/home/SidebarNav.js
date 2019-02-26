@@ -75,7 +75,7 @@ class SidebarNav extends React.Component{
     if(this.props.loggedIn){
       return (
         <React.Fragment>
-          <h4>Account</h4>
+          <h4><i class="fas fa-users-cog"></i> Account</h4>
           <button
              className="content"
              onClick={()=>{
@@ -123,7 +123,7 @@ class SidebarNav extends React.Component{
           sidebar=
           {
             <nav className="sidebar">
-              <h4>Forums</h4>
+              <h4><i class="fas fa-edit"></i> Forums</h4>
               <button 
                 className="content" 
                 onClick={()=>{
@@ -142,7 +142,7 @@ class SidebarNav extends React.Component{
               }
               >City
               </button>
-              <h4>Chats</h4>
+              <h4><i class="fas fa-comments"></i> Chats</h4>
               {this.showAllUsers()}
               {this.generateNav()}
             </nav>
