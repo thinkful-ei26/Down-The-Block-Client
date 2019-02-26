@@ -1,3 +1,5 @@
+@import "~../common/colors.scss";
+
 .landing-page {
   font-family: Play;
 }
@@ -39,16 +41,22 @@
 }
 
 .intro h1{
-  color: rgb(249, 249, 237);
+  color: $beige;
 
 }
 
 .landing-page form{
-  background: rgb(249, 249, 237);
+  background: $beige;
   padding: 20px;
   font-size: 20px;
   width: 80%;
   margin: 40px 0;
+}
+
+.landing-page form input {
+  border-radius: 5px;
+  border: transparent;
+  background: $tan;
 }
 
 @media(min-width:950px){
@@ -65,15 +73,11 @@
   font-size: 16px;
 }
 
-/* .landing-page form input[type="file"]{
-  width: 90px;
-} */
-
 .landing-page .about{
   font-size: 25px;
   width: 80%;
   margin: auto;
-  color: rgb(249, 249, 237);
+  color: $beige;
 }
 
 .landing-page h1{

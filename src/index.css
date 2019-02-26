@@ -19,3 +19,8 @@ main{
 h1,h2,h3,h4,h5,h6,p{
   margin:0;
 }
+
+form .highlight-red{
+  border: 2px solid #eb5424;
+  border-radius: 5px;
+}

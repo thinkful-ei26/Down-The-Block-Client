@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import LogInForm from './LogInForm';
 import SignUpForm from './SignUpForm';
-import './onboarding.css';
+import './onboarding.scss';
 
 export function LandingPage(props) {
     // If we are logged in redirect straight to the user's home

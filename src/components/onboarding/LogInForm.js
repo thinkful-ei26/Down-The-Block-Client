@@ -30,20 +30,20 @@ export class LogInForm extends React.Component {
                 )}>
                 <h2>Sign In</h2>
                 {error}
-                <label htmlFor="login-username">Username</label>
                 <Field
                     component={Input}
                     ref={input => (this.input = input)}
                     type="text"
                     name="login-username"
                     id="login-username"
+                    label="Username"
                     validate={[required, nonEmpty]}
                 />
-                <label htmlFor="password">Password</label>
                 <Field
                     component={Input}
                     type="password"
                     name="password"
+                    label="Password"
                     validate={[required, nonEmpty]}
                 />
                

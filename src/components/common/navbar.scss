@@ -1,5 +1,7 @@
+@import "~./colors.scss";
+
 .main-navbar{
-  background-color: #06311f;
+  background-color: $darkGreen;
   position: fixed;
   width:100%;
   z-index: 1000;
@@ -15,7 +17,7 @@
 }
 
 .logo, .landing-page-logo, .link{
-  color: rgb(249, 249, 237);
+  color: $beige;
   text-decoration: none;
   padding: 20px 10px;
   cursor:pointer;
@@ -38,7 +40,7 @@
 }
 
 .logo:hover i, .landing-page-logo:hover i{
-  color: rgb(161, 146, 107);
+  color: $tan;
   transition: .5s;
 }
 
@@ -50,12 +52,12 @@
 }
 
 .link:hover, .link:focus {
-  color: rgb(161, 146, 107);
+  color: $tan;
   outline: 0;
 }
 
 .tagline{
-  color: rgb(249, 249, 237);
+  color: $beige;
   display: none;
 }
 

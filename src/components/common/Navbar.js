@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { focusOn} from '../../actions/navigation';
 import { HashLink as Link } from 'react-router-hash-link';
-import './navbar.css'
+import './navbar.scss'
 
 export class Navbar extends React.Component{
   onClick(focus=""){
@@ -36,7 +36,7 @@ export class Navbar extends React.Component{
     return( 
       <nav className="main-navbar">
         <Link className={`${className}`} to="/home">
-          <i class="fas fa-home"></i> DownTheBlock
+          <i className="fas fa-home"></i> DownTheBlock
         </Link>
         <p className="tagline">Your Neighborhood At Your Fingertips</p>
         {this.navbarLinks()}
