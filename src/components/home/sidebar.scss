@@ -32,15 +32,24 @@
   outline: 0;
   border: 2px solid transparent;
   margin-left: 5px;
-  margin-top: 20px;
-}
-
-.open-sidebar:focus, .open-sidebar:hover{
-  border: 2px solid $beige;
+  margin-top: 18px;
+  font-size: 20px;
   cursor: pointer;
 }
+
+// .open-sidebar:focus, .open-sidebar:hover{
+//   border: 2px solid $beige;
+//   cursor: pointer;
+// }
 
 .sidebar h4{
   color: $darkGreen;
   padding: 10px;
+}
+
+@media(min-width: 750px){
+  .open-sidebar{
+    font-size: 25px;
+    margin-top: 20px;
+  }
 }
