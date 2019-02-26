@@ -4,12 +4,18 @@ import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../common/input';
 import {login} from '../../actions/auth';
 import {required, nonEmpty} from '../common/validators';
-import {Link} from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
+import { display, focusOn } from '../../actions/navigation'
 
 export class LogInForm extends React.Component {
     onSubmit(values) {
-        return this.props.dispatch(login(values['login-username'], values.password));
+        return this.props.dispatch(login(values.loginUsername, values.password));
     }
+
+    onClick(focus=""){
+        this.props.dispatch(display(focus));
+        this.props.dispatch(focusOn(focus));
+      }
 
     render() {
         let error;
@@ -28,28 +34,40 @@ export class LogInForm extends React.Component {
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
-                <h2>Sign in Below</h2>
+                <h2>Sign In</h2>
                 {error}
-                <label htmlFor="login-username">Username</label>
                 <Field
                     component={Input}
                     ref={input => (this.input = input)}
                     type="text"
-                    name="login-username"
-                    id="login-username"
+                    name="loginUsername"
+                    id="loginUsername"
+                    label="Username"
                     validate={[required, nonEmpty]}
                 />
-                <label htmlFor="password">Password</label>
                 <Field
                     component={Input}
                     type="password"
                     name="password"
+                    label="Password"
                     validate={[required, nonEmpty]}
                 />
                
-                <button disabled={this.props.pristine || this.props.submitting}>
+                <button 
+                type="submit"
+                // disabled={this.props.pristine || this.props.submitting}
+                >
                     Log in
                 </button>
+                <div className="bottom-text">
+                    <p>Don't Have An Account? 
+                        <Link
+                        className="link-to-form"
+                        onClick={()=>this.onClick('registerUsername')} 
+                        to ="/#register"
+                        > Sign Up Here!</Link>
+                    </p>    
+                </div>
             </form>
         );
     }

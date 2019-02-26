@@ -1,0 +1,82 @@
+@import "~./colors.scss";
+
+.main-navbar{
+  background-color: $darkGreen;
+  position: fixed;
+  width:100%;
+  z-index: 1000;
+}
+
+.right{
+  float:right;
+  padding-right: 5px;
+}
+
+.icon.right:hover, .icon.right:focus{
+  cursor:pointer;
+}
+
+.logo, .landing-page-logo, .link{
+  color: $beige;
+  text-decoration: none;
+  padding: 20px 10px;
+  cursor:pointer;
+  background-color: transparent;
+  border: none;
+  font-family: Play;
+  display: inline-block;
+  transition: ease-in-out .5s;
+}
+
+.logo{
+  text-align:left;
+  font-weight: 700;
+  margin-left:40px;
+  font-size: 20px;
+}
+
+.logo:focus, .landing-page-logo:focus{
+  outline: 0;
+}
+
+.logo:hover i, .landing-page-logo:hover i{
+  color: $tan;
+  transition: ease-in-out .5s;
+}
+
+.landing-page-logo{
+  text-align:left;
+  font-weight: 700;
+  margin-left:5px;
+  font-size: 18px;
+}
+
+.link:hover, .link:focus {
+  color: $tan;
+  outline: 0;
+}
+
+.tagline{
+  color: $beige;
+  display: none;
+}
+
+@media(min-width: 750px){
+  .tagline{
+    display: inline;
+  }
+
+  .logo, .landing-page-logo{
+    font-size: 30px;
+  }
+
+  .landing-page-logo{
+    margin-left: 30px;
+  }
+
+  .right{
+    padding-right: 30px;
+    padding-top: 8px;
+    font-size: 18px;
+  }
+}

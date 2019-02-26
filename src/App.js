@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
 import LandingPage from './components/onboarding/LandingPage';
 import HomePage from './components/home/HomePage';
-import SettingsPage from './components/settings/SettingsPage';
 import {refreshAuthToken} from './actions/auth';
 import Navbar from './components/common/Navbar';
 import Chat from "./components/home/Chat"
 import About from './components/common/About'
+// import SidebarNav from './components/home/SidebarNav';
 
 export class App extends React.Component {
 
@@ -50,7 +50,6 @@ export class App extends React.Component {
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/home" component={HomePage}></Route>
                 <Route exact path="/about" component={About}></Route>
-                <Route exact path="/settings" component={SettingsPage}></Route>
             </div>
         );
     }
