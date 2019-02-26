@@ -1,14 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Forum from './Forum';
-import Chat from './Chat'
-import ChatContainer from './ChatContainer';
+import Layout from './Layout';
 import './main.css'
 
 export class Main extends React.Component{
 
   display(){
-    return this.props.display==="neighbors" || this.props.display==="city" ? <Forum/> : <ChatContainer/>
+    return this.props.display==="neighbors" || this.props.display==="city" ? <Forum/> : <Layout />
   }
 
   render(){

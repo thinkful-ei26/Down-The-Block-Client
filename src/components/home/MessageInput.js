@@ -54,6 +54,7 @@ export default class MessageInput extends Component {
 
 	render() {
 		const { message } = this.state
+		console.log('messageInput State', this.state);
 		return (
 			<div className="message-input">
 				<form 
@@ -62,7 +63,7 @@ export default class MessageInput extends Component {
 
 					<input 
 						id = "message"
-						// ref = {"messageinput"}
+						ref = {"messageinput"}
 						type = "text"
 						className = "form-control"
 						value = { message }
@@ -71,6 +72,7 @@ export default class MessageInput extends Component {
 						onKeyUp = { e => { e.keyCode !== 13 && this.sendTyping() } }
 						onChange = {
 							({target})=> {
+								console.log('target VALUE:', target.value); 
 								this.setState({message:target.value})
 							}
 						}

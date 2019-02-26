@@ -21,7 +21,8 @@ export default class Messages extends Component {
 	}
 	
 	render() {
-		const { messages, user, typingUsers } = this.props
+        const { messages, user, typingUsers } = this.props; 
+        console.log('PROPS in Messages', this.props); 
 		return (
 			<div ref='container'
 				className="thread-container">
@@ -35,8 +36,9 @@ export default class Messages extends Component {
 								>
 									<div className="time">{mes.time}</div>
 									<div className="data">
-										<div className="message">{mes.message}</div>
-										<div className="name">{mes.sender}</div>
+										<div className="message"><b>{mes.sender}:</b>  {mes.message}</div>
+										<hr></hr>
+										
 									</div>
 								</div>
 
@@ -54,7 +56,7 @@ export default class Messages extends Component {
 					}
 				</div>
 
-
+{/* <div className="name">{mes.sender}</div>  */}
 			</div>
 		);
 	}
