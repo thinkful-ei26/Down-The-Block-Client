@@ -27,6 +27,16 @@ export class Post extends React.Component {
   }
   
   render(){
+    let postPhoto=null;
+    if(this.props.photo){
+      console.log("PHOTO!");
+      postPhoto= <img src={this.props.photo.url} alt="post"/>    
+    }
+    else{
+      console.log('NO PHOTO');
+      postPhoto=null;    
+    }
+
     return(
       <section className="entire-thread">
         <article className='post'>
@@ -57,8 +67,7 @@ export class Post extends React.Component {
           </div>
 
           <p className="post-content">{this.props.content}</p>   
-          
-          {this.props.photo && <img src={this.props.photo.url} alt='photo' />}
+          {postPhoto}
 
         </article>
         <PostComments comments={this.props.comments}/>
