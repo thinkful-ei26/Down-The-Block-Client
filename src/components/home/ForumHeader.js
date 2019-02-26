@@ -37,15 +37,6 @@ export class ForumHeader extends React.Component{
           className="search-posts" 
           placeholder="Search Forum"/> 
 
-        <select className="filter-posts" onChange={e=>this.props.dispatch(changeCategoryFilter(e.target.value))}>
-          <option value="">Filter Category:</option>
-          <option value="Crime">Crime</option>
-          <option value="Personal">Personal</option>
-          <option value="Event">Event</option>
-          <option value="Other">Other</option>
-        </select>
-
-
       </header>
     );
   }
