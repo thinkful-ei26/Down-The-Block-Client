@@ -16,13 +16,21 @@ export class Post extends React.Component {
 
   edit(postId, content, category){
     if(this.props.userId.id===this.props.loggedInUserId){
-      return <button onClick={()=>this.props.dispatch(postBeingEdited({postId, content, category}))} >Edit</button>
+      return (
+        <button 
+          onClick={()=>this.props.dispatch(postBeingEdited({postId, content, category}))} >
+          <i class="fas fa-pencil-alt"></i>
+        </button>)
     }  
   }
 
   delete(postId){
     if(this.props.userId.id===this.props.loggedInUserId){
-      return <button onClick={()=>this.props.dispatch(deletePost(postId))} >Delete</button>
+      return (
+        <button 
+          onClick={()=>this.props.dispatch(deletePost(postId))} >
+          <i class="fas fa-trash"></i>
+        </button>)
     }
   }
   
@@ -31,12 +39,9 @@ export class Post extends React.Component {
     return(
       <section className={`entire-thread border-${this.props.category}`}>
         <article className='post'>
-          <div className="top-post">
-            {/* <span className={`${this.props.category}`.toLowerCase()}>{this.props.category}</span> */}
             <div className="options">
-              {this.delete(this.props.postId)}
               {this.edit(this.props.postId, this.props.content, this.props.category)}
-            </div>
+              {this.delete(this.props.postId)}
           </div>
             
           <div className="post-info">
