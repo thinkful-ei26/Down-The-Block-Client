@@ -23,23 +23,13 @@ export class ForumHeader extends React.Component{
       {value: "Other", label: "Other"}
     ];
 
-    // const selectComponent = () => (
-    //   <Select options={filterOptions} />
-    // );
     return(
       <header className="forum-header">
         <input type="text" onChange={e=>this.props.dispatch(changeSearchTerm(e.target.value))} className="search-posts" placeholder="Search Forum"/> 
 
         {this.whichForum()}
-        <Select options={filterOptions} placeholder="Filter Category" className="filter-posts" onChange={option=>this.props.dispatch(changeCategoryFilter(option.value))} />
+        <Select options={filterOptions} placeholder="Filter Category" className="filter-posts" onChange={option => this.props.dispatch(changeCategoryFilter(option.value))} />
 
-        {/* <select className="filter-posts" onChange={e=>this.props.dispatch(changeCategoryFilter(e.target.value))}>
-          <option value="">Filter Category:</option>
-          <option value="Crime">Crime</option>
-          <option value="Personal">Personal</option>
-          <option value="Event">Event</option>
-          <option value="Other">Other</option>
-        </select> */}
       </header>
     );
   }
