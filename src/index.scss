@@ -1,3 +1,5 @@
+@import "~./components/common/colors.scss";
+
 body {
   margin: 0;
   padding: 0;
@@ -13,26 +15,12 @@ body {
 }
 
 main{
-  padding-top: 60px;
+  padding-top: 55px;
 }
 
 h1,h2,h3,h4,h5,h6,p{
   margin:0;
 }
-
-/* input[type="file"]{
-  color: transparent;
-} */
-
-/* button {
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
-} */
-
-/* button:hover {
-  background-color: #4CAF50;
-  color: white;
-} */
 
 label.image-input input[type="file"] {
   position:absolute;
@@ -58,4 +46,7 @@ label.image-input input[type="file"] {
 }
 .image-input :valid + span {
   color: #4A4;
+form .highlight-red{
+  border: 2px solid $darkRed;
+  border-radius: 5px;
 }

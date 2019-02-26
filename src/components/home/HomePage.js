@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import Sidebar from './Sidebar';
+import SidebarNav from './SidebarNav';
 import Main from './Main';
 import Geolocator from './Geolocator';
 import AddressForm from './AddressForm';
@@ -26,7 +26,7 @@ export class HomePage extends React.Component{
     return(
       <div className="home">
         <Geolocator/>
-        {this.props.coords && <Sidebar/>}
+        {this.props.coords && <SidebarNav/>}
         {this.props.coords && <Main/>}
         {this.props.showAnimation && <EyeAnimation/>}
         {this.props.geoError && !this.props.coords && <AddressForm />}

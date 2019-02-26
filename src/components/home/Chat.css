@@ -16,7 +16,7 @@ html, body, input {
   padding: 0;
  }
 
- .type_msg {
+ /* .type_msg {
   border: 2px solid #eb5424;
   border-radius: 5px;
   padding: 5px;
@@ -37,5 +37,5 @@ html, body, input {
   background: #FFF;
   border: 2px solid #eb5424;
   height: 550px;
- }
+ } */
 

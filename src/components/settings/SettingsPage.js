@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import UpdateAccountForm from './UpdateAccountForm';
 import UpdatePasswordForm from './UpdatePasswordForm';
-import requiresLogin from '../common/requires-login';
 import {changeSuccessMessage, updateProfilePhoto} from '../../actions/users';
 import './settings.css'
 
@@ -14,7 +13,6 @@ export class SettingsPage extends React.Component{
   componentDidUpdate(){
     window.scrollTo(0, 0); //make it jump to top
     if(this.props.successMessage){
-    
       //set a timer that changes the message back to null after seven seconds of displaying it
     setTimeout(
         function() {
@@ -31,11 +29,11 @@ export class SettingsPage extends React.Component{
     if(this.img.files){
       let updatedPhoto= this.img.files[0];
       return this.props.dispatch(updateProfilePhoto(updatedPhoto));
-    // }
     }
   }
 
   render(){
+    console.log('CURRENT USER', this.props.currentUser)
     return(
       <div className="settings">
         <main className="settings-main">
@@ -72,9 +70,12 @@ export class SettingsPage extends React.Component{
   }
 }
 
-const mapStateToProps = state => ({
-  successMessage: state.auth.successMessage,
-  currentUser: state.auth.currentUser,
-});
+const mapStateToProps = state => {
+  console.log('IN SETTINGS, STATE:', state);
+  return {
+    successMessage: state.auth.successMessage,
+    currentUser: state.auth.currentUser,
+  }
+};
 
-export default requiresLogin()(connect(mapStateToProps)(SettingsPage));
+export default connect(mapStateToProps)(SettingsPage);

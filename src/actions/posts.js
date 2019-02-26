@@ -206,10 +206,3 @@ import {
       type: UPDATED_POST,
       post
   })
-
-//   const mapStateToProps = state => {
-//       return {
-//           socket:state.socket
-//       }
-//   }
-//   export default connect(mapStateToProps)(fetchPosts);

@@ -1,25 +1,36 @@
-.sidebar{
-  position: absolute;
-  top: 60px;
-  background-color: rgb(56, 98, 146);
-  height: 100vh;
-  position: fixed;
-  width: 200px;
-  padding: 10px;
-}
-
-.sidebar button{
+.sidebar .content{
   display: block;
-  color: black;
+  color:  rgb(249, 249, 237);
   background: none;
   border: none;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
   padding: 20px;
+  text-decoration: none;
 }
 
-.sidebar button:hover, .sidebar button:focus{
+.sidebar .content:hover, .sidebar .content:focus{
   outline: 0;
-  color: white
+  color: #124f36;
+}
+
+.open-sidebar{
+  position: fixed;
+  z-index: 1000;
+  color: rgb(249, 249, 237);
+  background: transparent;
+  outline: 0;
+  border: 2px solid transparent;
+  margin-left: 5px;
+  margin-top: 20px;
+}
+
+.open-sidebar:focus, .open-sidebar:hover{
+  border: 2px solid rgb(249, 249, 237);
+  cursor: pointer;
+}
+
+.sidebar h4{
+  color: rgb(249, 249, 237);
 }

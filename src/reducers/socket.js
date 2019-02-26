@@ -14,3 +14,5 @@ export default (state=initialState, action) => {
             return state
     }
 }
+
+//only if its logged in should the socket  exist
