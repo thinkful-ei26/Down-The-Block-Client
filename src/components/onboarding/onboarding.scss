@@ -55,7 +55,7 @@
 }
 
 .landing-page label{
-  flex:1;
+  flex:.5;
   padding: 5px;
   font-size: 15px;
 }
@@ -136,6 +136,11 @@
 @media(min-width:400px){
   .landing-page label{
     font-size: 20px;
+  }
+
+  .landing-page form{
+    background: $beige;
+    padding: 20px 40px;
   }
 }
 
