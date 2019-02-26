@@ -26,6 +26,7 @@
   font-family: Play;
   display: inline-block;
   transition: ease-in-out .5s;
+  font-size: 15px;
 }
 
 .logo{
@@ -77,6 +78,9 @@
   .right{
     padding-right: 30px;
     padding-top: 8px;
+  }
+
+  .link{
     font-size: 18px;
   }
 }

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import LogInForm from './LogInForm';
 import SignUpForm from './SignUpForm';
+import About from '../common/About';
 import './onboarding.scss';
 
 export class LandingPage extends React.Component {
@@ -22,6 +23,7 @@ export class LandingPage extends React.Component {
                     {this.props.display==="loginUsername" ? <LogInForm /> : <SignUpForm/> }
                 </section>
             </section>
+            <About/>
             
         </main>
     );

@@ -15,18 +15,18 @@ export class Navbar extends React.Component{
     if(!this.props.loggedIn){
       return (
         <div className = "right">
-          <Link 
+          <button 
             className="link"
             onClick={()=>this.onClick('loginUsername')} 
-            to ="/#login">
+            >
             Login
-          </Link>
-          <Link 
+          </button>
+          <button 
             className="link"
             onClick={()=>this.onClick('registerUsername')} 
-            to ="/#register">
+            >
             Register
-          </Link>
+          </button>
         </div>
       )
     }

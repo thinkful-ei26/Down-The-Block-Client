@@ -5,9 +5,6 @@ import LandingPage from './components/onboarding/LandingPage';
 import HomePage from './components/home/HomePage';
 import {refreshAuthToken} from './actions/auth';
 import Navbar from './components/common/Navbar';
-import Chat from "./components/home/Chat"
-import About from './components/common/About'
-// import SidebarNav from './components/home/SidebarNav';
 
 export class App extends React.Component {
 
@@ -49,7 +46,6 @@ export class App extends React.Component {
                 <Route path="/" component={Navbar} />
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/home" component={HomePage}></Route>
-                <Route exact path="/about" component={About}></Route>
             </div>
         );
     }
