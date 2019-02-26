@@ -2,12 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Sidebar from "react-sidebar";
 import { display } from '../../actions/navigation'
-import './sidebar.css'
 import { fetchPosts } from '../../actions/posts';
 import { fetchUsers } from '../../actions/users';
-import { HashLink as Link } from 'react-router-hash-link';
 import { clearAuth } from '../../actions/auth';
 import { clearAuthToken } from '../common/local-storage';
+import './sidebar.scss';
 
 const mql = window.matchMedia(`(min-width: 900px)`);
 
@@ -107,7 +106,6 @@ class SidebarNav extends React.Component{
   }
 
  render(){
-   console.log('CURRENT USER', this.props.currentUser)
     return(
       <React.Fragment>
         {!this.state.sidebarDocked && 
@@ -147,7 +145,7 @@ class SidebarNav extends React.Component{
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { position: 'fixed', top: 60, background: 'black', width: 200, padding: 10} , root: {position: 'relative'}  }}
+          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(229, 228, 188)', width: 200} , root: {position: 'relative'}  }}
         >
         </Sidebar>
         </React.Fragment>

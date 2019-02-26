@@ -1,24 +1,33 @@
+@import "~../common/colors.scss";
+.sidebar{
+  margin-top:20px;
+}
+
 .sidebar .content{
   display: block;
-  color:  rgb(249, 249, 237);
+  color:  $darkGreen;
   background: none;
   border: none;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
-  padding: 20px;
+  margin: 20px 0;
   text-decoration: none;
+  width: 200px;
+  text-align: left;
+  padding-left:20px;
 }
 
 .sidebar .content:hover, .sidebar .content:focus{
   outline: 0;
-  color: #124f36;
+  background: $darkGreen;
+  color: $beige;
 }
 
 .open-sidebar{
   position: fixed;
   z-index: 1000;
-  color: rgb(249, 249, 237);
+  color: $beige;
   background: transparent;
   outline: 0;
   border: 2px solid transparent;
@@ -27,10 +36,11 @@
 }
 
 .open-sidebar:focus, .open-sidebar:hover{
-  border: 2px solid rgb(249, 249, 237);
+  border: 2px solid $beige;
   cursor: pointer;
 }
 
 .sidebar h4{
-  color: rgb(249, 249, 237);
+  color: $darkGreen;
+  padding: 10px;
 }
