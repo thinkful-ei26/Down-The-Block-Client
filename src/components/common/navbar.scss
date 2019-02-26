@@ -25,7 +25,7 @@
   border: none;
   font-family: Play;
   display: inline-block;
-  transition: color .5s;
+  transition: ease-in-out .5s;
 }
 
 .logo{
@@ -41,7 +41,7 @@
 
 .logo:hover i, .landing-page-logo:hover i{
   color: $tan;
-  transition: .5s;
+  transition: ease-in-out .5s;
 }
 
 .landing-page-logo{
