@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PostComments from './PostComments';
 import { postBeingEdited, deletePostSuccess, deletePost } from '../../actions/posts';
-import './post.css';
+import './post.scss';
 import PostAddComment from './PostAddComment';
 
 export class Post extends React.Component {

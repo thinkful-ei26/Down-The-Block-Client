@@ -3,7 +3,7 @@ import ForumHeader from './ForumHeader';
 import PostsList from './PostsList';
 import CreatePost from './CreatePost';
 import {connect} from 'react-redux';
-import './main.css'
+import './main.scss'
 
 export class Forum extends React.Component{
   componentDidMount(){

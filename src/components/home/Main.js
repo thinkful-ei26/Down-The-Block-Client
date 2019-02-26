@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Forum from './Forum';
 import Chat from './Chat'
-import './main.css'
 import SettingsPage from '../settings/SettingsPage';
 import About from '../common/About';
+import './main.scss'
 
 export class Main extends React.Component{
 

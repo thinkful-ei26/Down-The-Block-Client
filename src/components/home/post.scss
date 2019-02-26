@@ -1,11 +1,18 @@
+@import "~../common/colors.scss";
+
 .entire-thread{
-  background: rgb(249, 249, 237);
   width: 80%;
   margin: 20px auto 0px auto;
+  border: 1px solid lightgray;
 }
 
 .post{
-  border-bottom: 1px solid #a7a5a5;
+  background: white;
+  border-radius: 5px;
+}
+
+.comments-list{
+  background: $lightGray;
 }
 
 .create-post-textarea{
