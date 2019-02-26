@@ -3,7 +3,7 @@
   margin-top:20px;
 }
 
-.sidebar .content{
+.sidebar .content, .sidebar .nav-parent{
   display: block;
   color:  $darkGreen;
   background: none;
@@ -44,7 +44,7 @@
 //   cursor: pointer;
 // }
 
-.sidebar h4{
+.sidebar .nav-parent{
   color: $darkGreen;
   padding: 10px;
   font-family: Play;
