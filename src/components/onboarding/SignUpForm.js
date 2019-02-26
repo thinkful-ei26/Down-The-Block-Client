@@ -87,17 +87,16 @@ export class SignUpForm extends React.Component {
                 <br></br>
                 <button
                     type="submit"
-                    // disabled={this.props.pristine || this.props.submitting}
+                    className="submit"
                     >
                     Register
                 </button>
                 <div className="bottom-text">
                     <p>Already Have An Account? 
-                        <Link
+                        <button
                         className="link-to-form"
                         onClick={()=>this.onClick('loginUsername')} 
-                        to ="/#login"
-                        > Sign In Here!</Link>
+                        > Sign In Here!</button>
                     </p>    
                 </div>
             </form>
