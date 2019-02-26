@@ -17,8 +17,8 @@ export class CreatePost extends React.Component{
 
   onSubmit(e){
     e.preventDefault();
-    let photo = null;
-    if(this.img && this.img.files){
+    let photo=undefined;
+    if(this.img && this.img.files.length!==0){
       photo= this.img.files[0];
       console.log('THERES A FILE', photo)
     }
