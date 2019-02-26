@@ -1,5 +1,5 @@
 .main{
-  margin-left: 200px;
+  margin: 0;
 }
 
 .modal {
@@ -14,4 +14,10 @@
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+@media(min-width: 900px){
+  .main{
+    margin-left: 200px;
+  }
 }
