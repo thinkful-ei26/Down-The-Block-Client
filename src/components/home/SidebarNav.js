@@ -42,6 +42,10 @@ class SidebarNav extends React.Component{
     this.props.dispatch(fetchUsers(this.props.coords));
   }
 
+  setUser = (user)=>{
+    this.props.setUser(user.username)
+  }
+  
   showAllUsers(){
     if(this.props.users){
       return this.props.users.map((user,index)=> {
@@ -50,7 +54,8 @@ class SidebarNav extends React.Component{
             className="content"
             onClick={()=>{
               this.onSetSidebarOpen(false)
-              this.props.dispatch(display('chat'))
+              this.props.socket.emit('VERIFY_USER', this.props.currentUser.username, this.setUser)
+              this.props.dispatch(display('ChatContainer')) 
               }
             }
             key={index}>{user.firstName}
