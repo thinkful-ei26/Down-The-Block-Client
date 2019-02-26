@@ -24,7 +24,7 @@ class Sidebar extends React.Component{
               this.props.dispatch(display('ChatContainer'))  
             }
           }>
-            Users
+            Neighborhood-Watch
           </button>
         </nav>
       </aside>
