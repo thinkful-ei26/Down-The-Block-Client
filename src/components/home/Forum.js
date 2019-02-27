@@ -14,8 +14,9 @@ export class Forum extends React.Component{
         <ForumHeader type={this.props.display} />
         {this.props.coords && 
         <React.Fragment>
-        <CreatePost editPost={this.props.postBeingEdited}/>
-        <PostsList/>
+          <CreatePost 
+            editPost={this.props.postBeingEdited}/>
+          <PostsList/>
         </React.Fragment>
         }
       </section>
@@ -24,7 +25,6 @@ export class Forum extends React.Component{
 }
 
 const mapStateToProps = state => {
-  console.log("IN FORUM, STATE IS", state)
   return{
     display: state.nav.display,
     postBeingEdited: state.posts.postBeingEdited,
