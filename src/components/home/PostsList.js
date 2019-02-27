@@ -6,6 +6,7 @@ import { filterPostsBySearch, filterByCategory } from '../common/helper-function
 
 export class PostsList extends React.Component{
   componentDidMount(){
+    console.log('postlists mount', this.props.display)
     this.props.dispatch(fetchPosts(this.props.coords, this.props.display));
   }
 
