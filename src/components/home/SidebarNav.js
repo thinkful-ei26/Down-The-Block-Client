@@ -18,7 +18,7 @@ class SidebarNav extends React.Component{
       sidebarOpen: false,
       showForum: true,
       showChat: true,
-      showAccount: false
+      showAccount: true,
     };
 
     this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
@@ -58,7 +58,7 @@ class SidebarNav extends React.Component{
             onClick={()=>{
               this.onSetSidebarOpen(false)
               this.props.socket.emit('VERIFY_USER', this.props.currentUser.username, this.setUser)
-              this.props.dispatch(display('ChatContainer')) 
+              this.props.dispatch(display('ChatContainer'))
               }
             }
             key={index}>{user.firstName}
@@ -74,16 +74,8 @@ class SidebarNav extends React.Component{
     clearAuthToken();
   }
 
-  toggleForumChildren(){
-    this.setState({showForum: !this.state.showForum})
-  }
-
-  toggleChatChildren(){
-    this.setState({showChat: !this.state.showChat})
-  }
-
-  toggleAccountChildren(){
-    this.setState({showAccount: !this.state.showAccount})
+  toggleCategory(category){
+    this.setState({[category]: !this.state[category]});
   }
 
  render(){
@@ -102,11 +94,10 @@ class SidebarNav extends React.Component{
               <button
                 className="nav-parent"
                 onClick={()=>{
-                  this.toggleForumChildren()
+                  this.toggleCategory('showForum')
                 }}
               >
-              <i class="fas fa-edit"></i>
-                Forums
+              <i class="fas fa-edit"></i> Forums
               </button>
               {this.state.showForum && <section className="forum-children">
                 <button 
@@ -130,19 +121,17 @@ class SidebarNav extends React.Component{
               <button
                 className="nav-parent"
                 onClick={()=>{
-                  this.toggleChatChildren()
+                  this.toggleCategory('showChat')
                 }}
-              ><i class="fas fa-comments"></i> 
-              Chats
+              ><i class="fas fa-comments"></i> Chats
               </button>
               {this.state.showChat && this.showAllUsers()}
               <button
                 className="nav-parent"
                 onClick={()=>{
-                  this.toggleAccountChildren()
+                  this.toggleCategory('showAccount')
                 }}
-              ><i class="fas fa-users-cog"></i>
-              Account
+              ><i class="fas fa-users-cog"></i> Account
               </button>
               {this.state.showAccount && <section className="account-children">
                 <button

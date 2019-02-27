@@ -15,11 +15,17 @@
   text-decoration: none;
   width: 200px;
   text-align: left;
-  padding:10px 20px;
+  padding:10px 40px;
   font-family: Play;
 }
 
-.sidebar .content:hover, .sidebar .content:focus, .sidebar .nav-parent:hover{
+.sidebar .nav-parent{
+  color: $darkGreen;
+  padding: 10px;
+  font-size: 17px;
+}
+
+.sidebar .content:hover, .sidebar .content:focus, .sidebar .nav-parent:hover, .sidebar .nav-parent:focus{
   outline: 0;
   background: $darkGreen;
   color: $beige;
@@ -37,18 +43,6 @@
   font-size: 20px;
   cursor: pointer;
   transition: ease-in-out .5s;
-}
-
-// .open-sidebar:focus, .open-sidebar:hover{
-//   border: 2px solid $beige;
-//   cursor: pointer;
-// }
-
-.sidebar .nav-parent{
-  color: $darkGreen;
-  padding: 10px;
-  font-family: Play;
-  font-size: 17px;
 }
 
 @media(min-width: 750px){

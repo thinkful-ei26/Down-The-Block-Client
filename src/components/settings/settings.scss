@@ -1,5 +1,7 @@
+@import "~../common/colors.scss";
+
 .settings button{
-  background: rgb(56, 98, 146);
+  background: $darkGreen;
   border: none;
   border-radius: 4px;
   color: white;

@@ -3,69 +3,73 @@ import {connect} from 'react-redux';
 import UpdateAccountForm from './UpdateAccountForm';
 import UpdatePasswordForm from './UpdatePasswordForm';
 import {changeSuccessMessage, updateProfilePhoto} from '../../actions/users';
-// import './settings.css'
+import './settings.scss'
 
 export class SettingsPage extends React.Component{
   componentDidMount(){
-    document.title = 'Account Settings';
+    document.title = 'Settings';
   }
 
   componentDidUpdate(){
     window.scrollTo(0, 0); //make it jump to top
     if(this.props.successMessage){
       //set a timer that changes the message back to null after seven seconds of displaying it
-    setTimeout(
-        function() {
-          this.props.dispatch(changeSuccessMessage(null));
-        }
-        .bind(this),
-        7000
-    );
+      setTimeout(
+          function() {
+            this.props.dispatch(changeSuccessMessage(null));
+          }
+          .bind(this),
+          7000
+      );
     }
   }
 
   onSubmit(e){
     e.preventDefault();
-    if(this.img.files){
+    if(this.img && this.img.files.length!==0){
       let updatedPhoto= this.img.files[0];
       return this.props.dispatch(updateProfilePhoto(updatedPhoto));
     }
   }
 
   render(){
-    console.log('CURRENT USER', this.props.currentUser)
     return(
-      <div className="settings">
-        <main className="settings-main">
-          {this.props.successMessage &&
-          <div className="updated-message" aria-live="polite">
-            {this.props.successMessage}
-          </div>
+      <main className="settings">
+        {this.props.successMessage &&
+        <div className="updated-message" aria-live="polite">
+          {this.props.successMessage}
+        </div>
+        }
+        <div className="profile-photo-avatar">
+          {!this.props.currentUser.photo ?
+            <p className="initials">
+              {this.props.currentUser.firstName[0]}
+              {this.props.currentUser.lastName[0]}
+            </p>
+            :
+            <img className="profile-photo" src={this.props.currentUser.photo.url} alt="profile"/>
           }
-          <div className="profile-photo-avatar">
-            {!this.props.currentUser.photo ?
-              <p className="initials">
-                {this.props.currentUser.firstName[0]}
-                {this.props.currentUser.lastName[0]}
-              </p>
-              :
-              <img className="profile-photo" src={this.props.currentUser.photo.url} alt="profile"/>
-            }
-          </div>
-          <label className="image-input">
-            <span>Update Your Profile Photo</span>
-            <input
-              onChange={(e)=>this.onSubmit(e)}
-              accept="image/*"
-              ref={input => this.img = input}
-              type="file"
-            />
-          </label>
+        </div>
+        <button 
+            type="button"
+            className="upload-photo"
+            onClick={()=>this.img.click()}
+        >
+            <i class="fas fa-camera"></i> Update Profile Picture 
+        </button>
+        <input 
+            type="file"
+            accept="image/*"
+            className="image-input"
+            name="img"
+            id="img"
+            onChange={()=>this.onSubmit()}
+            ref={input => this.img = input} 
+        />
 
-          <UpdateAccountForm/>
-          <UpdatePasswordForm/>
-        </main>
-      </div>
+        <UpdateAccountForm/>
+        <UpdatePasswordForm/>
+      </main>
     );
   }
 }

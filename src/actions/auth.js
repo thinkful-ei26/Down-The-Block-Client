@@ -64,9 +64,10 @@ export const login = (username, password) => dispatch => {
             .then(res => res.json())
             .then(({authToken}) => storeAuthInfo(authToken, dispatch))
             .catch(err => {
-                const {code} = err;
+                console.log('ERROR', err);
+                const {status} = err;
                 const message =
-                    code === 401
+                    status === 401
                         ? 'Incorrect username or password'
                         : 'Unable to login, please try again';
                 dispatch(authError(err));

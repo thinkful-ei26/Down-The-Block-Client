@@ -24,6 +24,16 @@ form .highlight-red{
   border-radius: 5px;
 }
 
+.form-error{
+  color: #aa2d2d;
+  text-align: center;
+  padding-top: 10px;
+}
+
+button:focus{
+  outline: 0;
+}
+
 /*CUSTOM FILE INPUT*/
 .image-input{
   display: none;

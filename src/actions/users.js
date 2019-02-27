@@ -1,7 +1,7 @@
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import { normalizeResponseErrors } from './utils';
-import { refreshProfileAuthToken } from './auth';
+import { refreshProfileAuthToken, authError } from './auth';
 import { UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR } from './types';
 import {
   USER_COORDS_REQUEST,
@@ -26,14 +26,24 @@ export const registerUser = user => dispatch => {
             res.json();
         })
         .catch(err => {
-            const {reason, message, location} = err;
-            if (reason === 'ValidationError') {
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
+            console.log('ERROR', err);
+            const {code, location, message, status } = err;
+            const str =
+                code === 401
+                    ? 'Incorrect username or password'
+                    : status === 422 && location==='registerUsername'
+                    ? message
+                    : 'Unable to login, please try again';
+            dispatch(authError(err));
+            // Could not authenticate, so return a SubmissionError for Redux
+            // Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: str,
+                    _error: str
+                    
+                })
+            );
         });
 };
 

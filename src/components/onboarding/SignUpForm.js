@@ -3,9 +3,8 @@ import {Field, reduxForm, focus} from 'redux-form';
 import {registerUser} from '../../actions/users';
 import {login} from '../../actions/auth';
 import Input from '../common/input';
-import { HashLink as Link } from 'react-router-hash-link';
 import { display, focusOn } from '../../actions/navigation'
-import {required, nonEmpty, matches, length, isTrimmed, sizeLimit } from '../common/validators';
+import {required, nonEmpty, matches, length, isTrimmed } from '../common/validators';
 
 const passwordLength = length({min: 8, max: 72});
 const matchesPassword = matches('password');
@@ -44,6 +43,15 @@ export class SignUpForm extends React.Component {
       }
 
     render() {
+        let error;
+        if (this.props.error) {
+            error = (
+                <div className="form-error" aria-live="polite">
+                    {this.props.error}
+                </div>
+            );
+        }
+
         return (
             <form
                 id="register"
@@ -52,6 +60,8 @@ export class SignUpForm extends React.Component {
                     this.onSubmit(values)
                 )}>
                 <h2>Register</h2>
+
+                {error}
 
                 <Field
                     component={Input}
@@ -130,7 +140,7 @@ export class SignUpForm extends React.Component {
 export default reduxForm({
     form: 'registration',
     onSubmitFail: (errors, dispatch) =>{
-        console.log("ERROR", errors)
+        console.log('IN FORM', errors)
         dispatch(focus('registration', Object.keys(errors)[0]))
-    }
+    },
 })(SignUpForm);
