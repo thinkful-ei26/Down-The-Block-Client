@@ -42,7 +42,6 @@ export class CreatePost extends React.Component{
     } 
     //listens for the server when the new post has been created. ONLY do something with this post if the user's geofilter is within the radius of this post
     this.props.socket.on('new_post', post => {
-      console.log('THE POST GOTTEN BACK FROM THE SERVER SOCKET IS', post);
       //only do something with the post received if its within radius
       if(withinRadius(post.coordinates, this.props.coords, this.props.display)){
         this.props.dispatch(addNewPost(post));
@@ -63,7 +62,6 @@ export class CreatePost extends React.Component{
 
   generateButtons(){
     if(this.props.editPost){
-      //have save and cancel buttons
       return(
         <section>
           <button 
@@ -77,7 +75,6 @@ export class CreatePost extends React.Component{
       )
     }
     else{
-      //have a post button 
       return (
         <button 
           type="submit" >Post

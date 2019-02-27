@@ -19,30 +19,25 @@
 }
 
 .border-Crime{
-  // border: 1px solid #e36060;
   box-shadow: 0 0 4px #e36060;
 }
 
 .border-Personal{
   box-shadow: 0 0 4px #47b5c6;
-  // border: 1px solid #47b5c6;
 }
 
 .border-Event{
   box-shadow: 0 0 4px #c093d7;
-  // border: 1px solid #c093d7;
 }
 
 .border-Other{
   box-shadow: 0 0 4px #f3c59c;
-  // border: 1px solid #f3c59c;
 }
 
 /*POST*/
 .entire-thread{
   width: 80%;
   margin: 20px auto 0px auto;
-  // box-shadow: 0 0 4px grey;
   border-radius: 10px;
 }
 
@@ -201,8 +196,7 @@ vertical-align: top;
 }
 
 .modal .post-form{
-  margin-left: 200px;
-  margin-top: 60px;
+  margin-top: 70px;
 }
 
 input[type="radio"] {
@@ -235,14 +229,17 @@ input[type="radio"] {
 
 .post-form label:hover, .post-form button:hover, .post-form label:focus, .post-form button:focus {
   opacity: 1;
+  border: 2px solid $darkGreen;
 }
 
 .bottom-options{
   background: $lightGray;
+  border-radius: 5px;
 }
 
 .post-form label.border{
   opacity: 1;
+  border: 2px solid $darkGreen;
 }
 
 @media(min-width: 525px){
@@ -258,5 +255,19 @@ input[type="radio"] {
   .radio-buttons{
     display: inline;
     margin: 0;
+  }
+}
+
+@media (min-width: 900px){
+  .modal .post-form {
+    margin-left: 30%;
+    width: 600px;
+  }
+}
+
+@media (min-width: 1100px){
+  .modal .post-form {
+    margin-left: 25%;
+    width: 800px;
   }
 }

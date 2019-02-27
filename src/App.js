@@ -41,13 +41,13 @@ export class App extends React.Component {
 
     render() {        
         return (
-            <div className="app" >
+            <div id="app" className="app" >
                 {/* Always show the navbar! */}
                 <Route path="/" component={Navbar} />
-                {this.props.coords && <Route path="/" component={SidebarNav} />}
+                {/* {this.props.coords && <Route path="/" component={SidebarNav} />} */}
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/home" component={HomePage}></Route>
-                <Route exact path="/settings" component={SettingsPage}></Route>
+                {/* <Route exact path="/settings" component={SettingsPage}></Route> */}
             </div>
         );
     }

@@ -5,6 +5,7 @@ import Main from './Main';
 import Geolocator from './Geolocator';
 import AddressForm from './AddressForm';
 import requiresLogin from '../common/requires-login';
+import { display } from '../../actions/navigation'
 import { showAnimation } from '../../actions/navigation';
 import EyeAnimation from '../common/EyeAnimation'
 
@@ -20,12 +21,16 @@ export class HomePage extends React.Component{
   componentWillUnmount(){
     this.props.dispatch(showAnimation(false));
   }
+
+  // componentDidMount(){
+  //   this.props.dispatch(display('neighbors'));
+  // }
   
   render(){
     return(
-      <div className="home">
+      <div id="home" className="home">
         <Geolocator/>
-        {/* {this.props.coords && <SidebarNav setUser={this.setUser}/>} */}
+        {this.props.coords && <SidebarNav setUser={this.setUser}/>}
         {this.props.coords && <Main/>}
         {this.props.showAnimation && <EyeAnimation/>}
         {this.props.geoError && !this.props.coords && <AddressForm />}

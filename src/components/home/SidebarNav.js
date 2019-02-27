@@ -79,7 +79,6 @@ class SidebarNav extends React.Component{
 
   logOut() {
     this.props.dispatch(clearAuth());
-    this.props.dispatch(display('loginUsername'));
     clearAuthToken();
   }
 
@@ -158,7 +157,7 @@ class SidebarNav extends React.Component{
                 </Link>
                 <Link
                   className="content"
-                  to="/settings"
+                  to="/home"
                   onClick={()=>{
                     this.onSetSidebarOpen(false)
                     this.props.dispatch(display('settings'))
