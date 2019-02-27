@@ -5,6 +5,7 @@ import UpdatePasswordForm from './UpdatePasswordForm';
 import requiresLogin from '../common/requires-login';
 import {changeSuccessMessage, updateProfilePhoto} from '../../actions/users';
 import './settings.scss'
+import { Geolocator } from '../home/Geolocator';
 
 export class SettingsPage extends React.Component{
   componentDidMount(){
@@ -35,43 +36,46 @@ export class SettingsPage extends React.Component{
 
   render(){
     return(
-      <main className="settings main">
-        <div className="profile-photo-avatar">
-          {!this.props.currentUser.photo ?
-            <p className="initials">
-              {this.props.currentUser.firstName[0]}
-              {this.props.currentUser.lastName[0]}
-            </p>
-            :
-            <img className="profile-photo" src={this.props.currentUser.photo.url} alt="profile"/>
+      <React.Fragment>
+        <Geolocator />
+        <main className="settings main">
+          <div className="profile-photo-avatar">
+            {!this.props.currentUser.photo ?
+              <p className="initials">
+                {this.props.currentUser.firstName[0]}
+                {this.props.currentUser.lastName[0]}
+              </p>
+              :
+              <img className="profile-photo" src={this.props.currentUser.photo.url} alt="profile"/>
+            }
+                    <button 
+              type="button"
+              className="update-photo"
+              onClick={()=>this.img.click()}
+          >
+              <i className="fas fa-camera"></i> Update Profile Picture 
+          </button>
+          <input 
+              type="file"
+              accept="image/*"
+              className="image-input"
+              name="img"
+              id="img"
+              onChange={(e)=>this.onSubmit(e)}
+              ref={input => this.img = input} 
+          />
+          </div>
+
+          {this.props.successMessage &&
+          <div className="success-message" aria-live="polite">
+            {this.props.successMessage}
+          </div>
           }
-                  <button 
-            type="button"
-            className="update-photo"
-            onClick={()=>this.img.click()}
-        >
-            <i className="fas fa-camera"></i> Update Profile Picture 
-        </button>
-        <input 
-            type="file"
-            accept="image/*"
-            className="image-input"
-            name="img"
-            id="img"
-            onChange={(e)=>this.onSubmit(e)}
-            ref={input => this.img = input} 
-        />
-        </div>
 
-        {this.props.successMessage &&
-        <div className="success-message" aria-live="polite">
-          {this.props.successMessage}
-        </div>
-        }
-
-        <UpdateAccountForm/>
-        <UpdatePasswordForm/>
-      </main>
+          <UpdateAccountForm/>
+          <UpdatePasswordForm/>
+        </main>
+      </React.Fragment>
     );
   }
 }
