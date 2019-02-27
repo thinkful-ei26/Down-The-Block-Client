@@ -6,16 +6,12 @@ import {connect} from 'react-redux';
 import './main.scss'
 
 export class Forum extends React.Component{
-  componentDidMount(){
-    console.log('IN COMP DID MOUNT FOR FORUM')
-  }
   whatToDisplay(){
-    console.log('POST BEING EDITED IS', this.props.postBeingEdited)
       if(this.props.postBeingEdited){
         return (
           <div className="modal">
-          <CreatePost editPost={this.props.postBeingEdited}/>
-        </div>
+            <CreatePost editPost={this.props.postBeingEdited}/>
+          </div>
         )
       }
       else{
