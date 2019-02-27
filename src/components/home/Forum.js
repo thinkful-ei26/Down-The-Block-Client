@@ -8,14 +8,16 @@ import './main.scss'
 export class Forum extends React.Component{
 
   render(){
+    console.log('IN FORUM, POST BEING EDITED', this.props.postBeingEdited);
     console.log('CURRENT USER', this.props.currentUser)
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
         {this.props.coords && 
         <React.Fragment>
-        <CreatePost editPost={this.props.postBeingEdited}/>
-        <PostsList/>
+          <CreatePost 
+            editPost={this.props.postBeingEdited}/>
+          <PostsList/>
         </React.Fragment>
         }
       </section>

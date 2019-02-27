@@ -13,6 +13,7 @@ export class CreatePost extends React.Component{
     this.state = {
       borderAround: '',
       uploadedFile: false,
+      content: "",
     }
   }
 
@@ -24,12 +25,12 @@ export class CreatePost extends React.Component{
       console.log('THERES A FILE', photo)
     }
     let postId = this.props.editPost ? this.props.editPost.postId : null;
-    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display, photo};
+    const values={content: this.state.content, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display, photo};
 
     console.log('SUBMITTING POST IN CREATE POST');
     this.props.dispatch(submitPost(postId, values, this.props.coords, this.props.display));
     this.setState({uploadedFile: false});
-    this.content.value = "";
+    this.setState({content: "", borderAround: ''})
     this.form.category.value="Other";
     this.props.dispatch(postBeingEdited(null))
   }
@@ -53,7 +54,8 @@ export class CreatePost extends React.Component{
     //if editing, highlight the correct chosen category
     if(!prevProps.editPost && this.props.editPost){
       this.setState({
-        borderAround: this.props.editPost.category.toLowerCase()
+        borderAround: this.props.editPost.category.toLowerCase(),
+        content: this.props.editPost.content 
       })
     } 
   }
@@ -87,7 +89,11 @@ export class CreatePost extends React.Component{
             type="submit">Save
           </button>
           <button 
-            onClick={()=>this.props.dispatch(postBeingEdited(null))}
+            onClick={()=>{
+              this.props.dispatch(postBeingEdited(null))
+              this.setState({content: "", borderAround: ''})
+            }
+            }
             type="button" >Cancel
           </button>
         </section>
@@ -111,11 +117,17 @@ export class CreatePost extends React.Component{
     }
   }
 
+  setText(text){
+    this.setState({content: text})
+  }
+
   render(){
 
     let editMode = this.props.editPost ? true : false;
 
     console.log('EDIT MODE IS', editMode, 'PROPS ARE', this.props.editPost);
+
+    console.log('CONTENT', this.state.content);
 
     return(
       <div ref={div => this.div = div} className={`${this.props.postBeingEdited ? 'modal' : ''}`}>
@@ -125,16 +137,15 @@ export class CreatePost extends React.Component{
         ref={form => this.form = form}
         style={this.state.style}
       >
-          
         <textarea 
           required 
-          ref={input => this.content = input} 
           type="textarea" 
           id="content" 
           name="content" 
           className="create-post-textarea"
           placeholder={this.props.display==="neighbors" ? "Write a Post For Your Neighborhood To See!" : "Write a Post For Your City To See!"}
-          defaultValue={editMode && this.props.editPost.content}
+          value={this.state.content}
+          onChange={e => this.setText(e.target.value)}
         />
 
       <div className="bottom-options">
