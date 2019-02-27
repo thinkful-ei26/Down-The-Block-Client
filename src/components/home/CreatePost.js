@@ -120,6 +120,7 @@ export class CreatePost extends React.Component{
 
         <input 
           defaultChecked={editMode && (this.props.editPost.category==='Crime' && true)}
+          onClick={()=>this.setState({borderAround: 'crime'})} 
           type="radio" 
           id="crime" 
           name="category" 
@@ -134,6 +135,7 @@ export class CreatePost extends React.Component{
 
         <input 
           defaultChecked={editMode && (this.props.editPost.category==='Event' && true)}
+          onClick={()=>this.setState({borderAround: 'event'})} 
           type="radio" 
           id="event" 
           name="category" 
@@ -147,6 +149,7 @@ export class CreatePost extends React.Component{
 
         <input 
           defaultChecked={editMode && (this.props.editPost.category==='Personal' && true)}
+          onClick={()=>this.setState({borderAround: 'personal'})} 
           type="radio" 
           id="personal" 
           name="category" 
@@ -160,6 +163,7 @@ export class CreatePost extends React.Component{
 
         <input 
           defaultChecked={editMode && (this.props.editPost.category==='Other' && true)}
+          onClick={()=>this.setState({borderAround: 'other'})} 
           type="radio" 
           id="other" 
           name="category" 
