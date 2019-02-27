@@ -36,8 +36,6 @@ export class SettingsPage extends React.Component{
 
   render(){
     return(
-      <React.Fragment>
-        <Geolocator />
         <main className="settings main">
           <div className="profile-photo-avatar">
             {!this.props.currentUser.photo ?
@@ -75,7 +73,6 @@ export class SettingsPage extends React.Component{
           <UpdateAccountForm/>
           <UpdatePasswordForm/>
         </main>
-      </React.Fragment>
     );
   }
 }

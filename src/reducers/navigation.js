@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  display: 'loginUsername',
+  display: 'neighbors',
   showAnimation: false,
   focusOn: "",
 };
