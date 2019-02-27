@@ -6,39 +6,25 @@ import {connect} from 'react-redux';
 import './main.scss'
 
 export class Forum extends React.Component{
-  whatToDisplay(){
-      if(this.props.postBeingEdited){
-        return (
-          <div className="modal">
-            <CreatePost editPost={this.props.postBeingEdited}/>
-          </div>
-        )
-      }
-      else{
-        if(this.props.coords){
-          return (
-            <React.Fragment>
-              <CreatePost/>
-              <PostsList/>
-            </React.Fragment>
-          )
-        }
-      }
-  }
 
   render(){
     console.log('CURRENT USER', this.props.currentUser)
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
-        {this.whatToDisplay()}
+        {this.props.coords && 
+        <React.Fragment>
+          <CreatePost 
+            editPost={this.props.postBeingEdited}/>
+          <PostsList/>
+        </React.Fragment>
+        }
       </section>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log("IN FORUM, STATE IS", state)
   return{
     display: state.nav.display,
     postBeingEdited: state.posts.postBeingEdited,

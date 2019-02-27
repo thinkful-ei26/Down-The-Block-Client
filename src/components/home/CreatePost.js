@@ -13,6 +13,7 @@ export class CreatePost extends React.Component{
     this.state = {
       borderAround: '',
       uploadedFile: false,
+      content: "",
     }
   }
 
@@ -21,25 +22,17 @@ export class CreatePost extends React.Component{
     let photo=undefined;
     if(this.img && this.img.files.length!==0){
       photo= this.img.files[0];
-      console.log('THERES A FILE', photo)
     }
     let postId = this.props.editPost ? this.props.editPost.postId : null;
-    const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display, photo};
+    const values={content: this.state.content, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display, photo};
 
     this.props.dispatch(submitPost(postId, values, this.props.coords, this.props.display));
     this.setState({uploadedFile: false});
-    this.content.value = "";
     this.form.category.value="Other";
     this.props.dispatch(postBeingEdited(null))
   }
 
   componentDidMount(){
-    //if editing, highlight the correct chosen category
-    if(this.props.editPost){
-      this.setState({
-        borderAround: this.props.editPost.category.toLowerCase()
-      })
-    } 
     //listens for the server when the new post has been created. ONLY do something with this post if the user's geofilter is within the radius of this post
     this.props.socket.on('new_post', post => {
       //only do something with the post received if its within radius
@@ -54,10 +47,38 @@ export class CreatePost extends React.Component{
     })
   }
 
+  componentDidUpdate(prevProps){
+    //if editing, highlight the correct chosen category
+    if(!prevProps.editPost && this.props.editPost){
+      this.setState({
+        borderAround: this.props.editPost.category.toLowerCase(),
+        content: this.props.editPost.content 
+      })
+    }
+    else if(prevProps.editPost && !this.props.editPost){
+      this.setState({content: "", borderAround: ''})
+    }
+ 
+  }
+
+  componentWillMount(){
+    document.addEventListener('mousedown', this.handleClick, false);
+  }
+
   componentWillUnmount(){
     //need to turn sockets off or else they'll listen twice
     this.props.socket.off('new_post');
     this.props.socket.off('edited_post');
+    document.removeEventListener('mousedown', this.handleClick, false);
+  }
+
+  handleClick = (e) => {
+    if(this.form.contains(e.target)){
+      return
+    }
+    else{
+      this.props.dispatch(postBeingEdited(null));
+    }
   }
 
   generateButtons(){
@@ -68,7 +89,10 @@ export class CreatePost extends React.Component{
             type="submit">Save
           </button>
           <button 
-            onClick={()=>this.props.dispatch(postBeingEdited(null))}
+            onClick={()=>{
+              this.props.dispatch(postBeingEdited(null))
+            }
+            }
             type="button" >Cancel
           </button>
         </section>
@@ -92,27 +116,31 @@ export class CreatePost extends React.Component{
     }
   }
 
+  setText(text){
+    this.setState({content: text})
+  }
+
   render(){
 
     let editMode = this.props.editPost ? true : false;
 
     return(
+      <div ref={div => this.div = div} className={`${this.props.postBeingEdited ? 'modal' : ''}`}>
       <form 
         className="post-form" 
         onSubmit={(e)=> this.onSubmit(e)}
         ref={form => this.form = form}
         style={this.state.style}
       >
-          
         <textarea 
           required 
-          ref={input => this.content = input} 
           type="textarea" 
           id="content" 
           name="content" 
           className="create-post-textarea"
           placeholder={this.props.display==="neighbors" ? "Write a Post For Your Neighborhood To See!" : "Write a Post For Your City To See!"}
-          defaultValue={editMode ? this.props.editPost.content : ""}
+          value={this.state.content}
+          onChange={e => this.setText(e.target.value)}
         />
 
       <div className="bottom-options">
@@ -120,6 +148,7 @@ export class CreatePost extends React.Component{
 
         <input 
           defaultChecked={editMode && (this.props.editPost.category==='Crime' && true)}
+          onClick={()=>this.setState({borderAround: 'crime'})} 
           type="radio" 
           id="crime" 
           name="category" 
@@ -134,6 +163,7 @@ export class CreatePost extends React.Component{
 
         <input 
           defaultChecked={editMode && (this.props.editPost.category==='Event' && true)}
+          onClick={()=>this.setState({borderAround: 'event'})} 
           type="radio" 
           id="event" 
           name="category" 
@@ -146,7 +176,8 @@ export class CreatePost extends React.Component{
         </label>
 
         <input 
-          defaultChecked={editMode && (this.props.editPost.category==='Personal' && true)}
+          defaultChecked={editMode && this.props.editPost.category==='Personal' && true}
+          onClick={()=>this.setState({borderAround: 'personal'})} 
           type="radio" 
           id="personal" 
           name="category" 
@@ -160,6 +191,7 @@ export class CreatePost extends React.Component{
 
         <input 
           defaultChecked={editMode && (this.props.editPost.category==='Other' && true)}
+          onClick={()=>this.setState({borderAround: 'other'})} 
           type="radio" 
           id="other" 
           name="category" 
@@ -197,6 +229,7 @@ export class CreatePost extends React.Component{
         {this.generateButtons()}
       </div>
     </form>
+    </div>
     );
   }
 }
@@ -204,7 +237,8 @@ export class CreatePost extends React.Component{
 const mapStateToProps = state => ({
   coords: state.geolocation.coords,
   display: state.nav.display, 
-  socket:state.socket.socket
+  socket:state.socket.socket,
+  postBeingEdited: state.posts.postBeingEdited,
 });
 
 

@@ -1,7 +1,7 @@
-@import "~../common/colors.scss";
+@import "~../common/constants.scss";
 
 .landing-page {
-  font-family: Play;
+  font-family: $appFont;
 }
 
 .landing-page main{

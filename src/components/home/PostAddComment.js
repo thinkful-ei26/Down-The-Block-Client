@@ -10,13 +10,12 @@ export class PostAddComment extends React.Component {
     constructor(props){
         super(props);
 
-        this.test='';
+        this.comment='';
     }
 
     componentDidMount(){
         //listens for the server when the new post has been created
         this.props.socket.on('new_comment', post => {
-          console.log(post); 
           this.props.dispatch(updatePost(post));
         })
         this.props.socket.on('edit_comment', post => {
@@ -26,14 +25,13 @@ export class PostAddComment extends React.Component {
 
 
     onSubmit(e) {
-        console.log('ON SUBMIT, POST ID', this.props.form)
         e.preventDefault();
 
         let commentId = this.props.commentBeingEdited ? this.props.commentBeingEdited.id : null;
         let postId = this.props.commentBeingEdited ? this.props.commentBeingEdited.postId : this.props.form;
         
         let date = moment().format('LLLL');
-        this.props.dispatch(addComment(this.test, date, this.props.currentUser.id, postId, commentId));   
+        this.props.dispatch(addComment(this.comment, date, this.props.currentUser.id, postId, commentId));   
         this.content.value="";   
 
         this.props.dispatch(commentBeingEdited(null))
@@ -43,11 +41,15 @@ export class PostAddComment extends React.Component {
         if (e.keyCode === 13 && !e.shiftKey)
         {
             //form should submit
-            this.test=this.content.value
+            this.comment=this.content.value
             this.onSubmit(e);
         }
         else if(e.keyCode===13 && e.shiftKey){
-          this.test = this.content.value + ' <br/> ';
+          this.comment = this.content.value + ' <br/> ';
+        }
+        else if (e.keyCode===27){
+            //cancel comment
+            this.props.dispatch(commentBeingEdited(null))
         }
     }
 
@@ -85,7 +87,8 @@ export class PostAddComment extends React.Component {
 
                 {
                     this.props.commentBeingEdited &&
-                    <button type="button" onClick={()=> this.props.dispatch(commentBeingEdited(null)) }>
+                    <button type="button" 
+                        onClick={()=> this.props.dispatch(commentBeingEdited(null)) }>
                         Cancel
                     </button>
                 }
