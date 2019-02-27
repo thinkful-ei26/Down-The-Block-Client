@@ -24,14 +24,9 @@ form .highlight-red{
   border-radius: 5px;
 }
 
-label.image-input input[type="file"] {
+/*CUSTOM FILE INPUT*/
+.image-input{
   display: none;
-}
-
-.image-input {
-  padding: 2px 5px;
-  display: inline-block;
-  color: $darkGreen;
 }
 
 .upload-photo{
@@ -40,4 +35,10 @@ label.image-input input[type="file"] {
   border: 0;
   font-size: 20px;
   font-family: Play;
+  margin:auto;
+  cursor:pointer;
+}
+
+.upload-photo:focus{
+  outline: 0;
 }

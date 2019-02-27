@@ -19,9 +19,8 @@ export class SignUpForm extends React.Component {
         }
       }
 
-    checkIfFile(file){
-        console.log('FILE IS', file)
-        if(this.img && this.img.files.length!==0){
+    checkIfFile(){
+        if(this.img.files.length!==0){
             this.setState({uploadedFile: true});
         }
         else{
@@ -30,12 +29,11 @@ export class SignUpForm extends React.Component {
     }
 
     onSubmit(values) {
-        if(values.img){
-            values.img = values.img[0];
+        if(this.img && this.img.files.length!==0){
+            values.img = this.img.files[0];
         }
         const {password, firstName, lastName, img, registerUsername} = values;
         const user = { password, firstName, lastName, img, registerUsername};
-        // user.username = values['register-username'];
         return this.props.dispatch(registerUser(user))
             .then(() => this.props.dispatch(login(registerUsername, password)));
     }
@@ -92,24 +90,23 @@ export class SignUpForm extends React.Component {
                     validate={[required, nonEmpty, matchesPassword]}
                     label="Confirm Password"
                 />
-                <label className="image-input">
-                <Field
-                    component={Input} 
-                    name="img" 
-                    id="img"
-                    type= "file"
-                    validate={[sizeLimit]}
-                    // onChange={(e)=>this.checkIfFile(e)}
-                />
-                <span 
+
+                <button 
                     type="button"
                     className="upload-photo"
-                    
+                    onClick={()=>this.img.click()}
                 >
-                    <i class="fas fa-paperclip"></i> Upload Profile Photo{this.state.uploadedFile && <i class="fas fa-file"></i>}
-                </span>
-                </label>
-                <br></br>
+                   <i class="fas fa-camera"></i> Upload Profile Picture {this.state.uploadedFile && <i class="fas fa-file"></i>}
+                </button>
+                <input 
+                    type="file"
+                    accept="image/*"
+                    className="image-input"
+                    name="img"
+                    id="img"
+                    onChange={()=>this.checkIfFile(this.img)}
+                    ref={input => this.img = input} 
+                />
                 <button
                     type="submit"
                     className="submit"
@@ -119,6 +116,7 @@ export class SignUpForm extends React.Component {
                 <div className="bottom-text">
                     <p>Already Have An Account? 
                         <button
+                        type="button"
                         className="link-to-form"
                         onClick={()=>this.onClick('loginUsername')} 
                         > Sign In Here!</button>

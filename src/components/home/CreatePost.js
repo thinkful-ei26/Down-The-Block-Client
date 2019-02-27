@@ -177,18 +177,25 @@ export class CreatePost extends React.Component{
 
         </section>
 
-       {!editMode &&  
-       <label className="image-input">
-         <input 
-          accept="image/*"
-          ref={input => this.img = input}
-          type="file"
-          onChange={()=>this.checkIfFile()}
-          />
-          
-          <span><i class="fas fa-paperclip"></i> Upload Photo {this.state.uploadedFile && <i class="fas fa-file"></i>}</span>
-          
-        </label>
+       {!editMode && 
+       <React.Fragment> 
+        <button 
+          type="button"
+          className="upload-photo"
+          onClick={()=>this.img.click()}
+        >
+            <i class="fas fa-paperclip"></i> Upload Profile Photo{this.state.uploadedFile && <i class="fas fa-file"></i>}
+        </button>
+        <input 
+            type="file"
+            accept="image/*"
+            className="image-input"
+            name="img"
+            id="img"
+            onChange={()=>this.checkIfFile(this.img)}
+            ref={input => this.img = input} 
+        />
+        </React.Fragment>
        }
         {this.generateButtons()}
       </div>
