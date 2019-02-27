@@ -79,7 +79,6 @@ class SidebarNav extends React.Component{
 
   logOut() {
     this.props.dispatch(clearAuth());
-    this.props.dispatch(display('loginUsername'));
     clearAuthToken();
   }
 
