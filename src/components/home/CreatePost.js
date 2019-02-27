@@ -26,6 +26,7 @@ export class CreatePost extends React.Component{
     let postId = this.props.editPost ? this.props.editPost.postId : null;
     const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display, photo};
 
+    console.log('SUBMITTING POST IN CREATE POST');
     this.props.dispatch(submitPost(postId, values, this.props.coords, this.props.display));
     this.setState({uploadedFile: false});
     this.content.value = "";
@@ -34,12 +35,6 @@ export class CreatePost extends React.Component{
   }
 
   componentDidMount(){
-    //if editing, highlight the correct chosen category
-    if(this.props.editPost){
-      this.setState({
-        borderAround: this.props.editPost.category.toLowerCase()
-      })
-    } 
     //listens for the server when the new post has been created. ONLY do something with this post if the user's geofilter is within the radius of this post
     this.props.socket.on('new_post', post => {
       //only do something with the post received if its within radius
@@ -54,10 +49,34 @@ export class CreatePost extends React.Component{
     })
   }
 
+  componentDidUpdate(prevProps){
+    //if editing, highlight the correct chosen category
+    if(!prevProps.editPost && this.props.editPost){
+      this.setState({
+        borderAround: this.props.editPost.category.toLowerCase()
+      })
+    } 
+  }
+
+  componentWillMount(){
+    document.addEventListener('mousedown', this.handleClick, false);
+  }
+
   componentWillUnmount(){
     //need to turn sockets off or else they'll listen twice
     this.props.socket.off('new_post');
     this.props.socket.off('edited_post');
+    document.removeEventListener('mousedown', this.handleClick, false);
+  }
+
+  handleClick = (e) => {
+    console.log('e.target is', e.target)
+    if(this.form.contains(e.target)){
+      return
+    }
+    else{
+      this.props.dispatch(postBeingEdited(null));
+    }
   }
 
   generateButtons(){
@@ -96,7 +115,10 @@ export class CreatePost extends React.Component{
 
     let editMode = this.props.editPost ? true : false;
 
+    console.log('EDIT MODE IS', editMode, 'PROPS ARE', this.props.editPost);
+
     return(
+      <div ref={div => this.div = div} className={`${this.props.postBeingEdited ? 'modal' : ''}`}>
       <form 
         className="post-form" 
         onSubmit={(e)=> this.onSubmit(e)}
@@ -112,7 +134,7 @@ export class CreatePost extends React.Component{
           name="content" 
           className="create-post-textarea"
           placeholder={this.props.display==="neighbors" ? "Write a Post For Your Neighborhood To See!" : "Write a Post For Your City To See!"}
-          defaultValue={editMode ? this.props.editPost.content : ""}
+          defaultValue={editMode && this.props.editPost.content}
         />
 
       <div className="bottom-options">
@@ -120,6 +142,7 @@ export class CreatePost extends React.Component{
 
         <input 
           defaultChecked={editMode && (this.props.editPost.category==='Crime' && true)}
+          onClick={()=>this.setState({borderAround: 'crime'})} 
           type="radio" 
           id="crime" 
           name="category" 
@@ -134,6 +157,7 @@ export class CreatePost extends React.Component{
 
         <input 
           defaultChecked={editMode && (this.props.editPost.category==='Event' && true)}
+          onClick={()=>this.setState({borderAround: 'event'})} 
           type="radio" 
           id="event" 
           name="category" 
@@ -146,7 +170,8 @@ export class CreatePost extends React.Component{
         </label>
 
         <input 
-          defaultChecked={editMode && (this.props.editPost.category==='Personal' && true)}
+          defaultChecked={editMode && this.props.editPost.category==='Personal' && true}
+          onClick={()=>this.setState({borderAround: 'personal'})} 
           type="radio" 
           id="personal" 
           name="category" 
@@ -160,6 +185,7 @@ export class CreatePost extends React.Component{
 
         <input 
           defaultChecked={editMode && (this.props.editPost.category==='Other' && true)}
+          onClick={()=>this.setState({borderAround: 'other'})} 
           type="radio" 
           id="other" 
           name="category" 
@@ -197,6 +223,7 @@ export class CreatePost extends React.Component{
         {this.generateButtons()}
       </div>
     </form>
+    </div>
     );
   }
 }
@@ -204,7 +231,8 @@ export class CreatePost extends React.Component{
 const mapStateToProps = state => ({
   coords: state.geolocation.coords,
   display: state.nav.display, 
-  socket:state.socket.socket
+  socket:state.socket.socket,
+  postBeingEdited: state.posts.postBeingEdited,
 });
 
 

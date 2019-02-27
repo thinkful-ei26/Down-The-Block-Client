@@ -73,14 +73,14 @@ export const updatedUser = user => (dispatch, getState) => {
         })
         .catch(err => {
             console.log('THE ERROR IS', err)
-            const { location } = err;
-            const message = 'Unable to update, please try again';
+            const { location, message} = err;
+            const str = location==="username" ? message : 'Unable to update, please try again';
             // Could not authenticate, so return a SubmissionError for Redux
             // Form
             return Promise.reject(
                 new SubmissionError({
-                    [location]: message,
-                    _error: message
+                    [location]: str,
+                    _error: str
                 })
             );
         });

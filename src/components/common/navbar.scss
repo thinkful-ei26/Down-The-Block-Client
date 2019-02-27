@@ -1,4 +1,4 @@
-@import "~./colors.scss";
+@import "~./constants.scss";
 
 .main-navbar{
   background-color: $darkGreen;
@@ -19,7 +19,7 @@
   cursor:pointer;
   background-color: transparent;
   border: none;
-  font-family: Play;
+  font-family: $appFont;
   display: inline-block;
   transition: ease-in-out .5s;
   font-size: 15px;
@@ -56,7 +56,7 @@
 
 .tagline{
   color: $beige;
-  font-family: Play;
+  font-family: $appFont;
   display: none;
 }
 
