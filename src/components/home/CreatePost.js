@@ -78,6 +78,7 @@ export class CreatePost extends React.Component{
     }
     else{
       this.props.dispatch(postBeingEdited(null));
+      this.setState({content: "", borderAround: ''})
     }
   }
 
