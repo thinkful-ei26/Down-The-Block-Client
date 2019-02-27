@@ -11,7 +11,7 @@ export class Main extends React.Component{
 
   display(){
     return this.props.display==="neighbors" || this.props.display==="city" ? <Forum/> :
-    this.props.display==="settings" ? <SettingsPage/> : this.props.display==="about" ? <About/> : this.props.display==="chat" ? <Layout /> : ""
+    this.props.display==="settings" ? <SettingsPage/> : this.props.display==="about" ? <About/> : this.props.display==="chat" ? <Layout /> : <Forum />
   }
 
   render(){
