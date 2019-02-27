@@ -228,6 +228,9 @@ export const setUserCoords = (coords) => (dispatch, getState) => {
     .then(user => {
         dispatch(userCoordsSuccess(user));
     })
+    .then(()=>{
+        dispatch(refreshProfileAuthToken())
+    })
     .catch(error => {
         dispatch(userCoordsError(error))
     })
