@@ -239,21 +239,6 @@ input[type="radio"] {
   opacity: 1;
 }
 
-label.image-input input[type="file"] {
-  position:absolute;
-  top: -1000px;
-}
-
-.image-input {
-  padding: 2px 5px;
-  display: inline-block;
-  color: $darkGreen;
-}
-
-.image-input span{
-  color: $darkGreen;
-}
-
 @media(min-width: 525px){
   .bottom-options{
     display: flex;

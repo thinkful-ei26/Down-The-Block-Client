@@ -114,7 +114,7 @@ export class CreatePost extends React.Component{
           id="content" 
           name="content" 
           className="create-post-textarea"
-          placeholder="Write a Post For Your Neighborhood To See!" 
+          placeholder={this.props.display==="neighbors" ? "Write a Post For Your Neighborhood To See!" : "Write a Post For Your City To See!"}
           defaultValue={editMode ? this.props.editPost.content : ""}
         />
 

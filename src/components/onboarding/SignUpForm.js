@@ -11,6 +11,24 @@ const passwordLength = length({min: 8, max: 72});
 const matchesPassword = matches('password');
 
 export class SignUpForm extends React.Component {
+    constructor(props){
+        super(props);
+    
+        this.state = {
+          uploadedFile: false,
+        }
+      }
+
+    checkIfFile(file){
+        console.log('FILE IS', file)
+        if(this.img && this.img.files.length!==0){
+            this.setState({uploadedFile: true});
+        }
+        else{
+            this.setState({uploadedFile: false});
+        }
+    }
+
     onSubmit(values) {
         if(values.img){
             values.img = values.img[0];
@@ -81,8 +99,15 @@ export class SignUpForm extends React.Component {
                     id="img"
                     type= "file"
                     validate={[sizeLimit]}
+                    // onChange={(e)=>this.checkIfFile(e)}
                 />
-                <span>Select a Profile Photo</span>
+                <span 
+                    type="button"
+                    className="upload-photo"
+                    
+                >
+                    <i class="fas fa-paperclip"></i> Upload Profile Photo{this.state.uploadedFile && <i class="fas fa-file"></i>}
+                </span>
                 </label>
                 <br></br>
                 <button
