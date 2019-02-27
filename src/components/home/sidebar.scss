@@ -1,4 +1,4 @@
-@import "~../common/colors.scss";
+@import "~../common/constants.scss";
 .sidebar{
   margin-top:20px;
 }
@@ -16,7 +16,7 @@
   width: 200px;
   text-align: left;
   padding:10px 40px;
-  font-family: Play;
+  font-family: $appFont;
 }
 
 .sidebar .nav-parent{

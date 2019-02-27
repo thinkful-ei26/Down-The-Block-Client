@@ -1,10 +1,10 @@
-@import "~../common/colors.scss";
+@import "~../common/constants.scss";
 
 .settings{
   background: $lightGray;
   border-radius: 5px;
   // margin-top: 10px;
-  font-family: Play;
+  font-family: $appFont;
 }
 
 .settings.main{
@@ -14,7 +14,7 @@
 
 .settings h2{
   color: #06311f;
-  font-family: Play;
+  font-family: $appFont;
   text-align: center;
 }
 
@@ -27,7 +27,7 @@
   padding: 10px;
   font-size: 20px;
   transition: .5s;
-  font-family: Play;
+  font-family: $appFont;
   width: 200px;
   margin: auto;
   display: block;
@@ -97,7 +97,7 @@
   height: 75px;
   border-bottom-left-radius: 110px;
   border-bottom-right-radius: 110px;
-  font-family: Play;
+  font-family: $appFont;
   font-size: 15px;
   opacity: .8;
   cursor: pointer;
