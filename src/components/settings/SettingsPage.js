@@ -36,11 +36,6 @@ export class SettingsPage extends React.Component{
   render(){
     return(
       <main className="settings main">
-        {this.props.successMessage &&
-        <div className="updated-message" aria-live="polite">
-          {this.props.successMessage}
-        </div>
-        }
         <div className="profile-photo-avatar">
           {!this.props.currentUser.photo ?
             <p className="initials">
@@ -67,6 +62,12 @@ export class SettingsPage extends React.Component{
             ref={input => this.img = input} 
         />
         </div>
+
+        {this.props.successMessage &&
+        <div className="success-message" aria-live="polite">
+          {this.props.successMessage}
+        </div>
+        }
 
         <UpdateAccountForm/>
         <UpdatePasswordForm/>
