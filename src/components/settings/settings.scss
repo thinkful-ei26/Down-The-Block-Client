@@ -7,25 +7,30 @@
   font-family: Play;
 }
 
-.settings h1{
+.settings h2{
   color: #06311f;
   font-family: Play;
+  text-align: center;
 }
 
-.settings button{
+.settings .update{
   background: $darkGreen;
-  border: none;
+  border: 1px solid $darkGreen;
   border-radius: 4px;
-  color: white;
+  color: $beige;
   cursor: pointer;
-  padding: 7px;
-  margin-top: 7px;
-  margin-bottom: 10px
+  padding: 10px;
+  font-size: 20px;
+  transition: .5s;
+  font-family: Play;
+  width: 200px;
+  margin: auto;
+  display: block;
 }
 
-.settings button:hover {
-  font-weight: bold;
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 2px 6px 0 rgba(0,0,0,0.19);
+.settings .update:hover, .settings .update:focus {
+  background: $beige;
+  color: $darkGreen;
 }
 
 .settings form{
@@ -63,6 +68,40 @@
   width: 100%;
   margin: 20px auto;
   align-items: center;
+}
+
+.settings .profile-photo-avatar, .settings .profile-photo{
+  width:150px;
+  height: 150px;
+  border-radius: 50%;
+  font-size: 20px;
+  margin: auto;
+  position: relative;
+}
+
+.settings .initials{
+  font-size: 40px;
+}
+
+.settings .update-photo{
+  position: absolute;
+  top: 50%;
+  left: 0.3%;
+  background:  rgba(237, 236, 217,.8);
+  color: $darkGreen;
+  width: 151px;
+  height: 75px;
+  border-bottom-left-radius: 110px;
+  border-bottom-right-radius: 110px;
+  font-family: Play;
+  font-size: 15px;
+  opacity: 0;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.settings .update-photo:focus, .settings .update-photo:hover{
+  opacity: 1;
 }
 
 @media(min-width:400px){

@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import UpdateAccountForm from './UpdateAccountForm';
 import UpdatePasswordForm from './UpdatePasswordForm';
+import requiresLogin from '../common/requires-login';
 import {changeSuccessMessage, updateProfilePhoto} from '../../actions/users';
 import './settings.scss'
-import { stat } from 'fs';
 
 export class SettingsPage extends React.Component{
   componentDidMount(){
@@ -35,8 +35,7 @@ export class SettingsPage extends React.Component{
 
   render(){
     return(
-      <main className="settings">
-        <h1>Settings</h1>
+      <main className="settings main">
         {this.props.successMessage &&
         <div className="updated-message" aria-live="polite">
           {this.props.successMessage}
@@ -51,10 +50,9 @@ export class SettingsPage extends React.Component{
             :
             <img className="profile-photo" src={this.props.currentUser.photo.url} alt="profile"/>
           }
-        </div>
-        <button 
+                  <button 
             type="button"
-            className="upload-photo"
+            className="update-photo"
             onClick={()=>this.img.click()}
         >
             <i className="fas fa-camera"></i> Update Profile Picture 
@@ -65,9 +63,10 @@ export class SettingsPage extends React.Component{
             className="image-input"
             name="img"
             id="img"
-            onChange={()=>this.onSubmit()}
+            onChange={(e)=>this.onSubmit(e)}
             ref={input => this.img = input} 
         />
+        </div>
 
         <UpdateAccountForm/>
         <UpdatePasswordForm/>
@@ -77,7 +76,6 @@ export class SettingsPage extends React.Component{
 }
 
 const mapStateToProps = state => {
-  console.log('IN SETTINGS, STATE:', state);
   return {
     successMessage: state.auth.successMessage,
     errorMessage: state.auth.error,
@@ -85,4 +83,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps)(SettingsPage);
+export default requiresLogin()(connect(mapStateToProps)(SettingsPage));

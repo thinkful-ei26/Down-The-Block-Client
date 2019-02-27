@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
 import LandingPage from './components/onboarding/LandingPage';
 import HomePage from './components/home/HomePage';
+import SettingsPage from './components/settings/SettingsPage';
 import {refreshAuthToken} from './actions/auth';
 import Navbar from './components/common/Navbar';
+import SidebarNav from './components/home/SidebarNav';
 
 export class App extends React.Component {
     componentDidUpdate(prevProps) {
@@ -36,13 +38,16 @@ export class App extends React.Component {
         clearInterval(this.refreshInterval);
     }
 
+
     render() {        
         return (
             <div className="app" >
                 {/* Always show the navbar! */}
                 <Route path="/" component={Navbar} />
+                {this.props.coords && <Route path="/" component={SidebarNav} />}
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/home" component={HomePage}></Route>
+                <Route exact path="/settings" component={SettingsPage}></Route>
             </div>
         );
     }
@@ -50,7 +55,8 @@ export class App extends React.Component {
 
 const mapStateToProps = state => ({
     hasAuthToken: state.auth.authToken !== null,
-    loggedIn: state.auth.currentUser !== null
+    loggedIn: state.auth.currentUser !== null,
+    coords: state.geolocation.coords,
 });
 
 export default withRouter(connect(mapStateToProps)(App));

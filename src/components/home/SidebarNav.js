@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Sidebar from "react-sidebar";
+import requiresLogin from '../common/requires-login';
 import { display } from '../../actions/navigation'
 import { fetchPosts } from '../../actions/posts';
 import { fetchUsers } from '../../actions/users';
 import { clearAuth } from '../../actions/auth';
+import {Link} from 'react-router-dom';
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
 
@@ -47,6 +49,13 @@ class SidebarNav extends React.Component{
 
   setUser = (user)=>{
     this.props.setUser(user.username)
+  }
+
+
+  setUser = ()=>{
+    const { socket, user } = this.props; 
+    console.log('PROPS FROM HOMEPAGE IN SETUSER', this.props);
+        socket.emit('USER_CONNECTED', user);
   }
   
   showAllUsers(){
@@ -100,15 +109,17 @@ class SidebarNav extends React.Component{
               <i className="fas fa-edit"></i> Forums
               </button>
               {this.state.showForum && <section className="forum-children">
-                <button 
+                <Link 
+                  to="/home"
                   className="content" 
                   onClick={()=>{
                     this.onSetSidebarOpen(false)
                     this.props.dispatch(fetchPosts(this.props.coords, 'neighbors'))
                   }
                   }>Neighbors
-                </button>
-                <button 
+                </Link>
+                <Link 
+                  to="/home"
                   className="content" 
                   onClick={()=>{
                   this.onSetSidebarOpen(false)
@@ -116,7 +127,7 @@ class SidebarNav extends React.Component{
                   } 
                 }
                 >City
-                </button>
+                </Link>
               </section>}
               <button
                 className="nav-parent"
@@ -134,7 +145,8 @@ class SidebarNav extends React.Component{
               ><i className="fas fa-users-cog"></i> Account
               </button>
               {this.state.showAccount && <section className="account-children">
-                <button
+                <Link
+                  to="/home"
                   className="content"
                   onClick={()=>{
                     this.onSetSidebarOpen(false)
@@ -143,9 +155,10 @@ class SidebarNav extends React.Component{
                   }
                 >            
                   About
-                </button>
-                <button
+                </Link>
+                <Link
                   className="content"
+                  to="/settings"
                   onClick={()=>{
                     this.onSetSidebarOpen(false)
                     this.props.dispatch(display('settings'))
@@ -153,7 +166,7 @@ class SidebarNav extends React.Component{
                   }
                 >            
                   Settings
-                </button>
+                </Link>
                 <button id="logout" 
                   className="content"
                   onClick={() => {
@@ -184,4 +197,4 @@ const mapStateToProps = state => ({
   currentUser: state.auth.currentUser,
 });
 
-export default connect(mapStateToProps)(SidebarNav)
+export default requiresLogin()(connect(mapStateToProps)(SidebarNav));

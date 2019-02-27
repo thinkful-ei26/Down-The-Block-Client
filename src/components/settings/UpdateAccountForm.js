@@ -15,6 +15,7 @@ export class UpdateAccountForm extends React.Component{
 }
 
   render(){
+    console.log('DISPLAY IS', this.props.display)
     let error;
     if (this.props.error) {
         error = (
@@ -59,10 +60,10 @@ export class UpdateAccountForm extends React.Component{
           />
 
           <button
-              type="submit"
-              disabled={this.props.pristine || this.props.submitting}>
-            >
-              Update Account
+            className="update"
+            type="submit"
+            disabled={this.props.pristine || this.props.submitting}>
+            Update Account
           </button>
         </form>
     );
@@ -71,6 +72,7 @@ export class UpdateAccountForm extends React.Component{
 
 function mapStateToProps(state) {
   return {
+    display: state.nav.display,
     initialValues: {
       firstName: state.auth.currentUser.firstName,
       lastName: state.auth.currentUser.lastName,

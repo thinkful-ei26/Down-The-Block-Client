@@ -66,22 +66,22 @@
   font-size: 12px;
 }
 
-.profile-photo{
-width:50px;
-height: 50px;
-border-radius: 50%;
+.post .profile-photo{
+  width:50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
-.profile-photo-avatar{
+.post .profile-photo-avatar{
   width:50px;
   height: 50px;
   font-size: 20px;
-  }
+}
 
 .initials{
   width: fit-content;
   margin: auto;
-  }
+}
 
 .post-user-name{
   display: inline;
