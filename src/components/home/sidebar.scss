@@ -19,7 +19,7 @@
   font-family: Play;
 }
 
-.sidebar .content:hover, .sidebar .content:focus{
+.sidebar .content:hover, .sidebar .content:focus, .sidebar .nav-parent:hover{
   outline: 0;
   background: $darkGreen;
   color: $beige;
