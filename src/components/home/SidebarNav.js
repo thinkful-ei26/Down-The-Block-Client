@@ -158,7 +158,7 @@ class SidebarNav extends React.Component{
                 </Link>
                 <Link
                   className="content"
-                  to="/settings"
+                  to="/home"
                   onClick={()=>{
                     this.onSetSidebarOpen(false)
                     this.props.dispatch(display('settings'))

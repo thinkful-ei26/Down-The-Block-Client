@@ -23,9 +23,9 @@ export class HomePage extends React.Component{
   
   render(){
     return(
-      <div className="home">
+      <div id="home" className="home">
         <Geolocator/>
-        {/* {this.props.coords && <SidebarNav setUser={this.setUser}/>} */}
+        {this.props.coords && <SidebarNav setUser={this.setUser}/>}
         {this.props.coords && <Main/>}
         {this.props.showAnimation && <EyeAnimation/>}
         {this.props.geoError && !this.props.coords && <AddressForm />}
