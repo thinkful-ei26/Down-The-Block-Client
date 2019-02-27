@@ -1,0 +1,53 @@
+@import "~../common/colors.scss";
+.sidebar{
+  margin-top:20px;
+}
+
+.sidebar .content, .sidebar .nav-parent{
+  display: block;
+  color:  $darkGreen;
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 20px 0;
+  text-decoration: none;
+  width: 200px;
+  text-align: left;
+  padding:10px 40px;
+  font-family: Play;
+}
+
+.sidebar .nav-parent{
+  color: $darkGreen;
+  padding: 10px;
+  font-size: 17px;
+}
+
+.sidebar .content:hover, .sidebar .content:focus, .sidebar .nav-parent:hover, .sidebar .nav-parent:focus{
+  outline: 0;
+  background: $darkGreen;
+  color: $beige;
+}
+
+.open-sidebar{
+  position: fixed;
+  z-index: 1000;
+  color: $beige;
+  background: transparent;
+  outline: 0;
+  border: 2px solid transparent;
+  margin-left: 5px;
+  margin-top: 18px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: ease-in-out .5s;
+}
+
+@media(min-width: 750px){
+  .open-sidebar{
+    font-size: 25px;
+    margin-top: 20px;
+  }
+}

@@ -84,7 +84,9 @@ import {
     let formData = new FormData();
 
     Object.keys(values).forEach(item=> {
-        formData.append(item, (values[item]))
+        if(values[item]!==undefined){
+            formData.append(item, (values[item]))
+        }
     });
 
       dispatch(createPostRequest());
@@ -206,10 +208,3 @@ import {
       type: UPDATED_POST,
       post
   })
-
-//   const mapStateToProps = state => {
-//       return {
-//           socket:state.socket
-//       }
-//   }
-//   export default connect(mapStateToProps)(fetchPosts);

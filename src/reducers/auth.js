@@ -43,7 +43,8 @@ export default function reducer(state = initialState, action) {
         console.log('current user is', action.currentUser)
         return Object.assign({}, state, {
             loading: false,
-            currentUser: action.currentUser
+            currentUser: action.currentUser,
+            error: null,
         });
     } else if (action.type === AUTH_ERROR) {
         return Object.assign({}, state, {
@@ -56,7 +57,8 @@ export default function reducer(state = initialState, action) {
             successMessage: action.message,
             error: null
         });
-      } else if(action.type===CHANGE_SUCCESS_MESSAGE){
+    } 
+    else if(action.type===CHANGE_SUCCESS_MESSAGE){
         return Object.assign({}, state, {
             successMessage: action.message,
             error: null
@@ -72,27 +74,30 @@ export default function reducer(state = initialState, action) {
           users: action.users,
           loadingUsers: false,
         });
-      }
+    }
     else if(action.type===FETCH_USERS_ERROR){
         return Object.assign({}, state, {
             loadingUsers: false,
             error: action.error,
         });
-      } else if(action.type === USER_COORDS_REQUEST){
-          return Object.assign({}, state, {
+      } 
+    else if(action.type === USER_COORDS_REQUEST){
+        return Object.assign({}, state, {
             loading: true
-          })
-      } else if(action.type === USER_COORDS_ERROR){
-          return Object.assign({}, state, {
-            loading: false,
-            error: action.error
-          })
-      } else if(action.type === USER_COORDS_SUCCESS){
-          return Object.assign({}, state, {
-              currentUser: action.user,
-              error: null,
-              loading: false
-          })
-      }
+        })
+    } 
+    else if(action.type === USER_COORDS_ERROR){
+        return Object.assign({}, state, {
+        loading: false,
+        error: action.error
+        })
+    } 
+    else if(action.type === USER_COORDS_SUCCESS){
+        return Object.assign({}, state, {
+            currentUser: action.user,
+            error: null,
+            loading: false
+        })
+    }
     return state;
 }

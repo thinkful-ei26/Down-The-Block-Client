@@ -12,13 +12,14 @@ export class CreatePost extends React.Component{
 
     this.state = {
       borderAround: '',
+      uploadedFile: false,
     }
   }
 
   onSubmit(e){
     e.preventDefault();
-    let photo = null;
-    if(this.img && this.img.files){
+    let photo=undefined;
+    if(this.img && this.img.files.length!==0){
       photo= this.img.files[0];
       console.log('THERES A FILE', photo)
     }
@@ -26,6 +27,7 @@ export class CreatePost extends React.Component{
     const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display, photo};
 
     this.props.dispatch(submitPost(postId, values, this.props.coords, this.props.display));
+    this.setState({uploadedFile: false});
     this.content.value = "";
     this.form.category.value="Other";
     this.props.dispatch(postBeingEdited(null))
@@ -84,7 +86,17 @@ export class CreatePost extends React.Component{
     }
   }
 
+  checkIfFile(){
+    if(this.img && this.img.files.length!==0){
+      this.setState({uploadedFile: true});
+    }
+    else{
+      this.setState({uploadedFile: false});
+    }
+  }
+
   render(){
+
     let editMode = this.props.editPost ? true : false;
 
     return(
@@ -102,7 +114,7 @@ export class CreatePost extends React.Component{
           id="content" 
           name="content" 
           className="create-post-textarea"
-          placeholder="Write a Post For Your Neighborhood To See!" 
+          placeholder={this.props.display==="neighbors" ? "Write a Post For Your Neighborhood To See!" : "Write a Post For Your City To See!"}
           defaultValue={editMode ? this.props.editPost.content : ""}
         />
 
@@ -165,11 +177,25 @@ export class CreatePost extends React.Component{
 
         </section>
 
-       {!editMode &&  <input 
-          accept="image/*"
-          ref={input => this.img = input}
-          type="file"
+       {!editMode && 
+       <React.Fragment> 
+        <button 
+          type="button"
+          className="upload-photo"
+          onClick={()=>this.img.click()}
+        >
+            <i className="fas fa-paperclip"></i> Attach Photo {this.state.uploadedFile && <i className="fas fa-file"></i>}
+        </button>
+        <input 
+            type="file"
+            accept="image/*"
+            className="image-input"
+            name="img"
+            id="img"
+            onChange={()=>this.checkIfFile(this.img)}
+            ref={input => this.img = input} 
         />
+        </React.Fragment>
        }
         {this.generateButtons()}
       </div>

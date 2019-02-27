@@ -28,13 +28,6 @@ export class Input extends React.Component {
             error = <div className="form-error">{this.props.meta.error}</div>;
         }
 
-        let warning;
-        if (this.props.meta.touched && this.props.meta.warning) {
-            warning = (
-                <div className="form-warning">{this.props.meta.warning}</div>
-            );
-        }
-
         let element = (<Element
             {...this.props.input}
             {...max}
@@ -44,6 +37,7 @@ export class Input extends React.Component {
             type={this.props.type}
             ref={input => (this.input = input)}
             autoFocus = {this.props.autoFocus}
+            className={error && "highlight-red"}
             >
             {this.props.children}
         </Element>)
@@ -58,6 +52,7 @@ export class Input extends React.Component {
                 type={this.props.type}
                 ref={input => (this.input = input)}
                 autoFocus = {this.props.autoFocus}
+                className={error && "highlight-red"}
             >
             </Element>)
         }
@@ -66,8 +61,6 @@ export class Input extends React.Component {
             <div className="form-input">
                 <label htmlFor={this.props.input.name}>
                     {this.props.label}
-                    {error}
-                    {warning}
                 </label>
                 {element}
             </div>

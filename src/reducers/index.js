@@ -6,7 +6,6 @@ import comments from './comments';
 import geolocation from './geolocation';
 import { reducer as formReducer } from 'redux-form';
 import socket from './socket';
-// import comments from './comments';
 
 export default combineReducers({
   nav,

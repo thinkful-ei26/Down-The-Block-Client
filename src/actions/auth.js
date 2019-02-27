@@ -3,6 +3,7 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../components/common/local-storage';
+import {display} from './navigation';
 import {
     SET_AUTH_TOKEN,
     CLEAR_AUTH,
@@ -61,10 +62,13 @@ export const login = (username, password) => dispatch => {
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
             .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+            .then(()=>{
+                dispatch(display('neighbors'))
+            })
             .catch(err => {
-                const {code} = err;
+                const {status} = err;
                 const message =
-                    code === 401
+                    status === 401
                         ? 'Incorrect username or password'
                         : 'Unable to login, please try again';
                 dispatch(authError(err));

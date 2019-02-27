@@ -1,0 +1,62 @@
+@import "~./components/common/colors.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: $lightGray;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6,p{
+  margin:0;
+}
+
+form .highlight-red{
+  border: 2px solid $darkRed;
+  border-radius: 5px;
+}
+
+.form-error{
+  color: #aa2d2d;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.success-message{
+  color: $darkGreen;
+  text-align: center;
+  padding: 10px;
+  font-size:20px;
+  font-family: Play;
+}
+
+button:focus{
+  outline: 0;
+}
+
+/*CUSTOM FILE INPUT*/
+.image-input{
+  display: none;
+}
+
+.upload-photo{
+  color: $darkGreen;
+  background: none;
+  border: 0;
+  font-size: 20px;
+  font-family: Play;
+  margin:auto;
+  cursor:pointer;
+}
+
+.upload-photo:focus{
+  outline: 0;
+}

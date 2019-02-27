@@ -1,7 +1,7 @@
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import { normalizeResponseErrors } from './utils';
-import { refreshProfileAuthToken } from './auth';
+import { refreshProfileAuthToken, authError } from './auth';
 import { UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR } from './types';
 import {
   USER_COORDS_REQUEST,
@@ -10,7 +10,6 @@ import {
 } from './types';
 
 export const registerUser = user => dispatch => {
-    console.log('IN REGISTER USER')
     let formData = new FormData();
 
     Object.keys(user).forEach(item=> {
@@ -26,14 +25,20 @@ export const registerUser = user => dispatch => {
             res.json();
         })
         .catch(err => {
-            const {reason, message, location} = err;
-            if (reason === 'ValidationError') {
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
+            const {location, message, status } = err;
+            const str =
+                status === 422 && location==='registerUsername'
+                ? message
+                : 'Unable to register, please try again';
+            dispatch(authError(err));
+            // Could not authenticate, so return a SubmissionError for Redux
+            // Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: str,
+                    _error: str
+                })
+            );
         });
 };
 
@@ -67,23 +72,17 @@ export const updatedUser = user => (dispatch, getState) => {
             dispatch(refreshProfileAuthToken())
         })
         .catch(err => {
-
-            const {reason, message, location, status} = err;
-            if (reason === 'ValidationError' || status === 401) {
-                // Convert ValidationErrors into SubmissionErrors for Redux Form
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
-            else{
-                return Promise.reject(
-                    new SubmissionError({
-                        _error: 'Unable to update, please try again',
-                    })
-                );
-            }
+            console.log('THE ERROR IS', err)
+            const { location } = err;
+            const message = 'Unable to update, please try again';
+            // Could not authenticate, so return a SubmissionError for Redux
+            // Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: message,
+                    _error: message
+                })
+            );
         });
 };
 
@@ -103,22 +102,16 @@ export const updatePassword = user => (dispatch, getState) => {
             dispatch(updatedUserSuccess(updatedUser, 'Your password has been successfully updated'));
         })
         .catch(err => {
-            const {reason, message, location, status} = err;
-            if (reason === 'ValidationError' || status === 401) {
-                // Convert ValidationErrors into SubmissionErrors for Redux Form
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
-            else{
-                return Promise.reject(
-                    new SubmissionError({
-                        _error: 'Unable to update password, please try again',
-                    })
-                );
-            }
+            const {location } = err;
+            const message = 'Unable to update, please try again';
+            // Could not authenticate, so return a SubmissionError for Redux
+            // Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: message,
+                    _error: message
+                })
+            );
         });
 };
 
@@ -146,6 +139,7 @@ export const updateProfilePhoto = photo => (dispatch, getState) => {
         })
 
         .catch(err => {
+            //add error handling
             console.log(err);
         });
 };
@@ -233,7 +227,6 @@ export const setUserCoords = (coords) => (dispatch, getState) => {
     .then(res => res.json())
     .then(user => {
         dispatch(userCoordsSuccess(user));
-        // dispatch(fetchPosts(coords, forum));
     })
     .catch(error => {
         dispatch(userCoordsError(error))

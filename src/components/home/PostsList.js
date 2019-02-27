@@ -10,7 +10,7 @@ export class PostsList extends React.Component{
   }
 
   generatePosts(){
-    let posts = this.props.posts.map((post, index)=> <Post key={index} postId={post.id} {...post} />);
+    let posts = this.props.posts.map((post)=> <Post key={post.id} postId={post.id} {...post} />);
 
     if(this.props.searchTerm){
       posts = filterPostsBySearch(this.props.searchTerm, posts);

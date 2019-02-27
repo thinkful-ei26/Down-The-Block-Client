@@ -1,0 +1,262 @@
+@import "~../common/colors.scss";
+/*GENERAL*/
+
+.crime{
+  background: #e36060;
+  border-bottom-left-radius: 5px;
+}
+
+.personal{
+  background: #47b5c6;
+}
+
+.event{
+  background: #c093d7;
+}
+
+.other{
+  background: #f3c59c;
+}
+
+.border-Crime{
+  // border: 1px solid #e36060;
+  box-shadow: 0 0 4px #e36060;
+}
+
+.border-Personal{
+  box-shadow: 0 0 4px #47b5c6;
+  // border: 1px solid #47b5c6;
+}
+
+.border-Event{
+  box-shadow: 0 0 4px #c093d7;
+  // border: 1px solid #c093d7;
+}
+
+.border-Other{
+  box-shadow: 0 0 4px #f3c59c;
+  // border: 1px solid #f3c59c;
+}
+
+/*POST*/
+.entire-thread{
+  width: 80%;
+  margin: 20px auto 0px auto;
+  // box-shadow: 0 0 4px grey;
+  border-radius: 10px;
+}
+
+.post{
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.options{
+  float: right;
+  color: $darkGreen;
+}
+
+.options button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 7px;
+  margin-left: 2px;
+  font-size: 12px;
+}
+
+.post .profile-photo{
+  width:50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.post .profile-photo-avatar{
+  width:50px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.initials{
+  width: fit-content;
+  margin: auto;
+}
+
+.post-user-name{
+  display: inline;
+  }
+
+.post span{
+  display: inline;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/*COMMENTS*/
+
+.comments-list{
+  background: $lightGray;
+  padding: 0px 10px;
+  font-family: Play;
+  padding-top: 5px;
+}
+
+.profile-photo-avatar, .comment-profile-photo-avatar{
+border-radius: 50%;
+color: white;
+background: black;
+display: flex;
+}
+
+.comment-profile-photo-avatar{
+width:35px;
+height: 35px;
+font-size: 15px;
+}
+
+.comment-profile-photo{
+width:35px;
+height: 35px;
+border-radius: 50%;
+}
+
+.comment-user-name{
+display:inline;
+vertical-align: top;
+}
+
+.comment-content{
+  display: inline-block;
+  padding: 10px;
+  background: white;
+  border-radius: 16px;
+  margin-left: 10px;
+  overflow: scroll;
+}
+
+.post-info, .comment-info, .comment-form{
+  display:flex;
+  padding: 5px;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.comment-form{
+  padding: 10px 20px
+}
+
+.post-content{
+  padding: 10px 12px 10px 12px;
+  font-family: Play;
+  line-height: 1.5;
+  font-size: 17px;
+}
+
+.post-photo{
+  padding: 10px;
+  width: 100%;
+}
+
+.name-and-date{
+  padding: 6px 0px 0px 6px;
+  font-family: Play;
+}
+
+.comment-textarea{
+  resize: none;
+  outline: 0;
+  border: none;
+  border-radius: 16px;
+  width: 90%;
+  padding: 10px;
+  margin-left: 10px;
+  font-family: Play;
+  font-size: 16px;
+  color: $darkGreen;
+}
+
+/*Create Post*/
+.post-form{
+  background: white;
+  width: 80%;
+  margin: auto;
+  box-shadow: 0 0 4px grey;
+  border-radius: 10px;
+}
+
+.create-post-textarea{
+  width:100%;
+  height: 80px;
+  margin: auto;
+  display: block;
+  border: none;
+  outline: 0;
+  resize: none;
+  border-radius: 10px;
+  padding: 15px;
+  font-family: Play;
+  font-size: 16px;
+  color: $darkGreen;
+}
+
+.modal .post-form{
+  margin-left: 200px;
+  margin-top: 60px;
+}
+
+input[type="radio"] {
+  position: fixed;
+  opacity: 0;
+}
+
+.radio-buttons{
+  display: block;
+  width: fit-content;
+  margin: auto;
+}
+
+.post-form label, .post-form button{
+  display: inline-block;
+  padding: 7px;
+  cursor: pointer;
+  opacity:.7;
+  border: 2px solid transparent;
+  font-family: Play;
+  font-size: 15px;
+  transition: .5s;
+}
+
+.post-form button{
+  background: $beige;
+  color: $darkGreen;
+  border-bottom-right-radius: 5px;
+}
+
+.post-form label:hover, .post-form button:hover, .post-form label:focus, .post-form button:focus {
+  opacity: 1;
+}
+
+.bottom-options{
+  background: $lightGray;
+}
+
+.post-form label.border{
+  opacity: 1;
+}
+
+@media(min-width: 525px){
+  .bottom-options{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .post-form button{
+    display: inline-block;
+  }
+
+  .radio-buttons{
+    display: inline;
+    margin: 0;
+  }
+}
