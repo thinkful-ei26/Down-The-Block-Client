@@ -152,6 +152,11 @@ vertical-align: top;
   font-size: 17px;
 }
 
+.post-photo{
+  padding: 10px;
+  width: 100%;
+}
+
 .name-and-date{
   padding: 6px 0px 0px 6px;
   font-family: Play;
@@ -199,7 +204,7 @@ vertical-align: top;
   margin-top: 60px;
 }
 
-input[type="radio"] { 
+input[type="radio"] {
   position: fixed;
   opacity: 0;
 }
