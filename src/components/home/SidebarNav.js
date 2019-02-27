@@ -86,45 +86,6 @@ class SidebarNav extends React.Component{
     this.setState({showAccount: !this.state.showAccount})
   }
 
-  // generateNav(){
-  //   if(this.props.loggedIn){
-  //     return (
-  //       <React.Fragment>
-  //         <h4><i class="fas fa-users-cog"></i> Account</h4>
-  //         <button
-  //            className="content"
-  //            onClick={()=>{
-  //             this.onSetSidebarOpen(false)
-  //             this.props.dispatch(display('about'))
-  //            }
-  //           }
-  //         >            
-  //           About
-  //         </button>
-  //         <button
-  //            className="content"
-  //            onClick={()=>{
-  //             this.onSetSidebarOpen(false)
-  //             this.props.dispatch(display('settings'))
-  //            }
-  //           }
-  //         >            
-  //           Settings
-  //         </button>
-  //         <button id="logout" 
-  //           className="content"
-  //           onClick={() => {
-  //             this.onSetSidebarOpen(false)
-  //             this.logOut()
-  //             }
-  //           }>
-  //           Logout
-  //         </button>
-  //       </React.Fragment>
-  //     )
-  //   }
-  // }
-
  render(){
     return(
       <React.Fragment>
@@ -138,7 +99,6 @@ class SidebarNav extends React.Component{
           sidebar=
           {
             <nav className="sidebar">
-              {/* <h4><i class="fas fa-edit"></i> Forums</h4> */}
               <button
                 className="nav-parent"
                 onClick={()=>{
@@ -155,8 +115,7 @@ class SidebarNav extends React.Component{
                     this.onSetSidebarOpen(false)
                     this.props.dispatch(fetchPosts(this.props.coords, 'neighbors'))
                   }
-                  }
-                >Neighbors
+                  }>Neighbors
                 </button>
                 <button 
                   className="content" 
@@ -168,20 +127,15 @@ class SidebarNav extends React.Component{
                 >City
                 </button>
               </section>}
-              {/* <h4><i class="fas fa-comments"></i> Chats</h4> */}
               <button
                 className="nav-parent"
                 onClick={()=>{
                   this.toggleChatChildren()
                 }}
-              >
-              <i class="fas fa-comments"></i> 
+              ><i class="fas fa-comments"></i> 
               Chats
               </button>
-            
               {this.state.showChat && this.showAllUsers()}
-              {/* {this.generateNav()} */}
-              {/* <h4><i class="fas fa-users-cog"></i> Account</h4> */}
               <button
                 className="nav-parent"
                 onClick={()=>{
