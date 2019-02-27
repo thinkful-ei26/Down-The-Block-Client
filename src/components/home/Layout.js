@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ChatContainer from './ChatContainer'
+import  ChatContainer  from './ChatContainer'
 import { connect } from 'react-redux';
 
 class Layout extends Component {
@@ -25,10 +25,7 @@ class Layout extends Component {
 	* 	Sets the user property in state 
 	*	@param user {id:number, name:string}
 	*/	
-	setUser = ()=>{
-		const { socket, user } = this.props
-		socket.emit('USER_CONNECTED', user);
-	}
+
 
 	render() {
     console.log('PROPS IN LAYOUT', this.props)
@@ -39,7 +36,7 @@ class Layout extends Component {
 					!user ?	
 					''
 					:
-					<ChatContainer socket={socket} user={user} setUser={this.setUser} />
+					<ChatContainer socket={socket} user={user} />
 				}
 			</div>
 		);

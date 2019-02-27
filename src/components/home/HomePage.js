@@ -15,17 +15,18 @@ export class HomePage extends React.Component{
     if(!this.props.coords){
       this.props.dispatch(showAnimation(true));
     }
+    this.props.socket.emit('USER_CONNECTED', this.props.user);
   }
 
   componentWillUnmount(){
     this.props.dispatch(showAnimation(false));
   }
 
-  setUser = ()=>{
-    const { socket, user } = this.props; 
-    console.log('PROPS FROM HOMEPAGE IN SETUSER', this.props);
-		socket.emit('USER_CONNECTED', user);
-  }
+  // setUser = ()=>{
+  //   const { socket, user } = this.props; 
+  //   console.log('PROPS FROM HOMEPAGE IN SETUSER', this.props);
+	// 	socket.emit('USER_CONNECTED', user);
+  // }
   
   render(){
     console.log(this.props.geoError);
@@ -34,12 +35,9 @@ export class HomePage extends React.Component{
         <Geolocator/>
         {this.props.coords && 
         <SidebarNav 
-          setUser={this.setUser}
-          chats={chats}
-          user={user}
-          activeChat={activeChat}
-          setActiveChat={this.setActiveChat}
-          onSendPrivateMessage={this.sendOpenPrivateMessage}
+          // setUser={this.setUser}
+          // setActiveChat={this.setActiveChat}
+          // onSendPrivateMessage={this.sendOpenPrivateMessage}
         />}
         {this.props.coords && <Main/>}
         {this.props.showAnimation && <EyeAnimation/>}

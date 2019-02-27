@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import SideBar from './ChatSideBar'
-import Messages from './Messages'
-import MessageInput from './MessageInput'
+import { connect } from 'react-redux'; 
+import SideBar from './ChatSideBar';
+import ChatHeading from './ChatHeading';
+import Messages from './Messages';
+import MessageInput from './MessageInput';
+import { setActiveChat } from '../../actions/chatMessages'; 
 
 
-export default class ChatContainer extends Component {
+class ChatContainer extends Component {
 	
 	constructor(props) {
 	  super(props);	
-	
 	  this.state = {
-	  	chats:[],
-	  	activeChat:null
-	  };
+		chats:[],
+		activeChat:null
+	};
 	}
 
 	componentDidMount() {
@@ -30,7 +32,7 @@ export default class ChatContainer extends Component {
 
 	sendOpenPrivateMessage = (reciever) => {
 		const { socket, user } = this.props
-		socket.emit('PRIVATE_MESSAGE', {reciever, sender:user.name})
+		socket.emit('PRIVATE_MESSAGE', {reciever, sender:user})
 	}
 
 		/*
@@ -50,11 +52,13 @@ export default class ChatContainer extends Component {
 	*	@param reset {boolean} if true will set the chat as the only chat.
 	*/
 	addChat = (chat, reset = false)=>{
+		this.props.dispatch(setActiveChat(chat));
 		const { socket } = this.props
 		const { chats } = this.state
 
-		const newChats = reset ? [chat] : [...chats, chat]
-		this.setState({chats:newChats, activeChat:reset ? chat : this.state.activeChat})
+		const newChats = reset ? [chat] : [...chats, chat]; 
+
+		this.setState({chats:newChats, activeChat:reset ? chat : this.props.activeChat})
 
 		const messageEvent = `MESSAGE_RECIEVED-${chat.id}`
 		const typingEvent = `TYPING-${chat.id}`
@@ -102,7 +106,7 @@ export default class ChatContainer extends Component {
 					}
 					return chat
 				})
-				this.setState({chats:newChats})
+				this.setState({chats: newChats});
 			}
 		}
 	}
@@ -130,8 +134,9 @@ export default class ChatContainer extends Component {
 	setActiveChat = (activeChat)=>{
 		this.setState({activeChat})
 	}
-
+	
 	render() {
+		console.log(this.state.activeChat);
 		const { user } = this.props
 		const { activeChat } = this.state
 		return (
@@ -144,11 +149,13 @@ export default class ChatContainer extends Component {
 						activeChat !== null ? (
 
 							<div className="chat-room">
+							<ChatHeading name={activeChat.name} />
 								<Messages 
 									messages={activeChat.messages}
 									user={user}
 									typingUsers={activeChat.typingUsers}
 								/>
+								
 								<MessageInput 
 									sendMessage={
 										(message)=>{
@@ -174,3 +181,11 @@ export default class ChatContainer extends Component {
 		);
 	}
 }
+
+const mapStateToProps = (state) => ({
+	activeChat:state.chatMessages.activeChat,
+	chats:state.chatMessages, 
+	socket:state.socket.socket
+}); 
+
+export default connect(mapStateToProps)(ChatContainer);

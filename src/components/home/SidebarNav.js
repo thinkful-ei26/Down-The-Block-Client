@@ -5,6 +5,7 @@ import { display } from '../../actions/navigation'
 import { fetchPosts } from '../../actions/posts';
 import { fetchUsers } from '../../actions/users';
 import { clearAuth } from '../../actions/auth';
+import { setActiveChat } from '../../actions/chatMessages'; 
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
 
@@ -42,9 +43,14 @@ class SidebarNav extends React.Component{
     this.props.dispatch(fetchUsers(this.props.coords));
   }
 
-  setUser = (user)=>{
-    this.props.setUser(user.username)
-  }
+  // setUser = (user)=>{
+  //   this.props.setUser(user)
+  // }
+
+  sendOpenPrivateMessage = (reciever) => {
+		const { socket, currentUser } = this.props
+		socket.emit('PRIVATE_MESSAGE', {reciever: reciever.username, sender:currentUser})
+	}
   
   showAllUsers(){
     if(this.props.users){
@@ -53,13 +59,12 @@ class SidebarNav extends React.Component{
           <button
             className="content"
             onClick={()=>{
-              const { reciever } = user;
-		          const { onSendPrivateMessage } = this.props;
-
+              
+              console.log('USER BEING CLICKED IS:', user); 
               this.onSetSidebarOpen(false);
-              this.props.socket.emit('VERIFY_USER', this.props.currentUser, this.setUser);
-              onSendPrivateMessage(reciever);
-              this.props.dispatch(display('ChatContainer')) 
+              this.props.socket.emit('VERIFY_USER', this.props.currentUser);
+              this.sendOpenPrivateMessage(user);
+              this.props.dispatch(display('ChatContainer')); 
               }
             }
             key={index}>{user.firstName}
@@ -167,7 +172,9 @@ const mapStateToProps = state => ({
   users: state.auth.users,
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
-  socket:state.socket.socket
+  socket:state.socket.socket, 
+  chats:state.chatMessages.chats, 
+  activeChat: state.chatMessages.activeChat
 });
 
 export default connect(mapStateToProps)(SidebarNav)
