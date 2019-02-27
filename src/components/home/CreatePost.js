@@ -22,15 +22,12 @@ export class CreatePost extends React.Component{
     let photo=undefined;
     if(this.img && this.img.files.length!==0){
       photo= this.img.files[0];
-      console.log('THERES A FILE', photo)
     }
     let postId = this.props.editPost ? this.props.editPost.postId : null;
     const values={content: this.state.content, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display, photo};
 
-    console.log('SUBMITTING POST IN CREATE POST');
     this.props.dispatch(submitPost(postId, values, this.props.coords, this.props.display));
     this.setState({uploadedFile: false});
-    this.setState({content: "", borderAround: ''})
     this.form.category.value="Other";
     this.props.dispatch(postBeingEdited(null))
   }
@@ -57,7 +54,11 @@ export class CreatePost extends React.Component{
         borderAround: this.props.editPost.category.toLowerCase(),
         content: this.props.editPost.content 
       })
-    } 
+    }
+    else if(prevProps.editPost && !this.props.editPost){
+      this.setState({content: "", borderAround: ''})
+    }
+ 
   }
 
   componentWillMount(){
@@ -72,13 +73,11 @@ export class CreatePost extends React.Component{
   }
 
   handleClick = (e) => {
-    console.log('e.target is', e.target)
     if(this.form.contains(e.target)){
       return
     }
     else{
       this.props.dispatch(postBeingEdited(null));
-      this.setState({content: "", borderAround: ''})
     }
   }
 
@@ -92,7 +91,6 @@ export class CreatePost extends React.Component{
           <button 
             onClick={()=>{
               this.props.dispatch(postBeingEdited(null))
-              this.setState({content: "", borderAround: ''})
             }
             }
             type="button" >Cancel
@@ -125,10 +123,6 @@ export class CreatePost extends React.Component{
   render(){
 
     let editMode = this.props.editPost ? true : false;
-
-    console.log('EDIT MODE IS', editMode, 'PROPS ARE', this.props.editPost);
-
-    console.log('CONTENT', this.state.content);
 
     return(
       <div ref={div => this.div = div} className={`${this.props.postBeingEdited ? 'modal' : ''}`}>

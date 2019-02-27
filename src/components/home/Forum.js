@@ -8,7 +8,6 @@ import './main.scss'
 export class Forum extends React.Component{
 
   render(){
-    console.log('IN FORUM, POST BEING EDITED', this.props.postBeingEdited);
     console.log('CURRENT USER', this.props.currentUser)
     return(
       <section className="forum">
@@ -26,7 +25,6 @@ export class Forum extends React.Component{
 }
 
 const mapStateToProps = state => {
-  console.log("IN FORUM, STATE IS", state)
   return{
     display: state.nav.display,
     postBeingEdited: state.posts.postBeingEdited,
