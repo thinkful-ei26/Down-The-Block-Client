@@ -4,6 +4,7 @@ import UpdateAccountForm from './UpdateAccountForm';
 import UpdatePasswordForm from './UpdatePasswordForm';
 import {changeSuccessMessage, updateProfilePhoto} from '../../actions/users';
 import './settings.scss'
+import { stat } from 'fs';
 
 export class SettingsPage extends React.Component{
   componentDidMount(){
@@ -35,6 +36,7 @@ export class SettingsPage extends React.Component{
   render(){
     return(
       <main className="settings">
+        <h1>Settings</h1>
         {this.props.successMessage &&
         <div className="updated-message" aria-live="polite">
           {this.props.successMessage}
@@ -55,7 +57,7 @@ export class SettingsPage extends React.Component{
             className="upload-photo"
             onClick={()=>this.img.click()}
         >
-            <i class="fas fa-camera"></i> Update Profile Picture 
+            <i className="fas fa-camera"></i> Update Profile Picture 
         </button>
         <input 
             type="file"
@@ -78,6 +80,7 @@ const mapStateToProps = state => {
   console.log('IN SETTINGS, STATE:', state);
   return {
     successMessage: state.auth.successMessage,
+    errorMessage: state.auth.error,
     currentUser: state.auth.currentUser,
   }
 };

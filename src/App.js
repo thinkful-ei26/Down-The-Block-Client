@@ -7,7 +7,6 @@ import {refreshAuthToken} from './actions/auth';
 import Navbar from './components/common/Navbar';
 
 export class App extends React.Component {
-
     componentDidUpdate(prevProps) {
         if (!prevProps.loggedIn && this.props.loggedIn) {
             // When we are logged in, refresh the auth token periodically
@@ -37,11 +36,9 @@ export class App extends React.Component {
         clearInterval(this.refreshInterval);
     }
 
-    render() {
-        console.log('IN APP PROPS:', this.props);
-        
+    render() {        
         return (
-            <div className="app">
+            <div className="app" >
                 {/* Always show the navbar! */}
                 <Route path="/" component={Navbar} />
                 <Route exact path="/" component={LandingPage} />

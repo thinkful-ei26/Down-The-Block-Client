@@ -19,7 +19,7 @@ export class Post extends React.Component {
       return (
         <button
           onClick={()=>this.props.dispatch(postBeingEdited({postId, content, category}))} >
-          <i class="fas fa-pencil-alt"></i>
+          <i className="fas fa-pencil-alt"></i>
         </button>)
     }
   }
@@ -29,7 +29,7 @@ export class Post extends React.Component {
       return (
         <button
           onClick={()=>this.props.dispatch(deletePost(postId))} >
-          <i class="fas fa-trash"></i>
+          <i className="fas fa-trash"></i>
         </button>)
     }
   }

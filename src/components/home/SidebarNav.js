@@ -97,7 +97,7 @@ class SidebarNav extends React.Component{
                   this.toggleCategory('showForum')
                 }}
               >
-              <i class="fas fa-edit"></i> Forums
+              <i className="fas fa-edit"></i> Forums
               </button>
               {this.state.showForum && <section className="forum-children">
                 <button 
@@ -123,7 +123,7 @@ class SidebarNav extends React.Component{
                 onClick={()=>{
                   this.toggleCategory('showChat')
                 }}
-              ><i class="fas fa-comments"></i> Chats
+              ><i className="fas fa-comments"></i> Chats
               </button>
               {this.state.showChat && this.showAllUsers()}
               <button
@@ -131,7 +131,7 @@ class SidebarNav extends React.Component{
                 onClick={()=>{
                   this.toggleCategory('showAccount')
                 }}
-              ><i class="fas fa-users-cog"></i> Account
+              ><i className="fas fa-users-cog"></i> Account
               </button>
               {this.state.showAccount && <section className="account-children">
                 <button
@@ -169,7 +169,7 @@ class SidebarNav extends React.Component{
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(229, 228, 188)', width: 200, boxShadow: 0, webkitBoxShadow: 0} , root: {position: 'relative', boxShadow: 0}  }}
+          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(229, 228, 188)', width: 200, boxShadow: 0, WebkitBoxShadow: 0} , root: {position: 'relative', boxShadow: 0}  }}
         >
         </Sidebar>
         </React.Fragment>

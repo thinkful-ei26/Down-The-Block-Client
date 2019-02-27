@@ -184,7 +184,7 @@ export class CreatePost extends React.Component{
           className="upload-photo"
           onClick={()=>this.img.click()}
         >
-            <i class="fas fa-paperclip"></i> Attach Photo {this.state.uploadedFile && <i class="fas fa-file"></i>}
+            <i className="fas fa-paperclip"></i> Attach Photo {this.state.uploadedFile && <i className="fas fa-file"></i>}
         </button>
         <input 
             type="file"

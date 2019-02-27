@@ -23,13 +23,13 @@ class Comment extends React.Component {
 
   delete(commentId, postId){
     if(this.props.userId.id===this.props.loggedInUserId){
-      return <button onClick={()=>this.props.dispatch(deleteComment(commentId, postId))} ><i class="fas fa-trash"></i></button>
+      return <button onClick={()=>this.props.dispatch(deleteComment(commentId, postId))} ><i className="fas fa-trash"></i></button>
     }
   }
 
   edit(commentId){
     if(this.props.userId.id===this.props.loggedInUserId){
-      return <button onClick={()=>this.props.dispatch(commentBeingEdited(commentId))} > <i class="fas fa-pencil-alt"></i></button>
+      return <button onClick={()=>this.props.dispatch(commentBeingEdited(commentId))} > <i className="fas fa-pencil-alt"></i></button>
     }  
   }
 

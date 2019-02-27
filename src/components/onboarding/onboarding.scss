@@ -22,7 +22,7 @@
   position: relative;
 
   /* Add the blur effect */
-  filter: blur(5px);
+filter: blur(5px);
   -webkit-filter: blur(5px);
 }
 
@@ -72,8 +72,8 @@
 
 .landing-page input:focus{
   outline: 0;
-  border: 4px solid $darkGreen;
   transition: .5s;
+  background: white;
 }
 
 .landing-page .form-input{
@@ -169,6 +169,5 @@
   .landing-page h1{
     font-size: 60px;
   }
-  
 }
 

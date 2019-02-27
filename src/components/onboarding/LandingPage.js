@@ -7,7 +7,12 @@ import About from '../common/About';
 import './onboarding.scss';
 
 export class LandingPage extends React.Component {
+    componentDidMount(){
+        document.title= 'Down The Block'
+    }
+    
     render(){
+
     // If we are logged in redirect straight to the user's home
     if (this.props.loggedIn) {
         return <Redirect to="/home" />;

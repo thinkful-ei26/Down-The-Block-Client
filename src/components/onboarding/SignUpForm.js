@@ -106,7 +106,7 @@ export class SignUpForm extends React.Component {
                     className="upload-photo"
                     onClick={()=>this.img.click()}
                 >
-                   <i class="fas fa-camera"></i> Upload Profile Picture {this.state.uploadedFile && <i class="fas fa-file"></i>}
+                   <i className="fas fa-camera"></i> Upload Profile Picture {this.state.uploadedFile && <i className="fas fa-file"></i>}
                 </button>
                 <input 
                     type="file"
@@ -140,7 +140,7 @@ export class SignUpForm extends React.Component {
 export default reduxForm({
     form: 'registration',
     onSubmitFail: (errors, dispatch) =>{
-        console.log('IN FORM', errors)
+        console.log('ERRORs', errors);
         dispatch(focus('registration', Object.keys(errors)[0]))
     },
 })(SignUpForm);

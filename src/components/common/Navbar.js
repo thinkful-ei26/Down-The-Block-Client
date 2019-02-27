@@ -39,7 +39,7 @@ export class Navbar extends React.Component{
         <Link className={`${className}`} to="/home">
           <i className="fas fa-home"></i> DownTheBlock
         </Link>
-        <p className="tagline">Your Neighborhood At Your Fingertips</p>
+        <p className="tagline">Knock Knock, It's Your Neighborhood</p>
         {this.navbarLinks()}
       </nav>
     );

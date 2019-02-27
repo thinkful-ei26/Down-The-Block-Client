@@ -61,6 +61,7 @@ export class UpdateAccountForm extends React.Component{
           <button
               type="submit"
               disabled={this.props.pristine || this.props.submitting}>
+            >
               Update Account
           </button>
         </form>
@@ -70,7 +71,6 @@ export class UpdateAccountForm extends React.Component{
 
 function mapStateToProps(state) {
   return {
-    // to get the initial values if the user is editing the form: 
     initialValues: {
       firstName: state.auth.currentUser.firstName,
       lastName: state.auth.currentUser.lastName,
@@ -82,6 +82,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(reduxForm({
   form:'UpdateAccountForm',
   onSubmitFail: (error, dispatch) => {
+    console.log('ERRORs', error);
     dispatch(focus('UpdateAccountForm', Object.keys(error)[0]));
 }
 })(UpdateAccountForm));

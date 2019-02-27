@@ -1,5 +1,17 @@
 @import "~../common/colors.scss";
 
+.settings{
+  background: $lightGray;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-family: Play;
+}
+
+.settings h1{
+  color: #06311f;
+  font-family: Play;
+}
+
 .settings button{
   background: $darkGreen;
   border: none;
@@ -14,4 +26,55 @@
 .settings button:hover {
   font-weight: bold;
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 2px 6px 0 rgba(0,0,0,0.19);
+}
+
+.settings form{
+  padding: 20px 30px;
+  font-size: 20px;
+  width: 100%;
+  margin: 40px 0;
+  color: $darkGreen;
+}
+
+.settings label{
+  flex:.5;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.settings input {
+  border-radius: 5px;
+  border: 2px solid $darkGreen;
+  background: white;
+  flex: 1;
+  font-size: 16px;
+  padding: 5px;
+  color: $darkGreen;
+}
+
+.settings input:focus{
+  outline: 0;
+  transition: .5s;
+  background: $beige;
+}
+
+.settings .form-input{
+  display: flex;
+  width: 100%;
+  margin: 20px auto;
+  align-items: center;
+}
+
+@media(min-width:400px){
+  .settings label{
+    font-size: 20px;
+  }
+}
+
+@media(min-width:600px){
+  .settings form{
+    padding: 20px 20px;
+    width: 550px;
+    margin: auto;
+  }
 }

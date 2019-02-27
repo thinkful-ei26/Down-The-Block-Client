@@ -75,7 +75,7 @@ export class ForumHeader extends React.Component{
           styles={colorStyles}
         />
 
-        <i class="fas fa-search"></i>
+        <i className="fas fa-search"></i>
 
         <input 
           type="text" 
