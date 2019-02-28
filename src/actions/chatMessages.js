@@ -7,7 +7,7 @@ import {
     CHATS
 } from './types';
 
-export const displayNewPrivateMessage = (chatId, message) => ({
+export const fetchNewPrivateMessage = (chatId, message) => ({
     type:DISPLAY_NEW_PRIVATE_MESSAGE, 
     chatId, 
     message

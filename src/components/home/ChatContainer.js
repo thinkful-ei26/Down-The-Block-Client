@@ -10,24 +10,24 @@ import { setActiveChat } from '../../actions/chatMessages';
 class ChatContainer extends Component {
 	
 	constructor(props) {
-	  super(props);	
-	  this.state = {
-		chats:[],
-		activeChat:null
-	};
+		super(props);	
+		this.state = {
+			chats:[],
+			activeChat:null
+		};
 	}
 
 	componentDidMount() {
 		const { socket } = this.props
 		this.initSocket(socket);
 	}
-
+	
 	initSocket(socket){
-		socket.emit('COMMUNITY_CHAT', this.resetChat)
+		// socket.emit('COMMUNITY_CHAT', this.resetChat)
 		socket.on('PRIVATE_MESSAGE', this.addChat)
-		socket.on('connect', ()=>{
-			socket.emit('COMMUNITY_CHAT', this.resetChat)
-		})
+		// socket.on('connect', ()=>{
+		// 	socket.emit('COMMUNITY_CHAT', this.resetChat)
+		// })
 	}
 
 	sendOpenPrivateMessage = (reciever) => {
@@ -40,7 +40,7 @@ class ChatContainer extends Component {
 	* 	@param chat {Chat}
 	*/
 	resetChat = (chat)=>{
-		return this.addChat(chat, true)
+		return this.addChat(chat, false)
 	}
 
 	/*
@@ -82,7 +82,7 @@ class ChatContainer extends Component {
 				return chat
 			})
 
-			this.setState({chats:newChats})
+			this.setState({...chats, newChats})
 		}
 	}
 
@@ -132,11 +132,12 @@ class ChatContainer extends Component {
 	}
 
 	setActiveChat = (activeChat)=>{
-		this.setState({activeChat})
+		this.setState({...activeChat, activeChat})
 	}
 	
 	render() {
 		console.log(this.state.activeChat);
+		console.log('PROPS IN CHAT CONTAINER', this.props); 
 		const { user } = this.props
 		const { activeChat } = this.state
 		return (
@@ -154,8 +155,7 @@ class ChatContainer extends Component {
 									messages={activeChat.messages}
 									user={user}
 									typingUsers={activeChat.typingUsers}
-								/>
-								
+								/>								
 								<MessageInput 
 									sendMessage={
 										(message)=>{
@@ -176,16 +176,18 @@ class ChatContainer extends Component {
 						</div>
 					}
 				</div>
-
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state) => ({
-	activeChat:state.chatMessages.activeChat,
-	chats:state.chatMessages, 
-	socket:state.socket.socket
-}); 
+const mapStateToProps = (state) => {
+	console.log('STATE IN CHATCONTAINER', state);
+	return {
+		activeChat:state.chatMessages.activeChat,
+		chats:state.chatMessages.chats, 
+		socket:state.socket.socket
+	}
+}; 
 
 export default connect(mapStateToProps)(ChatContainer);
