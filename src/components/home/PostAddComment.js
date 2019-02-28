@@ -26,6 +26,9 @@ export class PostAddComment extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
+        if(this.comment.trim()===""){
+            return;
+        }
 
         let commentId = this.props.commentBeingEdited ? this.props.commentBeingEdited.id : null;
         let postId = this.props.commentBeingEdited ? this.props.commentBeingEdited.postId : this.props.form;
@@ -76,7 +79,7 @@ export class PostAddComment extends React.Component {
 
                 <textarea 
                     className="comment-textarea" 
-                    ref={input => this.content = input} 
+                    ref={input => this.content = input}
                     type="textarea" 
                     id="content" 
                     name="content" 
