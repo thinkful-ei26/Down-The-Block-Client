@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import SidebarNav from './SidebarNav';
+
 import Main from './Main';
 import Geolocator from './Geolocator';
 import AddressForm from './AddressForm';
@@ -13,11 +14,18 @@ export class HomePage extends React.Component{
 
   componentWillMount(){
     document.title = 'Home';
+    this.props.socket.emit('USER_CONNECTED', this.props.user);
   }
 
   componentWillUnmount(){
     this.props.dispatch(showAnimation(false));
   }
+
+  // setUser = ()=>{
+  //   const { socket, user } = this.props; 
+  //   console.log('PROPS FROM HOMEPAGE IN SETUSER', this.props);
+	// 	socket.emit('USER_CONNECTED', user);
+  // }
   
   render(){
     //while waiting to "ask" user for location
@@ -25,7 +33,12 @@ export class HomePage extends React.Component{
     return(
       <div id="home" className="home">
         <Geolocator/>
-        {this.props.coords && <SidebarNav setUser={this.setUser}/>}
+        {this.props.coords && 
+        <SidebarNav 
+          // setUser={this.setUser}
+          // setActiveChat={this.setActiveChat}
+          // onSendPrivateMessage={this.sendOpenPrivateMessage}
+        />}
         {this.props.coords && <Main/>}
         {this.props.showAnimation && <EyeAnimation/>}
         {this.props.geoError && !this.props.coords && <AddressForm />}

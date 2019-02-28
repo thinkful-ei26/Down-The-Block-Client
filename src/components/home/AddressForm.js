@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete';
+import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
+
 import './address-form.scss'
 
 import { showAnimation } from '../../actions/navigation';
@@ -22,7 +20,6 @@ class AddressForm extends React.Component {
   };
 
   componentDidMount(){
-    console.log('In Address Form Mount')
     this.props.dispatch(showAnimation(false));
   };
  
@@ -30,7 +27,6 @@ class AddressForm extends React.Component {
     this.setState({ address });
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      // .then(googleCoords => console.log('Success', googleCoords))
       .then(googleCoords => {
           let coords = {
             latitude: googleCoords.lat,
@@ -51,7 +47,7 @@ class AddressForm extends React.Component {
         onChange={this.handleChange}
         onSelect={this.handleSelect}
       >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+        {({ getInputProps, suggestions, getSuggestionItemProps }) => (
           <div>
             <section className="parallax"></section>
             <section className="intro">
@@ -63,7 +59,6 @@ class AddressForm extends React.Component {
                   })}
                 />
                 <div className="autocomplete-dropdown-container">
-                  {/* {loading && <div>Loading...</div>} */}
                   {suggestions.map(suggestion => {
                     const className = suggestion.active
                       ? 'suggestion-item--active'

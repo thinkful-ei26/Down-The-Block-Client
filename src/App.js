@@ -80,10 +80,8 @@ export class App extends React.Component {
                 >
                 {/* Always show the navbar! */}
                 <Route path="/" component={Navbar} />
-                {/* {this.props.coords && <Route path="/" component={SidebarNav} />} */}
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/home" component={HomePage}></Route>
-                {/* <Route exact path="/settings" component={SettingsPage}></Route> */}
             </div>
         );
     }

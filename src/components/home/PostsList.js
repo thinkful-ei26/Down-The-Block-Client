@@ -6,7 +6,6 @@ import { filterPostsBySearch, filterByCategory } from '../common/helper-function
 
 export class PostsList extends React.Component{
   componentDidMount(){
-    console.log('postlists mount', this.props.display)
     this.props.dispatch(fetchPosts(this.props.coords, this.props.display));
   }
 
@@ -34,7 +33,6 @@ export class PostsList extends React.Component{
 }
 
 const mapStateToProps = state => {
-  console.log("IN POSTS LIST STATE, ARR OF POSTS", state.posts.posts)
   return { 
     posts: state.posts.posts,
     coords: state.geolocation.coords,
