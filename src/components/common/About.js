@@ -31,11 +31,11 @@ export class About extends React.Component{
         <section className="about-icons">
           <div className="icon-holder">
             <i className="fas fa-edit"></i>
-            <p>Post In Forums To Help Keep Your Community Informed</p>
+            <p>Post In Forums To Help Keep Your Community In The Loop</p>
           </div>
           <div className="icon-holder">
             <i className="fas fa-search"></i>
-            <p>Easily Search Forums To Find What You're Interested In</p>
+            <p>Easily Search And Filter Forums To Find What You're Interested In</p>
           </div>
           <div className="icon-holder">
             <i className="fas fa-comments"></i>

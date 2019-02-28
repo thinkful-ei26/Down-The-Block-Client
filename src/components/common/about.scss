@@ -17,6 +17,7 @@
 .about .text p {
   line-height: 1.5;
   text-align: center;
+  font-family: $normalFont;
 }
 
 .landing-page .about h2{
@@ -46,6 +47,7 @@
   cursor:pointer;
   border: 2px solid $darkGreen;
   transition: .5s;
+  font-family: $appFont;
 }
 
 .about .join-today:hover, .about .join-today:focus{
@@ -68,6 +70,7 @@
 .about-icons p {
   max-width: 200px;
   margin: auto;
+  font-family: $normalFont;
 }
 
 .icon-holder{
