@@ -13,7 +13,7 @@ class Comment extends React.Component {
   }
 
   generateComment(comment){
-    let linesArr = comment.content.split('<br/>');
+    let linesArr = comment.content.split('\n');
     return linesArr.map((line, index)=> {
       return(
         <p key={index}> {index===0 && <strong>{comment.userId.firstName}</strong> } {line}</p>
