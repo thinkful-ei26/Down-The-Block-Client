@@ -5,6 +5,12 @@
   background: $lightGray;
   padding-top: 80px;
   padding-bottom: 40px;
+  outline: 0;
+}
+
+.main:focus{
+  outline: 0;
+  outline-color: transparent;
 }
 
 .modal {
