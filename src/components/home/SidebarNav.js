@@ -163,6 +163,7 @@ const mapStateToProps = state => ({
   users: state.auth.users,
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
+  socket:state.socket.socket
 });
 
 export default connect(mapStateToProps)(SidebarNav)
