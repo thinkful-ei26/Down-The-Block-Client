@@ -13,15 +13,17 @@ import HouseAnimation from './components/common/HouseAnimation';
 export class App extends React.Component {
 
     componentWillMount() {
-        this.props.dispatch(showAnimation(true))
-        //show animation for 2 seconds
-        setTimeout(
-            function() {
-              this.props.dispatch(showAnimation(false));
-            }
-            .bind(this),
-            3000
-        );
+        if(!this.props.loggedIn){
+            this.props.dispatch(showAnimation(true))
+            //show animation for 2 seconds
+            setTimeout(
+                function() {
+                  this.props.dispatch(showAnimation(false));
+                }
+                .bind(this),
+                3000
+            );     
+        }
         document.addEventListener("keydown", this.onKeyPressed.bind(this));
     }
 

@@ -30,7 +30,6 @@ export class LandingPage extends React.Component {
                 </section>
                 <About/> 
             </section>
-              
         </main>
     );
     }

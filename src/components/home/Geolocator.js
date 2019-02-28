@@ -4,6 +4,7 @@ import {geolocated} from 'react-geolocated';
 import { fetchLocationSuccess, fetchLocationError } from '../../actions/geolocation';
 import { showAnimation } from '../../actions/navigation';
 import {setUserCoords} from '../../actions/users';
+import HouseAnimation from '../common/HouseAnimation';
 
 export class Geolocator extends React.Component {
 
@@ -34,13 +35,13 @@ export class Geolocator extends React.Component {
   componentDidMount(){
     if(!this.props.coords){
       console.log("IN COMP DID MOUNT GEOLOCATOR")
-      // this.props.dispatch(showAnimation(true));
     }
+    
   }
 
   render() {
     return( 
-      null
+      <HouseAnimation/>
     )
   }
 }

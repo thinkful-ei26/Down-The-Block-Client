@@ -5,28 +5,23 @@ import Main from './Main';
 import Geolocator from './Geolocator';
 import AddressForm from './AddressForm';
 import requiresLogin from '../common/requires-login';
-import { display } from '../../actions/navigation'
 import { showAnimation } from '../../actions/navigation';
 import EyeAnimation from '../common/EyeAnimation'
+import HouseAnimation from '../common/HouseAnimation';
 
 export class HomePage extends React.Component{
 
   componentWillMount(){
     document.title = 'Home';
-    if(!this.props.coords){
-      this.props.dispatch(showAnimation(true));
-    }
   }
 
   componentWillUnmount(){
     this.props.dispatch(showAnimation(false));
   }
-
-  // componentDidMount(){
-  //   this.props.dispatch(display('neighbors'));
-  // }
   
   render(){
+    //while waiting to "ask" user for location
+
     return(
       <div id="home" className="home">
         <Geolocator/>
