@@ -87,7 +87,9 @@ export class PostAddComment extends React.Component {
 
                 {
                     this.props.commentBeingEdited &&
-                    <button type="button" 
+                    <button 
+                        className="comment-option"
+                        type="button" 
                         onClick={()=> this.props.dispatch(commentBeingEdited(null)) }>
                         Cancel
                     </button>
