@@ -27,8 +27,7 @@ export class LandingPage extends React.Component {
                     {this.props.display==="loginUsername" ? <LogInForm /> : this.props.display==="registerUsername" ? <SignUpForm /> : <LogInForm /> }
                 </section>
             </section>
-            <About/>
-            
+            <About/>   
         </main>
     );
     }

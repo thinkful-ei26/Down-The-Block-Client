@@ -1,4 +1,4 @@
-@import "~../common/colors.scss";
+@import "~../common/constants.scss";
 
 .forum-header{
   text-align: center;
@@ -10,7 +10,7 @@
 
 .forum-header h1{
   color: $darkGreen;
-  font-family: Play;
+  font-family: $appFont;
   margin-bottom: 20px;
 }
 
@@ -47,7 +47,7 @@
 .filter-posts {
   min-width: 150px;
   min-height: 25px;
-  font-family: Play;
+  font-family: $appFont;
 }
 
 .filter-posts span{

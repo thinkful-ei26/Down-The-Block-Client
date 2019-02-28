@@ -6,6 +6,7 @@ import comments from './comments';
 import geolocation from './geolocation';
 import { reducer as formReducer } from 'redux-form';
 import socket from './socket';
+import chatMessages from './chatMessages'; 
 
 export default combineReducers({
   nav,
@@ -14,5 +15,6 @@ export default combineReducers({
   geolocation,
   socket,
   comments,
+  chatMessages,
   form: formReducer,
 });

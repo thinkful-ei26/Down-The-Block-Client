@@ -1,9 +1,69 @@
-@import "~../common/colors.scss";
+@import "~../common/constants.scss";
 
 .about{
   background: $beige;
   color: $darkGreen;
   font-size: 20px;
   margin: auto;
-  padding: 50px;
+  padding: 50px 100px;
+  text-align: center;
+}
+
+.about .text{
+  max-width: 600px;
+  margin: auto;
+}
+
+.about .text p {
+  line-height: 1.5;
+  text-align: center;
+}
+
+.landing-page .about h2{
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.mockup{
+  width: 50%; 
+  height: 50%;
+  max-height: 450px;
+  max-width: 650px;
+}
+
+.mockup, .about .text{
+  flex: 1;
+}
+
+.about .join-today{
+  background: $darkGreen;
+  color: $beige;
+  border: none;
+  padding: 15px;
+  font-size: 20px;
+  margin: 20px auto;
+  display: block;
+  cursor:pointer;
+  border: 2px solid $darkGreen;
+  transition: .5s;
+}
+
+.about .join-today:hover, .about .join-today:focus{
+  background: $beige;
+  color: $darkGreen
+}
+
+@media(min-width: 1250px){
+  .about{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .landing-page .about h2{
+    text-align: left;
+  }
+
+  .about .text p{
+    text-align: left;
+  }
 }
