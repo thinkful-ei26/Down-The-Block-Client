@@ -108,6 +108,7 @@ display: flex;
 width:35px;
 height: 35px;
 font-size: 15px;
+flex: 1
 }
 
 .comment-profile-photo{
@@ -127,7 +128,8 @@ vertical-align: top;
   background: white;
   border-radius: 16px;
   margin-left: 10px;
-  overflow: scroll;
+  overflow: auto;
+  flex: 30
 }
 
 .post-info, .comment-info, .comment-form{
@@ -169,6 +171,7 @@ vertical-align: top;
   font-family: Play;
   font-size: 16px;
   color: $darkGreen;
+  flex: 30
 }
 
 /*Create Post*/
