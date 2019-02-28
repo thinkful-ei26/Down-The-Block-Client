@@ -1,22 +1,34 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import './about.scss';
+import mockup from '../../img/mockup.png';
+import { display, focusOn } from '../../actions/navigation'
 
-export default class About extends React.Component{
+export class About extends React.Component{
+
+  onClick(focus=""){
+    this.props.dispatch(display(focus));
+    this.props.dispatch(focusOn(focus));
+  }
+
   render(){
     return(
       <section className="about">
-        <p>
-          Are you curious about what’s going on in your neighborhood? Hear a helicopter hovering around your house and can’t figure out why? Lost a pet and desperately need your neighbors help to find him/her? Wouldn’t it be helpful if there was a convenient way to directly communicate with all your nearby neighbors, especially if you don’t have their phone numbers? Neighborhood Watch is here to help. Make an account, allow the app to use your location, and you’ll be immediately placed in a forum with everyone nearby also on the app. Neighbors can then easily communicate to each other about any recent criminal activity, accidents, robberies, events, parties, etc. that are happening nearby so everyone’s in the loop. And you can even send your neighbor a DM!
-        </p>
-
-        <p>
-          Are you curious about what’s going on in your neighborhood? Hear a helicopter hovering around your house and can’t figure out why? Lost a pet and desperately need your neighbors help to find him/her? Wouldn’t it be helpful if there was a convenient way to directly communicate with all your nearby neighbors, especially if you don’t have their phone numbers? Neighborhood Watch is here to help. Make an account, allow the app to use your location, and you’ll be immediately placed in a forum with everyone nearby also on the app. Neighbors can then easily communicate to each other about any recent criminal activity, accidents, robberies, events, parties, etc. that are happening nearby so everyone’s in the loop. And you can even send your neighbor a DM!
-        </p>
-
-        <p>
-          Are you curious about what’s going on in your neighborhood? Hear a helicopter hovering around your house and can’t figure out why? Lost a pet and desperately need your neighbors help to find him/her? Wouldn’t it be helpful if there was a convenient way to directly communicate with all your nearby neighbors, especially if you don’t have their phone numbers? Neighborhood Watch is here to help. Make an account, allow the app to use your location, and you’ll be immediately placed in a forum with everyone nearby also on the app. Neighbors can then easily communicate to each other about any recent criminal activity, accidents, robberies, events, parties, etc. that are happening nearby so everyone’s in the loop. And you can even send your neighbor a DM!
-        </p>
+        <article className="text">
+          <h2>Your Neighborhood At Your Fingertips</h2>
+          <p>
+          DownTheBlock gives you a convenient way to stay informed by connecting with all your neighbors. Lost a pet and desperately need your neighbors help to find him/her?  Hear a helicopter hovering above your house and don't know why? Join DownTheBlock today and you'll be placed in both a neighborhood and city forum, so you'll be up-to-date on everything happening close to home as well as in the broader community. From criminal activity to local events, you'll hear it all from here.
+          </p>
+          <button
+            type="button"
+            className="join-today"
+            onClick={()=>this.onClick('registerUsername')} 
+          > Join Your Neighborhood</button>
+        </article>
+        <img className="mockup" src={mockup} alt="mockup"/>
       </section>
     );
   }
 }
+
+export default connect()(About);
