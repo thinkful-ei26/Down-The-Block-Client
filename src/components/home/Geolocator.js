@@ -5,6 +5,7 @@ import {geolocated} from 'react-geolocated';
 import {fetchLocationSuccess, fetchLocationError} from '../../actions/geolocation';
 import {showAnimation} from '../../actions/navigation';
 import {setUserCoords} from '../../actions/users';
+import HouseAnimation from '../common/HouseAnimation';
 
 export class Geolocator extends React.Component {
 
@@ -24,10 +25,9 @@ export class Geolocator extends React.Component {
     }
   } 
 
-
   render() {
     return( 
-      null
+      <HouseAnimation/>
     )
   }
 }

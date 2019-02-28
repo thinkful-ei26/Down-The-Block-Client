@@ -8,14 +8,12 @@ import AddressForm from './AddressForm';
 import requiresLogin from '../common/requires-login';
 import { showAnimation } from '../../actions/navigation';
 import EyeAnimation from '../common/EyeAnimation'
+import HouseAnimation from '../common/HouseAnimation';
 
 export class HomePage extends React.Component{
 
   componentWillMount(){
     document.title = 'Home';
-    if(!this.props.coords){
-      this.props.dispatch(showAnimation(true));
-    }
     this.props.socket.emit('USER_CONNECTED', this.props.user);
   }
 
@@ -30,6 +28,8 @@ export class HomePage extends React.Component{
   // }
   
   render(){
+    //while waiting to "ask" user for location
+
     return(
       <div id="home" className="home">
         <Geolocator/>

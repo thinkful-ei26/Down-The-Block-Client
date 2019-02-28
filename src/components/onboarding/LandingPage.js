@@ -6,6 +6,7 @@ import SignUpForm from './SignUpForm';
 import About from '../common/About';
 import './onboarding.scss';
 
+
 export class LandingPage extends React.Component {
     componentDidMount(){
         document.title= 'Down The Block'
@@ -22,12 +23,12 @@ export class LandingPage extends React.Component {
             <section className="parallax">
             </section>
             <section className="intro">
-                <h1>Find Out What's Going On In Your Neighborhood</h1>
+                <h1>Discover What's Going On In Your Neighborhood</h1>
                 <section className="form-section">
                     {this.props.display==="loginUsername" ? <LogInForm /> : this.props.display==="registerUsername" ? <SignUpForm /> : <LogInForm /> }
                 </section>
+                <About/> 
             </section>
-            <About/>   
         </main>
     );
     }
