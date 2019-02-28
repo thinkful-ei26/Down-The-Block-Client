@@ -59,7 +59,6 @@ class SidebarNav extends React.Component{
 
   setUser = ()=>{
     const { socket, user } = this.props; 
-    console.log('PROPS FROM HOMEPAGE IN SETUSER', this.props);
         socket.emit('USER_CONNECTED', user);
   }
 =======
