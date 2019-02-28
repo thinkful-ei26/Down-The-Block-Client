@@ -6,7 +6,11 @@ import { display } from '../../actions/navigation'
 import { fetchPosts } from '../../actions/posts';
 import { fetchUsers } from '../../actions/users';
 import { clearAuth } from '../../actions/auth';
+<<<<<<< HEAD
 import {Link} from 'react-router-dom';
+=======
+import { setActiveChat } from '../../actions/chatMessages'; 
+>>>>>>> private-messaging-final
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
 
@@ -47,6 +51,7 @@ class SidebarNav extends React.Component{
     this.props.dispatch(fetchUsers(this.props.coords));
   }
 
+<<<<<<< HEAD
   setUser = (user)=>{
     this.props.setUser(user.username)
   }
@@ -57,6 +62,16 @@ class SidebarNav extends React.Component{
     console.log('PROPS FROM HOMEPAGE IN SETUSER', this.props);
         socket.emit('USER_CONNECTED', user);
   }
+=======
+  // setUser = (user)=>{
+  //   this.props.setUser(user)
+  // }
+
+  sendOpenPrivateMessage = (reciever) => {
+		const { socket, currentUser } = this.props
+		socket.emit('PRIVATE_MESSAGE', {reciever: reciever.username, sender:currentUser})
+	}
+>>>>>>> private-messaging-final
   
   showAllUsers(){
     if(this.props.users){
@@ -65,9 +80,18 @@ class SidebarNav extends React.Component{
           <button
             className="content"
             onClick={()=>{
+<<<<<<< HEAD
               this.onSetSidebarOpen(false)
               this.props.socket.emit('VERIFY_USER', this.props.currentUser.username, this.setUser)
               this.props.dispatch(display('ChatContainer'))
+=======
+              
+              console.log('USER BEING CLICKED IS:', user); 
+              this.onSetSidebarOpen(false);
+              this.props.socket.emit('VERIFY_USER', this.props.currentUser);
+              this.sendOpenPrivateMessage(user);
+              this.props.dispatch(display('ChatContainer')); 
+>>>>>>> private-messaging-final
               }
             }
             key={index}>{user.firstName}
@@ -194,6 +218,13 @@ const mapStateToProps = state => ({
   users: state.auth.users,
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
+<<<<<<< HEAD
+  socket:state.socket.socket
+=======
+  socket:state.socket.socket, 
+  chats:state.chatMessages.chats, 
+  activeChat: state.chatMessages.activeChat
+>>>>>>> private-messaging-final
 });
 
 export default requiresLogin()(connect(mapStateToProps)(SidebarNav));
