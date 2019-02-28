@@ -6,6 +6,7 @@ import SignUpForm from './SignUpForm';
 import About from '../common/About';
 import './onboarding.scss';
 
+
 export class LandingPage extends React.Component {
     componentDidMount(){
         document.title= 'Down The Block'
