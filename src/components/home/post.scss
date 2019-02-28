@@ -114,6 +114,7 @@
   width:35px;
   height: 35px;
   border-radius: 50%;
+  flex: 1
 }
 
 .comment-user-name{
@@ -128,6 +129,7 @@ vertical-align: top;
   border-radius: 16px;
   margin: 0 10px;  
   overflow: auto;
+  flex: 30
 }
 
 .post-info, .comment-info, .comment-form{
@@ -172,6 +174,7 @@ vertical-align: top;
   font-family: $appFont;
   font-size: 16px;
   color: $darkGreen;
+  flex: 30
 }
 
 .comment-option{
