@@ -73,12 +73,11 @@ class SidebarNav extends React.Component{
           <button
             className="content"
             onClick={()=>{
-              
               console.log('USER BEING CLICKED IS:', user); 
               this.onSetSidebarOpen(false);
               this.props.socket.emit('VERIFY_USER', this.props.currentUser);
               this.sendOpenPrivateMessage(user);
-              this.props.dispatch(display('ChatContainer')); 
+              this.props.dispatch(display('chat')); 
               }
             }
             key={index}>{user.firstName}

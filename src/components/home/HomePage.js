@@ -8,7 +8,6 @@ import AddressForm from './AddressForm';
 import requiresLogin from '../common/requires-login';
 import { showAnimation } from '../../actions/navigation';
 import EyeAnimation from '../common/EyeAnimation'
-import HouseAnimation from '../common/HouseAnimation';
 
 export class HomePage extends React.Component{
 

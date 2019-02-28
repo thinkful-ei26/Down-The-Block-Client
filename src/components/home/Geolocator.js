@@ -26,14 +26,19 @@ export class Geolocator extends React.Component {
   } 
 
   render() {
+    if(!this.props.coords && !this.props.geoError){
+      return <HouseAnimation/>
+    }
     return( 
-      <HouseAnimation/>
+      null
     )
   }
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  geoError: state.geolocation.error,
+  coords: state.geolocation.coords,
 });
 
 export default geolocated()(connect(mapStateToProps)(Geolocator));
