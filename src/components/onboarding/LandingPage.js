@@ -12,7 +12,6 @@ export class LandingPage extends React.Component {
     }
     
     render(){
-
     // If we are logged in redirect straight to the user's home
     if (this.props.loggedIn) {
         return <Redirect to="/home" />;

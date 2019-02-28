@@ -21,7 +21,6 @@ export class CreatePost extends React.Component{
     let photo=undefined;
     if(this.img && this.img.files.length!==0){
       photo= this.img.files[0];
-      console.log('THERES A FILE', photo)
     }
     let postId = this.props.editPost ? this.props.editPost.postId : null;
     const values={content: this.content.value, category: this.form.category.value ? this.form.category.value : "Other", date: moment().format('LLLL'), coordinates: this.props.coords, audience: this.props.display, photo};

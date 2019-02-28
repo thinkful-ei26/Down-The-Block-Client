@@ -1,11 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
+
+import './main.scss';
+
 import Forum from './Forum';
 import SettingsPage from '../settings/SettingsPage'
 import Layout from './Layout';
-import './main.scss'
 import About from '../common/About';
-import './main.scss';
+
 
 export class Main extends React.Component{
 
@@ -15,7 +17,6 @@ export class Main extends React.Component{
   }
 
   render(){
-    console.log('CURRENT USER IN MAIN', this.props.currentUser)
     return(
       <main className="main">
         {this.display()}

@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import './settings.scss'
+
 import UpdateAccountForm from './UpdateAccountForm';
 import UpdatePasswordForm from './UpdatePasswordForm';
 import requiresLogin from '../common/requires-login';
 import {changeSuccessMessage, updateProfilePhoto} from '../../actions/users';
-import './settings.scss'
-import { Geolocator } from '../home/Geolocator';
 
 export class SettingsPage extends React.Component{
   componentDidMount(){
