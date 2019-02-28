@@ -40,7 +40,7 @@ export const authError = error => ({
 const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
-    dispatch(display('neighbors'))
+    console.log(decodedToken);
     dispatch(authSuccess(decodedToken.user));
     saveAuthToken(authToken);
 };
@@ -63,10 +63,13 @@ export const login = (username, password) => dispatch => {
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
             .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+            .then(()=>{
+                dispatch(display('neighbors'))
+            })
             .catch(err => {
-                const {code} = err;
+                const {status} = err;
                 const message =
-                    code === 401
+                    status === 401
                         ? 'Incorrect username or password'
                         : 'Unable to login, please try again';
                 dispatch(authError(err));

@@ -7,7 +7,12 @@ import About from '../common/About';
 import './onboarding.scss';
 
 export class LandingPage extends React.Component {
+    componentDidMount(){
+        document.title= 'Down The Block'
+    }
+    
     render(){
+
     // If we are logged in redirect straight to the user's home
     if (this.props.loggedIn) {
         return <Redirect to="/home" />;
@@ -20,11 +25,10 @@ export class LandingPage extends React.Component {
             <section className="intro">
                 <h1>Find Out What's Going On In Your Neighborhood</h1>
                 <section className="form-section">
-                    {this.props.display==="loginUsername" ? <LogInForm /> : <SignUpForm/> }
+                    {this.props.display==="loginUsername" ? <LogInForm /> : this.props.display==="registerUsername" ? <SignUpForm /> : <LogInForm /> }
                 </section>
             </section>
-            <About/>
-            
+            <About/>   
         </main>
     );
     }

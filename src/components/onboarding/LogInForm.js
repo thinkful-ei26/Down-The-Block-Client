@@ -62,6 +62,7 @@ export class LogInForm extends React.Component {
                 <div className="bottom-text">
                     <p>Don't Have An Account? 
                         <button
+                        type="button"
                         className="link-to-form"
                         onClick={()=>this.onClick('registerUsername')} 
                         > Sign Up Here!</button>

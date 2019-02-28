@@ -59,9 +59,10 @@ export class UpdatePasswordForm extends React.Component{
               validate={[required, nonEmpty, matchesPassword]}
           />
           <button
-              type="submit"
-              disabled={this.props.pristine || this.props.submitting}>
-              Update Password
+            className="update"
+            type="submit"
+            disabled={this.props.pristine || this.props.submitting}>
+            Update Password
           </button>
         </form>
     );

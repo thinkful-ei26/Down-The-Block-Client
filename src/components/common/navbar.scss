@@ -1,10 +1,11 @@
-@import "~./colors.scss";
+@import "~./constants.scss";
 
 .main-navbar{
   background-color: $darkGreen;
   position: fixed;
   width:100%;
   z-index: 1000;
+  border-bottom: 2px solid $beige;
 }
 
 .right{
@@ -15,11 +16,12 @@
 .logo, .landing-page-logo, .link{
   color: $beige;
   text-decoration: none;
-  padding: 20px 10px;
+  padding: 5px 0;
+  margin: 10px 10px;
   cursor:pointer;
   background-color: transparent;
   border: none;
-  font-family: Play;
+  font-family: $appFont;
   display: inline-block;
   transition: ease-in-out .5s;
   font-size: 15px;
@@ -36,11 +38,6 @@
   outline: 0;
 }
 
-// .logo:hover i, .landing-page-logo:hover i{
-//   color: $tan;
-//   transition: ease-in-out .5s;
-// }
-
 .landing-page-logo{
   text-align:left;
   font-weight: 700;
@@ -48,14 +45,21 @@
   font-size: 18px;
 }
 
+.link{
+  margin-top: 8px;
+  border-bottom: 2px dashed transparent;
+  border-top: 2px dashed transparent;
+}
+
 .link:hover, .link:focus {
-  color: $darkGreen;
-  background: $beige;
   outline: 0;
+  border-bottom: 2px dashed $beige;
+  border-top: 2px dashed $beige;
 }
 
 .tagline{
   color: $beige;
+  font-family: $appFont;
   display: none;
 }
 

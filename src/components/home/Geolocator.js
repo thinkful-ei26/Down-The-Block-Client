@@ -11,7 +11,9 @@ export class Geolocator extends React.Component {
     console.log(this.props.currentUser);
     console.log(prevProps.currentUser);
     if(this.props.coords){
-      this.props.dispatch(fetchLocationSuccess(this.props.coords))
+      this.props.dispatch(fetchLocationSuccess(this.props.coords));
+      this.props.dispatch(showAnimation(false));
+      console.log('nothing ran');
       if(!prevProps.currentUser.coordinates && (!this.props.currentUser.coordinates || this.props.currentUser.coordinates.automatic === true)){
         console.log('NO LOCATION OR LOCATION SET AUTOMATICALLY');
         this.props.dispatch(setUserCoords(this.props.coords));

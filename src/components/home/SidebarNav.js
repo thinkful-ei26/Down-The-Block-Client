@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Sidebar from "react-sidebar";
+import requiresLogin from '../common/requires-login';
 import { display } from '../../actions/navigation'
 import { fetchPosts } from '../../actions/posts';
 import { fetchUsers } from '../../actions/users';
 import { clearAuth } from '../../actions/auth';
+import {Link} from 'react-router-dom';
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
 
@@ -15,7 +17,10 @@ class SidebarNav extends React.Component{
     super(props);
     this.state = {
       sidebarDocked: mql.matches,
-      sidebarOpen: false
+      sidebarOpen: false,
+      showForum: true,
+      showChat: true,
+      showAccount: true,
     };
 
     this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
@@ -45,6 +50,13 @@ class SidebarNav extends React.Component{
   setUser = (user)=>{
     this.props.setUser(user.username)
   }
+
+
+  setUser = ()=>{
+    const { socket, user } = this.props; 
+    console.log('PROPS FROM HOMEPAGE IN SETUSER', this.props);
+        socket.emit('USER_CONNECTED', user);
+  }
   
   showAllUsers(){
     if(this.props.users){
@@ -55,7 +67,7 @@ class SidebarNav extends React.Component{
             onClick={()=>{
               this.onSetSidebarOpen(false)
               this.props.socket.emit('VERIFY_USER', this.props.currentUser.username, this.setUser)
-              this.props.dispatch(display('ChatContainer')) 
+              this.props.dispatch(display('ChatContainer'))
               }
             }
             key={index}>{user.firstName}
@@ -67,47 +79,11 @@ class SidebarNav extends React.Component{
 
   logOut() {
     this.props.dispatch(clearAuth());
-    this.props.dispatch(display('loginUsername'));
     clearAuthToken();
   }
 
-  generateNav(){
-    if(this.props.loggedIn){
-      return (
-        <React.Fragment>
-          <h4>Account</h4>
-          <button
-             className="content"
-             onClick={()=>{
-              this.onSetSidebarOpen(false)
-              this.props.dispatch(display('about'))
-             }
-            }
-          >            
-            About
-          </button>
-          <button
-             className="content"
-             onClick={()=>{
-              this.onSetSidebarOpen(false)
-              this.props.dispatch(display('settings'))
-             }
-            }
-          >            
-            Settings
-          </button>
-          <button id="logout" 
-            className="content"
-            onClick={() => {
-              this.onSetSidebarOpen(false)
-              this.logOut()
-              }
-            }>
-            Logout
-          </button>
-        </React.Fragment>
-      )
-    }
+  toggleCategory(category){
+    this.setState({[category]: !this.state[category]});
   }
 
  render(){
@@ -123,34 +99,89 @@ class SidebarNav extends React.Component{
           sidebar=
           {
             <nav className="sidebar">
-              <h4>Forums</h4>
-              <button 
-                className="content" 
+              <button
+                className="nav-parent"
                 onClick={()=>{
+                  this.toggleCategory('showForum')
+                }}
+              >
+              <i className="fas fa-edit"></i> Forums
+              </button>
+              {this.state.showForum && <section className="forum-children">
+                <Link 
+                  to="/home"
+                  className="content" 
+                  onClick={()=>{
+                    this.onSetSidebarOpen(false)
+                    this.props.dispatch(fetchPosts(this.props.coords, 'neighbors'))
+                  }
+                  }>Neighbors
+                </Link>
+                <Link 
+                  to="/home"
+                  className="content" 
+                  onClick={()=>{
                   this.onSetSidebarOpen(false)
-                  this.props.dispatch(fetchPosts(this.props.coords, 'neighbors'))
+                  this.props.dispatch(fetchPosts(this.props.coords, 'city'))
+                  } 
                 }
-                }
-              >Neighors
-              </button>
-              <button 
-                className="content" 
+                >City
+                </Link>
+              </section>}
+              <button
+                className="nav-parent"
                 onClick={()=>{
-                this.onSetSidebarOpen(false)
-                this.props.dispatch(fetchPosts(this.props.coords, 'city'))
-                } 
-              }
-              >City
+                  this.toggleCategory('showChat')
+                }}
+              ><i className="fas fa-comments"></i> Chats
               </button>
-              <h4>Chats</h4>
-              {this.showAllUsers()}
-              {this.generateNav()}
+              {this.state.showChat && this.showAllUsers()}
+              <button
+                className="nav-parent"
+                onClick={()=>{
+                  this.toggleCategory('showAccount')
+                }}
+              ><i className="fas fa-users-cog"></i> Account
+              </button>
+              {this.state.showAccount && <section className="account-children">
+                <Link
+                  to="/home"
+                  className="content"
+                  onClick={()=>{
+                    this.onSetSidebarOpen(false)
+                    this.props.dispatch(display('about'))
+                  }
+                  }
+                >            
+                  About
+                </Link>
+                <Link
+                  className="content"
+                  to="/home"
+                  onClick={()=>{
+                    this.onSetSidebarOpen(false)
+                    this.props.dispatch(display('settings'))
+                  }
+                  }
+                >            
+                  Settings
+                </Link>
+                <button id="logout" 
+                  className="content"
+                  onClick={() => {
+                    this.onSetSidebarOpen(false)
+                    this.logOut()
+                    }
+                  }>
+                  Logout
+                </button>
+              </section>}
             </nav>
           }
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(229, 228, 188)', width: 200, boxShadow: 'none', webkitBoxShadow: 'none'} , root: {position: 'relative', boxShadow: 'none'}  }}
+          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(229, 228, 188)', width: 200, boxShadow: 0, WebkitBoxShadow: 0} , root: {position: 'relative', boxShadow: 0}  }}
         >
         </Sidebar>
         </React.Fragment>
@@ -166,4 +197,4 @@ const mapStateToProps = state => ({
   socket:state.socket.socket
 });
 
-export default connect(mapStateToProps)(SidebarNav)
+export default requiresLogin()(connect(mapStateToProps)(SidebarNav));

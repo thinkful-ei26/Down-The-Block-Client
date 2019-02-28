@@ -36,10 +36,12 @@ export class Navbar extends React.Component{
     let className= !this.props.loggedIn ? "landing-page-logo" : "logo";
     return( 
       <nav className="main-navbar">
-        <Link className={`${className}`} to="/home">
+        <Link className={`${className}`} 
+          onClick={()=> this.props.loggedIn && this.props.dispatch(display(this.props.display))}
+          to="/#app">
           <i className="fas fa-home"></i> DownTheBlock
         </Link>
-        <p className="tagline">Your Neighborhood At Your Fingertips</p>
+        <p className="tagline">Knock Knock, It's Your Neighborhood</p>
         {this.navbarLinks()}
       </nav>
     );
@@ -47,7 +49,8 @@ export class Navbar extends React.Component{
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.auth.currentUser !== null
+  loggedIn: state.auth.currentUser !== null,
+  display: state.nav.display,
 });
 
 export default connect(mapStateToProps)(Navbar);

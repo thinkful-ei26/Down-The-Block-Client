@@ -3,46 +3,28 @@ import ForumHeader from './ForumHeader';
 import PostsList from './PostsList';
 import CreatePost from './CreatePost';
 import {connect} from 'react-redux';
-import './main.css'
+import './main.scss'
 
 export class Forum extends React.Component{
-  componentDidMount(){
-    console.log('IN COMP DID MOUNT FOR FORUM')
-  }
-  whatToDisplay(){
-    console.log('POST BEING EDITED IS', this.props.postBeingEdited)
-      if(this.props.postBeingEdited){
-        return (
-          <div className="modal">
-          <CreatePost editPost={this.props.postBeingEdited}/>
-        </div>
-        )
-      }
-      else{
-        if(this.props.coords){
-          return (
-            <React.Fragment>
-              <CreatePost/>
-              <PostsList/>
-            </React.Fragment>
-          )
-        }
-      }
-  }
 
   render(){
     console.log('CURRENT USER', this.props.currentUser)
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
-        {this.whatToDisplay()}
+        {this.props.coords && 
+        <React.Fragment>
+          <CreatePost 
+            editPost={this.props.postBeingEdited}/>
+          <PostsList/>
+        </React.Fragment>
+        }
       </section>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log("IN FORUM, STATE IS", state)
   return{
     display: state.nav.display,
     postBeingEdited: state.posts.postBeingEdited,

@@ -1,9 +1,9 @@
-@import "~../common/colors.scss";
+@import "~../common/constants.scss";
 .sidebar{
   margin-top:20px;
 }
 
-.sidebar .content{
+.sidebar .content, .sidebar .nav-parent{
   display: block;
   color:  $darkGreen;
   background: none;
@@ -15,10 +15,17 @@
   text-decoration: none;
   width: 200px;
   text-align: left;
-  padding-left:20px;
+  padding:10px 40px;
+  font-family: $appFont;
 }
 
-.sidebar .content:hover, .sidebar .content:focus{
+.sidebar .nav-parent{
+  color: $darkGreen;
+  padding: 10px;
+  font-size: 17px;
+}
+
+.sidebar .content:hover, .sidebar .content:focus, .sidebar .nav-parent:hover, .sidebar .nav-parent:focus{
   outline: 0;
   background: $darkGreen;
   color: $beige;
@@ -36,16 +43,6 @@
   font-size: 20px;
   cursor: pointer;
   transition: ease-in-out .5s;
-}
-
-// .open-sidebar:focus, .open-sidebar:hover{
-//   border: 2px solid $beige;
-//   cursor: pointer;
-// }
-
-.sidebar h4{
-  color: $darkGreen;
-  padding: 10px;
 }
 
 @media(min-width: 750px){

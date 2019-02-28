@@ -6,11 +6,6 @@ import {
     FETCH_ADDRESS_ERROR
 } from './types';
 
-// import {GOOGLE_MAPS_API_KEY} from '../config';
-import { normalizeResponseErrors } from './utils';
-import { showAnimation } from './navigation';
-import {API_BASE_URL} from '../config';
-
 export const fetchLocationSuccess = coords => ({
     type: FETCH_LOCATION_SUCCESS,
     coords

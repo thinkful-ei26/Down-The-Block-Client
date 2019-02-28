@@ -80,16 +80,19 @@ import {
   });
 
   export const submitPost = (postId, values, coords, forum) => (dispatch, getState) =>{
-
     let formData = new FormData();
 
     Object.keys(values).forEach(item=> {
-        formData.append(item, (values[item]))
+        if(values[item]!==undefined){
+            formData.append(item, (values[item]))
+        }
     });
 
       dispatch(createPostRequest());
       const authToken = getState().auth.authToken;
       const method = postId ? "PUT" : "POST";
+
+      console.log('THE METHOD IS', method);
 
       let simplifiedGeoObject = {
           latitude: coords.latitude,
@@ -108,6 +111,7 @@ import {
       })
       .then(res => normalizeResponseErrors(res))
       .then(res => {
+
          return res.json()
         })
       .then(() => {

@@ -1,15 +1,15 @@
-@import "~../common/colors.scss";
+@import "~../common/constants.scss";
 
 .landing-page {
-  font-family: Play;
+  font-family: $appFont;
+}
+
+.landing-page main{
+  padding-top: 55px;
 }
 
 .form-section{
   width: 100%
-}
-
-.form-error{
-  color: $darkRed;
 }
 
 .parallax{
@@ -18,23 +18,23 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 900px; 
+  height: 100vh; 
   position: relative;
 
   /* Add the blur effect */
-  filter: blur(5px);
+filter: blur(5px);
   -webkit-filter: blur(5px);
 }
 
 .intro{
   position: absolute;
-  top: 60px;
+  top:0;
   margin: auto;
   width: 100%;
-  height: 900px; 
-  background-color:rgba(1,1,1,.3);
+  background-color:rgba(1,1,1,.4);
   padding: 20px;
-  /* position: relative; */
+  padding-top: 60px;
+  height: 100vh;
 }
 
 .intro h1{
@@ -55,7 +55,7 @@
 }
 
 .landing-page label{
-  flex:1;
+  flex:.5;
   padding: 5px;
   font-size: 15px;
 }
@@ -72,14 +72,15 @@
 
 .landing-page input:focus{
   outline: 0;
-  border: 4px solid $darkGreen;
   transition: .5s;
+  background: white;
 }
 
 .landing-page .form-input{
   display: flex;
   width: 100%;
   margin: 20px auto;
+  align-items: center;
 }
 
 .landing-page .submit{
@@ -124,6 +125,7 @@
 
 .landing-page form input{
   font-size: 16px;
+  height: fit-content;
 }
 
 .landing-page h1{
@@ -133,9 +135,28 @@
   font-size: 40px;
 }
 
+.landing-page .upload-photo{
+  width: 270px;
+  margin:auto;
+  margin-bottom: 20px;
+  border: 2px solid transparent;
+  transition: .5s;
+  display: block;
+  padding:  5px;
+}
+
+.landing-page .upload-photo:hover, .landing-page .upload-photo:focus{
+  border: 2px solid $darkGreen;
+}
+
 @media(min-width:400px){
   .landing-page label{
     font-size: 20px;
+  }
+
+  .landing-page form{
+    background: $beige;
+    padding: 20px 40px;
   }
 }
 
@@ -148,6 +169,5 @@
   .landing-page h1{
     font-size: 60px;
   }
-  
 }
 
