@@ -1,4 +1,4 @@
-@import "~./components/common/colors.scss";
+@import "~./components/common/constants.scss";
 
 body {
   margin: 0;
@@ -35,7 +35,7 @@ form .highlight-red{
   text-align: center;
   padding: 10px;
   font-size:20px;
-  font-family: Play;
+  font-family: $appFont;
 }
 
 button:focus{
@@ -52,11 +52,15 @@ button:focus{
   background: none;
   border: 0;
   font-size: 20px;
-  font-family: Play;
+  font-family: $appFont;
   margin:auto;
   cursor:pointer;
 }
 
 .upload-photo:focus{
+  outline: 0;
+}
+
+.app{
   outline: 0;
 }

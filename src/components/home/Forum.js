@@ -6,31 +6,18 @@ import {connect} from 'react-redux';
 import './main.scss'
 
 export class Forum extends React.Component{
-  whatToDisplay(){
-      if(this.props.postBeingEdited){
-        return (
-          <div className="modal">
-            <CreatePost editPost={this.props.postBeingEdited}/>
-          </div>
-        )
-      }
-      else{
-        if(this.props.coords){
-          return (
-            <React.Fragment>
-              <CreatePost/>
-              <PostsList/>
-            </React.Fragment>
-          )
-        }
-      }
-  }
 
   render(){
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
-        {this.whatToDisplay()}
+        {this.props.coords && 
+        <React.Fragment>
+          <CreatePost 
+            editPost={this.props.postBeingEdited}/>
+          <PostsList/>
+        </React.Fragment>
+        }
       </section>
     );
   }

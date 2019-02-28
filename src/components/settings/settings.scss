@@ -1,15 +1,20 @@
-@import "~../common/colors.scss";
+@import "~../common/constants.scss";
 
 .settings{
   background: $lightGray;
   border-radius: 5px;
-  margin-top: 10px;
-  font-family: Play;
+  // margin-top: 10px;
+  font-family: $appFont;
+}
+
+.settings.main{
+  margin-left:0;
+  padding-top: 20px;
 }
 
 .settings h2{
   color: #06311f;
-  font-family: Play;
+  font-family: $appFont;
   text-align: center;
 }
 
@@ -22,7 +27,7 @@
   padding: 10px;
   font-size: 20px;
   transition: .5s;
-  font-family: Play;
+  font-family: $appFont;
   width: 200px;
   margin: auto;
   display: block;
@@ -86,15 +91,15 @@
   position: absolute;
   top: 50%;
   left: 0.3%;
-  background:  rgba(237, 236, 217,.8);
+  background:  rgba(237, 236, 217, 1);
   color: $darkGreen;
   width: 151px;
   height: 75px;
   border-bottom-left-radius: 110px;
   border-bottom-right-radius: 110px;
-  font-family: Play;
+  font-family: $appFont;
   font-size: 15px;
-  opacity: 0;
+  opacity: .9;
   cursor: pointer;
   transition: .5s;
 }
