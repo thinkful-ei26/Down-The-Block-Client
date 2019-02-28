@@ -266,5 +266,3 @@ const mapStateToProps = state => ({
 
 
 export default connect(mapStateToProps)(CreatePost);
-
-//ERROR: this will try to submit even if comment is empty, and doesnt maintain the line breaks

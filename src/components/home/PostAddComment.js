@@ -1,9 +1,7 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
-
 import { addComment, commentBeingEdited } from '../../actions/comments';
 import { updatePost } from '../../actions/posts'; 
-
 import moment from 'moment';
 
 export class PostAddComment extends React.Component {
@@ -48,7 +46,7 @@ export class PostAddComment extends React.Component {
             this.onSubmit(e);
         }
         else if(e.keyCode===13 && e.shiftKey){
-          this.comment = this.content.value + ' <br/> ';
+          this.comment = this.content.value + ' \n ';
         }
         else if (e.keyCode===27){
             //cancel comment
