@@ -34,6 +34,15 @@ export class Post extends React.Component {
     }
   }
 
+  generateContent(){
+    let linesArr = this.props.content.split('\n');
+    return linesArr.map((line, index)=> {
+      return(
+        <p key={index}> {line}</p>
+      );
+    });
+  }
+
   render(){
 
     return(
@@ -62,7 +71,8 @@ export class Post extends React.Component {
             </div>
           </div>
 
-          <p className="post-content">{this.props.content}</p>
+          {this.generateContent()}
+          {/* <p className="post-content">{this.props.content}</p> */}
           {this.props.photo && <img className="post-photo"src={this.props.photo.url} alt="post"/> }
 
         </article>
