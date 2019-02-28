@@ -5,7 +5,7 @@
   color: $darkGreen;
   font-size: 20px;
   margin: auto;
-  padding: 50px 100px;
+  padding: 50px 30px;
   text-align: center;
 }
 
@@ -17,6 +17,7 @@
 .about .text p {
   line-height: 1.5;
   text-align: center;
+  font-family: $normalFont;
 }
 
 .landing-page .about h2{
@@ -46,11 +47,46 @@
   cursor:pointer;
   border: 2px solid $darkGreen;
   transition: .5s;
+  font-family: $appFont;
 }
 
 .about .join-today:hover, .about .join-today:focus{
   background: $beige;
   color: $darkGreen
+}
+
+.about-icons{
+  background: $beige;
+  color: $darkGreen;
+  padding: 50px 0px;
+  text-align: center;
+  box-shadow: 0 -5px 5px -5px $darkGreen;
+}
+
+.about-icons i {
+  font-size: 100px;
+  padding-bottom: 20px;
+}
+
+.about-icons p {
+  max-width: 200px;
+  margin: auto;
+  font-family: $normalFont;
+}
+
+.icon-holder{
+  margin: 20px 0;
+}
+
+@media(min-width: 800px){
+  .about-icons{
+    display: flex;
+    justify-content: space-around;
+  } 
+
+  .about{
+    padding: 50px 80px;
+  }
 }
 
 @media(min-width: 1250px){

@@ -25,7 +25,7 @@
   font-size: 16px;
 }
 
-.fa-search{
+.forum-header .fa-search{
   position: absolute;
   font-size: 13px;
   padding: 4px;
@@ -83,7 +83,7 @@
     flex: 1;
   }
 
-  .fa-search{
+  .forum-header .fa-search{
     margin-top:0px;
   }
 }

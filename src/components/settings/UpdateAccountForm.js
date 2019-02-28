@@ -15,7 +15,6 @@ export class UpdateAccountForm extends React.Component{
 }
 
   render(){
-    console.log('DISPLAY IS', this.props.display)
     let error;
     if (this.props.error) {
         error = (

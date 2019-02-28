@@ -1,15 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import PostComments from './PostComments';
-import { postBeingEdited, deletePostSuccess, deletePost } from '../../actions/posts';
+
 import './post.scss';
+
+import PostComments from './PostComments';
 import PostAddComment from './PostAddComment';
+import { postBeingEdited, deletePostSuccess, deletePost } from '../../actions/posts';
 
 export class Post extends React.Component {
 
   componentDidMount(){
     this.props.socket.on('delete_post', post => {
-      console.log('DELETED POST GOTTEN BACK FROM EMIT', post)
       this.props.dispatch(deletePostSuccess(post.id));
     })
   }

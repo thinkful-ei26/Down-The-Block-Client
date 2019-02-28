@@ -8,7 +8,6 @@ import './main.scss'
 export class Forum extends React.Component{
 
   render(){
-    console.log('CURRENT USER', this.props.currentUser)
     return(
       <section className="forum">
         <ForumHeader type={this.props.display} />
