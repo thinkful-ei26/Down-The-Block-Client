@@ -10,6 +10,7 @@ import HouseAnimation from '../common/HouseAnimation';
 export class Geolocator extends React.Component {
 
   componentDidUpdate(prevProps){
+    console.log(this.props.coords);
     if(this.props.coords){
       this.props.dispatch(fetchLocationSuccess(this.props.coords));
       this.props.dispatch(showAnimation(false));
