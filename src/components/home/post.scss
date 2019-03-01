@@ -88,6 +88,10 @@
   border-radius: 5px;
 }
 
+.post .line{
+  padding-left: 5px;
+}
+
 /*COMMENTS*/
 
 .comments-list{
@@ -129,6 +133,7 @@ vertical-align: top;
   margin: 0 10px;  
   overflow: auto;
   line-height: 1.5;
+  font-family: $normalFont;
 }
 
 .post-info, .comment-info, .comment-form{
@@ -160,6 +165,10 @@ vertical-align: top;
 .name-and-date{
   padding: 6px 0px 0px 6px;
   font-family: $appFont;
+}
+
+.name-and-date h6{
+  font-family: $normalFont;
 }
 
 .comment-textarea{

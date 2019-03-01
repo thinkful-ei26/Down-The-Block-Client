@@ -30,8 +30,8 @@
 }
 
 .mockup{
-  width: 50%; 
-  height: 50%;
+  width: 75%; 
+  height: 75%;
   max-height: 450px;
   max-width: 650px;
 }
@@ -87,7 +87,7 @@
   margin: 20px 0;
 }
 
-@media(min-width: 800px){
+@media(min-width: 900px){
   .about-icons{
     display: flex;
     justify-content: space-around;
@@ -95,6 +95,11 @@
 
   .about{
     padding: 50px 80px;
+  }
+
+  .mockup{
+    width: 50%;
+    height: 50%;
   }
 }
 

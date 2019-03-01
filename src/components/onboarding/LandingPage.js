@@ -9,7 +9,7 @@ import './onboarding.scss';
 
 export class LandingPage extends React.Component {
     componentDidMount(){
-        document.title= 'Down The Block'
+        document.title= 'DownTheBlock'
     }
     
     render(){

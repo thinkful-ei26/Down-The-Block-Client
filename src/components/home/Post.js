@@ -39,7 +39,7 @@ export class Post extends React.Component {
     let linesArr = this.props.content.split('\n');
     return linesArr.map((line, index)=> {
       return(
-        <p key={index}> {line}</p>
+        <p className="line" key={index}> {line}</p>
       );
     });
   }

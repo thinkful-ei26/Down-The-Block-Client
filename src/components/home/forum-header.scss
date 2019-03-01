@@ -23,6 +23,12 @@
   color: $darkGreen;
   border: 2px solid $darkGreen;
   font-size: 16px;
+  font-family: $normalFont;
+}
+
+.search-posts::placeholder{
+  font-size: 12px;
+  font-family: $normalFont;
 }
 
 .forum-header .fa-search{
@@ -47,7 +53,7 @@
 .filter-posts {
   min-width: 150px;
   min-height: 25px;
-  font-family: $appFont;
+  font-family: $normalFont;
 }
 
 .filter-posts span{
