@@ -64,7 +64,7 @@ class SidebarNav extends React.Component{
               }
             }
             key={index}>
-            {formatName(user.username)}
+            {formatName(user.firstName)}
           </button>
         )
       })
