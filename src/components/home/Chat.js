@@ -55,7 +55,7 @@ export class Chat extends React.Component {
         if(this.message.trim()===""){
             return;
         }
-                
+        this.message=this.content.value;       
         let date = moment().format('LLLL');
         this.props.dispatch(sendMessage(this.props.namespace, this.message, date, this.props.currentUser.id, this.props.chat.id));   
         this.content.value="";   
