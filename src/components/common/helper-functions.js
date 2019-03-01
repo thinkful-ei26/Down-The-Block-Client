@@ -151,7 +151,7 @@ export function filterByCategory(filter, posts){
 
 export function formatName(str) {
   //make it all lower case first
-  str = str.toLowerCase();
+  // str = str.toLowerCase();
   //make the first letter capital: 
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
