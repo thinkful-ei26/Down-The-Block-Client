@@ -18,6 +18,7 @@ class AddressForm extends React.Component {
   };
 
   componentDidMount(){
+    document.title='DownTheBlock'
     this.props.dispatch(showAnimation(false));
   };
  

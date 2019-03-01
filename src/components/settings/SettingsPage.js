@@ -9,7 +9,8 @@ import {changeSuccessMessage, updateProfilePhoto} from '../../actions/users';
 
 export class SettingsPage extends React.Component{
   componentDidMount(){
-    document.title = 'Settings';
+    document.title = `${this.props.currentUser.firstName}'s Settings`;
+    window.scrollTo(0, 0);
   }
 
   componentDidUpdate(){

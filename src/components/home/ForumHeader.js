@@ -55,10 +55,11 @@ export class ForumHeader extends React.Component{
               : data.color,
           cursor: isDisabled ? 'not-allowed' : 'default',
           fontFamily: 'Open Sans',
+          fontSize: '15px',
         };
       },
-      input: styles => ({ ...styles, ...dot(), fontFamily: 'Open Sans' }),
-      placeholder: styles => ({ ...styles, ...dot(), fontFamily: 'Open Sans' }),
+      input: styles => ({ ...styles, ...dot(), fontFamily: 'Open Sans', fontSize: '15px', }),
+      placeholder: styles => ({ ...styles, ...dot(), fontFamily: 'Open Sans', fontSize: '15px', }),
       singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
     };
 

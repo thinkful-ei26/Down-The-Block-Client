@@ -5,6 +5,9 @@ import mockup from '../../img/mockup.png';
 import { display, focusOn } from '../../actions/navigation'
 
 export class About extends React.Component{
+  componentDidMount(){
+    document.title='DownTheBlock'
+  }
 
   onClick(focus=""){
     this.props.dispatch(display(focus));

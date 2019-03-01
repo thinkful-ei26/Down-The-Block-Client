@@ -18,6 +18,10 @@ export class SignUpForm extends React.Component {
         }
       }
 
+    componentDidMount(){
+        document.title = 'Register';
+    }
+
     checkIfFile(){
         if(this.img.files.length!==0){
             this.setState({uploadedFile: true});
