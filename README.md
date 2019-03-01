@@ -1,8 +1,8 @@
 # Down The Block
 
-[downtheblock.us](https://downtheblock.us/ "Google's Homepage")
+[downtheblock.us](https://downtheblock.us/ "Down The Block")
 
-![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/Neighborhood_2.png "Sims")
+![pciture](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/Neighborhood_2.png "Sims")
 
 
 
