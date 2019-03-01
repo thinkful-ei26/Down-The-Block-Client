@@ -19,7 +19,6 @@ export default class HouseAnimation extends React.Component{
       this.setState(
         {housesLeft:[this.houseIcon, ...this.state.housesRight], 
         housesRight:[...this.state.housesLeft, this.houseIcon]}), 400)
-    // setTimeout(clearInterval(this.tick), 3000)
   }
 
   componentWillUnmount(){

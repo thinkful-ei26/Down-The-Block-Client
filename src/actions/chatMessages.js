@@ -8,7 +8,8 @@ import {
     SEND_MESSAGE_SUCCESS,
     SEND_MESSSAGE_ERROR,
     UPDATE_CHAT,
-    SET_NAMESPACE
+    SET_NAMESPACE,
+    SET_NEW_DAY
 } from './types';
 import {display} from './navigation';
 
@@ -64,7 +65,6 @@ export const sendMessageError= (error) => ({
 
 export const sendMessage = (namespace, content, date, author, chatId) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    console.log('SENDING MESSAGE')
     dispatch(sendMessageRequest());
     return (
         fetch(`${API_BASE_URL}/messages/${namespace}`, {
@@ -99,4 +99,9 @@ export const updateChat = (chat) => ({
 export const setNamespace = (namespace) => ({
     type: SET_NAMESPACE,
     namespace
+})
+
+export const setNewDay = (day) => ({
+    type: SET_NEW_DAY,
+    day
 })

@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import moment from 'moment';
-import {updateChat, sendMessage} from '../../actions/chatMessages';
+import {updateChat, sendMessage, setNewDay} from '../../actions/chatMessages';
 import socketClient from "socket.io-client";
 import { API_BASE_URL } from '../../config'; 
 import Message from './Message';
@@ -11,8 +11,9 @@ export class Chat extends React.Component {
       super(props);
 
       this.message='';
-
-      this.socket=''
+      this.socket='';
+      this.day='';
+      this.showDay=true
     }
 
     componentDidMount(){
@@ -42,58 +43,102 @@ export class Chat extends React.Component {
         }
       }
 
+      generateOtherParticipant(){
+        let participantA = this.props.chat.participants[0];
+        let participantB = this.props.chat.participants[1];
+        let other = participantA.id === this.props.currentUser.id ? participantB : participantA;
+        return `${other.firstName} ${other.lastName}`;
+      }
+
       onSubmit(e) {
         e.preventDefault();
-        if(this.message.value.trim()===""){
+        if(this.message.trim()===""){
             return;
         }
                 
         let date = moment().format('LLLL');
-        this.props.dispatch(sendMessage(this.props.namespace, this.message.value, date, this.props.currentUser.id, this.props.chat.id));   
-        this.message.value="";   
+        this.props.dispatch(sendMessage(this.props.namespace, this.message, date, this.props.currentUser.id, this.props.chat.id));   
+        this.content.value="";   
+        this.message="";
 
     } 
+
+    handleKeyDown(e){
+      if (e.keyCode === 13 && !e.shiftKey)
+      {
+          //form should submit
+          this.message=this.content.value
+          this.onSubmit(e);
+      }
+      else if(e.keyCode===13 && e.shiftKey){
+        this.message = this.content.value + ' \n ';
+      }
+  }
 
     render() {   
       if(!this.props.namespace || !this.props.chat){
         return null;
       }
 
-      let messages = this.props.chat.messages.map(message=><Message message={message}/>);
-      // let messages = this.props.chat.messages.map(message=><p>{message.content}</p>);
+    let messages = this.props.chat.messages.map((message, index)=>{
+      // this.props.dispatch(setNewDay(moment(message.date).format('LL')))
+      let next = moment(message.date).format('LL');
+      console.log('this.day', this.day, 'vs props.day', next)
+      if(this.day!==next){
+        this.day=next;
+        this.showDay= true;
+        console.log('DIFF', this.day);
+      }
+      else{
+        this.showDay= false;
+      }
+      return(
+        <React.Fragment key={index}>
+          {this.showDay && <h3>{this.day}</h3>}
+          <Message message={message}/>
+        </React.Fragment>
+      )
+    });
 
       return (
-        <div style={{paddingTop:20}}>
+        <section className="chat-container">
+          <h1>Chat With {this.generateOtherParticipant()} </h1>
           <section className="messages">
             {messages}
           </section>
           <form
             onSubmit={(e)=> this.onSubmit(e)}
+            className="send-message-form"
           >
           <textarea 
-              ref={input => this.message = input}
-              type="textarea" 
-              id="message" 
-              name="message" 
-              placeholder="Write a Message"
+            ref={input => this.content = input}
+            type="textarea" 
+            id="message" 
+            name="message" 
+            className="send-message"
+            placeholder="Send a Message"
+            onKeyDown={(e)=>this.handleKeyDown(e)}
           />
 
           <button 
             type="submit" 
+            className="send-message-button"
           >
-            Send
+            <i className="fas fa-arrow-circle-right"></i>
           </button>
           </form>
-        </div>
+        </section>
       )
     }
 }
 
 const mapStateToProps = state => {
+  console.log('STATE IS', state);
     return {
       currentUser: state.auth.currentUser,
       chat: state.chatMessages.chat,
       authToken: state.auth.authToken,
+      day: state.chatMessages.day,
     }
   };
   
