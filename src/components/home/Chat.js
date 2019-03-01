@@ -64,7 +64,9 @@ export class Chat extends React.Component {
 
       return (
         <div style={{paddingTop:20}}>
-          {messages}
+          <section className="messages">
+            {messages}
+          </section>
           <form
             onSubmit={(e)=> this.onSubmit(e)}
           >
