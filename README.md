@@ -5,6 +5,14 @@
 ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/Neighborhood_2.png "Sims")
 
 
+![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/screenShot1.png "Sims")
+
+![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/screenshot2.png "Sims")
+
+
+
+
+
 ## Intoducing Down The Block, the easiest way to communicate safely with your neighbors
 
 1. Are you curious about what’s going on in your neighborhood? ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/friends.jpg "friends")
