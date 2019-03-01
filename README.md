@@ -5,13 +5,6 @@
 ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/Neighborhood_2.png "Sims")
 
 
-![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/screenShot1.png "Sims")
-
-![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/screenshot2.png "Sims")
-
-
-
-
 
 ## Intoducing Down The Block, the easiest way to communicate safely with your neighbors
 
@@ -27,5 +20,12 @@
 1. Make an account ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/login.png "login")
 2. View your location
 3. Immediately communicate with others in your area. ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/posts.png "posts")
+
+
+![alt text](https://github.com/thinkful-ei26/Down-The-Block-Client/blob/dev/public/screenshot.png "Sims")
+
+![alt text](https://github.com/thinkful-ei26/Down-The-Block-Client/blob/dev/public/screenshot2.png "Sims")
+
+
 
 ### Posts can include a wide range of catagories including crime, accidents, robberies, events, parties, etc
