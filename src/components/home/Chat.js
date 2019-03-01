@@ -14,14 +14,23 @@ export class Chat extends React.Component {
     }
 
     componentDidMount(){
+        let socket;
         console.log('NAMESPACE is', this.props.namespace)
-        //listens for the server when the new post has been created
-        let socket= socketClient(`${API_BASE_URL}/${this.props.namespace}`);
-        console.log('THE SOCKET IN CHAT IS', socket);
-        socket.on('chat', chat => {
-          console.log('CHAT GOT BACK IN SOCKET', chat);
-          this.props.dispatch(updateChat(chat));
+        fetch(`${API_BASE_URL}/messages/${this.props.namespace}`, {
+            method: 'POST',
         })
+        .then(res => res.json())
+        .then((chat) =>{ 
+        console.log("HERE");
+        //listens for the server when the new post has been created
+          socket= socketClient(`${API_BASE_URL}/${this.props.namespace}`);
+          console.log('THE SOCKET IN CHAT IS', socket);
+          socket.on('chat', chat => {
+            console.log('CHAT GOT BACK IN SOCKET', chat);
+            this.props.dispatch(updateChat(chat));
+          })
+        })
+        .catch(err=>console.log("ERROR",err));
       }
 
       onSubmit(e) {

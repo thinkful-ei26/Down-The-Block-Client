@@ -68,7 +68,7 @@ export const sendMessage = (namespace, content, date, authorName, chatId) => (di
     dispatch(sendMessageRequest());
     return (
         fetch(`${API_BASE_URL}/messages/${namespace}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${authToken}`
