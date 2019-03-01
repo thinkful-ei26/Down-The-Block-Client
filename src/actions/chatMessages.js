@@ -62,7 +62,7 @@ export const sendMessageError= (error) => ({
   error
 })
 
-export const sendMessage = (namespace, content, date, authorName, chatId) => (dispatch, getState) => {
+export const sendMessage = (namespace, content, date, author, chatId) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     console.log('SENDING MESSAGE')
     dispatch(sendMessageRequest());
@@ -77,7 +77,7 @@ export const sendMessage = (namespace, content, date, authorName, chatId) => (di
                 content, 
                 date,
                 chatId, 
-                authorName
+                author
             })
         })
         .then(res => normalizeResponseErrors(res))

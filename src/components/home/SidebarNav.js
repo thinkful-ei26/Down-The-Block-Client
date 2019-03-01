@@ -58,7 +58,8 @@ class SidebarNav extends React.Component{
               let namespaceArr = [this.props.currentUser.username, user.username];
               namespaceArr.sort();
               let namespace = namespaceArr.join('');
-              this.props.dispatch(fetchChat(namespace, this.props.currentUser.username, user.username));
+              this.setState({sidebarOpen: false});
+              this.props.dispatch(fetchChat(namespace, this.props.currentUser.id, user.id));
               }
             }
             key={index}>{user.username}

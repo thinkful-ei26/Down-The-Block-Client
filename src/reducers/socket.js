@@ -12,7 +12,6 @@ const initialState={
 export default (state=initialState, action) => {
     switch (action.type) {	
         default: 
-            console.log('NORMAL SOCKET:', socket);
             return state
     }
 }
