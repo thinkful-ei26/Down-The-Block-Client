@@ -114,15 +114,19 @@ export function filterPostsBySearch(terms, posts){
   return posts.filter(post=>
     {
       let bool = true; 
-      let date = formatLongDate(post.props.date).toLowerCase();
+      // let date = formatLongDate(post.props.date).toLowerCase();
+
+      console.log('DATE IS', post.props.date);
 
       contains(post.props.postId, post.props.category, searchTerms);
 
-      contains(post.props.postId, date, searchTerms);
+      contains(post.props.postId, post.props.date, searchTerms);
 
       contains(post.props.postId, post.props.userId.firstName, searchTerms);
 
       contains(post.props.postId, post.props.content, searchTerms);
+
+      (post.props.comments && post.props.comments.find(comment=>contains(post.props.postId, comment.content, searchTerms))); 
 
 
       //grab the object in the array that corresponds to this specific post 

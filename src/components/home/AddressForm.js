@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
-
 import './address-form.scss'
-
 import { showAnimation } from '../../actions/navigation';
 import { fetchAddressSuccess } from '../../actions/geolocation';
 import { setUserCoords } from '../../actions/users';
@@ -48,7 +46,7 @@ class AddressForm extends React.Component {
         onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-          <div>
+          <div className="addressDiv">
             <section className="parallax"></section>
             <section className="intro">
               <section className="form-section address-form">

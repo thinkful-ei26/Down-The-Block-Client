@@ -30,8 +30,12 @@ export class About extends React.Component{
         </section>
         <section className="about-icons">
           <div className="icon-holder">
+            <i className="fas fa-map-marker-alt"></i>
+            <p>Geofilter conveniently gives you access to your own community</p>
+          </div>
+          <div className="icon-holder">
             <i className="fas fa-edit"></i>
-            <p>Post In Forums To Help Keep Your Community In The Loop</p>
+            <p>Post In Forums To Help Keep Your Neighborhood In The Loop</p>
           </div>
           <div className="icon-holder">
             <i className="fas fa-search"></i>
