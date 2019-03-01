@@ -124,6 +124,8 @@ export function filterPostsBySearch(terms, posts){
 
       contains(post.props.postId, post.props.content, searchTerms);
 
+      (post.props.comments && post.props.comments.find(comment=>contains(post.props.postId, comment.content, searchTerms))); 
+
 
       //grab the object in the array that corresponds to this specific post 
       let obj = globalArrayOfSearchTerms.find(item=>item.postId===post.props.postId)
