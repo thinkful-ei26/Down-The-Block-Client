@@ -7,6 +7,7 @@ import { fetchPosts } from '../../actions/posts';
 import { fetchUsers } from '../../actions/users';
 import { fetchChat } from '../../actions/chatMessages';
 import { clearAuth } from '../../actions/auth';
+import { formatName } from '../common/helper-functions'
 import {Link} from 'react-router-dom';
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
@@ -62,7 +63,8 @@ class SidebarNav extends React.Component{
               this.props.dispatch(fetchChat(namespace, this.props.currentUser.id, user.id));
               }
             }
-            key={index}>{user.username}
+            key={index}>
+            {formatName(user.username)}
           </button>
         )
       })
@@ -173,7 +175,7 @@ class SidebarNav extends React.Component{
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(237, 236, 217)', width: 200, boxShadow: 0, WebkitBoxShadow: 0} , root: {position: 'relative', boxShadow: 0}  }}
+          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(237, 236, 217)', width: 200}, root: {position: 'relative', boxShadow: 0}, }}
         >
         </Sidebar>
         </React.Fragment>

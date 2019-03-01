@@ -5,7 +5,8 @@ import {
     SEND_MESSAGE_REQUEST,
     SEND_MESSAGE_SUCCESS,
     SEND_MESSSAGE_ERROR,
-    UPDATE_CHAT
+    UPDATE_CHAT,
+    SET_NEW_DAY
 } from '../actions/types';
 
 const initialState={
@@ -13,6 +14,7 @@ const initialState={
     loading: false,
     error: null,
     namespace: null,
+    day: null,
 };
 
 export default (state=initialState, action) => {
@@ -22,7 +24,6 @@ export default (state=initialState, action) => {
           loading: true,
         });
       case FETCH_CHAT_SUCCESS:
-        console.log('HERE',action.chat, action.namespace)
         return Object.assign({}, state, {
           chat: action.chat,
           loading: false,
@@ -48,12 +49,17 @@ export default (state=initialState, action) => {
     return Object.assign({}, state, {
       chat: action.chat,
   })
-    case SEND_MESSSAGE_ERROR:
-      return Object.assign({}, state, {
-        loading: false,
-        error: action.error,
+  case SEND_MESSSAGE_ERROR:
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error,
+  })
+  case SET_NEW_DAY: 
+    console.log('NEW DAY', action.day);
+    return Object.assign({}, state, {
+      day: action.day
     })
-        default: 
-            return state
+    default: 
+        return state
     }
 }
