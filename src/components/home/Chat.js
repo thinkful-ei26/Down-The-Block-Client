@@ -1,61 +1,81 @@
-import React from 'react';
+import React from 'react'; 
 import { connect } from 'react-redux';
-import socketClient from "socket.io-client"
-import { API_BASE_URL } from '../../config'
+import moment from 'moment';
+import {updateChat, sendMessage} from '../../actions/chatMessages';
+import socketClient from "socket.io-client";
+import { API_BASE_URL } from '../../config'; 
 
-import './Chat.css'
 
 export class Chat extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      messages: [] //saving the chat to mongoDB
+    constructor(props){
+      super(props);
+
+      this.message='';
     }
-    //get users first name
 
-    //display it before the message
-    // this.socket = socketClient(API_BASE_URL)
-
-
-    //user_id of the person your chatting with
-    //make a subroom
-    this.socket = socketClient(API_BASE_URL);
-
-    //send the message as well as the coordinates to the client.
-    //then decide inside the function if the coordinates match up to display the message. if not dont display it
-    this.socket.on("chat-message", (msg) => {
-      if(msg===""){
-        return
+    componentDidMount(){
+        console.log('NAMESPACE is', this.props.namespace)
+        //listens for the server when the new post has been created
+        let socket= socketClient(`${API_BASE_URL}/${this.props.namespace}`);
+        console.log('THE SOCKET IN CHAT IS', socket);
+        socket.on('chat', chat => {
+          console.log('CHAT GOT BACK IN SOCKET', chat);
+          this.props.dispatch(updateChat(chat));
+        })
       }
-      this.setState({ messages: [...this.state.messages, msg] })
-    })
-  }
 
-  componentDidMount(){
-    console.log("mounted")
-  }
-  render() {
-    return (
-      <section>
-        <div className="chat"> <h1>Chat Messages</h1>
-          <form autoComplete="off" id="chat-form" className="chat-form" onSubmit={e => {
-            e.preventDefault()
-            this.socket.emit("chat-message", e.currentTarget.message.value)
-            document.getElementById("chat-form").reset();
-            console.log("submitted")
-          }} >
-            <input className="type_msg" type="text" placeholder="Type your message" name="message"
-            />
-            <button type="submit">Submit</button>
+      onSubmit(e) {
+        e.preventDefault();
+        if(this.message.value.trim()===""){
+            return;
+        }
+                
+        let date = moment().format('LLLL');
+        this.props.dispatch(sendMessage(this.props.namespace, this.message.value, date, this.props.currentUser.firstName, this.props.chat.id));   
+        this.message.value="";   
+
+    } 
+
+    render() { 
+      console.log('NAMESPACE is', this.props.namespace)
+  
+      if(!this.props.namespace || !this.props.chat){
+        return null;
+      }
+
+      let messages = this.props.chat.messages.map(message=><p>{message.content}</p>);
+      return (
+        <div style={{paddingTop:500}}>
+          {messages}
+          <form
+            onSubmit={(e)=> this.onSubmit(e)}
+          >
+          <textarea 
+              ref={input => this.message = input}
+              type="textarea" 
+              id="message" 
+              name="message" 
+              placeholder="Write a Message"
+          />
+
+          <button 
+            type="submit" 
+          >
+            Send
+          </button>
           </form>
-          {this.state.messages.map(message => {
-            return <li // need to make key
-            className="msg_container">{message}</li>
-          })}</div>
-      </section>
-    );
-  }
+        </div>
+      )
+    }
 }
 
-export default connect()(Chat)
+const mapStateToProps = state => {
+    return {
+      currentUser: state.auth.currentUser,
+      // namespace: state.chatMessages.namespace,
+      chat: state.chatMessages.chat
+    }
+  };
+  
+export default connect(mapStateToProps)(Chat)
 

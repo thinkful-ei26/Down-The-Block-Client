@@ -5,9 +5,9 @@ import requiresLogin from '../common/requires-login';
 import { display } from '../../actions/navigation'
 import { fetchPosts } from '../../actions/posts';
 import { fetchUsers } from '../../actions/users';
+import { fetchChat } from '../../actions/chatMessages';
 import { clearAuth } from '../../actions/auth';
 import {Link} from 'react-router-dom';
-import { setActiveChat } from '../../actions/chatMessages'; 
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
 
@@ -48,24 +48,6 @@ class SidebarNav extends React.Component{
     this.props.dispatch(fetchUsers(this.props.coords));
   }
 
-  setUser = (user)=>{
-    this.props.setUser(user.username)
-  }
-
-
-  setUser = ()=>{
-    const { socket, user } = this.props; 
-        socket.emit('USER_CONNECTED', user);
-  }
-  // setUser = (user)=>{
-  //   this.props.setUser(user)
-  // }
-
-  sendOpenPrivateMessage = (reciever) => {
-		const { socket, currentUser } = this.props
-		socket.emit('PRIVATE_MESSAGE', {reciever: reciever.username, sender:currentUser})
-	}
-  
   showAllUsers(){
     if(this.props.users){
       return this.props.users.map((user,index)=> {
@@ -73,14 +55,13 @@ class SidebarNav extends React.Component{
           <button
             className="content"
             onClick={()=>{
-              console.log('USER BEING CLICKED IS:', user); 
-              this.onSetSidebarOpen(false);
-              this.props.socket.emit('VERIFY_USER', this.props.currentUser);
-              this.sendOpenPrivateMessage(user);
-              this.props.dispatch(display('chat')); 
+              let namespaceArr = [this.props.currentUser.username, user.username];
+              namespaceArr.sort();
+              let namespace = namespaceArr.join('');
+              this.props.dispatch(fetchChat(namespace, this.props.currentUser.username, user.username));
               }
             }
-            key={index}>{user.firstName}
+            key={index}>{user.username}
           </button>
         )
       })

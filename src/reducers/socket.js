@@ -3,6 +3,7 @@ import { API_BASE_URL } from '../config';
 
 export const socket = socketClient(`${API_BASE_URL}`);
 
+
 const initialState={
     socket, 
 };
@@ -11,6 +12,7 @@ const initialState={
 export default (state=initialState, action) => {
     switch (action.type) {	
         default: 
+            console.log('NORMAL SOCKET:', socket);
             return state
     }
 }
