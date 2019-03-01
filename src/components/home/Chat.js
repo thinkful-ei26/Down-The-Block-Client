@@ -58,10 +58,10 @@ export class Chat extends React.Component {
             return;
         }
         let date = moment().format('LLLL');
-        this.props.dispatch(sendMessage(this.props.namespace, this.message, date, this.props.currentUser.id, this.props.chat.id));   
+        this.props.dispatch(sendMessage(this.props.namespace, this.message, date, this.props.currentUser.id, this.props.chat.id))
+        .then(()=>window.scrollTo(0, document.body.scrollHeight))
         this.content.value="";   
         this.message="";
-        window.scrollTo(0, document.body.scrollHeight);
     } 
 
     handleKeyDown(e){

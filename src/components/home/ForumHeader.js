@@ -54,11 +54,11 @@ export class ForumHeader extends React.Component{
               ? chroma.contrast(color, 'white') > 2 ? 'white' : 'black'
               : data.color,
           cursor: isDisabled ? 'not-allowed' : 'default',
-          fontFamily: 'Play',
+          fontFamily: 'Open Sans',
         };
       },
-      input: styles => ({ ...styles, ...dot(), fontFamily: 'Play' }),
-      placeholder: styles => ({ ...styles, ...dot(), fontFamily: 'Play' }),
+      input: styles => ({ ...styles, ...dot(), fontFamily: 'Open Sans' }),
+      placeholder: styles => ({ ...styles, ...dot(), fontFamily: 'Open Sans' }),
       singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
     };
 
