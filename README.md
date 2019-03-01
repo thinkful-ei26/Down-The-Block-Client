@@ -1,6 +1,6 @@
 # Down The Block
 
-[trello board](https://trello.com/b/hPCzbOTZ/neighborhood-watch "trello")
+[Project Management Trello Link](https://trello.com/b/hPCzbOTZ/neighborhood-watch "trello")
 
 [downtheblock.io.com](https://neighbors-client.herokuapp.com/ "Google's Homepage")
 
