@@ -88,6 +88,10 @@
   border-radius: 5px;
 }
 
+.post .line{
+  padding-left: 5px;
+}
+
 /*COMMENTS*/
 
 .comments-list{
@@ -128,6 +132,8 @@ vertical-align: top;
   border-radius: 16px;
   margin: 0 10px;  
   overflow: auto;
+  line-height: 1.5;
+  font-family: $normalFont;
 }
 
 .post-info, .comment-info, .comment-form{
@@ -161,6 +167,10 @@ vertical-align: top;
   font-family: $appFont;
 }
 
+.name-and-date h6{
+  font-family: $normalFont;
+}
+
 .comment-textarea{
   resize: none;
   outline: 0;
@@ -169,7 +179,7 @@ vertical-align: top;
   width: 100%;
   padding: 10px;
   margin-left: 10px;
-  font-family: $appFont;
+  font-family: $normalFont;
   font-size: 16px;
   color: $darkGreen;
 }
@@ -205,7 +215,7 @@ vertical-align: top;
   resize: none;
   border-radius: 10px;
   padding: 15px;
-  font-family: $appFont;
+  font-family: $normalFont;
   font-size: 16px;
   color: $darkGreen;
 }

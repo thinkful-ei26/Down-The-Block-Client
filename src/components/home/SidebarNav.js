@@ -5,7 +5,9 @@ import requiresLogin from '../common/requires-login';
 import { display } from '../../actions/navigation'
 import { fetchPosts } from '../../actions/posts';
 import { fetchUsers } from '../../actions/users';
+import { fetchChat } from '../../actions/chatMessages';
 import { clearAuth } from '../../actions/auth';
+import { formatName } from '../common/helper-functions'
 import {Link} from 'react-router-dom';
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
@@ -47,16 +49,6 @@ class SidebarNav extends React.Component{
     this.props.dispatch(fetchUsers(this.props.coords));
   }
 
-  setUser = (user)=>{
-    this.props.setUser(user.username)
-  }
-
-
-  setUser = ()=>{
-    const { socket, user } = this.props; 
-        socket.emit('USER_CONNECTED', user);
-  }
-  
   showAllUsers(){
     if(this.props.users){
       return this.props.users.map((user,index)=> {
@@ -64,12 +56,15 @@ class SidebarNav extends React.Component{
           <button
             className="content"
             onClick={()=>{
-              this.onSetSidebarOpen(false)
-              this.props.socket.emit('VERIFY_USER', this.props.currentUser.username, this.setUser)
-              this.props.dispatch(display('ChatContainer'))
+              let namespaceArr = [this.props.currentUser.username, user.username];
+              namespaceArr.sort();
+              let namespace = namespaceArr.join('');
+              this.setState({sidebarOpen: false});
+              this.props.dispatch(fetchChat(namespace, this.props.currentUser.id, user.id));
               }
             }
-            key={index}>{user.firstName}
+            key={index}>
+            {formatName(user.firstName)}
           </button>
         )
       })
@@ -180,7 +175,7 @@ class SidebarNav extends React.Component{
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(229, 228, 188)', width: 200, boxShadow: 0, WebkitBoxShadow: 0} , root: {position: 'relative', boxShadow: 0}  }}
+          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(237, 236, 217)', width: 200}, root: {position: 'relative', boxShadow: 0}, }}
         >
         </Sidebar>
         </React.Fragment>
@@ -193,7 +188,9 @@ const mapStateToProps = state => ({
   users: state.auth.users,
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
-  socket:state.socket.socket
+  socket:state.socket.socket, 
+  chats:state.chatMessages.chats, 
+  activeChat: state.chatMessages.activeChat
 });
 
 export default requiresLogin()(connect(mapStateToProps)(SidebarNav));

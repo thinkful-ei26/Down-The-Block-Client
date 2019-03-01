@@ -37,12 +37,10 @@ export class Geolocator extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     if(!this.props.coords && !this.props.geoError){
-      console.log('render house')
       return <HouseAnimation/>
     }
-    return(
+    return( 
       null
     )
   }

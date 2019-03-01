@@ -18,6 +18,10 @@ export class SignUpForm extends React.Component {
         }
       }
 
+    componentDidMount(){
+        document.title = 'Register';
+    }
+
     checkIfFile(){
         if(this.img.files.length!==0){
             this.setState({uploadedFile: true});
@@ -29,12 +33,13 @@ export class SignUpForm extends React.Component {
 
     onSubmit(values) {
         if(this.img && this.img.files.length!==0){
+            console.log('FILE', this.img.files[0])
             values.img = this.img.files[0];
         }
         const {password, firstName, lastName, img, registerUsername} = values;
         const user = { password, firstName, lastName, img, registerUsername};
         return this.props.dispatch(registerUser(user))
-            .then(() => this.props.dispatch(login(registerUsername, password)));
+        // .then(() => this.props.dispatch(login(registerUsername, password)));
     }
 
     onClick(focus=""){

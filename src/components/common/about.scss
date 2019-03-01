@@ -9,6 +9,10 @@
   text-align: center;
 }
 
+.home .about{
+  background: $lightGray;
+}
+
 .about .text{
   max-width: 600px;
   margin: auto;
@@ -26,8 +30,8 @@
 }
 
 .mockup{
-  width: 50%; 
-  height: 50%;
+  width: 75%; 
+  height: 75%;
   max-height: 450px;
   max-width: 650px;
 }
@@ -63,6 +67,11 @@
   box-shadow: 0 -5px 5px -5px $darkGreen;
 }
 
+.home .about-icons{
+  background: $lightGray;
+}
+
+
 .about-icons i {
   font-size: 100px;
   padding-bottom: 20px;
@@ -78,7 +87,7 @@
   margin: 20px 0;
 }
 
-@media(min-width: 800px){
+@media(min-width: 900px){
   .about-icons{
     display: flex;
     justify-content: space-around;
@@ -86,6 +95,11 @@
 
   .about{
     padding: 50px 80px;
+  }
+
+  .mockup{
+    width: 50%;
+    height: 50%;
   }
 }
 

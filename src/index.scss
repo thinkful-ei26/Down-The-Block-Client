@@ -11,6 +11,10 @@ body {
   background: $lightGray;
 }
 
+#root{
+  min-height: 100vh;
+}
+
 *{
   box-sizing: border-box;
 }
@@ -64,8 +68,16 @@ button:focus{
 .app{
   outline: 0;
 }
+
 footer{
   background: $darkGreen;
   font-family: Play;
   color: $beige;
+  text-align: right;
+  padding: 10px 30px 10px 10px;
+}
+
+p{
+  line-height: 1.5;
+  font-family: $normalFont;
 }

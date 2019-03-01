@@ -1,61 +1,147 @@
-import React from 'react';
+import React from 'react'; 
 import { connect } from 'react-redux';
-import socketClient from "socket.io-client"
-import { API_BASE_URL } from '../../config'
-
-import './Chat.css'
+import moment from 'moment';
+import {updateChat, sendMessage, setNewDay} from '../../actions/chatMessages';
+import socketClient from "socket.io-client";
+import { API_BASE_URL } from '../../config'; 
+import Message from './Message';
 
 export class Chat extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      messages: [] //saving the chat to mongoDB
+    constructor(props){
+      super(props);
+
+      this.message='';
+      this.socket='';
+      this.day='';
+      this.showDay=true
     }
-    //get users first name
 
-    //display it before the message
-    // this.socket = socketClient(API_BASE_URL)
-
-
-    //user_id of the person your chatting with
-    //make a subroom
-    this.socket = socketClient(API_BASE_URL);
-
-    //send the message as well as the coordinates to the client.
-    //then decide inside the function if the coordinates match up to display the message. if not dont display it
-    this.socket.on("chat-message", (msg) => {
-      if(msg===""){
-        return
+    componentDidMount(){
+        window.scrollTo(0, document.body.scrollHeight);
+        //create the namespaced socket
+        fetch(`${API_BASE_URL}/messages/${this.props.namespace}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${this.props.authToken}`
+          },
+        })
+        .then(res => res.json())
+        .then(() =>{ 
+          this.socket= socketClient(`${API_BASE_URL}/${this.props.namespace}`);
+          this.socket.on('chat', chat => {
+            console.log('SOCKET RECEIVED', chat);
+            this.props.dispatch(updateChat(chat));
+          })
+        })
+        .catch(err=>console.log("ERROR",err));
       }
-      this.setState({ messages: [...this.state.messages, msg] })
-    })
+
+      componentWillUnmount(){
+        if(this.socket){
+          this.socket.off('chat');
+        }
+      }
+
+      generateOtherParticipant(){
+        let participantA = this.props.chat.participants[0];
+        let participantB = this.props.chat.participants[1];
+        let other = participantA.id === this.props.currentUser.id ? participantB : participantA;
+        return `${other.firstName} ${other.lastName}`;
+      }
+
+      onSubmit(e) {
+        e.preventDefault();
+        console.log('SUBMIT')
+        this.message=this.content.value;       
+        if(this.message.trim()===""){
+            return;
+        }
+        let date = moment().format('LLLL');
+        this.props.dispatch(sendMessage(this.props.namespace, this.message, date, this.props.currentUser.id, this.props.chat.id))
+        .then(()=>window.scrollTo(0, document.body.scrollHeight))
+        this.content.value="";   
+        this.message="";
+    } 
+
+    handleKeyDown(e){
+      if (e.keyCode === 13 && !e.shiftKey)
+      {
+          //form should submit
+          this.message=this.content.value
+          this.onSubmit(e);
+      }
+      else if(e.keyCode===13 && e.shiftKey){
+        this.message = this.content.value + ' \n ';
+      }
   }
 
-  componentDidMount(){
-    console.log("mounted")
-  }
-  render() {
-    return (
-      <section>
-        <div className="chat"> <h1>Chat Messages</h1>
-          <form autoComplete="off" id="chat-form" className="chat-form" onSubmit={e => {
-            e.preventDefault()
-            this.socket.emit("chat-message", e.currentTarget.message.value)
-            document.getElementById("chat-form").reset();
-            console.log("submitted")
-          }} >
-            <input className="type_msg" type="text" placeholder="Type your message" name="message"
-            />
-            <button type="submit">Submit</button>
+    render() {   
+      if(!this.props.namespace || !this.props.chat){
+        return null;
+      }
+
+    let messages = this.props.chat.messages.map((message, index)=>{
+      // this.props.dispatch(setNewDay(moment(message.date).format('LL')))
+      let next = moment(message.date).format('LL');
+      console.log('this.day', this.day, 'vs props.day', next)
+      if(this.day!==next){
+        this.day=next;
+        this.showDay= true;
+        console.log('DIFF', this.day);
+      }
+      else{
+        this.showDay= false;
+      }
+      return(
+        <React.Fragment key={index}>
+          {this.showDay && <h3>{this.day}</h3>}
+          <Message message={message}/>
+        </React.Fragment>
+      )
+    });
+
+      return (
+        <section className="chat-container">
+          <h1>Chat With {this.generateOtherParticipant()} </h1>
+          <section className="messages">
+            {messages}
+          </section>
+          <form
+            onSubmit={(e)=> this.onSubmit(e)}
+            className="send-message-form"
+          >
+          <textarea 
+            ref={input => this.content = input}
+            type="textarea" 
+            id="message" 
+            name="message" 
+            className="send-message"
+            placeholder="Send a Message"
+            onKeyDown={(e)=>this.handleKeyDown(e)}
+          />
+
+          <button 
+            type="submit" 
+            className="send-message-button"
+          >
+            <i className="fas fa-arrow-circle-right"></i>
+          </button>
           </form>
-          {this.state.messages.map(message => {
-            return <li // need to make key
-            className="msg_container">{message}</li>
-          })}</div>
-      </section>
-    );
-  }
+        </section>
+      )
+    }
 }
 
-export default connect()(Chat)
+const mapStateToProps = state => {
+  console.log('STATE IS', state);
+    return {
+      currentUser: state.auth.currentUser,
+      chat: state.chatMessages.chat,
+      authToken: state.auth.authToken,
+      day: state.chatMessages.day,
+    }
+  };
+  
+export default connect(mapStateToProps)(Chat)
 

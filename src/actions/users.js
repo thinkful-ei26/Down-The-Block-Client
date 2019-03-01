@@ -1,7 +1,7 @@
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import { normalizeResponseErrors } from './utils';
-import { refreshProfileAuthToken, authError } from './auth';
+import { refreshProfileAuthToken, authError, login } from './auth';
 import { UPDATED_USER_SUCCESS, CHANGE_SUCCESS_MESSAGE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR } from './types';
 import {
   USER_COORDS_REQUEST,
@@ -10,6 +10,8 @@ import {
 } from './types';
 
 export const registerUser = user => dispatch => {
+    let password = user.password;
+    // let username = user.username;
     let formData = new FormData();
 
     Object.keys(user).forEach(item=> {
@@ -21,9 +23,8 @@ export const registerUser = user => dispatch => {
         body: formData
     })
         .then(res => normalizeResponseErrors(res))
-        .then(res =>{
-            res.json();
-        })
+        .then(res => res.json())
+        .then((user) => dispatch(login(user.username, password)))
         .catch(err => {
             const {location, message, status } = err;
             const str =

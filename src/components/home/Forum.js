@@ -7,6 +7,11 @@ import './main.scss'
 
 export class Forum extends React.Component{
 
+  componentDidMount(){
+    window.scrollTo(0, 0);
+    document.title='DownTheBlock'
+  }
+
   render(){
     return(
       <section className="forum">
