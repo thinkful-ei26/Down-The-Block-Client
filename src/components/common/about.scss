@@ -9,6 +9,10 @@
   text-align: center;
 }
 
+.home .about{
+  background: $lightGray;
+}
+
 .about .text{
   max-width: 600px;
   margin: auto;
@@ -62,6 +66,11 @@
   text-align: center;
   box-shadow: 0 -5px 5px -5px $darkGreen;
 }
+
+.home .about-icons{
+  background: $lightGray;
+}
+
 
 .about-icons i {
   font-size: 100px;
