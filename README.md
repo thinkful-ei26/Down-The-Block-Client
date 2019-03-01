@@ -1,7 +1,5 @@
 # Down The Block
 
-[trello board](https://trello.com/b/hPCzbOTZ/neighborhood-watch "trello")
-
 [downtheblock.us](https://downtheblock.us/ "Google's Homepage")
 
 ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/Neighborhood_2.png "Sims")
