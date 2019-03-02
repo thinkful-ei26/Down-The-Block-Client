@@ -42,10 +42,14 @@ Full-stack app with:
 
 ## Links
 [Server Repo](https://github.com/thinkful-ei26/Down-The-Block-Server)
+
 [Deployed Server On Heroku](https://down-the-block-server.herokuapp.com/)
+
 [Deployed Client On Heroku](https://down-the-block.herokuapp.com)
+
 [Project Management Trello Link](https://trello.com/b/hPCzbOTZ/neighborhood-watch "trello")
 
+## Demo Info (Friends Edition)
 Demo Account Username: ross
 Demo Account Password: friends123
-Set location to block, and manually put in 15098 Ventura Blvd, Sherman Oaks, CA 91403 into the address form to see the demo!
+Set location to block on browser, and manually put in 15098 Ventura Blvd, Sherman Oaks, CA 91403 into the address form to see the app in action!
