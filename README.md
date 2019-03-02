@@ -3,7 +3,7 @@
 DownTheBlock is deployed at [downtheblock.us](https://downtheblock.us)
 
 
-## Welcome to DownTheBlock -- Your Neighborhood at Your Fingertips
+## Welcome to DownTheBlock - Your Neighborhood at Your Fingertips
 ![pasted image 0](https://user-images.githubusercontent.com/43651736/53673209-6f57a100-3c43-11e9-8926-d7a35b3517d1.png)
 
 ### Neighbors Forum
