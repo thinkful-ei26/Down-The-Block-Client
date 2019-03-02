@@ -16,21 +16,29 @@ City Forum
 
 ## Client App Tech Stack
 React
+
 Redux for state management
+
 Socket.io for real-time updates
+
 JWT for user authentication
 
 ## UI/UX Design
 SASS  to reuse colors & fonts as variables
+
 Flexbox for a mobile-first layout
+
 Colors/Fonts:
   Green/beige theme (neighborhood vibe)
   Google Fonts ‘Play’ & ‘Open Sans’
+
 Ally-friendly:
   Tested with screen readers and aXe
 
 ## Server App Tech Stack
+
 Node with Express
+
 Mongoose for schema design
 JWT for user authentication
 MongoDB hosted on MongoDB Atlas
