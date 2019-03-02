@@ -32,7 +32,7 @@ DownTheBlock is deployed at [downtheblock.us](https://downtheblock.us)
 
 ### Server App Tech Stack
 
-The server repo can be found at https://github.com/thinkful-ei26/Down-The-Block-Server
+The server app is deployed to Heroku at https://down-the-block-server.herokuapp.com/ can be found at https://github.com/thinkful-ei26/Down-The-Block-Server
 
 -Node with Express
 
