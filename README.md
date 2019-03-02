@@ -41,3 +41,6 @@ The server app is deployed to Heroku at https://down-the-block-server.herokuapp.
 -JWT for user authentication
 
 -MongoDB hosted on MongoDB Atlas
+
+[Project Management Trello Link](https://trello.com/b/hPCzbOTZ/neighborhood-watch "trello")
+

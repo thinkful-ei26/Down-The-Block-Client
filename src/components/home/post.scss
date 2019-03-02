@@ -130,7 +130,7 @@ vertical-align: top;
   padding: 10px;
   background: white;
   border-radius: 16px;
-  margin: 0 10px;  
+  margin: 0 10px;
   overflow: auto;
   line-height: 1.5;
   font-family: $normalFont;
@@ -288,6 +288,10 @@ input[type="radio"] {
     margin-left: 30%;
     width: 600px;
   }
+  .post-photo {
+    width: 100%;
+  }
+
 }
 
 @media (min-width: 1100px){
