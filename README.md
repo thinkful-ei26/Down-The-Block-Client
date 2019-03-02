@@ -1,4 +1,4 @@
-# Down The Block(https://down-the-block.herokuapp.com)
+# [Down The Block](https://down-the-block.herokuapp.com)
 
 ## Welcome to DownTheBlock - Your Neighborhood at Your Fingertips
 ![pasted image 0](https://user-images.githubusercontent.com/43651736/53673209-6f57a100-3c43-11e9-8926-d7a35b3517d1.png)
@@ -40,13 +40,11 @@ Full-stack app with:
 
 :point_right: Display a map of user’s geofilter
 
-
-[Project Management Trello Link](https://trello.com/b/hPCzbOTZ/neighborhood-watch "trello")
-
 ## Links
 [Server Repo](https://github.com/thinkful-ei26/Down-The-Block-Server)
 [Deployed Server On Heroku](https://down-the-block-server.herokuapp.com/)
 [Deployed Client On Heroku](https://down-the-block.herokuapp.com)
+[Project Management Trello Link](https://trello.com/b/hPCzbOTZ/neighborhood-watch "trello")
 
 Demo Account Username: ross
 Demo Account Password: friends123
