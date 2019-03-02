@@ -1,6 +1,6 @@
 # Down The Block
 
-DownTheBlock is deployed at [downtheblock.us](https://neighbors-client.herokuapp.com/ "Google's Homepage")
+DownTheBlock is deployed at [downtheblock.us](https://downtheblock.us)
 
 
 
