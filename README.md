@@ -32,6 +32,8 @@ DownTheBlock is deployed at [downtheblock.us](https://downtheblock.us)
 
 ### Server App Tech Stack
 
+The server repo can be found at https://github.com/thinkful-ei26/Down-The-Block-Server
+
 -Node with Express
 
 -Mongoose for schema design
