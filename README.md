@@ -1,6 +1,8 @@
 # Down The Block
 
-[downtheblock.us](https://downtheblock.us/ "Google's Homepage")
+[trello board](https://trello.com/b/hPCzbOTZ/neighborhood-watch "trello")
+
+[downtheblock.io.com](https://neighbors-client.herokuapp.com/ "Google's Homepage")
 
 ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/Neighborhood_2.png "Sims")
 
@@ -17,10 +19,9 @@
 
 
 ### Down The Block is here to help. With our easy to use web app you can:
-1. Make an account ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/login.png "login")
-2. View your location
-3. Immediately communicate with others in your area. ![alt text](https://github.com/thinkful-ei26/neighborhood-watch-client/blob/feature-private-messages/public/posts.png "posts")
+1. Make an account ![pasted image 0](https://user-images.githubusercontent.com/43651736/53673209-6f57a100-3c43-11e9-8926-d7a35b3517d1.png)
 
+2. Immediately communicate with others in your area. 
 
 ![alt text](https://github.com/thinkful-ei26/Down-The-Block-Client/blob/dev/public/screenshot.png "Sims")
 
