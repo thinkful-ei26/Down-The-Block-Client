@@ -4,12 +4,12 @@ DownTheBlock is deployed at [downtheblock.us](https://downtheblock.us)
 
 
 
-Onboarding ![pasted image 0](https://user-images.githubusercontent.com/43651736/53673209-6f57a100-3c43-11e9-8926-d7a35b3517d1.png)
+![pasted image 0](https://user-images.githubusercontent.com/43651736/53673209-6f57a100-3c43-11e9-8926-d7a35b3517d1.png)
 
-Neighbors Forum
+## Neighbors Forum
 ![alt text](https://github.com/thinkful-ei26/Down-The-Block-Client/blob/dev/public/screenshot.png "Sims")
 
-City Forum
+## City Forum
 ![alt text](https://github.com/thinkful-ei26/Down-The-Block-Client/blob/dev/public/screenshot2.png "Sims")
 
 
