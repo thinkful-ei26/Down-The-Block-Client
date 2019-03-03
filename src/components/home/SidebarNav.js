@@ -92,7 +92,7 @@ class SidebarNav extends React.Component{
         <Sidebar
           sidebar=
           {
-            <nav className="sidebar">
+            <nav className="sidebar" style={{display: `${!this.state.sidebarOpen && !this.state.sidebarDocked ? 'none' : 'inherit'}`}}>
               <button
                 className="nav-parent"
                 onClick={()=>{
@@ -175,7 +175,7 @@ class SidebarNav extends React.Component{
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { position: 'fixed', top: 55, background: 'rgb(237, 236, 217)', width: 200}, root: {position: 'relative', boxShadow: 0}, }}
+          styles={{ sidebar: { position: 'fixed', top: 55, background: 'rgb(237, 236, 217)', width: 200, }, root: {position: 'relative', boxShadow: 0}, }}
         >
         </Sidebar>
         </React.Fragment>
