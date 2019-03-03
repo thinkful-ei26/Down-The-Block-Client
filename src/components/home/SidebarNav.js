@@ -99,7 +99,7 @@ class SidebarNav extends React.Component{
                   this.toggleCategory('showForum')
                 }}
               >
-              <i className="fas fa-edit"></i> Forums
+              <i className="fas fa-edit"></i> Forums {this.state.showForum ? <i className="fas fa-angle-up"></i> : <i className="fas fa-angle-down"></i>}
               </button>
               {this.state.showForum && <section className="forum-children">
                 <Link 
@@ -127,7 +127,7 @@ class SidebarNav extends React.Component{
                 onClick={()=>{
                   this.toggleCategory('showChat')
                 }}
-              ><i className="fas fa-comments"></i> Chats
+              ><i className="fas fa-comments"></i> Chats {this.state.showChat ? <i className="fas fa-angle-up"></i> : <i className="fas fa-angle-down"></i>}
               </button>
               {this.state.showChat && this.showAllUsers()}
               <button
@@ -135,7 +135,7 @@ class SidebarNav extends React.Component{
                 onClick={()=>{
                   this.toggleCategory('showAccount')
                 }}
-              ><i className="fas fa-users-cog"></i> Account
+              ><i className="fas fa-users-cog"></i> Account {this.state.showAccount ? <i className="fas fa-angle-up"></i> : <i className="fas fa-angle-down"></i>}
               </button>
               {this.state.showAccount && <section className="account-children">
                 <Link
@@ -175,7 +175,7 @@ class SidebarNav extends React.Component{
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(237, 236, 217)', width: 200}, root: {position: 'relative', boxShadow: 0}, }}
+          styles={{ sidebar: { position: 'fixed', top: 55, background: 'rgb(237, 236, 217)', width: 200}, root: {position: 'relative', boxShadow: 0}, }}
         >
         </Sidebar>
         </React.Fragment>
