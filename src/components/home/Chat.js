@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import moment from 'moment';
-import {updateChat, sendMessage, setNewDay} from '../../actions/chatMessages';
+import {updateChat, sendMessage} from '../../actions/chatMessages';
 import socketClient from "socket.io-client";
 import { API_BASE_URL } from '../../config'; 
 import Message from './Message';
@@ -134,7 +134,6 @@ export class Chat extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('STATE IS', state);
     return {
       currentUser: state.auth.currentUser,
       chat: state.chatMessages.chat,

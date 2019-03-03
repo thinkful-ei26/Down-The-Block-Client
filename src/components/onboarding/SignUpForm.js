@@ -1,12 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import {registerUser} from '../../actions/users';
-import {login} from '../../actions/auth';
 import Input from '../common/input';
 import { display, focusOn } from '../../actions/navigation'
 import {required, nonEmpty, matches, length, isTrimmed } from '../common/validators';
 
-const passwordLength = length({min: 8, max: 72});
+const passwordLength = length({min: 6, max: 72});
 const matchesPassword = matches('password');
 
 export class SignUpForm extends React.Component {
@@ -33,13 +33,11 @@ export class SignUpForm extends React.Component {
 
     onSubmit(values) {
         if(this.img && this.img.files.length!==0){
-            console.log('FILE', this.img.files[0])
             values.img = this.img.files[0];
         }
         const {password, firstName, lastName, img, registerUsername} = values;
         const user = { password, firstName, lastName, img, registerUsername};
         return this.props.dispatch(registerUser(user))
-        // .then(() => this.props.dispatch(login(registerUsername, password)));
     }
 
     onClick(focus=""){
@@ -55,6 +53,13 @@ export class SignUpForm extends React.Component {
                     {this.props.error}
                 </div>
             );
+        }
+        else if(this.props.authErr){
+            error = (
+                <div className="form-error" aria-live="polite">
+                    {this.props.authErr}
+                </div>
+            );            
         }
 
         return (
@@ -103,7 +108,7 @@ export class SignUpForm extends React.Component {
                     type="password"
                     name="passwordConfirm"
                     validate={[required, nonEmpty, matchesPassword]}
-                    label="Confirm Password"
+                    label="Passwords"
                 />
 
                 <button 
@@ -142,9 +147,14 @@ export class SignUpForm extends React.Component {
     }
 }
 
-export default reduxForm({
+
+const mapStateToProps = state => ({
+    authErr: state.auth.error
+});
+
+export default connect(mapStateToProps)(reduxForm({
     form: 'registration',
     onSubmitFail: (errors, dispatch) =>{
         dispatch(focus('registration', Object.keys(errors)[0]))
     },
-})(SignUpForm);
+})(SignUpForm));

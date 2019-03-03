@@ -6,12 +6,9 @@ import './comments.css';
 export class PostComments extends React.Component{
   
   generateComments(){
-    return this.props.comments.map((comment, index)=>{
-      comment.content = comment.content.replace(/\n/g, '<br/>');
-     return (
+    return this.props.comments.map((comment, index)=>
         <Comment key={index} {...comment} />
-     );
-    });
+    );
   }
 
   render(){
