@@ -1,4 +1,20 @@
 @import "~../../common/constants.scss";
+.chat-message {
+  display: flex;
+  align-items: center;
+  margin: auto 10px;
+}
+
+.mine.chat-message{
+  flex-direction: row-reverse;
+}
+
+.chat-message .profile-photo-avatar, .chat-message .profile-photo{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
 
 .chat-container h1{
   font-family: $appFont;
@@ -6,6 +22,7 @@
   padding: 20px 10px;
   color: $darkGreen;
   font-size: 30px;
+  margin-bottom: 0;
 }
 
 .chat-container h3{
@@ -26,7 +43,7 @@
 .message{
   width: 75%;
   font-family: $normalFont;
-  margin: 10px 20px;
+  margin: 10px;
   padding: 10px;
   border-radius: 15px;
 }
@@ -35,13 +52,13 @@
   font-size:10px;
 }
 
-.mine{
+.mine.message{
   background: #0379a9;
   color: white; 
   align-self: flex-end;
 }
 
-.theirs{
+.theirs.message{
   background: #e4e4e0;
   color: black; 
   align-self: flex-start;

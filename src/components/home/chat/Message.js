@@ -18,10 +18,22 @@ export class Message extends React.Component {
       let className = this.props.message.author.id === this.props.currentUser.id ? 'mine' : 'theirs'
 
       return(
-        <section className={`${className} message`}>
-          <strong><p>{formatName(this.props.message.author.firstName)}</p></strong>
-          <p className="chat-time">{moment(this.props.message.date).format('LT')}</p>
-          <div>{this.generateMessage(this.props.message.content)}</div>
+        <section className={`${className} chat-message`}>
+          <div className="profile-photo-avatar">
+            {!this.props.message.author.photo ?
+              <p className="initials">
+                {this.props.message.author.firstName[0]}
+                {this.props.message.author.lastName[0]}
+              </p>
+              :
+              <img className="profile-photo" src={this.props.message.author.photo.url} alt="profile"/>
+            }
+          </div>
+          <div className={`${className} message`}>
+            <strong><p>{this.props.message.author.firstName}</p></strong>
+            <p className="chat-time">{moment(this.props.message.date).format('LT')}</p>
+            <div>{this.generateMessage(this.props.message.content)}</div>
+          </div>
         </section>
       )
     }
