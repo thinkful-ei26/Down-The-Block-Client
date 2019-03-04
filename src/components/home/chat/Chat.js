@@ -17,25 +17,26 @@ export class Chat extends React.Component {
     }
 
     componentDidMount(){
-        window.scrollTo(0, document.body.scrollHeight);
-        //create the namespaced socket
-        fetch(`${API_BASE_URL}/messages/${this.props.namespace}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${this.props.authToken}`
-          },
+      this.content.focus();
+      // window.scrollTo(0, document.body.scrollHeight);
+      //create the namespaced socket
+      fetch(`${API_BASE_URL}/messages/${this.props.namespace}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.props.authToken}`
+        },
+      })
+      .then(res => res.json())
+      .then(() =>{ 
+        this.socket= socketClient(`${API_BASE_URL}/${this.props.namespace}`);
+        this.socket.on('chat', chat => {
+          console.log('SOCKET RECEIVED', chat);
+          this.props.dispatch(updateChat(chat));
         })
-        .then(res => res.json())
-        .then(() =>{ 
-          this.socket= socketClient(`${API_BASE_URL}/${this.props.namespace}`);
-          this.socket.on('chat', chat => {
-            console.log('SOCKET RECEIVED', chat);
-            this.props.dispatch(updateChat(chat));
-          })
-        })
-        .catch(err=>console.log("ERROR",err));
-      }
+      })
+      .catch(err=>console.log("ERROR",err));
+    }
 
       componentWillUnmount(){
         if(this.socket){
