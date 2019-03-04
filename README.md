@@ -1,22 +1,27 @@
 # [Down The Block](https://down-the-block.herokuapp.com)
 
 ## Welcome to DownTheBlock - Your Neighborhood at Your Fingertips
-![pasted image 0](https://user-images.githubusercontent.com/43651736/53673209-6f57a100-3c43-11e9-8926-d7a35b3517d1.png)
+<img src='./src/img/onboarding.png' alt='Onboarding Screenshot' width='300px'/>
 
 ## Features
-:white_check_mark: Users with a registered account will be able to see posts in two different forums depending on their geolocation 
+:white_check_mark: Users with a registered account will be asked for their geolocation and subsequently connected with their neighborhood
 
-:white_check_mark: Neighbors forum shows users posts within a 1 mile radius, while the city forum shows posts within a 5 mile radius
+:white_check_mark: Users will be able to see, and post, in two different forums; the neighbors forum has a 1 mile geofence, while the city forum has a 5 mile geofence
 
-:white_check_mark: Users can post, comment, filter, and search the forums in real-time
+:white_check_mark: Users can post, upload pictures, comment, filter, and search the forums in real-time
 
 :white_check_mark: Users can search for and directly message their neighbors within a 1 mile radius for a more private experience
 
-### Neighbors Forum
-![alt text](https://github.com/thinkful-ei26/Down-The-Block-Client/blob/dev/public/screenshot.png "Sims")
+## App Screenshots
 
-### City Forum
-![alt text](https://github.com/thinkful-ei26/Down-The-Block-Client/blob/dev/public/screenshot2.png "Sims")
+### Onboarding
+<img src='./src/img/onboarding.png' alt='Onboarding Screenshot' width='300px'/>
+
+### Forum
+<img src='./src/img/forum.png' alt='Onboarding Screenshot' width='300px'/>
+
+### Chats
+<img src='./src/img/chat.png' alt='Onboarding Screenshot' width='300px'/>
 
 ## Tech Stack: 
 Full-stack app with:
