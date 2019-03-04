@@ -32,6 +32,7 @@ export class Chat extends React.Component {
         this.socket= socketClient(`${API_BASE_URL}/${this.props.namespace}`);
         this.socket.on('chat', chat => {
           console.log('SOCKET RECEIVED', chat);
+          //send notification
           this.props.dispatch(updateChat(chat));
         })
       })
