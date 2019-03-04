@@ -8,7 +8,7 @@ import { clearAuth } from '../../actions/auth';
 import {Link} from 'react-router-dom';
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
-import { fetchChat, fetchPinnedChatUsers, deletePinnedChat } from '../../actions/chatMessages';
+import { fetchChat, fetchPinnedChatUsers, deletePinnedChat, fetchPinnedChatUsersSuccess } from '../../actions/chatMessages';
 import { formatName } from '../common/helper-functions'
 
 const mql = window.matchMedia(`(min-width: 900px)`);
@@ -53,7 +53,7 @@ class SidebarNav extends React.Component{
     if(this.props.pinnedChatUsers.length>0){
       return this.props.pinnedChatUsers.map((pinnedChatUser,index)=> {
         return (
-          <section className="content">
+          <section className="other content">
             <button
               className='chat-content'
               onClick={()=>{
