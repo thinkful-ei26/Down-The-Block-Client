@@ -100,7 +100,6 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(reduxForm({
   form:'UpdateAccountForm',
   onSubmitFail: (error, dispatch) => {
-    console.log('ERRORs', error);
     dispatch(focus('UpdateAccountForm', Object.keys(error)[0]));
 }
 })(UpdateAccountForm));

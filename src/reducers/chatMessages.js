@@ -74,7 +74,6 @@ export default (state=initialState, action) => {
       error: action.error,
   })
   case SET_NEW_DAY: 
-    console.log('NEW DAY', action.day);
     return Object.assign({}, state, {
       day: action.day
     })

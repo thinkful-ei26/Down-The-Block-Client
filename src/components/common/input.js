@@ -28,7 +28,6 @@ export class Input extends React.Component {
         if (this.props.meta.touched && this.props.meta.error) {
             error= this.props.label + ' ' + this.props.meta.error;
             if(this.props.meta.error!=="Required"){
-                console.log('THE ERROR IS', error);
                 this.props.dispatch(formError(error));
             }
         }

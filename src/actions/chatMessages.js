@@ -80,7 +80,6 @@ export const deletePinnedChat = (userId) => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then(pinnedChatUsers => {
-            console.log('AFTER DELEte', pinnedChatUsers)
             dispatch(fetchPinnedChatUsersSuccess(pinnedChatUsers))
         })
         .catch(error => {

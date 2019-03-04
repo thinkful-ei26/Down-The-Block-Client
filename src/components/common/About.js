@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './about.scss';
 import mockup from '../../img/mockup.png';
 import { display, focusOn } from '../../actions/navigation'
+import './about.scss';
 
 export class About extends React.Component{
   componentDidMount(){

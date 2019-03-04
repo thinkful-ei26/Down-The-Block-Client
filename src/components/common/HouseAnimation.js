@@ -5,20 +5,18 @@ export default class HouseAnimation extends React.Component{
   constructor(props){
     super(props)
 
-    this.houseIcon = <i style={styles.houseIcon} className="fas fa-home"></i>
-
     this.state={
       housesRight:[],
       housesLeft:[],
+      houseIcon: <i style={styles.houseIcon} className="fas fa-home"></i>
     }
-
   }
   
   componentDidMount(){
     this.tick = setInterval(()=>
       this.setState(
-        {housesLeft:[this.houseIcon, ...this.state.housesRight], 
-        housesRight:[...this.state.housesLeft, this.houseIcon]}), 400)
+        {housesLeft:[this.state.houseIcon, ...this.state.housesRight], 
+        housesRight:[...this.state.housesLeft, this.state.houseIcon]}), 400)
   }
 
   componentWillUnmount(){

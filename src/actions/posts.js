@@ -42,7 +42,6 @@ import {
         longitude: coords.longitude
       }
       let stringifiedObj = JSON.stringify(simplifiedGeoObject);
-      console.log('COORDS', stringifiedObj);
       fetch(`${API_BASE_URL}/posts/${stringifiedObj}/${forum}`, {
           method: 'GET',
           headers: {
@@ -52,7 +51,6 @@ import {
           .then(res => normalizeResponseErrors(res))
           .then(res => res.json())
           .then(posts => {
-              console.log('THE POSTS GOTTEN BACK IN FETCH POSTS ARE', posts)
               dispatch(fetchPostsSuccess(posts));
           })
           .catch(error => {
@@ -91,8 +89,6 @@ import {
       const authToken = getState().auth.authToken;
       const method = postId ? "PUT" : "POST";
 
-      console.log('THE METHOD IS', method);
-
       let simplifiedGeoObject = {
           latitude: coords.latitude,
           longitude: coords.longitude
@@ -120,7 +116,6 @@ import {
           dispatch(createPostError(error));
           const {message, location, status} = error;
           if (status === 400) {
-              console.log(message, location)
               // Convert errors into SubmissionErrors for Redux Form
               return Promise.reject(
                   new SubmissionError({
@@ -164,14 +159,10 @@ import {
           },
       })
       .then(res => normalizeResponseErrors(res))
-    //   .then(() => {
-    //       dispatch(deletePostSuccess(postId));
-    //   })
       .catch(error => {
           dispatch(deletePostError(error));
           const {message, location, status} = error;
           if (status === 400) {
-              console.log(message, location)
               // Convert errors into SubmissionErrors for Redux Form
               return Promise.reject(
                   new SubmissionError({
