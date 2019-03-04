@@ -52,6 +52,14 @@ DownTheBlock gives you a convenient way to stay informed by connecting you with 
 
 :point_right: Display a map of user’s geofilter
 
+## Team
+<a href="https://github.com/nikmash711" target="_blank"> **Nikkie Mashian** Product Owner & Design Lead</a>
+<a href="https://github.com/ethanfrigon" target="_blank"> **Ethan Frigon** Project Manager</a>
+<a href="https://github.com/IllegalSkillsException-active
+" target="_blank"> **Taylor Merrill** QA Lead</a>
+<a href="https://github.com/stevezg
+" target="_blank"> **Steve Anderson** DevOps Lead</a>
+
 ## Links
 [Server Repo](https://github.com/thinkful-ei26/Down-The-Block-Server)
 
