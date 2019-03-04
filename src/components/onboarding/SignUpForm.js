@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import {registerUser} from '../../actions/users';
 import Input from '../common/input';
+import { formError } from '../../actions/auth'
 import { display, focusOn } from '../../actions/navigation'
 import {required, nonEmpty, matches, length, isTrimmed } from '../common/validators';
 
@@ -20,6 +21,10 @@ export class SignUpForm extends React.Component {
 
     componentDidMount(){
         document.title = 'Register';
+    }
+
+    componentWillUnmount(){
+        this.props.dispatch(formError(null));
     }
 
     checkIfFile(){
@@ -44,8 +49,8 @@ export class SignUpForm extends React.Component {
         this.props.dispatch(display(focus));
         this.props.dispatch(focusOn(focus));
       }
-
-    render() {
+    
+    generateError(){
         let error;
         if (this.props.error) {
             error = (
@@ -54,14 +59,17 @@ export class SignUpForm extends React.Component {
                 </div>
             );
         }
-        else if(this.props.authErr){
-            console.log('THE ERROR IS', this.props.authErr);
+        else if(this.props.formError){
             error = (
                 <div className="form-error" aria-live="polite">
-                    {this.props.authErr}
+                    {this.props.formError}
                 </div>
             );            
         }
+    return error;
+    }
+
+    render() {
 
         return (
             <form
@@ -72,7 +80,7 @@ export class SignUpForm extends React.Component {
                 )}>
                 <h2>Register</h2>
 
-                {error}
+                {this.generateError()}
 
                 <Field
                     component={Input}
@@ -109,7 +117,7 @@ export class SignUpForm extends React.Component {
                     type="password"
                     name="passwordConfirm"
                     validate={[required, nonEmpty, matchesPassword]}
-                    label="Passwords"
+                    label="Password Confirmation"
                 />
 
                 <button 
@@ -147,7 +155,6 @@ export class SignUpForm extends React.Component {
         );
     }
 }
-
 
 const mapStateToProps = state => ({
     formError: state.auth.formError

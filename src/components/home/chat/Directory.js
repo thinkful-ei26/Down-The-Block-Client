@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { fetchChat } from '../../../actions/chatMessages';
-import { formatName } from '../../common/helper-functions';
 import { fetchUsers } from '../../../actions/users';
 import './directory.scss';
 

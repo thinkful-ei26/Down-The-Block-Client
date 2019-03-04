@@ -4,6 +4,7 @@ import Input from '../common/input';
 import {reduxForm, Field, focus, reset} from 'redux-form';
 import {updatePassword} from '../../actions/users';
 import {required, nonEmpty, matches, length, isTrimmed} from '../common/validators';
+import { formError } from '../../actions/auth'
 
 const passwordLength = length({min: 6, max: 72});
 const matchesPassword = matches('newPassword');
@@ -15,15 +16,30 @@ export class UpdatePasswordForm extends React.Component{
     return this.props.dispatch(updatePassword(user));
 }
 
+  // generateError(){
+  //   let error;
+  //   if (this.props.error) {
+  //       error = (
+  //           <div className="form-error" aria-live="polite">
+  //               {this.props.error}
+  //           </div>
+  //       );
+  //   }
+  //   else if(this.props.formError){
+  //       error = (
+  //           <div className="form-error" aria-live="polite">
+  //               {this.props.formError}
+  //           </div>
+  //       );            
+  //   }
+  //   return error;
+  // }
+
+  componentWillUnmount(){
+    this.props.dispatch(formError(null));
+  }
+
   render(){
-    let error;
-    if (this.props.error) {
-        error = (
-            <div className="form-error" aria-live="polite">
-                {this.props.error}
-            </div>
-        );
-    }
 
     return(
         <form
@@ -32,12 +48,12 @@ export class UpdatePasswordForm extends React.Component{
               this.onSubmit(values)
           )}>
           <h2>Password</h2>
-            {error}
+            {/* {this.generateError()} */}
           <Field
               component={Input}
               type="password"
               name="oldPassword"
-              label="Old Password:"
+              label="Old Password"
               className="required"
               validate={[required, passwordLength, isTrimmed]}
           />
@@ -46,14 +62,14 @@ export class UpdatePasswordForm extends React.Component{
               component={Input}
               type="password"
               name="newPassword"
-              label="New Password:"
+              label="New Password"
               className="required"
               validate={[required, passwordLength, isTrimmed]}
           />
           <Field
               component={Input}
               type="password"
-              label="Confirm Password:"
+              label="Password Confirmation"
               name="confirmPassword"
               className="required"
               validate={[required, nonEmpty, matchesPassword]}
@@ -69,9 +85,14 @@ export class UpdatePasswordForm extends React.Component{
   }
 }
 
+const mapStateToProps = state => ({
+  formError: state.auth.formError
+});
+
+
 const afterSubmit = (result, dispatch) => dispatch(reset('UpdatePasswordForm'));
 
-export default connect()(reduxForm({
+export default connect(mapStateToProps)(reduxForm({
   form:'UpdatePasswordForm',
   onSubmitSuccess: afterSubmit,
   onSubmitFail: (error, dispatch) => {
