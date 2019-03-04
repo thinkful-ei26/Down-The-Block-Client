@@ -10,6 +10,7 @@ import {
     AUTH_REQUEST,
     AUTH_SUCCESS,
     AUTH_ERROR,
+    FORM_ERROR
 } from './types';
 
 export const setAuthToken = authToken => ({
@@ -33,6 +34,11 @@ export const authSuccess = currentUser => ({
 export const authError = error => ({
     type: AUTH_ERROR,
     error
+});
+
+export const formError = formError => ({
+    type: FORM_ERROR,
+    formError
 });
 
 // Stores the auth token in state and localStorage, and decodes and stores

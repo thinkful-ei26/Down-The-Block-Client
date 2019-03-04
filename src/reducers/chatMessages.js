@@ -2,6 +2,9 @@ import {
     FETCH_CHAT_REQUEST,
     FETCH_CHAT_SUCCESS,
     FETCH_CHAT_ERROR,
+    FETCH_PINNED_CHAT_USERS_REQUEST,
+    FETCH_PINNED_CHAT_USERS_SUCCESS,
+    FETCH_PINNED_CHAT_USERS_ERROR,
     SEND_MESSAGE_REQUEST,
     SEND_MESSAGE_SUCCESS,
     SEND_MESSSAGE_ERROR,
@@ -15,6 +18,7 @@ const initialState={
     error: null,
     namespace: null,
     day: null,
+    pinnedChatUsers: []
 };
 
 export default (state=initialState, action) => {
@@ -35,7 +39,22 @@ export default (state=initialState, action) => {
           loading: false,
           error: action.error,
       })
-      case SEND_MESSAGE_REQUEST:
+      case FETCH_PINNED_CHAT_USERS_REQUEST:
+        return Object.assign({}, state, {
+          loading: true,
+        });
+      case FETCH_PINNED_CHAT_USERS_SUCCESS:
+        return Object.assign({}, state, {
+          loading: false,
+          error: null,
+          pinnedChatUsers: action.pinnedChatUsers
+      })
+      case FETCH_PINNED_CHAT_USERS_ERROR:
+        return Object.assign({}, state, {
+          loading: false,
+          error: action.error,
+      })
+    case SEND_MESSAGE_REQUEST:
       return Object.assign({}, state, {
         loading: true,
       });

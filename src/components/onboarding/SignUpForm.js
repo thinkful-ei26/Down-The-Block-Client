@@ -1,12 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import {registerUser} from '../../actions/users';
-import {login} from '../../actions/auth';
 import Input from '../common/input';
+import { formError } from '../../actions/auth'
 import { display, focusOn } from '../../actions/navigation'
 import {required, nonEmpty, matches, length, isTrimmed } from '../common/validators';
 
-const passwordLength = length({min: 8, max: 72});
+const passwordLength = length({min: 6, max: 72});
 const matchesPassword = matches('password');
 
 export class SignUpForm extends React.Component {
@@ -22,6 +23,10 @@ export class SignUpForm extends React.Component {
         document.title = 'Register';
     }
 
+    componentWillUnmount(){
+        this.props.dispatch(formError(null));
+    }
+
     checkIfFile(){
         if(this.img.files.length!==0){
             this.setState({uploadedFile: true});
@@ -33,21 +38,19 @@ export class SignUpForm extends React.Component {
 
     onSubmit(values) {
         if(this.img && this.img.files.length!==0){
-            console.log('FILE', this.img.files[0])
             values.img = this.img.files[0];
         }
         const {password, firstName, lastName, img, registerUsername} = values;
         const user = { password, firstName, lastName, img, registerUsername};
         return this.props.dispatch(registerUser(user))
-        // .then(() => this.props.dispatch(login(registerUsername, password)));
     }
 
     onClick(focus=""){
         this.props.dispatch(display(focus));
         this.props.dispatch(focusOn(focus));
       }
-
-    render() {
+    
+    generateError(){
         let error;
         if (this.props.error) {
             error = (
@@ -56,6 +59,17 @@ export class SignUpForm extends React.Component {
                 </div>
             );
         }
+        else if(this.props.formError){
+            error = (
+                <div className="form-error" aria-live="polite">
+                    {this.props.formError}
+                </div>
+            );            
+        }
+    return error;
+    }
+
+    render() {
 
         return (
             <form
@@ -66,7 +80,7 @@ export class SignUpForm extends React.Component {
                 )}>
                 <h2>Register</h2>
 
-                {error}
+                {this.generateError()}
 
                 <Field
                     component={Input}
@@ -103,7 +117,7 @@ export class SignUpForm extends React.Component {
                     type="password"
                     name="passwordConfirm"
                     validate={[required, nonEmpty, matchesPassword]}
-                    label="Confirm Password"
+                    label="Password Confirmation"
                 />
 
                 <button 
@@ -142,9 +156,13 @@ export class SignUpForm extends React.Component {
     }
 }
 
-export default reduxForm({
+const mapStateToProps = state => ({
+    formError: state.auth.formError
+});
+
+export default connect(mapStateToProps)(reduxForm({
     form: 'registration',
     onSubmitFail: (errors, dispatch) =>{
         dispatch(focus('registration', Object.keys(errors)[0]))
     },
-})(SignUpForm);
+})(SignUpForm));

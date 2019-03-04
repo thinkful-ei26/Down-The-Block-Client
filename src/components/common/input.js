@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { focusOn} from '../../actions/navigation';
+import { focusOn } from '../../actions/navigation';
+import { formError } from '../../actions/auth';
 
 
 export class Input extends React.Component {
@@ -25,7 +26,11 @@ export class Input extends React.Component {
 
         let error;
         if (this.props.meta.touched && this.props.meta.error) {
-            error = <div className="form-error">{this.props.meta.error}</div>;
+            error= this.props.label + ' ' + this.props.meta.error;
+            if(this.props.meta.error!=="Required"){
+                console.log('THE ERROR IS', error);
+                this.props.dispatch(formError(error));
+            }
         }
 
         let element = (<Element

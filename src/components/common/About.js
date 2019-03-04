@@ -21,13 +21,13 @@ export class About extends React.Component{
           <article className="text">
             <h2>Your Neighborhood At Your Fingertips</h2>
             <p>
-            DownTheBlock gives you a convenient way to stay informed by connecting with all your neighbors. Lost a pet and desperately need your neighbors help to find him/her?  Hear a helicopter hovering above your house and don't know why? Join DownTheBlock today and you'll be placed in both a neighborhood and city forum, so you'll be up-to-date on everything happening close to home as well as in the broader community. From criminal activity to local events, you'll hear it all from here.
+            DownTheBlock gives you a convenient way to stay informed by connecting you with all your neighbors. Lost a pet and desperately need your neighbors help to find him/her?  Hear a helicopter hovering above your house and don't know why? Join DownTheBlock today and you'll be up-to-date on everything happening close to home as well as in the broader community. From criminal activity to local events, you'll hear it all from here!
             </p>
-            <button
+            {!this.props.loggedIn && <button
               type="button"
               className="join-today"
               onClick={()=>this.onClick('registerUsername')} 
-            > Join Your Neighborhood</button>
+            > Join Your Neighborhood</button>}
           </article>
           <img className="mockup" src={mockup} alt="mockup"/>
         </section>
@@ -55,4 +55,8 @@ export class About extends React.Component{
   }
 }
 
-export default connect()(About);
+const mapStateToProps = state => ({
+  loggedIn: state.auth.currentUser !== null,
+});
+
+export default connect(mapStateToProps)(About);

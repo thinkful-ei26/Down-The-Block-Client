@@ -5,6 +5,7 @@ import {reduxForm, Field, focus} from 'redux-form';
 import {updatedUser} from '../../actions/users';
 import {required, nonEmpty, isTrimmed} from '../common/validators';
 import {formatName} from '../common/helper-functions';
+import { formError } from '../../actions/auth'
 
 export class UpdateAccountForm extends React.Component{
   onSubmit(values) {
@@ -14,16 +15,31 @@ export class UpdateAccountForm extends React.Component{
     return this.props.dispatch(updatedUser(user));
 }
 
+generateError(){
+  let error;
+  if (this.props.error) {
+      error = (
+          <div className="form-error" aria-live="polite">
+              {this.props.error}
+          </div>
+      );
+  }
+  else if(this.props.formError){
+      error = (
+          <div className="form-error" aria-live="polite">
+              {this.props.formError}
+          </div>
+      );            
+  }
+  return error;
+}
+
+componentWillUnmount(){
+  this.props.dispatch(formError(null));
+}
+
+
   render(){
-    let error;
-    if (this.props.error) {
-        error = (
-            <div className="form-error" aria-live="polite">
-                {this.props.error}
-            </div>
-        );
-    }
-  
     return(
         <form
           className="settings-form"
@@ -31,12 +47,12 @@ export class UpdateAccountForm extends React.Component{
               this.onSubmit(values)
           )}>
           <h2>Account</h2>
-          {error}
+          {this.generateError()}
           <Field 
               component={Input} 
               type="text" 
               name="firstName" 
-              label="First Name:"
+              label="First Name"
               maxLength="12"
               className="required"
               validate={[required, nonEmpty, isTrimmed]}
@@ -45,7 +61,7 @@ export class UpdateAccountForm extends React.Component{
               component={Input} 
               type="text" 
               name="lastName" 
-              label="Last Name:"
+              label="Last Name"
               className="required"
               validate={[required, nonEmpty, isTrimmed]}
           />
@@ -53,7 +69,7 @@ export class UpdateAccountForm extends React.Component{
               component={Input}
               type="text"
               name="username"
-              label = "Username:"
+              label = "Username"
               className="required"
               validate={[required, nonEmpty, isTrimmed]}
           />
@@ -72,6 +88,7 @@ export class UpdateAccountForm extends React.Component{
 function mapStateToProps(state) {
   return {
     display: state.nav.display,
+    formError: state.auth.formError,
     initialValues: {
       firstName: state.auth.currentUser.firstName,
       lastName: state.auth.currentUser.lastName,

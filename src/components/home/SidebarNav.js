@@ -4,13 +4,12 @@ import Sidebar from "react-sidebar";
 import requiresLogin from '../common/requires-login';
 import { display } from '../../actions/navigation'
 import { fetchPosts } from '../../actions/posts';
-import { fetchUsers } from '../../actions/users';
-import { fetchChat } from '../../actions/chatMessages';
 import { clearAuth } from '../../actions/auth';
-import { formatName } from '../common/helper-functions'
 import {Link} from 'react-router-dom';
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
+import { fetchChat, fetchPinnedChatUsers, deletePinnedChat } from '../../actions/chatMessages';
+import { formatName } from '../common/helper-functions'
 
 const mql = window.matchMedia(`(min-width: 900px)`);
 
@@ -45,27 +44,35 @@ class SidebarNav extends React.Component{
     this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
   }
 
-  componentDidMount (){
-    this.props.dispatch(fetchUsers(this.props.coords));
+  componentDidMount(){
+    this.props.dispatch(fetchPinnedChatUsers());
   }
 
-  showAllUsers(){
-    if(this.props.users){
-      return this.props.users.map((user,index)=> {
+  showActiveChats(){
+    //if the user hits x on the chat, it takes it out of the pinned array
+    if(this.props.pinnedChatUsers.length>0){
+      return this.props.pinnedChatUsers.map((pinnedChatUser,index)=> {
         return (
-          <button
-            className="content"
-            onClick={()=>{
-              let namespaceArr = [this.props.currentUser.username, user.username];
-              namespaceArr.sort();
-              let namespace = namespaceArr.join('');
-              this.setState({sidebarOpen: false});
-              this.props.dispatch(fetchChat(namespace, this.props.currentUser.id, user.id));
+          <section className="content">
+            <button
+              className='chat-content'
+              onClick={()=>{
+                let namespaceArr = [this.props.currentUser.username, pinnedChatUser.username];
+                namespaceArr.sort();
+                let namespace = namespaceArr.join('');
+                this.setState({sidebarOpen: false});
+                this.props.dispatch(fetchChat(namespace, this.props.currentUser.id, pinnedChatUser.id));
+                }
               }
-            }
-            key={index}>
-            {formatName(user.firstName)}
-          </button>
+              key={index}>
+              {formatName(pinnedChatUser.firstName)}
+            </button>
+            <button 
+              onClick={()=>this.props.dispatch(deletePinnedChat(pinnedChatUser.id))}
+              className="close-chat">
+              <i className="fas fa-times"></i>
+            </button>
+          </section>
         )
       })
     }
@@ -92,14 +99,14 @@ class SidebarNav extends React.Component{
         <Sidebar
           sidebar=
           {
-            <nav className="sidebar">
+            <nav className="sidebar" style={{display: `${!this.state.sidebarOpen && !this.state.sidebarDocked ? 'none' : 'inherit'}`}}>
               <button
                 className="nav-parent"
                 onClick={()=>{
                   this.toggleCategory('showForum')
                 }}
               >
-              <i className="fas fa-edit"></i> Forums
+              <i className="fas fa-edit"></i> Forums {this.state.showForum ? <i className="fas fa-angle-up"></i> : <i className="fas fa-angle-down"></i>}
               </button>
               {this.state.showForum && <section className="forum-children">
                 <Link 
@@ -125,17 +132,18 @@ class SidebarNav extends React.Component{
               <button
                 className="nav-parent"
                 onClick={()=>{
-                  this.toggleCategory('showChat')
+                  // this.toggleCategory('showChat')
+                  this.props.dispatch(display('searchUsers'))
                 }}
-              ><i className="fas fa-comments"></i> Chats
+              ><i className="fas fa-comments"></i> Messages 
               </button>
-              {this.state.showChat && this.showAllUsers()}
+              {this.showActiveChats()}
               <button
                 className="nav-parent"
                 onClick={()=>{
                   this.toggleCategory('showAccount')
                 }}
-              ><i className="fas fa-users-cog"></i> Account
+              ><i className="fas fa-users-cog"></i> Account {this.state.showAccount ? <i className="fas fa-angle-up"></i> : <i className="fas fa-angle-down"></i>}
               </button>
               {this.state.showAccount && <section className="account-children">
                 <Link
@@ -175,7 +183,7 @@ class SidebarNav extends React.Component{
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { position: 'fixed', top: 60, background: 'rgb(237, 236, 217)', width: 200}, root: {position: 'relative', boxShadow: 0}, }}
+          styles={{ sidebar: { position: 'fixed', top: 55, background: 'rgb(237, 236, 217)', width: 200, }, root: {position: 'relative', boxShadow: 0}, }}
         >
         </Sidebar>
         </React.Fragment>
@@ -188,9 +196,7 @@ const mapStateToProps = state => ({
   users: state.auth.users,
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
-  socket:state.socket.socket, 
-  chats:state.chatMessages.chats, 
-  activeChat: state.chatMessages.activeChat
+  pinnedChatUsers: state.chatMessages.pinnedChatUsers
 });
 
 export default requiresLogin()(connect(mapStateToProps)(SidebarNav));

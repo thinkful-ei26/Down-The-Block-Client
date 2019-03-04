@@ -4,8 +4,8 @@ import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../common/input';
 import {login} from '../../actions/auth';
 import {required, nonEmpty} from '../common/validators';
-import { HashLink as Link } from 'react-router-hash-link';
 import { display, focusOn } from '../../actions/navigation'
+import { formError } from '../../actions/auth'
 
 export class LogInForm extends React.Component {
     onSubmit(values) {
@@ -16,8 +16,8 @@ export class LogInForm extends React.Component {
         this.props.dispatch(display(focus));
         this.props.dispatch(focusOn(focus));
       }
-
-    render() {
+    
+    generateError(){
         let error;
         if (this.props.error) {
             error = (
@@ -26,6 +26,21 @@ export class LogInForm extends React.Component {
                 </div>
             );
         }
+        else if(this.props.formError){
+            error = (
+                <div className="form-error" aria-live="polite">
+                    {this.props.formError}
+                </div>
+            );            
+        }
+        return error;
+    }
+
+    componentWillUnmount(){
+        this.props.dispatch(formError(null));
+    }
+
+    render() {
 
         return (
             <form
@@ -35,7 +50,7 @@ export class LogInForm extends React.Component {
                     this.onSubmit(values)
                 )}>
                 <h2>Sign In</h2>
-                {error}
+                {this.generateError()}
                 <Field
                     component={Input}
                     ref={input => (this.input = input)}
@@ -75,6 +90,7 @@ export class LogInForm extends React.Component {
 
 const mapStateToProps = state => ({
     focusOn: state.nav.focusOn,
+    formError: state.auth.formError
 });
 
 export default connect(mapStateToProps)(reduxForm({
