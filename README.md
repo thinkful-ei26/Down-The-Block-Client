@@ -1,4 +1,4 @@
-# [Down The Block](https://down-the-block.herokuapp.com)
+# [DownTheBlock](https://down-the-block.herokuapp.com)
 
 ## Welcome to DownTheBlock - Your Neighborhood at Your Fingertips
 DownTheBlock gives you a convenient way to stay informed by connecting you with all your neighbors. Lost a pet and desperately need your neighbors help to find him/her? Hear a helicopter hovering above your house and don't know why? Join DownTheBlock today and you'll be up-to-date on everything happening close to home as well as in the broader community. From criminal activity to local events, you'll hear it all from here!
@@ -53,12 +53,15 @@ DownTheBlock gives you a convenient way to stay informed by connecting you with 
 :point_right: Display a map of user’s geofilter
 
 ## Team
-<a href="https://github.com/nikmash711" target="_blank"> **Nikkie Mashian** Product Owner & Design Lead</a>
-<a href="https://github.com/ethanfrigon" target="_blank"> **Ethan Frigon** Project Manager</a>
+<a href="https://github.com/nikmash711" target="_blank"> **Nikkie Mashian**</a>: Product Owner & Design Lead
+
+<a href="https://github.com/ethanfrigon" target="_blank"> **Ethan Frigon**</a>: Project Manager
+
 <a href="https://github.com/IllegalSkillsException-active
-" target="_blank"> **Taylor Merrill** QA Lead</a>
+" target="_blank"> **Taylor Merrill**</a>: QA Lead
+
 <a href="https://github.com/stevezg
-" target="_blank"> **Steve Anderson** DevOps Lead</a>
+" target="_blank"> **Steve Anderson**</a>: DevOps Lead
 
 ## Links
 [Server Repo](https://github.com/thinkful-ei26/Down-The-Block-Server)
