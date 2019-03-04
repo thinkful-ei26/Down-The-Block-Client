@@ -1,7 +1,7 @@
 # [Down The Block](https://down-the-block.herokuapp.com)
 
 ## Welcome to DownTheBlock - Your Neighborhood at Your Fingertips
-<img src='./src/img/onboarding.png' alt='Onboarding Screenshot' width='300px'/>
+DownTheBlock gives you a convenient way to stay informed by connecting you with all your neighbors. Lost a pet and desperately need your neighbors help to find him/her? Hear a helicopter hovering above your house and don't know why? Join DownTheBlock today and you'll be up-to-date on everything happening close to home as well as in the broader community. From criminal activity to local events, you'll hear it all from here!
 
 ## Features (for registered users)
 :white_check_mark: Upon registering, users will be asked for access to their location and subsequently connected with their own personal neighborhood
@@ -20,7 +20,7 @@
 ### Forum
 <img src='./src/img/forum.png' alt='Onboarding Screenshot' width='900px'/>
 
-### Chats
+### Direct Messaging
 <img src='./src/img/chat.png' alt='Onboarding Screenshot' width='900px'/>
 
 ## Tech Specs: 
@@ -63,5 +63,5 @@
 
 ## Demo Info (Friends Edition)
 **Since this is  a geolocation app, to properly see the pre-populated demo you must block your location on your browser**
-- Demo Account Username: ross
-- Demo Account Password: friends123
+- Account Username: ross
+- Account Password: friends123
