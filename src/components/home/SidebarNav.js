@@ -132,7 +132,7 @@ class SidebarNav extends React.Component{
               <button
                 className="nav-parent"
                 onClick={()=>{
-                  // this.toggleCategory('showChat')
+                  this.onSetSidebarOpen(false)
                   this.props.dispatch(display('searchUsers'))
                 }}
               ><i className="fas fa-comments"></i> Messages 
