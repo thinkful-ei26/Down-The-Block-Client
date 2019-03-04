@@ -18,7 +18,6 @@ import {
   import {normalizeResponseErrors} from './utils';
   import {SubmissionError} from 'redux-form';
   import {display} from './navigation';
-  import { connect } from 'react-redux';
 
   export const fetchPostsRequest = () => ({
       type: FETCH_POSTS_REQUEST,

@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import moment from 'moment'
-import {formatName} from '../common/helper-functions'
+import {formatName} from '../../common/helper-functions'
 import './message.scss';
 
 export class Message extends React.Component {

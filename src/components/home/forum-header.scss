@@ -8,13 +8,13 @@
   color: $darkGreen;
 }
 
-.forum-header h1{
+.home h1{
   color: $darkGreen;
   font-family: $appFont;
   margin-bottom: 20px;
 }
 
-.search-posts{
+.search{
   height: auto;
   border-radius: 5px;
   padding: 5px;
@@ -26,7 +26,7 @@
   font-family: $normalFont;
 }
 
-.search-posts::placeholder{
+.search::placeholder{
   font-size: 12px;
   font-family: $normalFont;
 }
@@ -40,11 +40,11 @@
   margin-left: 3px;
 }
 
-.search-posts:focus{
+.search:focus{
   outline: 0;
 }
 
-.search-posts, .filter-posts{
+.search, .filter-posts{
   width: 100%;
   height: 38px;
   margin: 10px auto;
@@ -73,12 +73,12 @@
     align-items: center;
   }
 
-  .search-posts{
+  .search{
     order: 1;
     flex: 1;
   }
 
-  .forum-header h1{
+  .home h1{
     order: 2;
     margin-bottom: 0px;
     flex: 2;

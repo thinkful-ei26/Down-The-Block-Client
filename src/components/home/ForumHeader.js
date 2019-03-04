@@ -81,7 +81,7 @@ export class ForumHeader extends React.Component{
         <input 
           type="text" 
           onChange={e=>this.props.dispatch(changeSearchTerm(e.target.value))} 
-          className="search-posts" 
+          className="search" 
           placeholder={`Search ${this.props.type==="neighbors" ? "Neighborhood" : "City"} Forum`}/> 
 
       </header>

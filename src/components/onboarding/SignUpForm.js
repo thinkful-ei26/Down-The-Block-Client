@@ -55,6 +55,7 @@ export class SignUpForm extends React.Component {
             );
         }
         else if(this.props.authErr){
+            console.log('THE ERROR IS', this.props.authErr);
             error = (
                 <div className="form-error" aria-live="polite">
                     {this.props.authErr}
@@ -149,7 +150,7 @@ export class SignUpForm extends React.Component {
 
 
 const mapStateToProps = state => ({
-    authErr: state.auth.error
+    formError: state.auth.formError
 });
 
 export default connect(mapStateToProps)(reduxForm({

@@ -1,9 +1,9 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import moment from 'moment';
-import {updateChat, sendMessage} from '../../actions/chatMessages';
+import {updateChat, sendMessage} from '../../../actions/chatMessages';
 import socketClient from "socket.io-client";
-import { API_BASE_URL } from '../../config'; 
+import { API_BASE_URL } from '../../../config'; 
 import Message from './Message';
 
 export class Chat extends React.Component {
@@ -52,7 +52,6 @@ export class Chat extends React.Component {
 
       onSubmit(e) {
         e.preventDefault();
-        console.log('SUBMIT')
         this.message=this.content.value;       
         if(this.message.trim()===""){
             return;
@@ -84,7 +83,6 @@ export class Chat extends React.Component {
     let messages = this.props.chat.messages.map((message, index)=>{
       // this.props.dispatch(setNewDay(moment(message.date).format('LL')))
       let next = moment(message.date).format('LL');
-      console.log('this.day', this.day, 'vs props.day', next)
       if(this.day!==next){
         this.day=next;
         this.showDay= true;

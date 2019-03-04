@@ -4,6 +4,9 @@ import {
     FETCH_CHAT_REQUEST,
     FETCH_CHAT_SUCCESS,
     FETCH_CHAT_ERROR,
+    FETCH_PINNED_CHAT_USERS_REQUEST,
+    FETCH_PINNED_CHAT_USERS_SUCCESS,
+    FETCH_PINNED_CHAT_USERS_ERROR,
     SEND_MESSAGE_REQUEST,
     SEND_MESSAGE_SUCCESS,
     SEND_MESSSAGE_ERROR,
@@ -28,6 +31,41 @@ export const fetchChatError= (error) => ({
   error
 })
 
+export const fetchPinnedChatUsersRequest = () => ({
+    type: FETCH_PINNED_CHAT_USERS_REQUEST,
+})
+
+export const fetchPinnedChatUsersSuccess = (pinnedChatUsers) => ({
+  type: FETCH_PINNED_CHAT_USERS_SUCCESS,
+  pinnedChatUsers
+})
+
+export const fetchPinnedChatUsersError= (error) => ({
+  type: FETCH_PINNED_CHAT_USERS_ERROR,
+  error
+})
+
+export const fetchPinnedChatUsers = () => (dispatch, getState) => {
+    dispatch(fetchPinnedChatUsersRequest())
+
+    const authToken = getState().auth.authToken;
+
+    fetch(`${API_BASE_URL}/users/pinnedChatUsers`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(pinnedChatUsers => {
+            dispatch(fetchPinnedChatUsersSuccess(pinnedChatUsers))
+        })
+        .catch(error => {
+            dispatch(fetchPinnedChatUsersError(error));
+        });
+};
+
 export const fetchChat = (namespace, userId1, userId2) => (dispatch, getState) => {
     dispatch(fetchChatRequest());
     const authToken = getState().auth.authToken;
@@ -42,6 +80,9 @@ export const fetchChat = (namespace, userId1, userId2) => (dispatch, getState) =
         .then(res => res.json())
         .then(chat => {
             dispatch(fetchChatSuccess(chat, namespace));
+            dispatch(fetchPinnedChatUsers())
+        })
+        .then(()=>{
             dispatch(display('chat')); 
         })
         .catch(error => {

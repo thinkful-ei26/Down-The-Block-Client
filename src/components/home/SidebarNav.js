@@ -4,13 +4,12 @@ import Sidebar from "react-sidebar";
 import requiresLogin from '../common/requires-login';
 import { display } from '../../actions/navigation'
 import { fetchPosts } from '../../actions/posts';
-import { fetchUsers } from '../../actions/users';
-import { fetchChat } from '../../actions/chatMessages';
 import { clearAuth } from '../../actions/auth';
-import { formatName } from '../common/helper-functions'
 import {Link} from 'react-router-dom';
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
+import { fetchChat, fetchPinnedChatUsers } from '../../actions/chatMessages';
+import { formatName } from '../common/helper-functions'
 
 const mql = window.matchMedia(`(min-width: 900px)`);
 
@@ -45,26 +44,27 @@ class SidebarNav extends React.Component{
     this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
   }
 
-  componentDidMount (){
-    this.props.dispatch(fetchUsers(this.props.coords));
+  componentDidMount(){
+    this.props.dispatch(fetchPinnedChatUsers());
   }
 
-  showAllUsers(){
-    if(this.props.users){
-      return this.props.users.map((user,index)=> {
+  showActiveChats(){
+    //if the user hits x on the chat, it takes it out of the pinned array
+    if(this.props.pinnedChatUsers.length>0){
+      return this.props.pinnedChatUsers.map((pinnedChatUser,index)=> {
         return (
           <button
-            className="content"
+            className='content'
             onClick={()=>{
-              let namespaceArr = [this.props.currentUser.username, user.username];
+              let namespaceArr = [this.props.currentUser.username, pinnedChatUser.username];
               namespaceArr.sort();
               let namespace = namespaceArr.join('');
               this.setState({sidebarOpen: false});
-              this.props.dispatch(fetchChat(namespace, this.props.currentUser.id, user.id));
+              this.props.dispatch(fetchChat(namespace, this.props.currentUser.id, pinnedChatUser.id));
               }
             }
             key={index}>
-            {formatName(user.firstName)}
+            {formatName(pinnedChatUser.firstName)}
           </button>
         )
       })
@@ -125,11 +125,12 @@ class SidebarNav extends React.Component{
               <button
                 className="nav-parent"
                 onClick={()=>{
-                  this.toggleCategory('showChat')
+                  // this.toggleCategory('showChat')
+                  this.props.dispatch(display('searchUsers'))
                 }}
-              ><i className="fas fa-comments"></i> Chats {this.state.showChat ? <i className="fas fa-angle-up"></i> : <i className="fas fa-angle-down"></i>}
+              ><i className="fas fa-comments"></i> Messages 
               </button>
-              {this.state.showChat && this.showAllUsers()}
+              {this.showActiveChats()}
               <button
                 className="nav-parent"
                 onClick={()=>{
@@ -188,9 +189,7 @@ const mapStateToProps = state => ({
   users: state.auth.users,
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
-  socket:state.socket.socket, 
-  chats:state.chatMessages.chats, 
-  activeChat: state.chatMessages.activeChat
+  pinnedChatUsers: state.chatMessages.pinnedChatUsers
 });
 
 export default requiresLogin()(connect(mapStateToProps)(SidebarNav));

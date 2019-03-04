@@ -11,7 +11,8 @@ import {
     FETCH_USERS_ERROR,
     USER_COORDS_SUCCESS,
     USER_COORDS_REQUEST,
-    USER_COORDS_ERROR
+    USER_COORDS_ERROR,
+    FORM_ERROR
 } from '../actions/types';
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
     successMessage: null,
     users: [],
     loadingUsers: false,
+    formError: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -45,12 +47,20 @@ export default function reducer(state = initialState, action) {
             currentUser: action.currentUser,
             error: null,
         });
-    } else if (action.type === AUTH_ERROR) {
+    } 
+    else if (action.type === AUTH_ERROR) {
         return Object.assign({}, state, {
             loading: false,
             error: action.error
         });
-    } else if (action.type=== UPDATED_USER_SUCCESS){
+    } 
+    else if (action.type === FORM_ERROR) {
+        return Object.assign({}, state, {
+            loading: false,
+            formError: action.formError
+        });
+    } 
+    else if (action.type=== UPDATED_USER_SUCCESS){
         return Object.assign({}, state, {
             currentUser: action.updatedUser,
             successMessage: action.message,

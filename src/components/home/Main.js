@@ -1,19 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
-import './main.scss';
-
 import Forum from './Forum';
 import SettingsPage from '../settings/SettingsPage'
-import Chat from './Chat';
+import Chat from './chat/Chat';
 import About from '../common/About';
+import Directory from './chat/Directory';
+import './main.scss';
 
 
 export class Main extends React.Component{
 
   display(){
     return this.props.display==="neighbors" || this.props.display==="city" ? <Forum/> :
-    this.props.display==="settings" ? <SettingsPage/> : this.props.display==="about" ? <About/> : this.props.display==="chat" ? <Chat namespace={this.props.namespace}/> : <Forum />
+    this.props.display==="settings" ? <SettingsPage/> : this.props.display==="about" ? <About/> : this.props.display==="searchUsers" ? <Directory/> : this.props.display==="chat" ? <Chat namespace={this.props.namespace}/> : <Forum />
   }
 
   render(){
