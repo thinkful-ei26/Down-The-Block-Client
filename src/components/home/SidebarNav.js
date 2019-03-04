@@ -8,7 +8,7 @@ import { clearAuth } from '../../actions/auth';
 import {Link} from 'react-router-dom';
 import { clearAuthToken } from '../common/local-storage';
 import './sidebar.scss';
-import { fetchChat, fetchPinnedChatUsers } from '../../actions/chatMessages';
+import { fetchChat, fetchPinnedChatUsers, deletePinnedChat } from '../../actions/chatMessages';
 import { formatName } from '../common/helper-functions'
 
 const mql = window.matchMedia(`(min-width: 900px)`);
@@ -53,19 +53,26 @@ class SidebarNav extends React.Component{
     if(this.props.pinnedChatUsers.length>0){
       return this.props.pinnedChatUsers.map((pinnedChatUser,index)=> {
         return (
-          <button
-            className='content'
-            onClick={()=>{
-              let namespaceArr = [this.props.currentUser.username, pinnedChatUser.username];
-              namespaceArr.sort();
-              let namespace = namespaceArr.join('');
-              this.setState({sidebarOpen: false});
-              this.props.dispatch(fetchChat(namespace, this.props.currentUser.id, pinnedChatUser.id));
+          <section className="content">
+            <button
+              className='chat-content'
+              onClick={()=>{
+                let namespaceArr = [this.props.currentUser.username, pinnedChatUser.username];
+                namespaceArr.sort();
+                let namespace = namespaceArr.join('');
+                this.setState({sidebarOpen: false});
+                this.props.dispatch(fetchChat(namespace, this.props.currentUser.id, pinnedChatUser.id));
+                }
               }
-            }
-            key={index}>
-            {formatName(pinnedChatUser.firstName)}
-          </button>
+              key={index}>
+              {formatName(pinnedChatUser.firstName)}
+            </button>
+            <button 
+              onClick={()=>this.props.dispatch(deletePinnedChat(pinnedChatUser.id))}
+              className="close-chat">
+              <i className="fas fa-times"></i>
+            </button>
+          </section>
         )
       })
     }

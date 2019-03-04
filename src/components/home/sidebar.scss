@@ -13,10 +13,36 @@
   cursor: pointer;
   margin: 20px 0;
   text-decoration: none;
-  width: 200px;
   text-align: left;
   padding:10px 40px;
   font-family: $appFont;
+  width: 200px;
+}
+
+.sidebar section.content{
+  display:flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.close-chat{
+  background: transparent;
+  border: none;
+  cursor: pointer; 
+  display: none;
+  opacity: .5;
+  transition: .5s;
+}
+
+
+.sidebar .chat-content{
+  margin: 0;
+  color:  $darkGreen;
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .sidebar .nav-parent{
@@ -25,10 +51,21 @@
   font-size: 17px;
 }
 
-.sidebar .content:hover, .sidebar .content:focus, .sidebar .nav-parent:hover, .sidebar .nav-parent:focus{
+.sidebar .content:hover, .sidebar .content:focus, .sidebar .content:hover .chat-content, .sidebar .content:focus .chat-content, .sidebar .nav-parent:hover, .sidebar .nav-parent:focus{
   outline: 0;
   background: $darkGreen;
   color: $beige;
+}
+
+.sidebar .content:hover .close-chat, .sidebar .content:focus .close-chat{
+  display: block;
+  color: $darkGreen;
+  background: $beige;
+  border-radius: 50%;
+}
+
+.sidebar .close-chat:hover, .sidebar .close-chat:focus{
+  opacity: 1;
 }
 
 .open-sidebar{

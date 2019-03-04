@@ -66,6 +66,28 @@ export const fetchPinnedChatUsers = () => (dispatch, getState) => {
         });
 };
 
+export const deletePinnedChat = (userId) => (dispatch, getState) => {
+    dispatch(fetchPinnedChatUsersRequest())
+
+    const authToken = getState().auth.authToken;
+
+    fetch(`${API_BASE_URL}/users/pinnedChatUsers/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(pinnedChatUsers => {
+            console.log('AFTER DELEte', pinnedChatUsers)
+            dispatch(fetchPinnedChatUsersSuccess(pinnedChatUsers))
+        })
+        .catch(error => {
+            dispatch(fetchPinnedChatUsersError(error));
+        });
+};
+
 export const fetchChat = (namespace, userId1, userId2) => (dispatch, getState) => {
     dispatch(fetchChatRequest());
     const authToken = getState().auth.authToken;
