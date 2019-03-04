@@ -57,11 +57,9 @@ DownTheBlock gives you a convenient way to stay informed by connecting you with 
 
 <a href="https://github.com/ethanfrigon" target="_blank"> **Ethan Frigon**</a>: Project Manager
 
-<a href="https://github.com/IllegalSkillsException-active
-" target="_blank"> **Taylor Merrill**</a>: QA Lead
+<a href="https://github.com/IllegalSkillsException-active" target="_blank"> **Taylor Merrill**</a>: QA Lead
 
-<a href="https://github.com/stevezg
-" target="_blank"> **Steve Anderson**</a>: DevOps Lead
+<a href="https://github.com/stevezg" target="_blank"> **Steve Anderson**</a>: DevOps Lead
 
 ## Links
 [Server Repo](https://github.com/thinkful-ei26/Down-The-Block-Server)
