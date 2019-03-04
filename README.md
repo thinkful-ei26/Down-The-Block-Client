@@ -3,8 +3,8 @@
 ## Welcome to DownTheBlock - Your Neighborhood at Your Fingertips
 <img src='./src/img/onboarding.png' alt='Onboarding Screenshot' width='300px'/>
 
-## Features
-:white_check_mark: Users with a registered account will be asked for their geolocation and subsequently connected with their neighborhood
+## Features (for registered users)
+:white_check_mark: Upon registering, users will be asked for access to their location and subsequently connected with their own personal neighborhood
 
 :white_check_mark: Users will be able to see, and post, in two different forums; the neighbors forum has a 1 mile geofence, while the city forum has a 5 mile geofence
 
@@ -15,29 +15,38 @@
 ## App Screenshots
 
 ### Onboarding
-<img src='./src/img/onboarding.png' alt='Onboarding Screenshot' width='300px'/>
+<img src='./src/img/onboarding.png' alt='Onboarding Screenshot' width='900px'/>
 
 ### Forum
-<img src='./src/img/forum.png' alt='Onboarding Screenshot' width='300px'/>
+<img src='./src/img/forum.png' alt='Onboarding Screenshot' width='900px'/>
 
 ### Chats
-<img src='./src/img/chat.png' alt='Onboarding Screenshot' width='300px'/>
+<img src='./src/img/chat.png' alt='Onboarding Screenshot' width='900px'/>
 
-## Tech Stack: 
-Full-stack app with:
-- React for the frontend
-- Redux for state management
-- Node/Express for the backend
-- MongoDB for the database hosted on Atlas
-- JWTs for authentication
-- Socket.io for real-time updates
+## Tech Specs: 
+**Front-end:**
+- React
+- Redux
+- Javascript
+- Socket.io 
+- HTML5
+- Sass
+
+**Back-end**
+- Node
+- Express
+- MongoDB hosted on Atlas
+- JWT 
+- Passport 
+- Socket.io 
+
+**Workflow**
+- Agile/SCRUM 
 
 ## Future Updates
-:point_right:Send notifications when a user has an unread chat
+:point_right: Send notifications when a user has an unread chat
 
 :point_right: More diverse categories for posts
-
-:point_right: Verify users live in neighborhood
 
 :point_right: Use pagination instead of infinite scroll 
 
@@ -53,8 +62,6 @@ Full-stack app with:
 [Project Management Trello Link](https://trello.com/b/hPCzbOTZ/neighborhood-watch "trello")
 
 ## Demo Info (Friends Edition)
+**Since this is  a geolocation app, to properly see the pre-populated demo you must block your location on your browser**
 - Demo Account Username: ross
-
 - Demo Account Password: friends123
-
-- Set location to block on browser, and manually put in 15098 Ventura Blvd, Sherman Oaks, CA 91403 into the address form to see the app in action!
