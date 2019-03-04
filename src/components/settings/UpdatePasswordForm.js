@@ -16,25 +16,6 @@ export class UpdatePasswordForm extends React.Component{
     return this.props.dispatch(updatePassword(user));
 }
 
-  // generateError(){
-  //   let error;
-  //   if (this.props.error) {
-  //       error = (
-  //           <div className="form-error" aria-live="polite">
-  //               {this.props.error}
-  //           </div>
-  //       );
-  //   }
-  //   else if(this.props.formError){
-  //       error = (
-  //           <div className="form-error" aria-live="polite">
-  //               {this.props.formError}
-  //           </div>
-  //       );            
-  //   }
-  //   return error;
-  // }
-
   componentWillUnmount(){
     this.props.dispatch(formError(null));
   }
@@ -48,7 +29,6 @@ export class UpdatePasswordForm extends React.Component{
               this.onSubmit(values)
           )}>
           <h2>Password</h2>
-            {/* {this.generateError()} */}
           <Field
               component={Input}
               type="password"

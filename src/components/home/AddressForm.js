@@ -36,7 +36,9 @@ class AddressForm extends React.Component {
         this.props.dispatch(fetchAddressSuccess(coords));
         this.props.dispatch(setUserCoords(coords));
       })
-      .catch(error => console.error('Error', error));
+      .catch(error => {
+        //add error handling
+      });
   };
  
   render() {

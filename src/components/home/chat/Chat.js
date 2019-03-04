@@ -31,12 +31,13 @@ export class Chat extends React.Component {
       .then(() =>{ 
         this.socket= socketClient(`${API_BASE_URL}/${this.props.namespace}`);
         this.socket.on('chat', chat => {
-          console.log('SOCKET RECEIVED', chat);
           //send notification
           this.props.dispatch(updateChat(chat));
         })
       })
-      .catch(err=>console.log("ERROR",err));
+      .catch(err=>{
+        // add error handling
+      });
     }
 
       componentWillUnmount(){
@@ -83,12 +84,10 @@ export class Chat extends React.Component {
       }
 
     let messages = this.props.chat.messages.map((message, index)=>{
-      // this.props.dispatch(setNewDay(moment(message.date).format('LL')))
       let next = moment(message.date).format('LL');
       if(this.day!==next){
         this.day=next;
         this.showDay= true;
-        console.log('DIFF', this.day);
       }
       else{
         this.showDay= false;

@@ -7,7 +7,6 @@ import About from '../common/About';
 import Directory from './chat/Directory';
 import './main.scss';
 
-
 export class Main extends React.Component{
 
   display(){

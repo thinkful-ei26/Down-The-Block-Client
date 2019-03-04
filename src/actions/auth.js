@@ -46,7 +46,6 @@ export const formError = formError => ({
 const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
-    console.log(decodedToken);
     dispatch(authSuccess(decodedToken.user));
     saveAuthToken(authToken);
 };
@@ -93,7 +92,6 @@ export const login = (username, password) => dispatch => {
 export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());
     const authToken = getState().auth.authToken;
-    console.log('IN REFRESH AUTH ACTION, TOKEN IS', authToken)
 
     return fetch(`${API_BASE_URL}/auth/refresh`, {
         method: 'POST',

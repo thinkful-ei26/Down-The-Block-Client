@@ -51,7 +51,6 @@ export const addComment = (content, date, userId, postId, commentId) => (dispatc
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((post) =>{ 
-            console.log('the response in comments ACTION is', post);
             dispatch(postCommentSuccess(post));
         })
         .catch(err => {
@@ -90,7 +89,6 @@ export const deleteComment = (commentId, postId) => (dispatch, getState) =>{
         dispatch(deleteCommentError(error));
         const {message, location, status} = error;
         if (status === 400) {
-            console.log(message, location)
             // Convert errors into SubmissionErrors for Redux Form
             return Promise.reject(
                 new SubmissionError({

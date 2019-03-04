@@ -73,7 +73,6 @@ export default (state = INITIAL_STATE, action) => {
         loading: true 
       })      
     case DELETE_POST_SUCCESS:
-      console.log('IN DELETE SUCCESS', action.postId)
       return Object.assign({}, state, {
         loading: false,
         error: null,
@@ -90,8 +89,6 @@ export default (state = INITIAL_STATE, action) => {
       posts
     })
     case ADD_NEW_POST:
-      console.log("IN ADD NEW POST REDUCER, STATE.POSTS IS", state.posts);
-      console.log("IN  ADD NEW POST REDUCER, THIS IS WHATS GETTING CHANGED TO", [...state.posts, action.post ]) 
       return Object.assign({}, state, {
         posts: [action.post, ...state.posts ] 
       })

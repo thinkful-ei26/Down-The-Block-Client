@@ -11,7 +11,6 @@ import {
 
 export const registerUser = user => dispatch => {
     let password = user.password;
-    // let username = user.username;
     let formData = new FormData();
 
     Object.keys(user).forEach(item=> {
@@ -73,7 +72,6 @@ export const updatedUser = user => (dispatch, getState) => {
             dispatch(refreshProfileAuthToken())
         })
         .catch(err => {
-            console.log('THE ERROR IS', err)
             const { location, message} = err;
             const str = location==="username" ? message : 'Unable to update, please try again';
             // Could not authenticate, so return a SubmissionError for Redux
@@ -141,7 +139,6 @@ export const updateProfilePhoto = photo => (dispatch, getState) => {
 
         .catch(err => {
             //add error handling
-            console.log(err);
         });
 };
 
@@ -177,10 +174,9 @@ export const fetchUsers = (coords) => (dispatch, getState) => {
         .then(res => res.json())
         .then(users => {
             dispatch(fetchUsersSuccess(users));
-            console.log('THE USERS GOTTEN BACK IN ACTION ARE', users)
         })
         .catch(error => {
-            console.log(error);
+            //add error handling
         });
 };
 export const userCoordsRequest = () => ({
