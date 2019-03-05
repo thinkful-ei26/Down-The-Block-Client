@@ -75,7 +75,7 @@ export class ForumHeader extends React.Component{
           onChange={option => this.props.dispatch(changeCategoryFilter(option.value))}
           styles={colorStyles}
         />
-
+      <div>
         <i className="fas fa-search"></i>
 
         <input 
@@ -84,6 +84,8 @@ export class ForumHeader extends React.Component{
           className="search" 
           placeholder={`Search ${this.props.type==="neighbors" ? "Neighborhood" : "City"} Forum`}/> 
 
+      </div>
+        
       </header>
     );
   }

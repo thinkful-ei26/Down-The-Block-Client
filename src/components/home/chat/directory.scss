@@ -9,6 +9,26 @@
   width: 100%;
   display: block;
   margin-bottom: 20px;
+  font-size: 16px;
+  height: 40px;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+}
+
+.search-container{
+  width: 100%;
+  margin: auto;
+}
+
+.directory-main .fa-search{
+  position: absolute;
+  font-size: 13px;
+  padding: 4px;
+  color: $darkGreen;
+  margin-top: 9px;
+  margin-left: 3px;
 }
 
 .directory-main h1{
@@ -64,7 +84,12 @@
   }
 
   .directory-main .search{
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .search-container{
     width: 60%;
-    margin: 20px auto;
+    margin: auto;
   }
 }
