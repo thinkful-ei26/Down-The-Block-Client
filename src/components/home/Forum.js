@@ -3,13 +3,14 @@ import ForumHeader from './ForumHeader';
 import PostsList from './PostsList';
 import CreatePost from './CreatePost';
 import {connect} from 'react-redux';
+import {focusOn} from '../../actions/navigation';
 import './main.scss'
 
 export class Forum extends React.Component{
 
   componentDidMount(){
     window.scrollTo(0, 0);
-    document.title='DownTheBlock'
+    document.title='DownTheBlock';
   }
 
   render(){

@@ -13,8 +13,13 @@ export class Directory extends React.Component{
     }
   }
 
-  componentDidMount (){
+  componentDidMount(){
     this.props.dispatch(fetchUsers(this.props.coords));
+    this.search.focus();
+  }
+
+  componentDidUpdate(prevProps){
+    this.search.focus();
   }
 
   setSearchTerm(term){
@@ -72,12 +77,16 @@ export class Directory extends React.Component{
     return(
       <main className="directory-main">
         <h1>Neighbor Directory</h1>
-        <input 
-          className="search"
-          placeholder="Search Neighbors Directory"
-          value={this.state.searchTerm}
-          onChange={e => this.setSearchTerm(e.target.value)}
-          type="search" />
+        <div className="search-container">
+          <i className="fas fa-search"></i>
+          <input 
+            ref={input=>this.search=input}
+            className="search"
+            placeholder="Search Neighbors Directory"
+            value={this.state.searchTerm}
+            onChange={e => this.setSearchTerm(e.target.value)}
+            type="search" />
+        </div>
         <section className="directory">
           {this.showAllUsers()}
         </section>
