@@ -29,7 +29,7 @@ export class Directory extends React.Component{
   showAllUsers(){
     let directory; 
 
-    if(this.props.users){
+    if(this.props.users.length>0){
       let users = this.props.users;
 
       if(this.state.searchTerm){
@@ -68,6 +68,9 @@ export class Directory extends React.Component{
           </button>
         )
       })
+    }
+    else{
+      directory= <h3>No Neighbors Yet On The App, Spread The Word About DownTheBlock!</h3>
     }
 
   return directory;
