@@ -53,7 +53,7 @@ DownTheBlock gives you a convenient way to stay informed by connecting you with 
 :point_right: Display a map of user’s geofilter
 
 ## Team
-<a href="https://github.com/nikmash711" target="_blank"> **Nikkie Mashian**</a>: Product Owner & Design Lead
+<a href="https://github.com/nikmash711" target="_blank"> **Nikkie Mashian**</a>: Product Manager & Design Lead
 
 <a href="https://github.com/ethanfrigon" target="_blank"> **Ethan Frigon**</a>: Project Manager
 
