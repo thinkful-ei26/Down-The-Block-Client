@@ -1,4 +1,5 @@
 import React from 'react';
+import uuidv4 from 'uuid/v4';
 import './houseanimation.css'
 
 export default class HouseAnimation extends React.Component{
@@ -8,15 +9,14 @@ export default class HouseAnimation extends React.Component{
     this.state={
       housesRight:[],
       housesLeft:[],
-      houseIcon: <i style={styles.houseIcon} className="fas fa-home"></i>
     }
   }
   
   componentDidMount(){
     this.tick = setInterval(()=>
       this.setState(
-        {housesLeft:[this.state.houseIcon, ...this.state.housesRight], 
-        housesRight:[...this.state.housesLeft, this.state.houseIcon]}), 600)
+        {housesLeft:[<i key={uuidv4()} style={styles.houseIcon} className="fas fa-home"></i>, ...this.state.housesRight], 
+        housesRight:[...this.state.housesLeft, <i key={uuidv4()} style={styles.houseIcon} className="fas fa-home"></i>]}), 600)
   }
 
   componentWillUnmount(){
