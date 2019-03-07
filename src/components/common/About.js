@@ -34,7 +34,7 @@ export class About extends React.Component{
         <section className="about-icons">
           <div className="icon-holder">
             <i className="fas fa-map-marker-alt"></i>
-            <p>Geolocation conveniently gives you access to your own community</p>
+            <p>Easy access to your community based on your geolocation</p>
           </div>
           <div className="icon-holder">
             <i className="fas fa-edit"></i>
