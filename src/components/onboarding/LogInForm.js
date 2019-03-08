@@ -9,6 +9,7 @@ import { formError } from '../../actions/auth'
 
 export class LogInForm extends React.Component {
     onSubmit(values) {
+        console.log('the values', values);
         return this.props.dispatch(login(values.loginUsername, values.password));
     }
 
@@ -81,7 +82,22 @@ export class LogInForm extends React.Component {
                         className="link-to-form"
                         onClick={()=>this.onClick('registerUsername')} 
                         > Sign Up Here!</button>
-                    </p>    
+                    </p>   
+                    <p>Want To See A Live Demo?
+                        <button
+                        type="button"
+                        className="link-to-form"
+                        onClick={()=>{
+                            let values = {
+                                loginUsername:'ross',
+                                password:"friends123",
+                            }
+
+                            console.log('values', values);
+                            this.onSubmit(values)
+                        }} 
+                        > Click Here!</button>
+                    </p>  
                 </div>
             </form>
         );
