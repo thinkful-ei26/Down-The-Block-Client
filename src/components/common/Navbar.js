@@ -1,80 +1,47 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {toggleNavbar} from '../../actions/navigation';
-import { clearAuth } from '../../actions/auth';
-import { clearAuthToken } from './local-storage';
+import { focusOn, display } from '../../actions/navigation';
 import { HashLink as Link } from 'react-router-hash-link';
-import './navbar.css'
+import './navbar.scss'
 
 export class Navbar extends React.Component{
-  logOut() {
-    this.props.dispatch(clearAuth());
-    this.props.dispatch(toggleNavbar(false));
-    clearAuthToken();
+  onClick(focus=""){
+    this.props.dispatch(display(focus));
+    this.props.dispatch(focusOn(focus));
   }
 
   navbarLinks(){
-    let className = this.props.toggleNavbar ? "show link" : "dontshow link";
 
-
-
-    if(this.props.loggedIn){
-      console.log('LOGGED IN')
+    if(!this.props.loggedIn){
       return (
         <div className = "right">
-          <Link 
-            onClick={()=>this.props.dispatch(toggleNavbar(false))} 
-            className={className} 
-            to ="/home">
-            Home
-          </Link>
-          <Link 
-            onClick={()=>this.props.dispatch(toggleNavbar(false))} 
-            className={className} 
-            to ="/about">
-            About
-          </Link>
-          <button id="logout" 
-            className={className} 
-            onClick={() => this.logOut()}>
-            Logout
-          </button>
-        </div>
-      )
-    }
-    else{
-      return (
-        <div className = "right">
-          <Link 
-            onClick={()=>this.props.dispatch(toggleNavbar(false))} 
-            className={className} 
-            to ="/about">
-            About
-          </Link>
-          <Link 
-            onClick={()=>this.props.dispatch(toggleNavbar(false))} 
-            className={className} 
-            to ="/#login">
+          <button 
+            className="link"
+            onClick={()=>this.onClick('loginUsername')} 
+            >
             Login
-          </Link>
-          <Link 
-            onClick={()=>this.props.dispatch(toggleNavbar(false))} 
-            className={className} 
-            to ="/register/#register">
+          </button>
+          <button 
+            className="link"
+            onClick={()=>this.onClick('registerUsername')} 
+            >
             Register
-          </Link>
+          </button>
         </div>
       )
     }
   }
 
   render(){  
+    let className= !this.props.loggedIn ? "landing-page-logo" : "logo";
     return( 
       <nav className="main-navbar">
-        <Link className="logo" to="/home">
-          Neighborhood Watch
+        <Link className={`${className}`} 
+          onClick={()=> this.props.loggedIn && this.props.dispatch(display(this.props.display))}
+          to="/#app">
+          <i className="fas fa-home"></i> DownTheBlock
         </Link>
-        <button onClick={()=>this.props.dispatch(toggleNavbar())} className="icon right"><i className="fa fa-bars"></i></button>
+        <p className="tagline">Knock Knock, It's Your Neighborhood</p>
         {this.navbarLinks()}
       </nav>
     );
@@ -82,8 +49,8 @@ export class Navbar extends React.Component{
 }
 
 const mapStateToProps = (state) => ({
-  toggleNavbar: state.nav.toggleNavbar,
-  loggedIn: state.auth.currentUser !== null
+  loggedIn: state.auth.currentUser !== null,
+  display: state.nav.display,
 });
 
 export default connect(mapStateToProps)(Navbar);

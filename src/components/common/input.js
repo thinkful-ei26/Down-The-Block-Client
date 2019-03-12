@@ -1,7 +1,16 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import { focusOn } from '../../actions/navigation';
+import { formError } from '../../actions/auth';
 
-export default class Input extends React.Component {
+
+export class Input extends React.Component {
     componentDidUpdate(prevProps) {
+        //focus on form when clicked
+        if(this.input.id===this.props.focusOn){
+            this.input.focus();
+            this.props.dispatch(focusOn(""));
+        }
         if (!prevProps.meta.active && this.props.meta.active) {
             this.input.focus();
         }
@@ -17,14 +26,10 @@ export default class Input extends React.Component {
 
         let error;
         if (this.props.meta.touched && this.props.meta.error) {
-            error = <div className="form-error">{this.props.meta.error}</div>;
-        }
-
-        let warning;
-        if (this.props.meta.touched && this.props.meta.warning) {
-            warning = (
-                <div className="form-warning">{this.props.meta.warning}</div>
-            );
+            error= this.props.label + ' ' + this.props.meta.error;
+            if(this.props.meta.error!=="Required"){
+                this.props.dispatch(formError(error));
+            }
         }
 
         let element = (<Element
@@ -36,13 +41,13 @@ export default class Input extends React.Component {
             type={this.props.type}
             ref={input => (this.input = input)}
             autoFocus = {this.props.autoFocus}
+            className={error && "highlight-red"}
             >
             {this.props.children}
         </Element>)
 
         //if its a file/image, need to handle it differently: 
         if(this.props.input.name==="img"){
-            console.log('here')
             delete this.props.input.value;
             element = (<Element
                 {...this.props.input}
@@ -51,6 +56,7 @@ export default class Input extends React.Component {
                 type={this.props.type}
                 ref={input => (this.input = input)}
                 autoFocus = {this.props.autoFocus}
+                className={error && "highlight-red"}
             >
             </Element>)
         }
@@ -59,11 +65,16 @@ export default class Input extends React.Component {
             <div className="form-input">
                 <label htmlFor={this.props.input.name}>
                     {this.props.label}
-                    {error}
-                    {warning}
                 </label>
                 {element}
             </div>
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    focusOn: state.nav.focusOn,
+    focusForm: state.nav.focusForm,
+  });
+  
+  export default connect(mapStateToProps)(Input);

@@ -3,12 +3,14 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../components/common/local-storage';
+import {display} from './navigation';
 import {
     SET_AUTH_TOKEN,
     CLEAR_AUTH,
     AUTH_REQUEST,
     AUTH_SUCCESS,
     AUTH_ERROR,
+    FORM_ERROR
 } from './types';
 
 export const setAuthToken = authToken => ({
@@ -32,6 +34,11 @@ export const authSuccess = currentUser => ({
 export const authError = error => ({
     type: AUTH_ERROR,
     error
+});
+
+export const formError = formError => ({
+    type: FORM_ERROR,
+    formError
 });
 
 // Stores the auth token in state and localStorage, and decodes and stores
@@ -61,10 +68,13 @@ export const login = (username, password) => dispatch => {
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
             .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+            .then(()=>{
+                dispatch(display('neighbors'))
+            })
             .catch(err => {
-                const {code} = err;
+                const {status} = err;
                 const message =
-                    code === 401
+                    status === 401
                         ? 'Incorrect username or password'
                         : 'Unable to login, please try again';
                 dispatch(authError(err));
@@ -82,7 +92,31 @@ export const login = (username, password) => dispatch => {
 export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());
     const authToken = getState().auth.authToken;
+
     return fetch(`${API_BASE_URL}/auth/refresh`, {
+        method: 'POST',
+        headers: {
+            // Provide our existing token as credentials to get a new one
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+        .catch(err => {
+            // We couldn't get a refresh token because our current credentials
+            // are invalid or expired, or something else went wrong, so clear
+            // them and sign us out
+            dispatch(authError(err));
+            dispatch(clearAuth());
+            clearAuthToken(authToken);
+        });
+};
+
+export const refreshProfileAuthToken = () => (dispatch, getState) => {
+    dispatch(authRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/auth/refresh-profile`, {
         method: 'POST',
         headers: {
             // Provide our existing token as credentials to get a new one

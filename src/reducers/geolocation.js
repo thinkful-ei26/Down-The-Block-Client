@@ -3,7 +3,8 @@ import {
   FETCH_LOCATION_ERROR, 
   FETCH_ADDRESS_REQUEST,
   FETCH_ADDRESS_SUCCESS,
-  FETCH_ADDRESS_ERROR } from '../actions/types';
+  FETCH_ADDRESS_ERROR,
+} from '../actions/types';
 
 const initialState = {
   coords: null,
@@ -13,7 +14,6 @@ const initialState = {
 export default (state=initialState, action) =>{
   switch (action.type){
     case FETCH_LOCATION_SUCCESS:
-      console.log('in reducer',action.coords);
       return Object.assign({}, state, {
         coords: action.coords
       })
@@ -26,7 +26,6 @@ export default (state=initialState, action) =>{
         error: null
       })
     case FETCH_ADDRESS_SUCCESS:
-      console.log('in reducer', action.coords);
       return Object.assign({}, state, {
         coords: action.coords
       })

@@ -1,80 +1,89 @@
 import React from 'react';
-import {connect} from 'react-redux';
-// import {};
-import './address-form.css'
-import {Field, reduxForm} from 'redux-form';
-import {required, nonEmpty} from '../common/validators';
-import { fetchAddress } from '../../actions/geolocation';
+import { connect } from 'react-redux'
+import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
+import './address-form.scss'
+import { showAnimation } from '../../actions/navigation';
+import { fetchAddressSuccess } from '../../actions/geolocation';
+import { setUserCoords } from '../../actions/users';
 
-export class AddressForm extends React.Component {
+class AddressForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { address: '' };
+  }
+ 
+  handleChange = address => {
+    this.setState({ address });
+  };
 
-  onSubmit(values) {
-      // props = this.props;
-      console.log(values);
-      // return this.props.dispatch(addComment(values.content, props.loggedInUserId, props.form));
-      return this.props.dispatch(fetchAddress(values));       
-  }  
-
-  render() {   
-      // console.log('render address form');
-      let error;
-      if (this.props.error) {
-        error = (
-          <div className="form-error" aria-live="polite">
-            {this.props.error}
-          </div>
-        );
-      }   
-      return (
-        <form 
-        className= "address-form"
-        onSubmit= {this.props.handleSubmit(values=> 
-            {
-            this.onSubmit(values);
-            this.props.reset('addressForm');
-            }
-        )}>
-            {error}
-            <label htmlFor="street-address">Street Address</label>
-            <Field
-                component="input"
-                type="text"
-                name="street-address"
-                id="street-address"
-                // validate={[required, nonEmpty]}
-            />
-            <label htmlFor="city">City</label>
-            <Field
-                component="input"
-                type="text"
-                name="city"
-                id="city"
-                // validate={[required, nonEmpty]}
-            />
-            <label htmlFor="state">State</label>
-            <Field
-                component="input"
-                type="text"
-                name="state"
-                id="state"
-                // validate={[required, nonEmpty]}
-            />
-            <label htmlFor="zipcode">Zip Code</label>
-            <Field
-                component="input"
-                type="text"
-                name="zipcode"
-                id="zipcode"
-                validate={[required, nonEmpty]}
-            />
-            <button  disabled={this.props.pristine || this.props.submitting}>
-                SUBMIT
-            </button>
-        </form> 
-      )
+  componentDidMount(){
+    document.title='DownTheBlock'
+    this.props.dispatch(showAnimation(false));
+  };
+ 
+  handleSelect = address => {
+    this.setState({ address });
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(googleCoords => {
+          let coords = {
+            latitude: googleCoords.lat,
+            longitude: googleCoords.lng,
+            automatic: false
+        };
+        this.props.dispatch(showAnimation(false));
+        this.props.dispatch(fetchAddressSuccess(coords));
+        this.props.dispatch(setUserCoords(coords));
+      })
+      .catch(error => {
+        //add error handling
+      });
+  };
+ 
+  render() {
+    return (
+      <div className="addressDiv">
+        <section className="parallax"></section>
+        <section className="intro">
+          <section className="address-container">
+          <h1>Find Your Neighborhood</h1>
+          <p className="text">Your browser hasn't allowed DownTheBlock permission to your location. However, to be placed in the correct neighborhood, DownTheBlock needs access to your location. Please either change the settings in your browser and refresh, or manually input your address below.</p>
+          <PlacesAutocomplete
+            value={this.state.address}
+            onChange={this.handleChange}
+            onSelect={this.handleSelect}
+          >
+            {({ getInputProps, suggestions, getSuggestionItemProps }) => (
+              
+                  <section className="address-form">
+                    <input
+                      {...getInputProps({
+                        placeholder: 'Enter your address here...',
+                        className: 'location-search-input',
+                      })}
+                    />
+                    <div className="autocomplete-dropdown-container">
+                      {suggestions.map(suggestion => {
+                        const className = 'suggestion-item';
+                        return (
+                          <div
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                            })}
+                          >
+                            <span>{suggestion.description}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    </section>
+            )}
+          </PlacesAutocomplete>
+        </section>
+        </section>
+      </div>
+    );
   }
 }
 
-export default reduxForm({
-  form: 'addressForm'
-})(AddressForm);
+export default connect()(AddressForm);

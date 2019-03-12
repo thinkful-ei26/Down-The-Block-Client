@@ -1,13 +1,13 @@
 import {
   DISPLAY,
-  TOGGLE_NAVBAR,
-  SHOW_ANIMATION
+  SHOW_ANIMATION,
+  FOCUS_ON
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  display: 'neighbor-forum',
-  toggleNavbar: false,
+  display: 'neighbors',
   showAnimation: false,
+  focusOn: "",
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,20 +16,14 @@ export default (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, {
         display: action.component,
       });
-    case TOGGLE_NAVBAR:
-      console.log(action.bool);
-      if(action.bool===true || action.bool===false){
-        return Object.assign({}, state, {
-          toggleNavbar: action.bool,
-        })
-      }
-      return Object.assign({}, state, {
-        toggleNavbar: !state.toggleNavbar,
-      })
-      case SHOW_ANIMATION:
+    case SHOW_ANIMATION:
       return Object.assign({}, state, {
         showAnimation: action.bool,
-      });    
+      });   
+    case FOCUS_ON:
+      return Object.assign({}, state, {
+        focusOn: action.focus,
+      });     
     default:
       return state;
   }
